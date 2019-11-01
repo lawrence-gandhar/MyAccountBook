@@ -1,2 +1,2 @@
-# MyAccount
+# MyAccountBook
  Django based personal financial application
