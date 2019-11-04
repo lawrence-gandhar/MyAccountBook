@@ -14,3 +14,7 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name = 'app/registration/logout.html'), name = 'logout'),
     re_path(r'^accounts/*', RedirectView.as_view(pattern_name='login', permanent=True)),
 ]
+
+urlpatterns += [
+    path('dashboard/', never_cache(login_required(Dashboard.as_view())), name = 'dashboard'),
+]
