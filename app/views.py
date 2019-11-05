@@ -9,7 +9,7 @@ def index(request):
 
 
 class Dashboard(View):
-    template_name = 'app/app_files/base.html'
+    template_name = 'app/app_files/index.html'
 
     def get(self, request):
         return render(request, self.template_name)
