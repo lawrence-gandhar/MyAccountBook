@@ -282,7 +282,12 @@
 
   <!-- Custom scripts for all pages-->
   <script src="{% static 'all_page/js/sb-admin-2.min.js' %}"></script>
-  <script src="{% static 'custom_files/js/navigation.js' %}"></script>
+  <script src="{% static 'custom_files/js/common.js' %}"></script>
+
+  
+  <script>
+    var active_link = '{{ active_link }}';
+  </script>
 
   {% load_javascript_files js_files %} 
 
