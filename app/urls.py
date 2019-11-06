@@ -8,6 +8,7 @@ from django.conf.urls.static import static
 
 from app.views import *
 
+# Authorization
 urlpatterns = [
     path('', index, name = 'home'),
     path('login/', auth_views.LoginView.as_view(template_name = 'app/registration/login.html'), name='login'),
@@ -15,6 +16,15 @@ urlpatterns = [
     re_path(r'^accounts/*', RedirectView.as_view(pattern_name='login', permanent=True)),
 ]
 
+# Dashboard
 urlpatterns += [
     path('dashboard/', never_cache(login_required(Dashboard.as_view())), name = 'dashboard'),
 ]
+
+# Contacts
+urlpatterns += [
+    path('contacts/', never_cache(login_required(Contacts.as_view())), name = 'contacts'),
+]
+
+
+
