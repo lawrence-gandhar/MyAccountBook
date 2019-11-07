@@ -26,19 +26,18 @@
     </ul>
 </div>
 
-<div class="row" style="padding:10px;">
+<div class="row" style="padding:10px; margin-right:10px">
 
     {% ifequal view 'grid' %}
-
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card shadow h-100 py-2">
-                <div class="card-body">ADS</div>
+        {% for contact in contacts %}
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card shadow h-100 py-2">
+                    <div class="card-body">ADS</div>
+                </div>
             </div>
-        </div>
-
+        {% endfor %}
     {% else %}
-
-        <table class="table table-responsive" style="margin:0px 10px;">
+        <table class="table table-bordered" style="margin:0px 10px;"  width="100%" cellspacing="0">
             <thead>
                 <th>Contact Name</th>
                 <th>Is Customer</th>
@@ -50,13 +49,25 @@
                 <th>Invoice Terms</th>
                 <th>Bills Terms</th>
                 <th>TDS (%)</th>
-
             </thead>
-        </table>
-        
+            <tbody>
+                {% for contact in contacts %}
+                    <tr>
+                        <td>Contact Name</td>
+                        <td>Is Customer</td>
+                        <td>Is Vendor</td>
+                        <td>Is Vendor</td>
+                        <td>Active</td>
+                        <td>PAN</td>
+                        <td>GSTIN</td>
+                        <td>Invoice Terms</td>
+                        <td>Bills Terms</td>
+                        <td>TDS (%)</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>        
     {% endifequal %}    
-
-
 </div>
 
 
