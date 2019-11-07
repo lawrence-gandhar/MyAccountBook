@@ -20,6 +20,7 @@
 
   <!-- Custom styles for this template-->
   <link href="{% static 'all_page/css/sb-admin-2.min.css' %}" rel="stylesheet">
+  <link href="{% static 'custom_files/css/common.css' %}" rel="stylesheet">
 
   {% load_css_files css_files %}
 
@@ -41,7 +42,7 @@
       <div id="content">
 
         <!-- Topbar -->
-        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow" style="margin-bottom:0px !important;">
 
           <!-- Sidebar Toggle (Topbar) -->
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -224,7 +225,7 @@
         <!-- End of Topbar -->
 
         <!-- Begin Page Content -->
-        <div class="container-fluid">
+        <div class="container" style="margin:0px; padding:0px 5px;">
           {% block content %}
           {% endblock %}
         </div>

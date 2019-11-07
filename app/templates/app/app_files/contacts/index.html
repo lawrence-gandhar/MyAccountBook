@@ -6,7 +6,58 @@
 
 {% block content %}
 
+<div class="row" style="padding:10px;background-color: #08e668; background-image: linear-gradient(180deg, #08e668 10%, #2eac1c 100%); background-size: cover;">
+    <ul style="list-style:none; margin:0px; color:#FFFFFF;">
+        <li class="nav-item" style="float:left;padding:0px 10px;">
+            <a href="#" style="color:#FFFFFF; text-decoration:none;" title="Add Contact">
+                <i class="fas fw fa-plus-square"></i>
+            </a>
+        </li>
+        <li class="nav-item" style="float:left;padding:0px 10px;">
+            <a href="{% url 'contacts' %}" style="color:#FFFFFF; text-decoration:none;" title="View Contacts As List">
+                <i class="fas fw fa-th-list"></i>
+            </a>
+        </li>
+        <li class="nav-item" style="float:left;padding:0px 10px;">
+            <a href="{% url 'contacts' %}?view=grid" style="color:#FFFFFF; text-decoration:none;" title="View Contacts As Grid">
+                <i class="fas fw fa-th"></i>
+            </a>
+        </li>
+    </ul>
+</div>
 
+<div class="row" style="padding:10px;">
+
+    {% ifequal view 'grid' %}
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card shadow h-100 py-2">
+                <div class="card-body">ADS</div>
+            </div>
+        </div>
+
+    {% else %}
+
+        <table class="table table-responsive" style="margin:0px 10px;">
+            <thead>
+                <th>Contact Name</th>
+                <th>Is Customer</th>
+                <th>Is Vendor</th>
+                <th>Is Vendor</th>
+                <th>Active</th>
+                <th>PAN</th>
+                <th>GSTIN</th>
+                <th>Invoice Terms</th>
+                <th>Bills Terms</th>
+                <th>TDS (%)</th>
+
+            </thead>
+        </table>
+        
+    {% endifequal %}    
+
+
+</div>
 
 
 {% endblock %}

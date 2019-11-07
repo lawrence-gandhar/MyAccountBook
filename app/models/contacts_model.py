@@ -9,6 +9,15 @@ class Contacts(models.Model):
 
     IS_ACTIVE = ((True, 'YES'), (False, 'NO'))
 
+    PAYMENT_DAYS = (
+        (1, 'On Due Date'),
+        (2, '10 Days'),
+        (3, '20 Days'),
+        (4, '30 Days'),
+        (5, '60 Days'),
+        (6, '90 Days'),
+    )
+
     is_customer = models.BooleanField(
         db_index = True,
         choices = IS_ACTIVE,
@@ -32,6 +41,42 @@ class Contacts(models.Model):
         db_index = True,
         choices =  IS_ACTIVE,
         default = True,
+    )
+
+    pan = models.CharField(
+        max_length = 10,
+        db_index = True,
+        null = True,
+        blank = True,
+    )
+
+    gstin = models.CharField(
+        max_length = 100,
+        db_index = True,
+        null = True,
+        blank = True,
+    )
+
+    tds = models.DecimalField(
+        db_index = True,
+        null = True,
+        blank = True,
+        max_digits = 20, 
+        decimal_places = 2
+    )
+
+    invoice_terms = models.IntegerField(
+        null = True,
+        blank = True,
+        db_index = True,
+        choices = PAYMENT_DAYS,
+    )
+
+    bills_terms = models.IntegerField(
+        null = True,
+        blank = True,
+        db_index = True,
+        choices = PAYMENT_DAYS,
     )
 
     notes = models.TextField(
@@ -62,15 +107,6 @@ class Contacts_Email(models.Model):
 
     EMAIL_CHOICES = ((True, 'Yes'),(False, 'No'))
 
-    PAYMENT_DAYS = (
-        (1, 'On Due Date'),
-        (2, '10 Days'),
-        (3, '20 Days'),
-        (4, '30 Days'),
-        (5, '60 Days'),
-        (6, '90 Days'),
-    )
-
     contact = models.ForeignKey(
         Contacts, 
         on_delete = models.CASCADE, 
@@ -93,42 +129,6 @@ class Contacts_Email(models.Model):
         db_index = True,
         choices = EMAIL_CHOICES,
         default = True,
-    )
-
-    pan = models.CharField(
-        max_length = 10,
-        db_index = True,
-        null = False,
-        blank = False,
-    )
-
-    gstin = models.CharField(
-        max_length = 100,
-        db_index = True,
-        null = True,
-        blank = True,
-    )
-
-    tds = models.DecimalField(
-        db_index = True,
-        null = True,
-        blank = True,
-        max_digits = 20, 
-        decimal_places = 2
-    )
-
-    invoice_terms = models.IntegerField(
-        null = True,
-        blank = True,
-        db_index = True,
-        choices = PAYMENT_DAYS,
-    )
-
-    bills_terms = models.IntegerField(
-        null = True,
-        blank = True,
-        db_index = True,
-        choices = PAYMENT_DAYS,
     )
 
     created_on = models.DateTimeField(
