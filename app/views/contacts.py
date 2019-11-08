@@ -32,7 +32,6 @@ class Contacts(View):
         else:
             self.data["view"] = ""
 
-
         return render(request, self.template_name, self.data)
 
 
@@ -51,8 +50,20 @@ def add_contacts(request, slug = None):
     data["contact_account_details_form"] = ContactAccountDetailsForm()
 
     data["slug"] = slug
-    
 
+    breadcrumbs_list = [
+        '<li class="nav-item" style="float:left;padding:0px 10px;margin-left:20px;"><a href="{% url \'add-contacts\' \'step1\' %}" style="color:#FFFFFF; text-decoration:none;"><i class="fas fw fa-user"></i> Basic Details</a></li>',
+        '<li class="nav-item" style="float:left;padding:0px 10px; margin-left:10px;"><a href="{% url \'add-contacts\' \'step2\' %}" style="color:#FFFFFF; text-decoration:none;" title="View Contacts As List"><i class="fas fw fa-envelope-open"></i> Email Details</a></li>',
+        '<li class="nav-item" style="float:left;padding:0px 10px; margin-left:10px;"><a href="{% url \'add-contacts\' \'step3\' %}" style="color:#FFFFFF; text-decoration:none;" title="View Contacts As Grid"><i class="fas fw fa-id-card"></i> Address Details</a></li>',
+        '<li class="nav-item" style="float:left;padding:0px 10px; margin-left:10px;"><a href="{% url \'add-contacts\' \'step4\' %}" style="color:#FFFFFF; text-decoration:none;" title="View Contacts As Grid"><i class="fas fw fa-credit-card"></i> Account Details</a></li>'
+    ]
 
+    breadcrumbs_index = int(slug.replace('step',''))
+
+    breadcrumbs = []
+    for i in range(breadcrumbs_index):
+        breadcrumbs.append(breadcrumbs_list[i])
+
+    data["breadcrumbs"] = ''.join(breadcrumbs)
 
     return render(request, template_name, data)

@@ -11,64 +11,7 @@
         <li class="nav-item" style="float:left;padding:0px 10px; font-weight:bold">
             CONTACTS <i class="fas fw fa-chevron-circle-right" style="margin-left:10px;"></i>
         </li>
-        {% ifequal slug 'step1' %}
-        <li class="nav-item" style="float:left;padding:0px 10px;margin-left:20px;">
-            <a href="{% url 'add-contacts' 'step1' %}" style="color:#FFFFFF; text-decoration:none;">
-                <i class="fas fw fa-user"></i> Basic Details
-            </a>
-        </li>
-        {% endifequal %}
-        {% ifequal slug 'step2' %}
-        <li class="nav-item" style="float:left;padding:0px 10px;margin-left:20px;">
-            <a href="{% url 'add-contacts' 'step1' %}" style="color:#FFFFFF; text-decoration:none;">
-                <i class="fas fw fa-user"></i> Basic Details
-            </a>
-        </li>
-        <li class="nav-item" style="float:left;padding:0px 10px; margin-left:10px;">
-            <a href="{% url 'add-contacts' 'step2' %}" style="color:#FFFFFF; text-decoration:none;" title="View Contacts As List">
-                <i class="fas fw fa-envelope-open"></i> Email Details
-            </a>
-        </li>
-        {% endifequal %}
-        {% ifequal slug 'step3' %}  
-        <li class="nav-item" style="float:left;padding:0px 10px;margin-left:20px;">
-            <a href="{% url 'add-contacts' 'step1' %}" style="color:#FFFFFF; text-decoration:none;">
-                <i class="fas fw fa-user"></i> Basic Details
-            </a>
-        </li>
-        <li class="nav-item" style="float:left;padding:0px 10px; margin-left:10px;">
-            <a href="{% url 'add-contacts' 'step2' %}" style="color:#FFFFFF; text-decoration:none;" title="View Contacts As List">
-                <i class="fas fw fa-envelope-open"></i> Email Details
-            </a>
-        </li>      
-        <li class="nav-item" style="float:left;padding:0px 10px; margin-left:10px;">
-            <a href="{% url 'add-contacts' 'step3' %}" style="color:#FFFFFF; text-decoration:none;" title="View Contacts As Grid">
-                <i class="fas fw fa-id-card"></i> Address Details
-            </a>
-        </li>
-        {% endifequal %}
-        {% ifequal slug 'step4' %}
-        <li class="nav-item" style="float:left;padding:0px 10px;margin-left:20px;">
-            <a href="{% url 'add-contacts' 'step1' %}" style="color:#FFFFFF; text-decoration:none;">
-                <i class="fas fw fa-user"></i> Basic Details
-            </a>
-        </li>
-        <li class="nav-item" style="float:left;padding:0px 10px; margin-left:10px;">
-            <a href="{% url 'add-contacts' 'step2' %}" style="color:#FFFFFF; text-decoration:none;" title="View Contacts As List">
-                <i class="fas fw fa-envelope-open"></i> Email Details
-            </a>
-        </li>      
-        <li class="nav-item" style="float:left;padding:0px 10px; margin-left:10px;">
-            <a href="{% url 'add-contacts' 'step3' %}" style="color:#FFFFFF; text-decoration:none;" title="View Contacts As Grid">
-                <i class="fas fw fa-id-card"></i> Address Details
-            </a>
-        </li>
-        <li class="nav-item" style="float:left;padding:0px 10px; margin-left:10px;">
-            <a href="{% url 'add-contacts' 'step4' %}" style="color:#FFFFFF; text-decoration:none;" title="View Contacts As Grid">
-                <i class="fas fw fa-credit-card"></i> Account Details
-            </a>
-        </li>
-        {% endifequal %}
+        {{breadcrumbs|safe}}
     </ul>
 </div>
 
@@ -76,7 +19,7 @@
     <div class="col-xl-10 col-md-10 mb-10">
         <div class="card shadow h-100 py-2">
             <div class="card-heading text-center">ADD CONTACT<hr/></div>
-            <div class="card-body">
+            <div class="card-body">                
                 <form method="post">
                     {% csrf_token %}
                     <table class="table">
@@ -113,6 +56,7 @@
                         </tr>                        
                     </table>
                 </form>
+
                 <form method="post">
                     <table class="table" style="margin-bottom:0px;">
                         <tr>
@@ -135,6 +79,7 @@
                         </tr>
                     </table>
                 </form>
+                
                 <form method="post">
                     <table class="table" style="margin-bottom:0px;">
                         <tr>
