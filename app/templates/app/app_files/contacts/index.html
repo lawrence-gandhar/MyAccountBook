@@ -30,9 +30,46 @@
 
     {% ifequal view 'grid' %}
         {% for contact in contacts %}
-            <div class="col-xl-3 col-md-6 mb-4">
+            <div class="col-xl-4 col-md-6 mb-4">
                 <div class="card shadow h-100 py-2">
-                    <div class="card-body">ADS</div>
+                    <div class="card-body">
+                        <div>
+                            <span style="width:100px; display:inline-block; font-weight:bold">Contact Name</span>
+                            <span>: {{contact.contact_name|upper}}</span>
+                        </div> 
+                        <div>
+                            <span style="width:100px; display:inline-block; font-weight:bold">Is Customer</span>
+                            <span>: {{contact.is_customer}}</span>
+                        </div> 
+                        <div>
+                            <span style="width:100px; display:inline-block; font-weight:bold">Is Vendor</span>
+                            <span>: {{contact.is_vendor}}</span>
+                        </div> 
+                        <div>
+                            <span style="width:100px; display:inline-block; font-weight:bold">Active</span>
+                            <span>: {{contact.is_active}}</span>
+                        </div> 
+                        <div>
+                            <span style="width:100px; display:inline-block; font-weight:bold">PAN</span>
+                            <span>: {{contact.pan|upper}}</span>
+                        </div> 
+                        <div>
+                            <span style="width:100px; display:inline-block; font-weight:bold">GSTIN</span>
+                            <span>: {{contact.gstin|upper}}</span>
+                        </div> 
+                        <div>
+                            <span style="width:100px; display:inline-block; font-weight:bold">Invoice Terms</span>
+                            <span>: {{contact.invice_terms}}</span>
+                        </div> 
+                        <div>
+                            <span style="width:100px; display:inline-block; font-weight:bold">Bills Terms</span>
+                            <span>: {{contact.bills_term}}</span>
+                        </div> 
+                        <div>
+                            <span style="width:100px; display:inline-block; font-weight:bold">TDS (%)</span>
+                            <span>: {{contact.tds}}</span>
+                        </div> 
+                    </div>
                 </div>
             </div>
         {% endfor %}
@@ -41,7 +78,6 @@
             <thead>
                 <th>Contact Name</th>
                 <th>Is Customer</th>
-                <th>Is Vendor</th>
                 <th>Is Vendor</th>
                 <th>Active</th>
                 <th>PAN</th>
@@ -53,16 +89,15 @@
             <tbody>
                 {% for contact in contacts %}
                     <tr>
-                        <td>Contact Name</td>
-                        <td>Is Customer</td>
-                        <td>Is Vendor</td>
-                        <td>Is Vendor</td>
-                        <td>Active</td>
-                        <td>PAN</td>
-                        <td>GSTIN</td>
-                        <td>Invoice Terms</td>
-                        <td>Bills Terms</td>
-                        <td>TDS (%)</td>
+                        <td>{{contact.contact_name|upper}}</td>
+                        <td>{{contact.is_customer}}</td>
+                        <td>{{contact.is_vendor}}</td>
+                        <td>{{contact.is_active}}</td>
+                        <td>{{contact.pan|upper}}</td>
+                        <td>{{contact.gstin|upper}}</td>
+                        <td>{{contact.invice_terms}}</td>
+                        <td>{{contact.bills_term}}</td>
+                        <td>{{contact.tds}}</td>
                     </tr>
                 {% endfor %}
             </tbody>
