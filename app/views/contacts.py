@@ -50,6 +50,7 @@ def add_contacts(request, slug = None):
     data["contact_account_details_form"] = ContactAccountDetailsForm()
 
     data["slug"] = slug
+    data["breadcrumbs"] = ''
 
     breadcrumbs_list = [
         '<li class="nav-item" style="float:left;padding:0px 10px;margin-left:20px;"><a href="{% url \'add-contacts\' \'step1\' %}" style="color:#FFFFFF; text-decoration:none;"><i class="fas fw fa-user"></i> Basic Details</a></li>',
@@ -58,12 +59,13 @@ def add_contacts(request, slug = None):
         '<li class="nav-item" style="float:left;padding:0px 10px; margin-left:10px;"><a href="{% url \'add-contacts\' \'step4\' %}" style="color:#FFFFFF; text-decoration:none;" title="View Contacts As Grid"><i class="fas fw fa-credit-card"></i> Account Details</a></li>'
     ]
 
-    breadcrumbs_index = int(slug.replace('step',''))
+    if slug is not None:
+        breadcrumbs_index = int(slug.replace('step',''))
 
-    breadcrumbs = []
-    for i in range(breadcrumbs_index):
-        breadcrumbs.append(breadcrumbs_list[i])
+        breadcrumbs = []
+        for i in range(breadcrumbs_index):
+            breadcrumbs.append(breadcrumbs_list[i])
 
-    data["breadcrumbs"] = ''.join(breadcrumbs)
+        data["breadcrumbs"] = ''.join(breadcrumbs)
 
     return render(request, template_name, data)
