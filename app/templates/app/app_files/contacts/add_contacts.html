@@ -1,0 +1,29 @@
+{% extends 'app/base/base.html' %}
+{% load static %}
+
+{% load common_filters %}
+{% load pagination %}
+
+{% block content %}
+
+<div class="container">
+    <div class="col-xl-10 col-md-10 mb-10">
+        <div class="card shadow h-100 py-2">
+            <div class="card-heading text-center">ADD CONTACT<hr/></div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label>Is Cutomer</label>
+                        {{ form.is_customer }}
+                    </div>
+
+                </form>
+            </div>
+        </div>  
+    </div>  
+</div>
+
+
+
+{% endblock %}

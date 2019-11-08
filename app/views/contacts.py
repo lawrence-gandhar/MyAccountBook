@@ -4,6 +4,7 @@ from django.views import View
 from collections import OrderedDict, defaultdict
 
 from app.models.contacts_model import Contacts as C
+from app.forms.contact_forms import *
 
 
 class Contacts(View):
@@ -33,3 +34,15 @@ class Contacts(View):
 
 
         return render(request, self.template_name, self.data)
+
+
+#
+#   ADD CONTACTS
+#
+def add_contacts(request, slug = None):
+    template_name = 'app/app_files/contacts/add_contacts.html'
+
+    data = defaultdict()
+
+    data["form"] = ContactsForm()
+    return render(request, template_name, data)

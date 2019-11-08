@@ -24,6 +24,9 @@ urlpatterns += [
 # Contacts
 urlpatterns += [
     path('contacts/', never_cache(login_required(contacts.Contacts.as_view())), name = 'contacts'),
+    path('contacts/add/', login_required(contacts.add_contacts), name = 'add-contacts'),
+    path('contacts/add/<slug:slug>/', login_required(contacts.add_contacts), name = 'add-contacts'),
+    
 ]
 
 
