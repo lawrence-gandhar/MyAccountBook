@@ -51,6 +51,7 @@ def add_contacts(request, slug = None):
     data["contact_account_details_form"] = ContactAccountDetailsForm()
 
     data["slug"] = slug
+    
 
 
 
