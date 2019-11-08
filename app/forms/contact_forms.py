@@ -43,3 +43,30 @@ class ContactsEmailForm(ModelForm):
             'is_official' : Select(attrs={'class':'form-control input-sm',}, choices = EMAIL_CHOICES, ),
             'is_personal' : Select(attrs={'class':'form-control input-sm',}, choices = EMAIL_CHOICES, ),
         }
+
+class ContactsAddressForm(ModelForm):
+    class Meta:
+        ADDRESS_CHOICES = ((True, 'Yes'),(False, 'No'))
+
+        model = Contact_Addresses
+        fields = ('contact_name', 'is_billing_address', 'is_shipping_address', 'same_billing_shipping_address')
+
+        widgets = {
+            'contact_name' : TextInput(attrs={'class':'form-control input-sm',}),
+            'is_billing_address' : Select(attrs={'class':'form-control input-sm',}, choices = ADDRESS_CHOICES, ),
+            'is_shipping_address' : Select(attrs={'class':'form-control input-sm',}, choices = ADDRESS_CHOICES, ),
+            'same_billing_shipping_address' : Select(attrs={'class':'form-control input-sm',}, choices = ADDRESS_CHOICES, ),
+        }
+
+class ContactAccountDetailsForm(ModelForm):
+    class Meta:
+        model = Contact_Account_Details
+        fields = ('account_number', 'account_holder_name', 'ifsc_code', 'bank_name', 'bank_branch_name')
+
+        widgets = {
+            'account_number' : TextInput(attrs={'class':'form-control input-sm',}),
+            'account_holder_name' : TextInput(attrs={'class':'form-control input-sm',}),
+            'ifsc_code' : TextInput(attrs={'class':'form-control input-sm',}),
+            'bank_name' : TextInput(attrs={'class':'form-control input-sm',}),
+            'bank_branch_name' : TextInput(attrs={'class':'form-control input-sm',}),
+        }

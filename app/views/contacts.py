@@ -47,5 +47,11 @@ def add_contacts(request, slug = None):
 
     data["contact_form"] = ContactsForm()
     data["contact_email_form"] = ContactsEmailForm()
-    
+    data["contact_address_form"] = ContactsAddressForm()
+    data["contact_account_details_form"] = ContactAccountDetailsForm()
+
+    data["slug"] = slug
+
+
+
     return render(request, template_name, data)
