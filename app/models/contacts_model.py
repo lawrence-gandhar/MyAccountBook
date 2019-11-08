@@ -125,7 +125,7 @@ class Contacts_Email(models.Model):
         default = True,
     )
 
-    is_primary = models.BooleanField(
+    is_personal = models.BooleanField(
         db_index = True,
         choices = EMAIL_CHOICES,
         default = True,

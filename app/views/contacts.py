@@ -43,6 +43,9 @@ def add_contacts(request, slug = None):
     template_name = 'app/app_files/contacts/add_contacts.html'
 
     data = defaultdict()
+    data["active_link"] = 'Contacts'
 
-    data["form"] = ContactsForm()
+    data["contact_form"] = ContactsForm()
+    data["contact_email_form"] = ContactsEmailForm()
+    
     return render(request, template_name, data)

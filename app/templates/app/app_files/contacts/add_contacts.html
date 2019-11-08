@@ -13,11 +13,83 @@
             <div class="card-body">
                 <form method="post">
                     {% csrf_token %}
-                    <div class="form-group">
-                        <label>Is Cutomer</label>
-                        {{ form.is_customer }}
-                    </div>
-
+                    <table class="table">
+                        <tr>
+                            <td colspan="2" style="line-height:25px; background-color:#CCCCCC; color:#000000; font-weight:bold;">Contact Details</td>
+                        </tr>
+                        <tr>
+                            <td width="200px">Is Customer {{ contact_form.is_customer }}</td>
+                            <td>Is Vendor {{ contact_form.is_vendor }}</td>
+                        </tr>
+                        <tr>
+                            <td style="line-height:35px;">Contact/Organization Name</td>
+                            <td>{{ contact_form.contact_name }}</td>
+                        </tr>
+                        <tr>
+                            <td style="line-height:35px;">PAN</td>
+                            <td>{{ contact_form.pan }}</td>
+                        </tr>
+                        <tr>
+                            <td style="line-height:35px;">GSTIN</td>
+                            <td>{{ contact_form.gstin }}</td>
+                        </tr>
+                        <tr>
+                            <td style="line-height:35px;">TDS (%)</td>
+                            <td>{{ contact_form.tds }}</td>
+                        </tr>
+                        <tr>
+                            <td style="line-height:35px;">Invoice Terms</td>
+                            <td>{{ contact_form.invoice_terms }}</td>
+                        </tr>
+                        <tr>
+                            <td style="line-height:35px;">Billing Terms</td>
+                            <td>{{ contact_form.bills_terms }}</td>
+                        </tr>                        
+                    </table>
+                </form>
+                <form method="post">
+                    <table class="table" style="margin-bottom:0px;">
+                        <tr>
+                            <td colspan="2" style="line-height:25px; background-color:#CCCCCC; color:#000000; font-weight:bold;">Contact Email Details</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="table" >
+                                    <div class="d-table-cell" style="width:350px; padding-right:20px">
+                                        Email Address {{ contact_email_form.email }}
+                                    </div>   
+                                    <div class="d-table-cell" style="width:100px; padding-right:20px">
+                                        Is Official {{ contact_email_form.is_official }}
+                                    </div>
+                                    <div class="d-table-cell" style="width:100px; padding-right:20px">
+                                        Is Personal {{ contact_email_form.is_personal }}
+                                    </div>
+                                </div> 
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+                <form method="post">
+                    <table class="table" style="margin-bottom:0px;">
+                        <tr>
+                            <td colspan="2" style="line-height:25px; background-color:#CCCCCC; color:#000000; font-weight:bold;">Contact Address Details</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="table">
+                                    <div class="d-table-cell" style="width:350px; padding-right:20px">
+                                        Email Address {{ contact_email_form.email }}
+                                    </div>   
+                                    <div class="d-table-cell" style="width:100px; padding-right:20px">
+                                        Is Official {{ contact_email_form.is_official }}
+                                    </div>
+                                    <div class="d-table-cell" style="width:100px; padding-right:20px">
+                                        Is Personal {{ contact_email_form.is_personal }}
+                                    </div>
+                                </div> 
+                            </td>
+                        </tr>
+                    </table>
                 </form>
             </div>
         </div>  

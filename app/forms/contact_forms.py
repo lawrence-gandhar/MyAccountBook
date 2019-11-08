@@ -21,8 +21,8 @@ class ContactsForm(ModelForm):
                 )
 
         widgets = {
-            'is_customer': CheckboxInput(attrs={'class':'form-control input-sm','value':'1',}),
-            'is_vendor': CheckboxInput(attrs={'class':'form-control input-sm','value':'1',}),
+            'is_customer': CheckboxInput(attrs={'class':'input-sm','value':'1','required':'false'}),
+            'is_vendor': CheckboxInput(attrs={'class':'input-sm','value':'1',}),
             'contact_name' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'200'}),
             'pan' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'20'}),
             'tds' : NumberInput(attrs={'class':'form-control input-sm',}),
@@ -31,3 +31,15 @@ class ContactsForm(ModelForm):
             'bills_terms' : Select(attrs={'class':'form-control input-sm',}, choices = PAYMENT_DAYS, ),
         }
 
+class ContactsEmailForm(ModelForm):
+    class Meta:
+        EMAIL_CHOICES = ((True, 'Yes'),(False, 'No'))
+        
+        model = Contacts_Email
+        fields = ('email', 'is_official', 'is_personal')
+
+        widgets = {
+            'email' : EmailInput(attrs={'class':'form-control input-sm',}),
+            'is_official' : Select(attrs={'class':'form-control input-sm',}, choices = EMAIL_CHOICES, ),
+            'is_personal' : Select(attrs={'class':'form-control input-sm',}, choices = EMAIL_CHOICES, ),
+        }
