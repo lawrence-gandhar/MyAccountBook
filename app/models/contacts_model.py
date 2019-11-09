@@ -22,12 +22,16 @@ class Contacts(models.Model):
         db_index = True,
         choices = IS_ACTIVE,
         default = False,
+        null = True,
+        blank = True,
     )
 
     is_vendor = models.BooleanField(
         db_index = True,
         choices = IS_ACTIVE,
         default = False,
+        null = True,
+        blank = True,
     )
 
     contact_name = models.CharField(
@@ -94,6 +98,41 @@ class Contacts(models.Model):
         db_index = True,
         null = True,
     )
+
+    def is_customer_value(self):
+        if self.is_customer:
+            return "YES"
+        return "NO"
+
+    def is_vendor_value(self):
+        if self.is_vendor:
+            return "YES"
+        return "NO"
+
+    def is_active_value(self):
+        if self.is_active:
+            return "YES"
+        return "NO"    
+
+    def invoice_terms_full(self):
+        if self.invoice_terms is not None:
+            return dict(self.PAYMENT_DAYS)[self.invoice_terms]
+        return '--'
+    
+    def bills_terms_full(self):
+        if self.bills_terms is not None:
+            return dict(self.PAYMENT_DAYS)[self.bills_terms]
+        return '--'
+
+    def pan_value(self):
+        if self.pan is not None:
+            return self.pan.upper()
+        return "--"
+
+    def gstin_value(self):
+        if self.gstin is not None:
+            return self.gstin.upper()
+        return "--"
 
     class Meta:
         verbose_name_plural = 'contacts_tbl'

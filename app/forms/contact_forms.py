@@ -21,7 +21,7 @@ class ContactsForm(ModelForm):
                 )
 
         widgets = {
-            'is_customer': CheckboxInput(attrs={'class':'input-sm','value':'1','required':'false'}),
+            'is_customer': CheckboxInput(attrs={'class':'input-sm','value':'1',}),
             'is_vendor': CheckboxInput(attrs={'class':'input-sm','value':'1',}),
             'contact_name' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'200'}),
             'pan' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'20'}),

@@ -39,36 +39,36 @@
                         </div> 
                         <div>
                             <span style="width:100px; display:inline-block; font-weight:bold">Is Customer</span>
-                            <span>: {{contact.is_customer}}</span>
+                            <span>: {{contact.is_customer_value}}</span>
                         </div> 
                         <div>
                             <span style="width:100px; display:inline-block; font-weight:bold">Is Vendor</span>
-                            <span>: {{contact.is_vendor}}</span>
+                            <span>: {{contact.is_vendor_value}}</span>
                         </div> 
                         <div>
                             <span style="width:100px; display:inline-block; font-weight:bold">Active</span>
-                            <span>: {{contact.is_active}}</span>
+                            <span>: {{contact.is_active_value}}</span>
                         </div> 
                         <div>
                             <span style="width:100px; display:inline-block; font-weight:bold">PAN</span>
-                            <span>: {{contact.pan|upper}}</span>
+                            <span>: {{contact.pan_value}}</span>
                         </div> 
                         <div>
                             <span style="width:100px; display:inline-block; font-weight:bold">GSTIN</span>
-                            <span>: {{contact.gstin|upper}}</span>
-                        </div> 
-                        <div>
-                            <span style="width:100px; display:inline-block; font-weight:bold">Invoice Terms</span>
-                            <span>: {{contact.invice_terms}}</span>
-                        </div> 
-                        <div>
-                            <span style="width:100px; display:inline-block; font-weight:bold">Bills Terms</span>
-                            <span>: {{contact.bills_term}}</span>
+                            <span>: {{contact.gstin_value}}</span>
                         </div> 
                         <div>
                             <span style="width:100px; display:inline-block; font-weight:bold">TDS (%)</span>
                             <span>: {{contact.tds}}</span>
                         </div> 
+                        <div>
+                            <span style="width:100px; display:inline-block; font-weight:bold">Invoice Terms</span>
+                            <span>: {{contact.invoice_terms_full }}</span>
+                        </div> 
+                        <div>
+                            <span style="width:100px; display:inline-block; font-weight:bold">Bills Terms</span>
+                            <span>: {{contact.bills_terms_full }}</span>
+                        </div>                         
                     </div>
                 </div>
             </div>
@@ -82,22 +82,22 @@
                 <th>Active</th>
                 <th>PAN</th>
                 <th>GSTIN</th>
-                <th>Invoice Terms</th>
-                <th>Bills Terms</th>
                 <th>TDS (%)</th>
+                <th>Invoice Terms</th>
+                <th>Billing Terms</th>                
             </thead>
             <tbody>
                 {% for contact in contacts %}
                     <tr>
-                        <td>{{contact.contact_name|upper}}</td>
-                        <td>{{contact.is_customer}}</td>
-                        <td>{{contact.is_vendor}}</td>
-                        <td>{{contact.is_active}}</td>
-                        <td>{{contact.pan|upper}}</td>
-                        <td>{{contact.gstin|upper}}</td>
-                        <td>{{contact.invice_terms}}</td>
-                        <td>{{contact.bills_term}}</td>
+                        <td>{{contact.contact_name}}</td>
+                        <td>{{contact.is_customer_value}}</td>
+                        <td>{{contact.is_vendor_value}}</td>
+                        <td>{{contact.is_active_value}}</td>
+                        <td>{{contact.pan_value}}</td>
+                        <td>{{contact.gstin_value}}</td>
                         <td>{{contact.tds}}</td>
+                        <td>{{contact.invoice_terms_full}}</td>
+                        <td>{{contact.bills_terms_full}}</td>                        
                     </tr>
                 {% endfor %}
             </tbody>
