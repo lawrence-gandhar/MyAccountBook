@@ -1,0 +1,21 @@
+<table class="table">
+    <tr>
+        <td>Account Number</td>
+        <td>Account Holder's Name</td>
+        <td>IFSC Code</td>
+        <td>Bank</td>
+        <td>Bank Branch</td>
+        <td>Created On</td>
+    </tr>
+    {% for account_detail in contact_account_details %}
+        <tr>
+            <td>{{account_detail.account_number}}</td>
+            <td>{{account_detail.account_holder_name}}</td>
+            <td>{{account_detail.ifsc_code}}</td>
+            <td>{{account_detail.bank_name}}</td>
+            <td>{{account_detail.bank_branch_name}}</td>
+            <td>{{account_detail.created_on}}</td>
+        </tr>
+    {% endfor %}    
+</table>
+<a href="{% url 'add-contacts' 'step3' contact_form_instance %}" type="button" class="btn btn-success">Back</a>
