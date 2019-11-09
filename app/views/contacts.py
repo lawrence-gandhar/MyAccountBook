@@ -36,9 +36,9 @@ class Contacts(View):
         return render(request, self.template_name, self.data)
 
 
-#
+#=====================================================================================
 #   ADD CONTACTS
-#
+#=====================================================================================
 def add_contacts(request, slug = None, ins = None):
     template_name = 'app/app_files/contacts/add_contacts.html'
 
@@ -54,6 +54,7 @@ def add_contacts(request, slug = None, ins = None):
     data["breadcrumbs"] = ''
     data["breadcrumbs_index"] = 0
     data["included_template"] = 'app/app_files/contacts/add_contacts_step1.html'
+    data["add_proxy"] = None
 
     data["contact_form_instance"] = ins
 
@@ -130,6 +131,10 @@ def add_contacts(request, slug = None, ins = None):
                 contact_email.contact = c
                 contact_email.save()
 
+                data["add_proxy"] = request.POST.get('add_proxy', None)
+
+                if data["add_proxy"] == '1':
+                    return redirect('/contacts/add/step2/{}'.format(data["contact_form_instance"]), permanent=True) 
                 return redirect('/contacts/add/step3/{}'.format(data["contact_form_instance"]), permanent=True) 
 
         if data["breadcrumbs_index"] == 3:            
@@ -152,7 +157,12 @@ def add_contacts(request, slug = None, ins = None):
                 contact_account_details.contact = c
                 contact_account_details.save()
 
-                return redirect('/contacts/', permanent=True) 
+                return redirect('/contacts/add/step4/{}'.format(data["contact_form_instance"]), permanent=True) 
 
         return render(request, template_name, data) 
     return render(request, template_name, data)
+
+
+#=====================================================================================
+#   ADD CONTACTS
+#=====================================================================================

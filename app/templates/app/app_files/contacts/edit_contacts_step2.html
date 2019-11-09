@@ -5,6 +5,7 @@
         <td>Is Official</td>
         <td>Is Personal</td>
         <td>Created On</td>
+        <td>Action</td>
     </tr>
     {% for email in contact_emails %}
         <tr>
@@ -12,8 +13,83 @@
             <td>{{email.is_official_full}}</td>
             <td>{{email.is_personal_full}}</td>
             <td>{{email.created_on}}</td>
+            <td>
+                <button class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#editModal">
+                    <i class="fas fa-fw fa-pencil-alt" style="font-size:70%"></i>
+                </button>
+            </td>
         </tr>
     {% endfor %}    
 </table>
-<a href="{% url 'add-contacts' 'step1' contact_form_instance %}" type="button" class="btn btn-success">Back</a>
-<a href="{% url 'add-contacts' 'step3' contact_form_instance %}" type="button" class="btn btn-success">Next</a>
+<a href="{% url 'add-contacts' 'step1' contact_form_instance %}" type="button" class="btn btn-primary">Back</a>
+<a href="{% url 'add-contacts' 'step3' contact_form_instance %}" type="button" class="btn btn-primary">Next</a>
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal">Add Another</button>
+
+
+<!-- Add Modal -->
+<div class="modal" id="addModal">
+    <div class="modal-dialog">
+        <div class="modal-content">            
+            <form method="post" action="">
+                {% csrf_token %}
+                <input type="hidden" name="add_proxy" value="1">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Email Address</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="table" style="padding:10px 0px;">
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:0px 10px;">
+                                <label>Email Address</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                {{ contact_email_form.email }}
+                            </div>
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:0px 10px;">
+                                <label>Is Official Email</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                {{ contact_email_form.is_official }}
+                            </div>
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:0px 10px;">
+                                <label>Is Personal Email</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                {{ contact_email_form.is_personal }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success">Submit</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal" id="editModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Modal Heading</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
