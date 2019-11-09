@@ -1,0 +1,21 @@
+
+<table class="table">
+    <tr>
+        <td>Contact Person</td>
+        <td>Is Billing Address</td>
+        <td>Is Shipping Address</td>
+        <td>Billing & Shipping is same</td>
+        <td>Created On</td>
+    </tr>
+    {% for address in contact_addresses %}
+        <tr>
+            <td>{{address.contact_name}}</td>
+            <td>{{address.is_billing_address_full}}</td>
+            <td>{{address.is_shipping_address_full}}</td>
+            <td>{{address.same_billing_shipping_address_full}}</td>
+            <td>{{address.created_on}}</td>
+        </tr>
+    {% endfor %}    
+</table>
+<a href="{% url 'add-contacts' 'step2' contact_form_instance %}" type="button" class="btn btn-success">Back</a>
+<a href="{% url 'add-contacts' 'step3' contact_form_instance %}" type="button" class="btn btn-success">Next</a>

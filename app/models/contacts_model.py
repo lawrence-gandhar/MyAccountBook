@@ -181,6 +181,16 @@ class Contacts_Email(models.Model):
         null = True,
     )
 
+    def is_official_full(self):
+        if self.is_official:
+            return "YES"
+        return "NO" 
+
+    def is_personal_full(self):
+        if self.is_official:
+            return "YES"
+        return "NO" 
+
     class Meta:
         verbose_name_plural = 'contacts_email_tbl'
 
@@ -235,6 +245,21 @@ class Contact_Addresses(models.Model):
         db_index = True,
         null = True,
     )
+
+    def is_billing_address_full(self):
+        if self.is_billing_address:
+            return "YES"
+        return "NO"
+
+    def is_shipping_address_full(self):
+        if self.is_shipping_address:
+            return "YES"
+        return "NO"
+
+    def same_billing_shipping_address_full(self):
+        if self.same_billing_shipping_address:
+            return "YES"
+        return "NO"
 
     class Meta:
         verbose_name_plural = 'contacts_address_details_tbl'

@@ -1,0 +1,19 @@
+
+<table class="table">
+    <tr>
+        <td>Email</td>
+        <td>Is Official</td>
+        <td>Is Personal</td>
+        <td>Created On</td>
+    </tr>
+    {% for email in contact_emails %}
+        <tr>
+            <td>{{email.email}}</td>
+            <td>{{email.is_official_full}}</td>
+            <td>{{email.is_personal_full}}</td>
+            <td>{{email.created_on}}</td>
+        </tr>
+    {% endfor %}    
+</table>
+<a href="{% url 'add-contacts' 'step1' contact_form_instance %}" type="button" class="btn btn-success">Back</a>
+<a href="{% url 'add-contacts' 'step3' contact_form_instance %}" type="button" class="btn btn-success">Next</a>
