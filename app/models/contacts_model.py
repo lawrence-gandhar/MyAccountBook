@@ -18,6 +18,8 @@ class Contacts(models.Model):
         (6, '90 Days'),
     )
 
+    user = models.ForeignKey(User, on_delete = models.CASCADE, db_index = True, null = True,)
+
     is_customer = models.BooleanField(
         db_index = True,
         choices = IS_ACTIVE,

@@ -119,7 +119,10 @@ def add_contacts(request, slug = None, ins = None):
         if data["slug"] is None:
             contact_form = ContactsForm(request.POST)
             if contact_form.is_valid():
-                data["contact_form_instance"] = contact_form.save()            
+                data["contact_form_instance"] = contact_form_ins = contact_form.save(commit = False)
+                contact_form_ins.user = request.user
+                contact_form_ins.save()
+
                 return redirect('/contacts/add/step2/{}'.format(data["contact_form_instance"].pk), permanent=True) 
         
         if data["breadcrumbs_index"] == 2:            
