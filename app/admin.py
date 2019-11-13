@@ -1,6 +1,7 @@
 from django.contrib import admin
 
 from app.models.contacts_model import Contacts as C, Contacts_Email, Contact_Addresses, Contact_Account_Details
+from app.models.invoice_model import Invoice
 # Register your models here.
 
 @admin.register(C)
@@ -18,4 +19,8 @@ class Contact_Addresses(admin.ModelAdmin):
 @admin.register(Contact_Account_Details)
 class Contact_Account_Details(admin.ModelAdmin):
     model = Contact_Account_Details
+
+@admin.register(Invoice)
+class Invoice(admin.ModelAdmin):
+    model = Invoice
 

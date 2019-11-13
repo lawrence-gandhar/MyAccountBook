@@ -97,5 +97,10 @@ class Invoice(models.Model):
         db_index = True,
     )
 
+    created_on = models.DateTimeField(
+        auto_now = True,
+        db_index = True,
+    )
+
     class Meta:
         verbose_name_plural = 'invoice_tbl'
