@@ -20,14 +20,14 @@ $(document).ready(function(){
     }
 })
 
-function edit_contact(elem){
-    $(elem).hide();
+$("#edit_contact").click(function(){
+    $(this).hide();
     $("#cancel_edit_contact").show();
     $(".disabled_form_elements input, .disabled_form_elements select, .disabled_form_elements checkbox").prop("disabled", false);
-}
+})
 
-function cancel_edit_contact(elem){
-    $(elem).hide();
+$("#cancel_edit_contact").click(function(){
+    $(this).hide();
     $("#edit_contact").show();
     $(".disabled_form_elements input, .disabled_form_elements select, .disabled_form_elements checkbox").prop("disabled", true);
-}
+})
