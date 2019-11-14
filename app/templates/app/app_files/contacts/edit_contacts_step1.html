@@ -1,4 +1,4 @@
-<form method="post" class="disabled_form_elements" action="contacts/edit/step1/{{contact_form_instance}}">
+<form method="post" class="disabled_form_elements" action="/contacts/edit/step1/{{contact_form_instance}}">
     {% csrf_token %}
     <div class="table" style="padding:10px 0px;">
         <div class="d-table-row" style="padding:10px 0px;">
@@ -66,7 +66,8 @@
         <div class="d-table-row" style="padding:10px 0px;">
             <div class="d-table-cell" style="padding:5px 10px;">
                 <button type="button" class="btn btn-warning" id="edit_contact">Edit</button>
-                <button style="display:none;" type="button" class="btn btn-danger" id="cancel_edit_contact" onclick="cancel_edit_contact(this)">Cancel</button>
+                <button style="display:none;" type="button" class="btn btn-danger" id="cancel_edit_contact">Cancel</button>
+                <button style="display:none;" class="btn btn-primary" id="save_edit_contact">Save</button>
                 <a href="{% url 'add-contacts' 'step2' contact_form_instance %}" type="button" class="btn btn-success">Next</a>
             </div>
         </div>

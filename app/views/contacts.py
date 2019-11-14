@@ -62,6 +62,13 @@ def add_contacts(request, slug = None, ins = None):
     # Check Slug - for creation of breadcrumbs
     #=========================================
 
+    if ins is not None:
+        try: 
+            contact = C.objects.get(pk = data["contact_form_instance"])
+        except C.DoesNotExist:
+            raise Http404()
+
+
     if data["slug"] is not None and data["contact_form_instance"] is not None:
 
         breadcrumbs_list = [
@@ -173,12 +180,12 @@ def add_contacts(request, slug = None, ins = None):
 def edit_contact(request, slug = None, ins = None):
     if request.POST:
         if slug is not None and ins is not None:
+
             try:
                 contact = C.objects.get(pk = int(ins))
                 
                 contact_form = ContactsForm(request.POST, instance = contact)
                 contact_form.save()
-            except:
-                return Http404
-        return Http404
-    return Http404
+            except C.DoesNotExists:
+                return redirect('/Http404', permanent=True)
+    return redirect('/contacts/add/step1/{}'.format(ins), permanent=True)

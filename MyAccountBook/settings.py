@@ -25,7 +25,7 @@ SECRET_KEY = 'ema*-eaeg%@h2%935^7hi8@-&kd7eb4m^b19a&w+0yww04#s*4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
