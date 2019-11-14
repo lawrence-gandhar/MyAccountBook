@@ -64,9 +64,9 @@ def add_contacts(request, slug = None, ins = None):
 
     if ins is not None:
         try: 
-            contact = C.objects.get(pk = data["contact_form_instance"])
+            contact = C.objects.get(pk = data["contact_form_instance"], user = request.user)
         except C.DoesNotExist:
-            raise Http404()
+            return redirect('/unauthorized/', permanent = True)
 
 
     if data["slug"] is not None and data["contact_form_instance"] is not None:
@@ -86,7 +86,7 @@ def add_contacts(request, slug = None, ins = None):
             
             try:
                 if data["breadcrumbs_index"] == 1:
-                    contact = C.objects.get(pk = data["contact_form_instance"])
+                    contact = C.objects.get(pk = data["contact_form_instance"], user = request.user)
                     data["contact_form"] = ContactsForm(instance = contact)
                     counter = 1
 
@@ -132,9 +132,12 @@ def add_contacts(request, slug = None, ins = None):
 
                 return redirect('/contacts/add/step2/{}'.format(data["contact_form_instance"].pk), permanent=True) 
         
-        if data["breadcrumbs_index"] == 2:            
-            c = C.objects.get(pk = data["contact_form_instance"])
+        try:
+            c = C.objects.get(pk = data["contact_form_instance"], user = request.user)
+        except C.DoesNotExist:
+            return redirect('/unauthorized/', permanent = True)
 
+        if data["breadcrumbs_index"] == 2:            
             contact_email_form = ContactsEmailForm(request.POST or None)
             if contact_email_form.is_valid():
                 contact_email = contact_email_form.save(commit = False)    
@@ -148,8 +151,6 @@ def add_contacts(request, slug = None, ins = None):
                 return redirect('/contacts/add/step3/{}'.format(data["contact_form_instance"]), permanent=True) 
 
         if data["breadcrumbs_index"] == 3:            
-            c = C.objects.get(pk = data["contact_form_instance"])
-
             contact_address_form = ContactsAddressForm(request.POST or None)
             if contact_address_form.is_valid():
                 contact_address = contact_address_form.save(commit = False)    
@@ -159,8 +160,6 @@ def add_contacts(request, slug = None, ins = None):
                 return redirect('/contacts/add/step4/{}'.format(data["contact_form_instance"]), permanent=True) 
 
         if data["breadcrumbs_index"] == 4:            
-            c = C.objects.get(pk = data["contact_form_instance"])
-
             contact_account_details_form = ContactAccountDetailsForm(request.POST or None)
             if contact_account_details_form.is_valid():
                 contact_account_details = contact_account_details_form.save(commit = False)    

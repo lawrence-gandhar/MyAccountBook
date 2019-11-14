@@ -6,7 +6,7 @@ from django.views.generic.base import RedirectView
 from django.conf import settings
 from django.conf.urls.static import static
 
-from app.views import dashboard, contacts
+from app.views import dashboard, contacts, base
 
 # Authorization
 urlpatterns = [
@@ -14,6 +14,7 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name = 'app/registration/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name = 'app/registration/logout.html'), name = 'logout'),
     re_path(r'^accounts/*', RedirectView.as_view(pattern_name='login', permanent=True)),
+    path('unauthorized/', login_required(base.UnAuthorized.as_view()), name = 'unauthorized'),
 ]
 
 # Dashboard
