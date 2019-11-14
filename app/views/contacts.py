@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, JsonResponse
 from django.views import View
 from collections import OrderedDict, defaultdict
 from django.contrib import messages
 
 from app.models.contacts_model import Contacts as C
 from app.forms.contact_forms import *
+
+import json
 
 
 class Contacts(View):
@@ -57,6 +59,7 @@ def add_contacts(request, slug = None, ins = None):
     data["add_proxy"] = None
 
     data["contact_form_instance"] = ins
+                        
 
     #=========================================
     # Check Slug - for creation of breadcrumbs
@@ -87,6 +90,7 @@ def add_contacts(request, slug = None, ins = None):
             try:
                 if data["breadcrumbs_index"] == 1:
                     contact = C.objects.get(pk = data["contact_form_instance"], user = request.user)
+
                     data["contact_form"] = ContactsForm(instance = contact)
                     counter = 1
 
@@ -188,3 +192,38 @@ def edit_contact(request, slug = None, ins = None):
             except C.DoesNotExists:
                 return redirect('/unauthorized/', permanent=True)
     return redirect('/contacts/add/step1/{}'.format(ins), permanent=True)
+
+#=======================================================================================
+#   FETCH EDIT CONTACT EXTRA FORMS
+#=======================================================================================
+
+def fetch_extra_edit_forms(request):
+    if request.is_ajax():
+        if request.POST:
+            form_type = request.POST.get('form_type', None)
+            obj_ins = request.POST.get('ins', None)
+
+            form_html = OrderedDict()
+
+            if form_type is not None and obj_ins is not None:
+                pass
+
+                if form_type == 'edit_contact_email':
+                    labels = {
+                        'email' : 'Email Address',
+                        'is_official' : 'Is Official Email',
+                        'is_personal' : 'Is Personal Email'
+                    }
+                    try:
+                        obj = Contacts_Email.objects.get(pk = int(obj_ins))
+                        form_data = ContactsEmailForm(instance = obj) 
+                    except:
+                        return HttpResponse('0')
+
+                for key in form_data.fields:
+                    form_html[key] = {'label': labels[key], 'field':str(form_data[key]).replace("\n","")}
+                return HttpResponse(json.dumps(form_html))
+
+            return HttpResponse('0')
+        return HttpResponse('0')
+    return HttpResponse('0')

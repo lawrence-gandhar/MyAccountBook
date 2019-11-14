@@ -25,11 +25,35 @@ $("#edit_contact").click(function(){
     $("#cancel_edit_contact").show();
     $("#save_edit_contact").show();
     $(".disabled_form_elements input, .disabled_form_elements select, .disabled_form_elements checkbox").prop("disabled", false);
-})
+});
+
 
 $("#cancel_edit_contact").click(function(){
     $(this).hide();
     $("#edit_contact").show();
     $("#save_edit_contact").show();
     $(".disabled_form_elements input, .disabled_form_elements select, .disabled_form_elements checkbox").prop("disabled", true);
-})
+});
+
+
+function edit_form_button(form_type, obj){
+    var CSRFtoken = $('input[name=csrfmiddlewaretoken]').val();
+
+    $.post('/contacts/fetch_extra_edit_forms/', {csrfmiddlewaretoken: CSRFtoken, form_type: form_type, ins:obj}, function(data){
+        data = $.parseJSON(data);
+        console.log(data);
+
+        htm = '';
+
+        $.each(data, function(i,v){
+            htm += '<div class="d-table-row" style="padding:10px 0px;">';
+            htm += '<div class="d-table-cell" style="padding:0px 10px;">';
+            htm += '<label>'+v["label"]+'</label></div>';
+            htm += '<div class="d-table-cell" style="padding:5px 10px;">'+v["field"]+'</div>';
+            htm += '</div>';
+        });
+
+        $("#extra_form_layout").empty().append(htm);
+        $("#editModal").modal("show");
+    });
+}
