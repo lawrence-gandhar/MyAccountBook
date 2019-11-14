@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.views import View
 from collections import OrderedDict, defaultdict
 from django.contrib import messages
@@ -25,7 +25,7 @@ class Contacts(View):
 
         view_type = request.GET.get('view',False)
 
-        contacts = C.objects.all()
+        contacts = C.objects.filter(user = request.user)
         self.data["contacts"] = contacts
 
         if view_type:
@@ -167,5 +167,18 @@ def add_contacts(request, slug = None, ins = None):
 
 
 #=====================================================================================
-#   ADD CONTACTS
+#   EDIT CONTACTS
 #=====================================================================================
+
+def edit_contact(request, slug = None, ins = None):
+    if request.POST:
+        if slug is not None and ins is not None:
+            try:
+                contact = C.objects.get(pk = int(ins))
+                
+                contact_form = ContactsForm(request.POST, instance = contact)
+                contact_form.save()
+            except:
+                return Http404
+        return Http404
+    return Http404

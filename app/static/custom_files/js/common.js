@@ -18,5 +18,16 @@ $(document).ready(function(){
     for (var i = 0; i < disabled_elems.length; i++) {
         disabled_elems[i].disabled = !disabled_elems[i].disabled;
     }
-
 })
+
+function edit_contact(elem){
+    $(elem).hide();
+    $("#cancel_edit_contact").show();
+    $(".disabled_form_elements input, .disabled_form_elements select, .disabled_form_elements checkbox").prop("disabled", false);
+}
+
+function cancel_edit_contact(elem){
+    $(elem).hide();
+    $("#edit_contact").show();
+    $(".disabled_form_elements input, .disabled_form_elements select, .disabled_form_elements checkbox").prop("disabled", true);
+}
