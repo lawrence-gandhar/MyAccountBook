@@ -181,10 +181,10 @@ def edit_contact(request, slug = None, ins = None):
         if slug is not None and ins is not None:
 
             try:
-                contact = C.objects.get(pk = int(ins))
+                contact = C.objects.get(pk = int(ins), user = request.user)
                 
                 contact_form = ContactsForm(request.POST, instance = contact)
                 contact_form.save()
             except C.DoesNotExists:
-                return redirect('/Http404', permanent=True)
+                return redirect('/unauthorized/', permanent=True)
     return redirect('/contacts/add/step1/{}'.format(ins), permanent=True)
