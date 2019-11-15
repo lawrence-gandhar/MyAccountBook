@@ -219,6 +219,54 @@ class Contact_Addresses(models.Model):
         db_index = True,
     )
 
+    flat_no = models.CharField(
+        max_length = 250,
+        blank = False,
+        null = False,
+        db_index = True,
+        default = 'default',
+    )
+
+    street = models.CharField(
+        max_length = 250,
+        blank = False,
+        null = False,
+        db_index = True,
+        default = 'default',
+    )
+
+    city = models.CharField(
+        max_length = 250,
+        blank = False,
+        null = False,
+        db_index = True,
+        default = 'default',
+    )
+
+    state = models.CharField(
+        max_length = 250,
+        blank = False,
+        null = False,
+        db_index = True,
+        default = 'default',
+    )
+
+    country = models.CharField(
+        max_length = 250,
+        blank = False,
+        null = False,
+        db_index = True,
+        default = 'default',
+    )
+
+    pincode = models.CharField(
+        max_length = 250,
+        blank = False,
+        null = False,
+        db_index = True,
+        default = 'default',
+    )
+
     is_billing_address = models.BooleanField(
         db_index = True,
         choices = ADDRESS_CHOICES,
@@ -226,12 +274,6 @@ class Contact_Addresses(models.Model):
     ) 
 
     is_shipping_address = models.BooleanField(
-        db_index = True,
-        choices = ADDRESS_CHOICES,
-        default = False,
-    )
-
-    same_billing_shipping_address = models.BooleanField(
         db_index = True,
         choices = ADDRESS_CHOICES,
         default = False,
@@ -259,7 +301,7 @@ class Contact_Addresses(models.Model):
         return "NO"
 
     def same_billing_shipping_address_full(self):
-        if self.same_billing_shipping_address:
+        if self.is_billing_address == self.is_shipping_address:
             return "YES"
         return "NO"
 
