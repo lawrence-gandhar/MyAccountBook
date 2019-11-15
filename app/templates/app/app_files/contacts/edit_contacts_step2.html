@@ -1,30 +1,44 @@
+<div class="row">
+    <div class="col-lg-12" style="padding:0px">
+        <div class="card">
+            <div class="card-body">
+                <div class="table">
+                    <table class="table-bordered" width="100%" cellspacing="0">
+                        <tr>
+                            <td>Email</td>
+                            <td>Is Official</td>
+                            <td>Is Personal</td>
+                            <td>Created On</td>
+                            <td>Action</td>
+                        </tr>
+                        {% for email in contact_emails %}
+                            <tr>
+                                <td>{{email.email}}</td>
+                                <td>{{email.is_official_full}}</td>
+                                <td>{{email.is_personal_full}}</td>
+                                <td>{{email.created_on}}</td>
+                                <td>
+                                    {% csrf_token %}
+                                    <button class="btn btn-primary btn-sm" onclick="edit_form_button('edit_contact_email',{{email.id}})">
+                                        <i class="fas fa-fw fa-pencil-alt" style="font-size:70%"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        {% endfor %}    
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<table class="table">
-    <tr>
-        <td>Email</td>
-        <td>Is Official</td>
-        <td>Is Personal</td>
-        <td>Created On</td>
-        <td>Action</td>
-    </tr>
-    {% for email in contact_emails %}
-        <tr>
-            <td>{{email.email}}</td>
-            <td>{{email.is_official_full}}</td>
-            <td>{{email.is_personal_full}}</td>
-            <td>{{email.created_on}}</td>
-            <td>
-                {% csrf_token %}
-                <button class="btn btn-primary btn-sm" onclick="edit_form_button('edit_contact_email',{{email.id}})">
-                    <i class="fas fa-fw fa-pencil-alt" style="font-size:70%"></i>
-                </button>
-            </td>
-        </tr>
-    {% endfor %}    
-</table>
-<a href="{% url 'add-contacts' 'step1' contact_form_instance %}" type="button" class="btn btn-primary">Back</a>
-<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal">Add Another</button>
-<a href="{% url 'add-contacts' 'step3' contact_form_instance %}" type="button" class="btn btn-primary">Next</a>
+<div class="col-lg-12">
+    <a href="{% url 'add-contacts' 'step1' contact_form_instance %}" type="button" class="btn btn-primary">Back</a>
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal">Add Another</button>
+    <a href="{% url 'add-contacts' 'step3' contact_form_instance %}" type="button" class="btn btn-primary">Next</a>
+</div>
+
+
 
 
 <!-- Add Modal -->
