@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from app.other_constants import country_list
 
 #**************************************************************************
 #   CONTACT'S DATA
@@ -252,11 +252,11 @@ class Contact_Addresses(models.Model):
     )
 
     country = models.CharField(
-        max_length = 250,
-        blank = False,
-        null = False,
+        max_length = 5,
+        null = True,
+        blank = True,
         db_index = True,
-        default = 'default',
+        choices = country_list.COUNTRIES_LIST_CHOICES
     )
 
     pincode = models.CharField(

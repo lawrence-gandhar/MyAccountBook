@@ -49,10 +49,16 @@ class ContactsAddressForm(ModelForm):
         ADDRESS_CHOICES = ((True, 'Yes'),(False, 'No'))
 
         model = Contact_Addresses
-        fields = ('contact_name', 'is_billing_address', 'is_shipping_address',)
+        fields = ('contact_name', 'flat_no', 'street', 'city', 'state', 'country' , 'pincode', 'is_billing_address', 'is_shipping_address',)
 
         widgets = {
             'contact_name' : TextInput(attrs={'class':'form-control input-sm',}),
+            'flat_no' : TextInput(attrs={'class':'form-control input-sm',}),
+            'street' : TextInput(attrs={'class':'form-control input-sm',}),
+            'city' : TextInput(attrs={'class':'form-control input-sm',}),
+            'state' : TextInput(attrs={'class':'form-control input-sm',}),
+            'country' : Select(attrs={'class':'form-control input-sm',}, choices = country_list.COUNTRIES_LIST_CHOICES),
+            'pincode' : TextInput(attrs={'class':'form-control input-sm',}),
             'is_billing_address' : Select(attrs={'class':'form-control input-sm',}, choices = ADDRESS_CHOICES, ),
             'is_shipping_address' : Select(attrs={'class':'form-control input-sm',}, choices = ADDRESS_CHOICES, ),
         }
