@@ -162,7 +162,7 @@ def add_contacts(request, slug = None, ins = None):
                 contact_address.save()
 
                 return redirect('/contacts/add/step4/{}'.format(data["contact_form_instance"]), permanent=True) 
-
+            
         if data["breadcrumbs_index"] == 4:            
             contact_account_details_form = ContactAccountDetailsForm(request.POST or None)
             if contact_account_details_form.is_valid():

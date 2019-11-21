@@ -1,4 +1,4 @@
-<form method="post">
+<form method="post" action="">
     {% csrf_token %}
     <div class="table" style="padding:10px 0px;">
         <div class="d-table-row" style="padding:10px 0px;">
@@ -31,6 +31,14 @@
             </div>
             <div class="d-table-cell" style="padding:5px 10px;">
                 {{ contact_address_form.city }}
+            </div>
+        </div>
+        <div class="d-table-row" style="padding:10px 0px;">
+            <div class="d-table-cell" style="padding:0px 10px;">
+                <label>Zip</label>
+            </div>
+            <div class="d-table-cell" style="padding:5px 10px;">
+                {{ contact_address_form.pincode }}
             </div>
         </div>
         <div class="d-table-row" style="padding:10px 0px;">
@@ -72,4 +80,3 @@
         </div>
     </div>
 </form>
-

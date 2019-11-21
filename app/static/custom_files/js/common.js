@@ -1,10 +1,10 @@
 $(document).ready(function(){
 
-    $("#accordionSidebar li.nav-item").each(function(){
+    $("#menu li").each(function(){
         
-        $("#accordionSidebar li.nav-item").removeClass("active");
+        $("#menu li").removeClass("active");
 
-        link_text = $(this).find("a.nav-link").find("span").text();
+        link_text = $(this).find("a").find("span").text();
 
         if(active_link === link_text){            
             $(this).addClass("active");
