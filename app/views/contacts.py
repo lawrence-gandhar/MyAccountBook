@@ -161,6 +161,10 @@ def add_contacts(request, slug = None, ins = None):
                 contact_address.contact = c
                 contact_address.save()
 
+                data["add_proxy"] = request.POST.get('add_proxy', None)
+
+                if data["add_proxy"] == '1':
+                    return redirect('/contacts/add/step3/{}'.format(data["contact_form_instance"]), permanent=True) 
                 return redirect('/contacts/add/step4/{}'.format(data["contact_form_instance"]), permanent=True) 
             
         if data["breadcrumbs_index"] == 4:            

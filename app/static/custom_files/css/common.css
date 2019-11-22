@@ -13,21 +13,6 @@ thead th, td{
     font-size: 11px;
 }
 
-.card{
-    border-radius: 0px !important;
-    font-size:11px;
-    padding:5px !important;
-    line-height:15px;
-}
-
-.card-body{
-    padding:5px !important;
-}
-
-hr{
-    /*border:2px solid #000000;*/
-}
-
 button.btn{
     border-radius:0px;
     border:1px solid #000000;
@@ -37,8 +22,91 @@ button.btn{
 a.btn{
     border-radius:0px;
     border:1px solid #000000;
+    color:#FFFFFF;
+}
+
+.btn{
+    color:#FFFFFF;
 }
 
 .form-control{
     height: 33px !important;
 }
+
+/************************************************************
+CARD STYLES
+************************************************************/
+
+.card{
+    border-radius: 0px !important;
+    font-size:11px;
+    line-height:15px;
+    margin:10px 10px;
+}
+
+.card-body{
+    padding:5px !important;
+}
+
+.card-title{
+    font-size: 15px !important; 
+    margin-bottom:1rem !important;
+}
+
+.card-subtitle{
+    font-size: 12px !important;
+}
+
+
+/************************************************************
+Background STYLES
+************************************************************/
+
+.bg-gold{
+    background-color: #ffcc00;
+    color: #000000;
+}
+
+.bg-gold .card-subtitle{
+    color: #000000;
+}
+
+.bg-gold .text-muted{
+    color:#000000 !important;
+}
+
+.bg-green{
+    background-color: #72ec50;
+    color: #000000;
+}
+
+.bg-green .card-subtitle{
+    color: #000000;
+}
+
+.bg-green .text-muted{
+    color:#000000 !important;
+}
+
+.bg-blue{
+    background-color: #7571f9;
+    color:#000000;
+}
+
+.bg-blue .card-title{
+    color:#FFFFFF;
+}
+
+.bg-blue .card-subtitle{
+    color: #FFFFFF;
+}
+
+.bg-blue .text-muted{
+    color:#FFFFFF !important;
+}
+
+
+
+
+
+

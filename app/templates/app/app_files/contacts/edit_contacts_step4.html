@@ -1,21 +1,37 @@
-<table class="table">
-    <tr>
-        <td>Account Number</td>
-        <td>Account Holder's Name</td>
-        <td>IFSC Code</td>
-        <td>Bank</td>
-        <td>Bank Branch</td>
-        <td>Created On</td>
-    </tr>
-    {% for account_detail in contact_account_details %}
-        <tr>
-            <td>{{account_detail.account_number}}</td>
-            <td>{{account_detail.account_holder_name}}</td>
-            <td>{{account_detail.ifsc_code}}</td>
-            <td>{{account_detail.bank_name}}</td>
-            <td>{{account_detail.bank_branch_name}}</td>
-            <td>{{account_detail.created_on}}</td>
-        </tr>
-    {% endfor %}    
-</table>
-<a href="{% url 'add-contacts' 'step3' contact_form_instance %}" type="button" class="btn btn-success">Back</a>
+<div class="row">
+    <div class="col-lg-12" style="padding:0px">
+        <div class="card">
+            <div class="card-header bg-blue">
+                <h5 class="card-title">CONTACT'S ADDRESS DETAILS</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Manage Contact's Addresses</h6>
+            </div>
+            <div class="card-body">
+                <div class="table">
+                    <table class="table-bordered" width="100%" cellspacing="0">    
+                        <tr>
+                            <td>Account Number</td>
+                            <td>Account Holder's Name</td>
+                            <td>IFSC Code</td>
+                            <td>Bank</td>
+                            <td>Bank Branch</td>
+                            <td>Created On</td>
+                        </tr>
+                        {% for account_detail in contact_account_details %}
+                            <tr>
+                                <td>{{account_detail.account_number}}</td>
+                                <td>{{account_detail.account_holder_name}}</td>
+                                <td>{{account_detail.ifsc_code}}</td>
+                                <td>{{account_detail.bank_name}}</td>
+                                <td>{{account_detail.bank_branch_name}}</td>
+                                <td>{{account_detail.created_on}}</td>
+                            </tr>
+                        {% endfor %}    
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-center">
+            <a href="{% url 'add-contacts' 'step3' contact_form_instance %}" type="button" class="btn btn-success">Back</a>        
+        </div>
+    </div>
+</div>

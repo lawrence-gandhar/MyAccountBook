@@ -1,75 +1,86 @@
-<form method="post" class="disabled_form_elements" action="/contacts/edit/step1/{{contact_form_instance}}">
-    {% csrf_token %}
-    <div class="table" style="padding:10px 0px;">
-        <div class="d-table-row" style="padding:10px 0px;">
-            <div class="d-table-cell" style="padding:0px 10px;">
-                <label>Is Customer</label>
+<div class="row">
+    <div class="col-lg-12" style="padding:0px">
+        <div class="card">
+            <div class="card-header bg-blue">
+                <h5 class="card-title">BASIC DETAILS</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Edit Contact's Basic Details</h6>
             </div>
-            <div class="d-table-cell" style="padding:0px 10px;">
-                {{ contact_form.is_customer }}
-            </div>
-            <div class="d-table-cell" style="padding:0px 10px;">
-                <label>Is Vendor</label>
-            </div>
-            <div class="d-table-cell" style="padding:0px 10px;">
-                {{ contact_form.is_vendor }}
-            </div>
-        </div>
-        <div class="d-table-row" style="padding:10px 0px;">
-            <div class="d-table-cell" style="padding:0px 10px;">
-                <label>Contact/Organization Name</label>
-            </div>
-            <div class="d-table-cell" style="padding:5px 10px;">
-                {{ contact_form.contact_name }}
-            </div>
-        </div>
-        <div class="d-table-row" style="padding:10px 0px;">
-            <div class="d-table-cell" style="padding:5px 10px;">
-                <label>PAN</label>
-            </div>
-            <div class="d-table-cell" style="padding:5px 10px;">
-                {{ contact_form.pan }}
-            </div>
-        </div>
-        <div class="d-table-row" style="padding:10px 0px;">
-            <div class="d-table-cell" style="padding:5px 10px;">
-                <label>GSTIN</label>
-            </div>
-            <div class="d-table-cell" style="padding:5px 10px;">
-                {{ contact_form.gstin }}
-            </div>
-        </div>
-        <div class="d-table-row" style="padding:10px 0px;">
-            <div class="d-table-cell" style="padding:5px 10px;">
-                <label>TDS %</label>
-            </div>
-            <div class="d-table-cell" style="padding:5px 10px;">
-                {{ contact_form.tds }}
-            </div>
-        </div>
-        <div class="d-table-row" style="padding:10px 0px;">
-            <div class="d-table-cell" style="padding:5px 10px;">
-                <label>Terms Of Invoice</label>
-            </div>
-            <div class="d-table-cell" style="padding:5px 10px;">
-                {{ contact_form.invoice_terms }}
-            </div>
-        </div>
-        <div class="d-table-row" style="padding:10px 0px;">
-            <div class="d-table-cell" style="padding:5px 10px;">
-                <label>Terms Of Billing</label>
-            </div>
-            <div class="d-table-cell" style="padding:5px 10px;">
-                {{ contact_form.bills_terms }}
-            </div>
-        </div>
-        <div class="d-table-row" style="padding:10px 0px;">
-            <div class="d-table-cell" style="padding:5px 10px;">
-                <button type="button" class="btn btn-flat mb-1 btn-warning" id="edit_contact">Edit</button>
-                <button style="display:none;" type="button" class="btn btn-flat mb-1 btn-danger" id="cancel_edit_contact">Cancel</button>
-                <button style="display:none;" class="btn btn-flat mb-1 btn-success" id="save_edit_contact">Save</button>
-                <a href="{% url 'add-contacts' 'step2' contact_form_instance %}" type="button" class="btn btn-flat mb-1 btn-primary">Next</a>
-            </div>
+            <form method="post" class="disabled_form_elements" action="/contacts/edit/step1/{{contact_form_instance}}">
+                <div class="card-body">
+                    {% csrf_token %}
+                    <div class="table" style="padding:10px 0px;">
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:0px 10px;">
+                                <label>Is Customer</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:0px 10px;">
+                                {{ contact_form.is_customer }}
+                            </div>
+                            <div class="d-table-cell" style="padding:0px 10px;">
+                                <label>Is Vendor</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:0px 10px;">
+                                {{ contact_form.is_vendor }}
+                            </div>
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:0px 10px;">
+                                <label>Contact/Organization Name</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                {{ contact_form.contact_name }}
+                            </div>
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                <label>PAN</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                {{ contact_form.pan }}
+                            </div>
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                <label>GSTIN</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                {{ contact_form.gstin }}
+                            </div>
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                <label>TDS %</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                {{ contact_form.tds }}
+                            </div>
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                <label>Terms Of Invoice</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                {{ contact_form.invoice_terms }}
+                            </div>
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                <label>Terms Of Billing</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                {{ contact_form.bills_terms }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-center">
+                    <button type="button" class="btn btn-flat mb-1 btn-warning" id="edit_contact">Edit</button>
+                    <button style="display:none;" type="button" class="btn btn-flat mb-1 btn-danger" id="cancel_edit_contact">Cancel</button>
+                    <button style="display:none;" class="btn btn-flat mb-1 btn-success" id="save_edit_contact">Save</button>
+                    <a href="{% url 'add-contacts' 'step2' contact_form_instance %}" type="button" class="btn btn-flat mb-1 btn-primary">Next</a>
+                </div>
+            </form>
         </div>
     </div>
-</form>
+</div>
+
