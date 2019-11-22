@@ -58,6 +58,8 @@ def add_contacts(request, slug = None, ins = None):
     data["included_template"] = 'app/app_files/contacts/add_contacts_step1.html'
     data["add_proxy"] = None
 
+    data["instance_title"] = None
+
     data["contact_form_instance"] = ins
                         
 
@@ -68,6 +70,7 @@ def add_contacts(request, slug = None, ins = None):
     if ins is not None:
         try: 
             contact = C.objects.get(pk = data["contact_form_instance"], user = request.user)
+            data["instance_title"] = contact.contact_name
         except C.DoesNotExist:
             return redirect('/unauthorized/', permanent = True)
 
@@ -88,9 +91,10 @@ def add_contacts(request, slug = None, ins = None):
         else:
             
             try:
-                if data["breadcrumbs_index"] == 1:
-                    contact = C.objects.get(pk = data["contact_form_instance"], user = request.user)
+                contact = C.objects.get(pk = data["contact_form_instance"], user = request.user)
+                data["instance_title"] = contact.contact_name
 
+                if data["breadcrumbs_index"] == 1:
                     data["contact_form"] = ContactsForm(instance = contact)
                     counter = 1
 
