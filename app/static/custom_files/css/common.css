@@ -92,6 +92,9 @@ Background STYLES
 GLOSSY BUTTONS
 ********************************************************/
 
+a.button{
+    color:#FFFFFF;
+}
 
 .button {
     display: inline-block;
@@ -99,9 +102,9 @@ GLOSSY BUTTONS
     position: relative;
     overflow: hidden;
     min-width: 96px;
-    line-height: 46px;
+    line-height: 36px;
     padding: 0 24px;
-    font-size: 17px;
+    font-size: 15px;
     color: white;
     text-align: center;
     text-decoration: none;
@@ -109,7 +112,6 @@ GLOSSY BUTTONS
     background-color: #247edd;
     background-clip: padding-box;
     border: 1px solid;
-    border-color: #1c65b2 #18589c #18589c;
     border-radius: 4px;
     -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.4), 0 1px 2px rgba(0, 0, 0, 0.2);
     box-shadow: inset 0 1px rgba(255, 255, 255, 0.4), 0 1px 2px rgba(0, 0, 0, 0.2);
@@ -132,19 +134,11 @@ GLOSSY BUTTONS
     box-shadow: inset 0 0 38px rgba(255, 255, 255, 0.5);
   }
   
-  .button:hover { background-color: #1a74d3; }
-  
   .button:active {
-    color: rgba(255, 255, 255, 0.9);
-    text-shadow: 0 -1px #154c86;
-    background: #1f71c8;
-    border-color: #113f70 #154c86 #1c65b2;
+    color: #FFFFFF;
+    text-shadow: 0 -1px #FFFFFF;
     -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px rgba(255, 255, 255, 0.4);
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px rgba(255, 255, 255, 0.4);
-    background-image: -webkit-linear-gradient(top, #1a5da5, #3a8be0);
-    background-image: -moz-linear-gradient(top, #1a5da5, #3a8be0);
-    background-image: -o-linear-gradient(top, #1a5da5, #3a8be0);
-    background-image: linear-gradient(to bottom, #1a5da5, #3a8be0);
   }
   
   .button:active:before {
@@ -156,8 +150,24 @@ GLOSSY BUTTONS
     box-shadow: inset 0 0 96px rgba(0, 0, 0, 0.2);
   }
   
+  .button-blue {
+    color: #FFFFFF;
+    background-color: #0580ff;
+    border-color: #070e17 #081a3a #0a1709;
+  }
+  
+  .button-blue:hover { background-color: #4557f1; }
+  
+  .button-blue:active {
+    background: #4557f1;
+    border-color: #093606 #0d4d09 #4557f1;
+    background-image: -webkit-linear-gradient(top, #5525c5, #226ddd);
+    background-image: -moz-linear-gradient(top, #5525c5, #226ddd);
+    background-image: -o-linear-gradient(top, #5525c5, #226ddd);
+    background-image: linear-gradient(to bottom, #5525c5, #226ddd);
+  }
+  
   .button-green {
-    text-shadow: 0 1px #0d4d09;
     background-color: #1ca913;
     border-color: #147b0e #11640b #11640b;
   }
@@ -165,7 +175,6 @@ GLOSSY BUTTONS
   .button-green:hover { background-color: #159b0d; }
   
   .button-green:active {
-    text-shadow: 0 -1px #0d4d09;
     background: #189210;
     border-color: #093606 #0d4d09 #147b0e;
     background-image: -webkit-linear-gradient(top, #126d0c, #20c016);
@@ -175,16 +184,14 @@ GLOSSY BUTTONS
   }
   
   .button-red {
-    text-shadow: 0 1px #72100d;
-    background-color: #cd1d18;
+    background-color: #ff0000;
     border-color: #9f1713 #891310 #891310;
   }
   
   .button-red:hover { background-color: #c01511; }
   
   .button-red:active {
-    text-shadow: 0 -1px #72100d;
-    background: #b61a15;
+    background: #ff0000;
     border-color: #5b0d0b #72100d #9f1713;
     background-image: -webkit-linear-gradient(top, #921511, #e4201b);
     background-image: -moz-linear-gradient(top, #921511, #e4201b);
@@ -192,24 +199,21 @@ GLOSSY BUTTONS
     background-image: linear-gradient(to bottom, #921511, #e4201b);
   }
 
-  .button-blue {
-    text-shadow: 0 1px #4557f1;
-    background-color: #0580ff;
-    border-color: #070e17 #081a3a #0a1709;
+  .button-orange {
+    background-color: #ff6600;
+    border-color: #e75d0d #ff6600 #e75d0d;
   }
   
-  .button-green:hover { background-color: #159b0d; }
   
-  .button-green:active {
-    text-shadow: 0 -1px #0d4d09;
-    background: #189210;
-    border-color: #093606 #0d4d09 #147b0e;
-    background-image: -webkit-linear-gradient(top, #126d0c, #20c016);
-    background-image: -moz-linear-gradient(top, #126d0c, #20c016);
-    background-image: -o-linear-gradient(top, #126d0c, #20c016);
-    background-image: linear-gradient(to bottom, #126d0c, #20c016);
+  .button-orange:hover { background-color: #e75d0d; }
+  
+  .button-orange:active {
+    background: #ff6600;
+    border-color: #093606 #0d4d09 #ee7809;
+    background-image: -webkit-linear-gradient(top, #eb5f1e, #f8570c);
+    background-image: -moz-linear-gradient(top, #eb5f1e, #f8570c);
+    background-image: -o-linear-gradient(top, #eb5f1e, #f8570c);
+    background-image: linear-gradient(to bottom, #eb5f1e, #f8570c);
   }
   
-
-
 
