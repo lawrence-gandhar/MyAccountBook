@@ -57,3 +57,9 @@ function edit_form_button(form_type, obj){
         $("#editModal").modal("show");
     });
 }
+
+
+function add_another_record(id){
+    $("#add_another").val(1);
+    $("form#add_form").submit();
+}

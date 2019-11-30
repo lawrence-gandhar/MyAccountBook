@@ -71,9 +71,6 @@ def add_contacts(request, slug = None, ins = None):
             '<li class="nav-item" style="float:left;padding:0px 10px; margin-left:10px;"><a href="/contacts/add/step4/'+ str(data["contact_form_instance"]) +'" style="color:#FFFFFF; text-decoration:none;"><i class="fas fw fa-credit-card"></i> Account Details</a></li>'
         ]
 
-    print(data["query_string"])
-
-
     if data["query_string"] is not None:
         if data["query_string"] == '':
             return redirect('/unauthorized/', permanent = True)
@@ -165,9 +162,9 @@ def add_contacts(request, slug = None, ins = None):
                 contact_email.contact = c
                 contact_email.save()
 
-                data["add_proxy"] = request.POST.get('add_proxy', None)
+                data["add_another"] = request.POST.get('add_another', None)
 
-                if data["add_proxy"] == '1':
+                if data["add_another"] == '1':
                     return redirect('/contacts/add/step2/{}'.format(data["contact_form_instance"]), permanent=True) 
                 return redirect('/contacts/add/step3/{}'.format(data["contact_form_instance"]), permanent=True) 
 
@@ -178,9 +175,9 @@ def add_contacts(request, slug = None, ins = None):
                 contact_address.contact = c
                 contact_address.save()
 
-                data["add_proxy"] = request.POST.get('add_proxy', None)
+                data["add_another"] = request.POST.get('add_another', None)
 
-                if data["add_proxy"] == '1':
+                if data["add_another"] == '1':
                     return redirect('/contacts/add/step3/{}'.format(data["contact_form_instance"]), permanent=True) 
                 return redirect('/contacts/add/step4/{}'.format(data["contact_form_instance"]), permanent=True) 
             
