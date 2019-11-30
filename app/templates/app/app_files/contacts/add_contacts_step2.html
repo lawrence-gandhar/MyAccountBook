@@ -39,8 +39,10 @@
                 </div>
             </div>
             <div class="card-footer text-center">
+                <a href="{% url 'add-contacts' 'step1' contact_form_instance %}" type="button" class="btn button button-blue">Back</a>
                 <button type="button" class="btn button button-blue">Save and add another</button>
                 <button class="btn button button-green">Save</button>
+                <a href="{% url 'add-contacts' 'step3' contact_form_instance %}" type="button" class="btn button button-blue">Skip</a>
             </div>
         </form>
     </div>
