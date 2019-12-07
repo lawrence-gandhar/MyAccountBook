@@ -20,21 +20,6 @@ $(document).ready(function(){
     }
 })
 
-$("#edit_contact").click(function(){
-    $(this).hide();
-    $("#cancel_edit_contact").show();
-    $("#save_edit_contact").show();
-    $(".disabled_form_elements input, .disabled_form_elements select, .disabled_form_elements checkbox").prop("disabled", false);
-});
-
-
-$("#cancel_edit_contact").click(function(){
-    $(this).hide();
-    $("#edit_contact").show();
-    $("#save_edit_contact").hide();
-    $(".disabled_form_elements input, .disabled_form_elements select, .disabled_form_elements checkbox").prop("disabled", true);
-});
-
 
 function edit_form_button(form_type, obj){
     var CSRFtoken = $('input[name=csrfmiddlewaretoken]').val();
@@ -61,5 +46,16 @@ function edit_form_button(form_type, obj){
 
 function add_another_record(id){
     $("#add_another").val(1);
+
+    $("div.required-fields input, div.required-fields textarea, div.required-fields select").each(function(i,v){
+        if($(this).val()==""){
+            $(this).css("border","1px solid #FF0000");
+            alert("Field is required");
+            return false;
+        }
+    });
+
     $("form#add_form").submit();
 }
+
+

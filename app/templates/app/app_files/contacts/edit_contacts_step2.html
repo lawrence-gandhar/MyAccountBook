@@ -29,6 +29,9 @@
                                     <button class="btn btn-primary btn-sm" onclick="edit_form_button('edit_contact_email',{{email.id}})">
                                         <i class="fas fa-fw fa-pencil-alt" style="font-size:70%"></i>
                                     </button>
+                                    <a class="btn btn-danger btn-sm" href="{% url 'delete-contacts' 'step2' contact_form_instance email.id %}">
+                                        <i class="fas fa-fw fa-trash-alt" style="font-size:70%"></i>
+                                    </a>
                                 </td>
                             </tr>
                         {% endfor %}    

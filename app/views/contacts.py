@@ -46,6 +46,9 @@ def add_contacts(request, slug = None, ins = None):
 
     data = defaultdict()
     data["active_link"] = 'Contacts'
+    data["css_files"] = ['']
+    data["js_files"] = ['custom_files/js/contacts.js']
+
 
     data["contact_form"] = ContactsForm()
     data["contact_email_form"] = ContactsEmailForm()
@@ -245,3 +248,27 @@ def fetch_extra_edit_forms(request):
             return HttpResponse('0')
         return HttpResponse('0')
     return HttpResponse('0')
+
+
+#
+#
+#
+def delete_contacts(request, slug = None, ins = None, obj = None):
+
+    if slug is not None and ins is not None and obj is not None:
+        try: 
+            contact = C.objects.get(pk = ins, user = request.user)
+        except C.DoesNotExist:
+            return redirect('/unauthorized/', permanent = True)
+
+        slug = int(slug.replace('step',''))
+
+        if slug == 2:
+            try:
+                CE = Contacts_Email.objects.get(pk = obj, contact = contact)
+                Contacts_Email.objects.get(pk = obj).delete()
+                return redirect('/contacts/add/step2/{}'.format(ins), permanent=True)
+            except CE.DoesNotExists:
+                return redirect('/unauthorized/', permanent = True)
+        
+    return redirect('/unauthorized/', permanent = True)

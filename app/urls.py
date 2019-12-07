@@ -29,6 +29,7 @@ urlpatterns += [
     path('contacts/add/<slug:slug>/<int:ins>', login_required(contacts.add_contacts), name = 'add-contacts'),
     path('contacts/edit/<slug:slug>/<int:ins>', login_required(contacts.edit_contact), name = 'edit-contact'),
     path('contacts/fetch_extra_edit_forms/', login_required(contacts.fetch_extra_edit_forms), name = 'fetch_extra_edit_forms'),
+    path('contacts/delete_contacts/<slug:slug>/<int:ins>/<int:obj>', login_required(contacts.delete_contacts), name = 'delete-contacts'),
 ]
 
 
