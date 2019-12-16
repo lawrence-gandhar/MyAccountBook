@@ -228,8 +228,10 @@ def fetch_extra_edit_forms(request):
             form_html = OrderedDict()
 
             if form_type is not None and obj_ins is not None:
-                pass
-
+                
+                #=====================================================
+                # Edit Email Form
+                #=====================================================
                 if form_type == 'edit_contact_email':
                     labels = {
                         'email' : 'Email Address',
@@ -241,6 +243,32 @@ def fetch_extra_edit_forms(request):
                         form_data = ContactsEmailForm(instance = obj) 
                     except:
                         return HttpResponse('0')
+
+                #=====================================================
+                # Edit Address Form
+                #=====================================================
+                if form_type == 'edit_contact_address':
+                    labels = {
+                        'contact_name' : 'Contact Person',
+                        'flat_no' : 'Flat/Door No',
+                        'street' : 'Street/Lane',
+                        'city' : 'City',
+                        'state' : 'State',
+                        'country' : 'Country',
+                        'pincode' : 'Zip Code',
+                        'is_billing_address' : 'Is Billing Address',
+                        'is_shipping_address' : 'Is Shipping Address',
+                    }
+                    try:
+                        obj = Contact_Addresses.objects.get(pk = int(obj_ins))
+                        form_data = ContactsAddressForm(instance = obj) 
+                    except:
+                        return HttpResponse('0')
+
+                #=====================================================
+                # Edit Address Form
+                #=====================================================
+                
 
                 for key in form_data.fields:
                     form_html[key] = {'label': labels[key], 'field':str(form_data[key]).replace("\n","")}
@@ -265,10 +293,24 @@ def delete_contacts(request, slug = None, ins = None, obj = None):
 
         slug = int(slug.replace('step',''))
 
+        #=====================================================
+        # DELETE CONTACTS EMAIL
+        #=====================================================
         if slug == 2:
             try:
                 CE = Contacts_Email.objects.get(pk = obj, contact = contact)
                 Contacts_Email.objects.get(pk = obj).delete()
+                return redirect('/contacts/add/step2/{}'.format(ins), permanent=True)
+            except CE.DoesNotExists:
+                return redirect('/unauthorized/', permanent = True)
+
+        #=====================================================
+        # DELETE CONTACTS ADDRESS
+        #=====================================================
+        if slug == 3:
+            try:
+                CE = Contact_Addresses.objects.get(pk = obj, contact = contact)
+                Contact_Addresses.objects.get(pk = obj).delete()
                 return redirect('/contacts/add/step2/{}'.format(ins), permanent=True)
             except CE.DoesNotExists:
                 return redirect('/unauthorized/', permanent = True)

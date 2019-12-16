@@ -40,10 +40,10 @@
                                 <td>{{address.created_on}}</td>
                                 <td class="text-center" width="80px">
                                     {% csrf_token %}
-                                    <button class="btn btn-primary btn-sm" style="margin-right: 2px" onclick="edit_form_button('edit_contact_email',{{email.id}})">
+                                    <button class="btn btn-primary btn-sm" style="margin-right: 2px" onclick="edit_form_button('edit_contact_address',{{address.id}})">
                                         <i class="fas fa-fw fa-pencil-alt" style="font-size:70%"></i>
                                     </button>
-                                    <a class="btn btn-danger btn-sm" href="{% url 'delete-contacts' 'step2' contact_form_instance email.id %}">
+                                    <a class="btn btn-danger btn-sm" href="{% url 'delete-contacts' 'step3' contact_form_instance address.id %}">
                                         <i class="fas fa-fw fa-trash-alt" style="font-size:70%"></i>
                                     </a>
                                 </td>
@@ -148,6 +148,29 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn button button-green">Submit</button>
+                    <button type="button" class="btn button button-red" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Edit Modal -->
+<div class="modal" id="editModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" action="">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Address Details</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" id="extra_form_layout">
+
                 </div>
                 <div class="modal-footer">
                     <button class="btn button button-green">Submit</button>
