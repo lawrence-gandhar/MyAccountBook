@@ -12,6 +12,7 @@ import json
 #=====================================================================================
 #   CONTACTS VIEW
 #=====================================================================================
+#
 class Contacts(View):
 
     # Template 
@@ -47,6 +48,7 @@ class Contacts(View):
 #=====================================================================================
 #   ADD CONTACTS
 #=====================================================================================
+#
 def add_contacts(request, slug = None, ins = None):
 
     # Template 
@@ -200,7 +202,7 @@ def add_contacts(request, slug = None, ins = None):
 #=====================================================================================
 #   EDIT CONTACTS
 #=====================================================================================
-
+#
 def edit_contact(request, slug = None, ins = None):
     if request.POST:
         if slug is not None and ins is not None:
@@ -216,7 +218,7 @@ def edit_contact(request, slug = None, ins = None):
 #=======================================================================================
 #   FETCH EDIT CONTACT EXTRA FORMS
 #=======================================================================================
-
+#
 def fetch_extra_edit_forms(request):
     if request.is_ajax():
         if request.POST:
@@ -252,7 +254,7 @@ def fetch_extra_edit_forms(request):
 #=======================================================================================
 #   DELETE CONTACTS
 #=======================================================================================
-
+#
 def delete_contacts(request, slug = None, ins = None, obj = None):
 
     if slug is not None and ins is not None and obj is not None:
