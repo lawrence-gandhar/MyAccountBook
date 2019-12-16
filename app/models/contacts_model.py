@@ -224,7 +224,6 @@ class Contact_Addresses(models.Model):
         blank = False,
         null = False,
         db_index = True,
-        default = 'default',
     )
 
     street = models.CharField(
@@ -232,7 +231,6 @@ class Contact_Addresses(models.Model):
         blank = False,
         null = False,
         db_index = True,
-        default = 'default',
     )
 
     city = models.CharField(
@@ -240,7 +238,6 @@ class Contact_Addresses(models.Model):
         blank = False,
         null = False,
         db_index = True,
-        default = 'default',
     )
 
     state = models.CharField(
@@ -248,7 +245,6 @@ class Contact_Addresses(models.Model):
         blank = False,
         null = False,
         db_index = True,
-        default = 'default',
     )
 
     country = models.CharField(
@@ -264,7 +260,6 @@ class Contact_Addresses(models.Model):
         blank = False,
         null = False,
         db_index = True,
-        default = 'default',
     )
 
     is_billing_address = models.BooleanField(
