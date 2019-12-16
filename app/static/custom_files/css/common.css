@@ -16,6 +16,10 @@ thead th, td{
     height: 33px !important;
 }
 
+.table th, .table td {
+  padding: 4px 6px 6px 5px;
+}
+
 /************************************************************
 CARD STYLES
 ************************************************************/
@@ -217,4 +221,18 @@ a.button{
 
 .btn{
   border-radius:0px !important;
+  border:1px solid #000000;
 }
+
+.btn i{color:#000000;}
+.btn:hover i{color:#FFFFFF;}
+
+.btn:hover{color:#FFFFFF;}
+
+/********************************************************
+FONT STYLES
+********************************************************/
+.font-bold{font-weight:bold;}
+
+.font-white{color:#FFFFFF;}
+.font-black{color: #000000;}

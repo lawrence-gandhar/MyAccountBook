@@ -11,18 +11,19 @@
             <div class="card-body">
                 <div class="table">
                     <table class="table-bordered" width="100%" cellspacing="0">
-                        <tr>
-                            <td>Contact Person</td>
-                            <td>Flat/Door No</td>
-                            <td>Street/Locality</td>
-                            <td>City</td>
-                            <td>Zip</td>
-                            <td>State</td>
-                            <td>Country</td>
-                            <td>Is Billing Address</td>
-                            <td>Is Shipping Address</td>
-                            <td>Billing & Shipping is same</td>
-                            <td>Created On</td>
+                        <tr style="background-color:#5d5d5d;">
+                            <td class="text-center font-bold font-white" style="padding:10px;">Contact Person</td>
+                            <td class="text-center font-bold font-white">Flat/Door No</td class="text-center font-bold font-white">
+                            <td class="text-center font-bold font-white">Street/Locality</td class="text-center font-bold font-white">
+                            <td class="text-center font-bold font-white">City</td class="text-center font-bold font-white">
+                            <td class="text-center font-bold font-white">Zip</td class="text-center font-bold font-white">
+                            <td class="text-center font-bold font-white">State</td class="text-center font-bold font-white">
+                            <td class="text-center font-bold font-white">Country</td class="text-center font-bold font-white">
+                            <td class="text-center font-bold font-white">Is Billing Address</td class="text-center font-bold font-white">
+                            <td class="text-center font-bold font-white">Is Shipping Address</td class="text-center font-bold font-white">
+                            <td class="text-center font-bold font-white">Billing & Shipping is same</td class="text-center font-bold font-white">
+                            <td class="text-center font-bold font-white">Created On</td class="text-center font-bold font-white">
+                            <td class="text-center font-bold font-white">Action</td class="text-center font-bold font-white">
                         </tr>
                         {% for address in contact_addresses %}
                             <tr>
@@ -37,6 +38,15 @@
                                 <td>{{address.is_shipping_address_full}}</td>
                                 <td>{{address.same_billing_shipping_address_full}}</td>
                                 <td>{{address.created_on}}</td>
+                                <td class="text-center" width="80px">
+                                    {% csrf_token %}
+                                    <button class="btn btn-primary btn-sm" style="margin-right: 2px" onclick="edit_form_button('edit_contact_email',{{email.id}})">
+                                        <i class="fas fa-fw fa-pencil-alt" style="font-size:70%"></i>
+                                    </button>
+                                    <a class="btn btn-danger btn-sm" href="{% url 'delete-contacts' 'step2' contact_form_instance email.id %}">
+                                        <i class="fas fa-fw fa-trash-alt" style="font-size:70%"></i>
+                                    </a>
+                                </td>
                             </tr>
                         {% endfor %}    
                     </table>                    
