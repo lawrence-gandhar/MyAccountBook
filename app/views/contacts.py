@@ -76,26 +76,19 @@ def add_contacts(request, slug = None, ins = None):
     data["contact_account_details_form"] = ContactAccountDetailsForm()
 
     #=========================================
-    # Breadcrumbs List
+    # Breadcrumbs List & Links
     #=========================================
+
+    qStr = ''
+    if data["query_string"] is not None and data["query_string"] == 'all':
+        qStr = '?section='+data["query_string"]
+
     breadcrumbs_list = [
-            '<li class="nav-item" style="float:left;padding:0px 10px;margin-left:20px;"><a href="/contacts/add/step1/'+ str(data["contact_form_instance"]) +'" style="color:#FFFFFF; text-decoration:none;"><i class="fas fw fa-user"></i> Basic Details</a></li>',
-            '<li class="nav-item" style="float:left;padding:0px 10px; margin-left:10px;"><a href="/contacts/add/step2/'+ str(data["contact_form_instance"]) +'" style="color:#FFFFFF; text-decoration:none;"><i class="fas fw fa-envelope-open"></i> Email Details</a></li>',
-            '<li class="nav-item" style="float:left;padding:0px 10px; margin-left:10px;"><a href="/contacts/add/step3/'+ str(data["contact_form_instance"]) +'" style="color:#FFFFFF; text-decoration:none;"><i class="fas fw fa-id-card"></i> Address Details</a></li>',
-            '<li class="nav-item" style="float:left;padding:0px 10px; margin-left:10px;"><a href="/contacts/add/step4/'+ str(data["contact_form_instance"]) +'" style="color:#FFFFFF; text-decoration:none;"><i class="fas fw fa-credit-card"></i> Account Details</a></li>'
+            '<li class="nav-item" style="float:left;padding:0px 10px;margin-left:20px;"><a href="/contacts/add/step1/'+ str(data["contact_form_instance"]) +qStr+'" style="color:#FFFFFF; text-decoration:none;"><i class="fas fw fa-user"></i> Basic Details</a></li>',
+            '<li class="nav-item" style="float:left;padding:0px 10px; margin-left:10px;"><a href="/contacts/add/step2/'+ str(data["contact_form_instance"]) +qStr+'" style="color:#FFFFFF; text-decoration:none;"><i class="fas fw fa-envelope-open"></i> Email Details</a></li>',
+            '<li class="nav-item" style="float:left;padding:0px 10px; margin-left:10px;"><a href="/contacts/add/step3/'+ str(data["contact_form_instance"]) +qStr+'" style="color:#FFFFFF; text-decoration:none;"><i class="fas fw fa-id-card"></i> Address Details</a></li>',
+            '<li class="nav-item" style="float:left;padding:0px 10px; margin-left:10px;"><a href="/contacts/add/step4/'+ str(data["contact_form_instance"]) +qStr+'" style="color:#FFFFFF; text-decoration:none;"><i class="fas fw fa-credit-card"></i> Account Details</a></li>'
         ]
-
-    #=========================================
-    # Check Slug - for creation of breadcrumbs 
-    #=========================================
-    if data["query_string"] is not None:
-        if data["query_string"] == '':
-            return redirect('/unauthorized/', permanent = True)
-        elif data["query_string"] == 'all':
-            data["breadcrumbs"] = ''.join(breadcrumbs_list)
-        else:
-            return redirect('/unauthorized/', permanent = True)
-
 
     if ins is not None:
         try: 
@@ -141,13 +134,22 @@ def add_contacts(request, slug = None, ins = None):
             except:
                 data["included_template"] = 'app/app_files/contacts/add_contacts_'+data["slug"]+'.html'
 
-
         breadcrumbs = []
         for i in range(data["breadcrumbs_index"]):
             breadcrumbs.append(breadcrumbs_list[i])
 
         data["breadcrumbs"] = ''.join(breadcrumbs)
 
+    #=========================================
+    # Check Slug - for creation of breadcrumbs 
+    #=========================================
+    if data["query_string"] is not None:
+        if data["query_string"] == '':
+            return redirect('/unauthorized/', permanent = True)
+        elif data["query_string"] == 'all':
+            data["breadcrumbs"] = ''.join(breadcrumbs_list)
+        else:
+            return redirect('/unauthorized/', permanent = True)
 
     #=========================================
     # POST REQUEST

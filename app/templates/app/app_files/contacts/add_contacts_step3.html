@@ -87,11 +87,9 @@
                     </div>
                 </div>
                 <div class="card-footer text-center">
-                    <input type="text" value="" name="add_another" id="add_another">
                     <a href="{% url 'add-contacts' 'step2' contact_form_instance %}" type="button" class="btn button button-blue">Back</a>
-                    <button type="button" class="btn button button-orange" onclick="add_another_record({{contact_form_instance}})">Save and add another</button>
                     <button class="btn button button-green">Save</button>
-                    <a href="{% url 'add-contacts' 'step4' contact_form_instance %}" type="button" class="btn button button-blue">Skip</a>
+                    <a href="{% url 'add-contacts' 'step4' contact_form_instance %}" type="button" class="btn button button-orange">Skip</a>
                 </div>
             </form>
         </div>
