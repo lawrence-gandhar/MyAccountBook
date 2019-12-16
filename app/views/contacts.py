@@ -11,18 +11,22 @@ import json
 
 
 class Contacts(View):
+
+    # Template 
     template_name = 'app/app_files/contacts/index.html'
 
+    # Initialize 
     data = defaultdict()
+    data["view"] = ""
+    data["contacts"] = {}
+    data["active_link"] = 'Contacts'
 
+    # Custom CSS/JS Files For Inclusion into template
     data["css_files"] = []
     data["js_files"] = []
 
-    data["view"] = ""
-    data["contacts"] = {}
-
-    data["active_link"] = 'Contacts'
-
+    #
+    #
     def get(self, request):        
 
         view_type = request.GET.get('view',False)
@@ -42,31 +46,36 @@ class Contacts(View):
 #   ADD CONTACTS
 #=====================================================================================
 def add_contacts(request, slug = None, ins = None):
+
+    # Template 
     template_name = 'app/app_files/contacts/add_contacts.html'
 
+    # Initialize 
     data = defaultdict()
-    data["active_link"] = 'Contacts'
+
+    # Custom CSS/JS Files For Inclusion into template
     data["css_files"] = ['']
     data["js_files"] = ['custom_files/js/contacts.js']
 
+    data["active_link"] = 'Contacts'
+    data["slug"] = slug
+    data["breadcrumbs"] = ''
+    data["breadcrumbs_index"] = 0
+    data["included_template"] = 'app/app_files/contacts/add_contacts_step1.html'
+    
+    data["instance_title"] = None
+    data["contact_form_instance"] = ins
+    data["query_string"] = request.GET.get('section', None)
 
+    # Initialize Forms
     data["contact_form"] = ContactsForm()
     data["contact_email_form"] = ContactsEmailForm()
     data["contact_address_form"] = ContactsAddressForm()
     data["contact_account_details_form"] = ContactAccountDetailsForm()
 
-    data["slug"] = slug
-    data["breadcrumbs"] = ''
-    data["breadcrumbs_index"] = 0
-    data["included_template"] = 'app/app_files/contacts/add_contacts_step1.html'
-    data["add_proxy"] = None
-
-    data["instance_title"] = None
-
-    data["contact_form_instance"] = ins
-
-    data["query_string"] = request.GET.get('section', None)
-
+    #=========================================
+    # Breadcrumbs List
+    #=========================================
     breadcrumbs_list = [
             '<li class="nav-item" style="float:left;padding:0px 10px;margin-left:20px;"><a href="/contacts/add/step1/'+ str(data["contact_form_instance"]) +'" style="color:#FFFFFF; text-decoration:none;"><i class="fas fw fa-user"></i> Basic Details</a></li>',
             '<li class="nav-item" style="float:left;padding:0px 10px; margin-left:10px;"><a href="/contacts/add/step2/'+ str(data["contact_form_instance"]) +'" style="color:#FFFFFF; text-decoration:none;"><i class="fas fw fa-envelope-open"></i> Email Details</a></li>',
@@ -74,6 +83,9 @@ def add_contacts(request, slug = None, ins = None):
             '<li class="nav-item" style="float:left;padding:0px 10px; margin-left:10px;"><a href="/contacts/add/step4/'+ str(data["contact_form_instance"]) +'" style="color:#FFFFFF; text-decoration:none;"><i class="fas fw fa-credit-card"></i> Account Details</a></li>'
         ]
 
+    #=========================================
+    # Check Slug - for creation of breadcrumbs 
+    #=========================================
     if data["query_string"] is not None:
         if data["query_string"] == '':
             return redirect('/unauthorized/', permanent = True)
@@ -81,11 +93,7 @@ def add_contacts(request, slug = None, ins = None):
             data["breadcrumbs"] = ''.join(breadcrumbs_list)
         else:
             return redirect('/unauthorized/', permanent = True)
-                        
 
-    #=========================================
-    # Check Slug - for creation of breadcrumbs
-    #=========================================
 
     if ins is not None:
         try: 
@@ -150,7 +158,6 @@ def add_contacts(request, slug = None, ins = None):
                 data["contact_form_instance"] = contact_form_ins = contact_form.save(commit = False)
                 contact_form_ins.user = request.user
                 contact_form_ins.save()
-
                 return redirect('/contacts/add/step2/{}'.format(data["contact_form_instance"].pk), permanent=True) 
         
         try:
@@ -164,11 +171,6 @@ def add_contacts(request, slug = None, ins = None):
                 contact_email = contact_email_form.save(commit = False)    
                 contact_email.contact = c
                 contact_email.save()
-
-                data["add_another"] = request.POST.get('add_another', None)
-
-                if data["add_another"] == '1':
-                    return redirect('/contacts/add/step2/{}'.format(data["contact_form_instance"]), permanent=True) 
                 return redirect('/contacts/add/step3/{}'.format(data["contact_form_instance"]), permanent=True) 
 
         if data["breadcrumbs_index"] == 3:            
@@ -176,12 +178,7 @@ def add_contacts(request, slug = None, ins = None):
             if contact_address_form.is_valid():
                 contact_address = contact_address_form.save(commit = False)    
                 contact_address.contact = c
-                contact_address.save()
-
-                data["add_another"] = request.POST.get('add_another', None)
-
-                if data["add_another"] == '1':
-                    return redirect('/contacts/add/step3/{}'.format(data["contact_form_instance"]), permanent=True) 
+                contact_address.save()                 
                 return redirect('/contacts/add/step4/{}'.format(data["contact_form_instance"]), permanent=True) 
             
         if data["breadcrumbs_index"] == 4:            
@@ -190,7 +187,6 @@ def add_contacts(request, slug = None, ins = None):
                 contact_account_details = contact_account_details_form.save(commit = False)    
                 contact_account_details.contact = c
                 contact_account_details.save()
-
                 return redirect('/contacts/add/step4/{}'.format(data["contact_form_instance"]), permanent=True) 
 
         return render(request, template_name, data) 
@@ -204,7 +200,6 @@ def add_contacts(request, slug = None, ins = None):
 def edit_contact(request, slug = None, ins = None):
     if request.POST:
         if slug is not None and ins is not None:
-
             try:
                 contact = C.objects.get(pk = int(ins), user = request.user)
                 
@@ -250,9 +245,10 @@ def fetch_extra_edit_forms(request):
     return HttpResponse('0')
 
 
-#
-#
-#
+#=======================================================================================
+#   DELETE CONTACTS
+#=======================================================================================
+
 def delete_contacts(request, slug = None, ins = None, obj = None):
 
     if slug is not None and ins is not None and obj is not None:
