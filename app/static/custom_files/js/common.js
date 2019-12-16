@@ -44,18 +44,4 @@ function edit_form_button(form_type, obj){
 }
 
 
-function add_another_record(id){
-    $("#add_another").val(1);
-
-    $("div.required-fields input, div.required-fields textarea, div.required-fields select").each(function(i,v){
-        if($(this).val()==""){
-            $(this).css("border","1px solid #FF0000");
-            alert("Field is required");
-            return false;
-        }
-    });
-
-    $("form#add_form").submit();
-}
-
 
