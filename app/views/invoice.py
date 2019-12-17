@@ -15,6 +15,13 @@ import json
 #
 def create_invoice(request, ins = None):
     # Template 
-    template_name = 'app/app_files/contacts/index.html'
-    
-    return HttpResponse('')
+    template_name = 'app/app_files/invoice/create_invoice.html'
+
+    # Initialize 
+    data = defaultdict()
+
+    # Custom CSS/JS Files For Inclusion into template
+    data["css_files"] = ['']
+    data["js_files"] = ['']
+
+    return render(request, template_name, data)
