@@ -51,21 +51,23 @@ class Contacts(View):
 #
 def add_contacts(request, slug = None, ins = None):
 
-    # Template 
-    template_name = 'app/app_files/contacts/add_contacts.html'
-
     # Initialize 
     data = defaultdict()
 
+    # Template 
+    template_name = 'app/app_files/contacts/add_contacts.html'
+    data["included_template"] = 'app/app_files/contacts/add_contacts_step1.html'
+    
     # Custom CSS/JS Files For Inclusion into template
     data["css_files"] = ['']
     data["js_files"] = ['custom_files/js/contacts.js']
 
+    # Set link as active in menubar
     data["active_link"] = 'Contacts'
+
     data["slug"] = slug
     data["breadcrumbs"] = ''
     data["breadcrumbs_index"] = 0
-    data["included_template"] = 'app/app_files/contacts/add_contacts_step1.html'
     
     data["instance_title"] = None
     data["contact_form_instance"] = ins

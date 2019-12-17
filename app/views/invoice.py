@@ -14,13 +14,16 @@ import json
 #=====================================================================================
 #
 def create_invoice(request, ins = None):
-    # Template 
-    template_name = 'app/app_files/invoice/create_invoice.html'
-
+    
     # Initialize 
     data = defaultdict()
-
-    # Custom CSS/JS Files For Inclusion into template
     
+    # Template 
+    template_name = 'app/app_files/invoice/index.html'
+    data["included_template"] = 'app/app_files/invoice/create_invoice.html'
+
+    # Set link as active in menubar
+    data["active_link"] = 'Invoice'
+
 
     return render(request, template_name, data)
