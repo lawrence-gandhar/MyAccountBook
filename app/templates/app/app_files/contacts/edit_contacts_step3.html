@@ -163,7 +163,9 @@
 <div class="modal" id="editModal">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form method="post" action="">
+            <form method="post" action="{% url 'edit-contact-forms' %}">
+                <input type="hidden" name="slug" value="{{slug}}">
+                <input type="hidden" name="form_ins" value="{{contact_form_instance}}">
                 {% csrf_token %}
                 <div class="modal-header">
                     <h4 class="modal-title">Edit Address Details</h4>

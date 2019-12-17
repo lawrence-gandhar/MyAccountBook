@@ -208,9 +208,10 @@ def edit_contact(request, slug = None, ins = None):
         if slug is not None and ins is not None:
             try:
                 contact = C.objects.get(pk = int(ins), user = request.user)
-                
                 contact_form = ContactsForm(request.POST, instance = contact)
-                contact_form.save()
+                
+                if contact_form.is_valid(): 
+                    contact_form.save()    
             except C.DoesNotExists:
                 return redirect('/unauthorized/', permanent=True)
     return redirect('/contacts/add/step1/{}'.format(ins), permanent=True)
@@ -261,15 +262,14 @@ def fetch_extra_edit_forms(request):
                     }
                     try:
                         obj = Contact_Addresses.objects.get(pk = int(obj_ins))
-                        form_data = ContactsAddressForm(instance = obj) 
+                        form_data = ContactsAddressForm(instance = obj)
                     except:
                         return HttpResponse('0')
 
                 #=====================================================
                 # Edit Address Form
-                #=====================================================
-                
-
+                #=====================================================                
+                form_html["id"] = {'label':'id', 'field':'<input type="hidden" value="'+obj_ins+'" name="id">'}
                 for key in form_data.fields:
                     form_html[key] = {'label': labels[key], 'field':str(form_data[key]).replace("\n","")}
                 return HttpResponse(json.dumps(form_html))
@@ -311,8 +311,32 @@ def delete_contacts(request, slug = None, ins = None, obj = None):
             try:
                 CE = Contact_Addresses.objects.get(pk = obj, contact = contact)
                 Contact_Addresses.objects.get(pk = obj).delete()
-                return redirect('/contacts/add/step2/{}'.format(ins), permanent=True)
+                return redirect('/contacts/add/step3/{}'.format(ins), permanent=True)
             except CE.DoesNotExists:
                 return redirect('/unauthorized/', permanent = True)
         
+    return redirect('/unauthorized/', permanent = True)
+
+#================================================================================
+# EDIT CONTACT FORMS 
+#================================================================================
+
+def edit_contact_forms(request):
+    if request.POST:
+        slug = request.POST.get('slug', None)
+        obj_ins = request.POST.get('id', None)
+        form_ins = request.POST.get('form_ins', None)
+
+        if slug is not None and obj_ins is not None:
+
+            # EDIT EMAIL
+            if slug == "step2":
+                obj = Contacts_Email.objects.get(pk = int(obj_ins))
+                email_form = ContactsEmailForm(request.POST, instance = obj)
+                
+                if email_form.is_valid():
+                    email_form.save()
+                    return redirect('/contacts/add/step2/{}'.format(form_ins), permanent=True)
+            return redirect('/unauthorized/', permanent = True)
+        return redirect('/unauthorized/', permanent = True)
     return redirect('/unauthorized/', permanent = True)

@@ -189,7 +189,7 @@ class Contacts_Email(models.Model):
         return "NO" 
 
     def is_personal_full(self):
-        if self.is_official:
+        if self.is_personal:
             return "YES"
         return "NO" 
 
