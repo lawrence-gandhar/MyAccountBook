@@ -33,10 +33,12 @@ function edit_form_button(form_type, obj){
         $.each(data, function(i,v){
             htm += '<div class="d-table-row" style="padding:10px 0px;">';
             htm += '<div class="d-table-cell" style="padding:0px 10px;">';
-            htm += '<label>'+v["label"]+'</label></div>';
+            htm += '<label style="'+v["label_style"]+'">'+v["label"]+'</label></div>';
             htm += '<div class="d-table-cell" style="padding:5px 10px;">'+v["field"]+'</div>';
             htm += '</div>';
         });
+
+        console.log(htm);
 
         $("#extra_form_layout").empty().append(htm);
         $("#editModal").modal("show");

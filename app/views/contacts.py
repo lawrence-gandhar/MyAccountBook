@@ -269,9 +269,17 @@ def fetch_extra_edit_forms(request):
                 #=====================================================
                 # Edit Address Form
                 #=====================================================                
-                form_html["id"] = {'label':'id', 'field':'<input type="hidden" value="'+obj_ins+'" name="id">'}
+                form_html["id"] = {
+                    'label':'id', 
+                    'field':'<input type="hidden" value="'+obj_ins+'" name="id">', 
+                    'label_style':'display:none'
+                }
                 for key in form_data.fields:
-                    form_html[key] = {'label': labels[key], 'field':str(form_data[key]).replace("\n","")}
+                    form_html[key] = {
+                        'label': labels[key], 
+                        'field':str(form_data[key]).replace("\n",""),
+                        'label_style':''
+                    }
                 return HttpResponse(json.dumps(form_html))
 
             return HttpResponse('0')
