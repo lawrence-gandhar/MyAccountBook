@@ -21,7 +21,6 @@ def create_invoice(request, ins = None):
     data = defaultdict()
 
     # Custom CSS/JS Files For Inclusion into template
-    data["css_files"] = ['']
-    data["js_files"] = ['']
+    
 
     return render(request, template_name, data)
