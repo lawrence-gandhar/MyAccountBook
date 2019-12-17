@@ -26,8 +26,6 @@ function edit_form_button(form_type, obj){
 
     $.post('/contacts/fetch_extra_edit_forms/', {csrfmiddlewaretoken: CSRFtoken, form_type: form_type, ins:obj}, function(data){
         data = $.parseJSON(data);
-        console.log(data);
-
         htm = '';
 
         $.each(data, function(i,v){
@@ -37,8 +35,6 @@ function edit_form_button(form_type, obj){
             htm += '<div class="d-table-cell" style="padding:5px 10px;">'+v["field"]+'</div>';
             htm += '</div>';
         });
-
-        console.log(htm);
 
         $("#extra_form_layout").empty().append(htm);
         $("#editModal").modal("show");

@@ -177,7 +177,7 @@ def add_contacts(request, slug = None, ins = None):
                 contact_email = contact_email_form.save(commit = False)    
                 contact_email.contact = c
                 contact_email.save()
-                return redirect('/contacts/add/step3/{}'.format(data["contact_form_instance"]), permanent=True) 
+                return redirect('/contacts/add/step2/{}'.format(data["contact_form_instance"]), permanent=True) 
 
         if data["breadcrumbs_index"] == 3:            
             contact_address_form = ContactsAddressForm(request.POST or None)
@@ -185,7 +185,7 @@ def add_contacts(request, slug = None, ins = None):
                 contact_address = contact_address_form.save(commit = False)    
                 contact_address.contact = c
                 contact_address.save()                 
-                return redirect('/contacts/add/step4/{}'.format(data["contact_form_instance"]), permanent=True) 
+                return redirect('/contacts/add/step3/{}'.format(data["contact_form_instance"]), permanent=True) 
             
         if data["breadcrumbs_index"] == 4:            
             contact_account_details_form = ContactAccountDetailsForm(request.POST or None)
