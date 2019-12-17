@@ -192,10 +192,9 @@ def add_contacts(request, slug = None, ins = None):
             if contact_account_details_form.is_valid():
                 contact_account_details = contact_account_details_form.save(commit = False)    
                 contact_account_details.contact = c
-                contact_account_details.save()
-                return redirect('/contacts/add/step4/{}'.format(data["contact_form_instance"]), permanent=True) 
+                contact_account_details.save()                
+                return redirect('/contacts/add/step{}/{}'.format(data["contact_form_instance"]), permanent=True) 
 
-        return render(request, template_name, data) 
     return render(request, template_name, data)
 
 
@@ -267,7 +266,26 @@ def fetch_extra_edit_forms(request):
                         return HttpResponse('0')
 
                 #=====================================================
-                # Edit Address Form
+                # Edit Account Form
+                #=====================================================
+                if form_type == 'edit_contact_account_details':
+                    labels = {
+                        'account_number':'Account Number',
+                        'account_holder_name':'Account Holder',
+                        'ifsc_code':'IFSC Code',
+                        'bank_name':'Bank Name',
+                        'bank_branch_name':'Branch Name',
+                    }
+
+                    try:
+                        obj = Contact_Account_Details.objects.get(pk = int(obj_ins))
+                        form_data = ContactAccountDetailsForm(instance = obj)
+                    except:
+                        return HttpResponse('0')
+
+
+                #=====================================================
+                # Convert Form Fields to JSON
                 #=====================================================                
                 form_html["id"] = {
                     'label':'id', 
@@ -322,6 +340,17 @@ def delete_contacts(request, slug = None, ins = None, obj = None):
                 return redirect('/contacts/add/step3/{}'.format(ins), permanent=True)
             except CE.DoesNotExists:
                 return redirect('/unauthorized/', permanent = True)
+    
+        #=====================================================
+        # DELETE CONTACTS ACCOUNT DETAILS
+        #=====================================================
+        if slug == 4:
+            try:
+                CE = Contact_Account_Details.objects.get(pk = obj, contact = contact)
+                Contact_Account_Details.objects.get(pk = obj).delete()
+                return redirect('/contacts/add/step4/{}'.format(ins), permanent=True)
+            except CE.DoesNotExists:
+                return redirect('/unauthorized/', permanent = True)
         
     return redirect('/unauthorized/', permanent = True)
 
@@ -337,14 +366,48 @@ def edit_contact_forms(request):
 
         if slug is not None and obj_ins is not None:
 
+            redirect_url = False
+
+            #==========================================================
             # EDIT EMAIL
+            #==========================================================
             if slug == "step2":
                 obj = Contacts_Email.objects.get(pk = int(obj_ins))
                 email_form = ContactsEmailForm(request.POST, instance = obj)
                 
                 if email_form.is_valid():
                     email_form.save()
-                    return redirect('/contacts/add/step2/{}'.format(form_ins), permanent=True)
+                    redirect_url = True
+            
+            #==========================================================
+            # EDIT ADDRESS DETAILS
+            #==========================================================
+
+            if slug == "step3":
+                obj = Contact_Addresses.objects.get(pk = int(obj_ins))
+                address_form = ContactsAddressForm(request.POST, instance = obj)
+
+                if address_form.is_valid():
+                    address_form.save()
+                    redirect_url = True
+
+            #==========================================================
+            # EDIT ACCOUNT DETAILS
+            #==========================================================
+
+            if slug == "step4":
+                obj = Contact_Account_Details.objects.get(pk = int(obj_ins))
+                accounts_form = ContactAccountDetailsForm(request.POST, instance = obj)
+
+                if accounts_form.is_valid():
+                    accounts_form.save()
+                    redirect_url = True
+
+            #==========================================================
+            # REDIRECTION ON SUCCESS OR FAILURE
+            #==========================================================
+            if redirect_url:                
+                return redirect('/contacts/add/{}/{}'.format(slug, form_ins), permanent=True)
             return redirect('/unauthorized/', permanent = True)
         return redirect('/unauthorized/', permanent = True)
     return redirect('/unauthorized/', permanent = True)

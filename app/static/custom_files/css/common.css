@@ -217,6 +217,10 @@ a.button{
     background-image: -o-linear-gradient(top, #eb5f1e, #f8570c);
     background-image: linear-gradient(to bottom, #eb5f1e, #f8570c);
   }
+
+  .button-black{
+    background-color: #000000;
+  }
   
 
 .btn{
