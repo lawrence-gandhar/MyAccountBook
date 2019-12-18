@@ -315,7 +315,9 @@ class Contact_Account_Details(models.Model):
         db_index = True
     )
 
-    account_number = models.BigIntegerField(
+    account_number = models.CharField(
+        max_length = 30,
+        blank = True,
         null = True,
         db_index = True,
     )
