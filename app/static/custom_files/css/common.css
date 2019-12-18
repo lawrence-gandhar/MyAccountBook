@@ -240,3 +240,22 @@ FONT STYLES
 
 .font-white{color:#FFFFFF;}
 .font-black{color: #000000;}
+
+/*****************************************************/
+
+input[type="checkbox"]:after{
+  border: 1px solid #ced4da !important;
+}
+
+
+/*****************************************************/
+
+.hide-row{
+  display: none !important;
+}
+
+.show-row{
+  display: table-row !important;
+}
+
+/******************************************************/

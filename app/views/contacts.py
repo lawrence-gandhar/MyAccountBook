@@ -4,7 +4,8 @@ from django.views import View
 from collections import OrderedDict, defaultdict
 from django.contrib import messages
 
-from app.models.contacts_model import Contacts as C
+from app.models.contacts_model import Contacts as C, Contacts_Email, Contact_Addresses, Contact_Account_Details
+from app.models.users_model import *
 from app.forms.contact_forms import *
 
 import json
@@ -413,3 +414,23 @@ def edit_contact_forms(request):
             return redirect('/unauthorized/', permanent = True)
         return redirect('/unauthorized/', permanent = True)
     return redirect('/unauthorized/', permanent = True)
+
+
+#================================================================================
+# CHECK APPLICATION ID
+#================================================================================
+
+def check_app_id(request):
+    if request.is_ajax():
+        if request.POST: 
+
+            data = {'ret':0, 'data':None}
+
+            try:
+                pro = Profile.objects.get(app_id__iexact = request.POST["id"])
+                data["ret"] = 1
+                return HttpResponse(json.dumps(data))
+            except:
+                return HttpResponse(json.dumps(data))
+        return HttpResponse(json.dumps(data))
+    return HttpResponse(json.dumps(data))

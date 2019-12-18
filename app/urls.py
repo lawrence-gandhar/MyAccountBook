@@ -31,6 +31,11 @@ urlpatterns += [
     path('contacts/fetch_extra_edit_forms/', login_required(contacts.fetch_extra_edit_forms), name = 'fetch_extra_edit_forms'),
     path('contacts/delete_contacts/<slug:slug>/<int:ins>/<int:obj>', login_required(contacts.delete_contacts), name = 'delete-contacts'),
     path('contacts/edit_contact_forms/', login_required(contacts.edit_contact_forms), name = 'edit-contact-forms'),
+    path('contacts/check_appid/', login_required(contacts.check_app_id), name='check-appid'),
+]
+
+# Invoice
+urlpatterns += [
     path('invoice/create_invoice/<int:ins>', login_required(invoice.create_invoice), name = 'create-invoice'),
 ]
 
