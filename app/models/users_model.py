@@ -1,12 +1,20 @@
 from django.db import models
 from django.contrib.auth.models import User
 from app.other_constants import country_list
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 #**************************************************************************
 #   USER'S PROFILE DETAILS
 #**************************************************************************
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, db_index = True,)
+    app_id = models.CharField(
+        max_length = 30,
+        db_index = True,
+        blank = True,
+        null = True,
+    )
 
     class Meta:
         verbose_name_plural = 'user_profile_tbl'
@@ -176,3 +184,21 @@ class User_Addresses(models.Model):
 
     class Meta:
         verbose_name_plural = 'contacts_address_details_tbl'
+
+#==================================================================
+# Create instances on User Creation
+#==================================================================
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def create_user_account_details(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def create_user_address_details(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
