@@ -1,12 +1,25 @@
 from django.contrib import admin
 
-from app.models.contacts_model import Contacts as C, Contacts_Email, Contact_Addresses, Contact_Account_Details
+from app.models.contacts_model import Contacts, Contacts_Email, Contact_Addresses, Contact_Account_Details
 from app.models.invoice_model import Invoice
+from app.models.users_model import Profile, User_Account_Details, User_Address_Details
 # Register your models here.
 
-@admin.register(C)
+@admin.register(Contacts)
 class C(admin.ModelAdmin):
-    model = C
+    model = Contacts
+
+@admin.register(Profile)
+class Profile(admin.ModelAdmin):
+    model = Profile
+
+@admin.register(User_Account_Details)
+class User_Account_Details(admin.ModelAdmin):
+    model = User_Account_Details 
+
+@admin.register(User_Address_Details)
+class User_Address_Details(admin.ModelAdmin):
+    model = User_Address_Details 
 
 @admin.register(Contacts_Email)
 class Contacts_Email(admin.ModelAdmin):

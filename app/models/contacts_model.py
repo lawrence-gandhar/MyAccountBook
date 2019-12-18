@@ -20,6 +20,13 @@ class Contacts(models.Model):
 
     user = models.ForeignKey(User, on_delete = models.CASCADE, db_index = True, null = True,)
 
+    app_id = models.CharField(
+        max_length = 30,
+        db_index = True,
+        blank = True,
+        null = True,
+    )
+
     is_customer = models.BooleanField(
         db_index = True,
         choices = IS_ACTIVE,

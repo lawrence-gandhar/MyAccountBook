@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from app.other_constants import country_list
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.utils.crypto import get_random_string
 
 #**************************************************************************
 #   USER'S PROFILE DETAILS
@@ -84,21 +85,14 @@ class User_Account_Details(models.Model):
 #   A CONTACT CAN HAVE MULTIPLE ADDRESSES
 #**************************************************************************
 
-class User_Addresses(models.Model):
+class User_Address_Details(models.Model):
 
     ADDRESS_CHOICES = ((True, 'Yes'),(False, 'No'))
 
-    contact = models.ForeignKey(
+    user = models.ForeignKey(
         User, 
         on_delete = models.CASCADE, 
         db_index = True
-    )
-
-    contact_name = models.CharField(
-        max_length = 250,
-        blank = False,
-        null = False,
-        db_index = True,
     )
 
     flat_no = models.CharField(
@@ -183,7 +177,7 @@ class User_Addresses(models.Model):
         return "NO"
 
     class Meta:
-        verbose_name_plural = 'contacts_address_details_tbl'
+        verbose_name_plural = 'user_address_details_tbl'
 
 #==================================================================
 # Create instances on User Creation
@@ -191,14 +185,16 @@ class User_Addresses(models.Model):
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-        Profile.objects.create(user=instance)
+        pro = Profile.objects.create(user=instance)
+        pro.app_id = 'APK-'+get_random_string(length=10)
+        pro.save()
 
 @receiver(post_save, sender=User)
 def create_user_account_details(sender, instance, created, **kwargs):
     if created:
-        Profile.objects.create(user=instance)
+        User_Account_Details.objects.create(user=instance)
 
 @receiver(post_save, sender=User)
 def create_user_address_details(sender, instance, created, **kwargs):
     if created:
-        Profile.objects.create(user=instance)
+        User_Address_Details.objects.create(user=instance)
