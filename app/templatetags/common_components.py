@@ -22,25 +22,24 @@ register = template.Library()
 #*************************************************************************
 @register.simple_tag
 def loader_component():
-    htm = '''<div class="modal" id="wait_Modal">
+    htm = '''<div class="modal" id="wait_Modal" style="background-color: hsla(0, 4%, 26%, 0.87) !important;">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title">Processing.. Please Wait</h4>
                     </div>
                     <div class="modal-body">                
-                        <div class="spinner-grow text-muted"></div>
-                        <div class="spinner-grow text-primary"></div>
-                        <div class="spinner-grow text-success"></div>
-                        <div class="spinner-grow text-info"></div>
-                        <div class="spinner-grow text-warning"></div>
-                        <div class="spinner-grow text-danger"></div>
-                        <div class="spinner-grow text-secondary"></div>
-                        <div class="spinner-grow text-dark"></div>
-                        <div class="spinner-grow text-light"></div>                
+                        <div class="loader-custom"></div>
+                        <div>
+                            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                                <path class="checkmark__check" fill="none" d="M16 16 36 36 M36 16 16 36" />
+                            </svg>
+                        </div> 
+                        <div id="modal-text"></div>            
                     </div>
                 </div>
             </div>
         </div>'''
 
-    return htm
+    return safestring.mark_safe(htm)

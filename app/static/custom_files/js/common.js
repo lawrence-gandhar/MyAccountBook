@@ -47,3 +47,28 @@ function edit_form_button(form_type, obj){
 //  LOADER COMPONENT
 //************************************************************ */
 
+function loader_component(){
+    htm = `<div class="modal" id="wait_Modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Processing.. Please Wait</h4>
+                </div>
+                <div class="modal-body">                
+                    <div class="spinner-grow text-muted"></div>
+                    <div class="spinner-grow text-primary"></div>
+                    <div class="spinner-grow text-success"></div>
+                    <div class="spinner-grow text-info"></div>
+                    <div class="spinner-grow text-warning"></div>
+                    <div class="spinner-grow text-danger"></div>
+                    <div class="spinner-grow text-secondary"></div>
+                    <div class="spinner-grow text-dark"></div>
+                    <div class="spinner-grow text-light"></div>                
+                </div>
+            </div>
+        </div>
+    </div>`;
+
+    return htm;
+}
+
