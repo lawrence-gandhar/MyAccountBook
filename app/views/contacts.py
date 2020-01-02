@@ -196,7 +196,7 @@ def add_contacts(request, slug = None, ins = None):
                 contact_account_details = contact_account_details_form.save(commit = False)    
                 contact_account_details.contact = c
                 contact_account_details.save()                
-                return redirect('/contacts/add/step{}/{}'.format(data["contact_form_instance"]), permanent=True) 
+                return redirect('/contacts/add/step4/{}'.format(data["contact_form_instance"]), permanent=True) 
 
     return render(request, template_name, data)
 
