@@ -9,8 +9,7 @@
                 <h6 class="card-subtitle mb-2 text-muted">Add Invoice against a Contact</h6>
             </div>
             <div class="card-header" style="padding:10px 0px; background-color:#ffffff;">
-                <h5>Choose Invoice Template</h5>
-
+                <p style="padding:10px; border-bottom: 1px solid #000000;"><strong>Select Invoice Template Design</strong></p>
                 <div class="table">
                     <div class="d-table-row" style="padding:10px 0px;">
                         <div class="d-table-cell" style="padding:0px 10px;">
@@ -37,48 +36,8 @@
                     </div>
                 </div>
             </div>
-            <form method="post">
-                <div class="card-body">
-                    {% csrf_token %}
-                    <div class="table" style="padding:10px 0px;">
-                        <div class="d-table-row" style="padding:10px 0px;">
-                            <div class="d-table-cell" style="padding:0px 10px;">
-                                <label>Contact</label>
-                            </div>
-                            <div class="d-table-cell" style="padding:5px 10px;">
-                                {{invoice_form.service_recipient}}
-                            </div>
-                        </div>
-                        <div class="d-table-row" style="padding:10px 0px;">
-                            <div class="d-table-cell" style="padding:0px 10px;">
-                                <label>Contact Billing Address</label>
-                            </div>
-                            <div class="d-table-cell" style="padding:5px 10px;">
-                                {{invoice_form.service_recipient}}
-                            </div>
-                        </div>
-                        <div class="d-table-row" style="padding:10px 0px;">
-                            <div class="d-table-cell" style="padding:0px 10px;">
-                                <label>Contact Shipping Address</label>
-                            </div>
-                            <div class="d-table-cell" style="padding:5px 10px;">
-                                {{invoice_form.service_recipient}}
-                            </div>
-                        </div>
-                        <div class="d-table-row" style="padding:10px 0px;">
-                            <div class="d-table-cell" style="padding:0px 10px;">
-                                <label>Contact</label>
-                            </div>
-                            <div class="d-table-cell" style="padding:5px 10px;">
-                                {{invoice_form.service_recipient}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer text-center">
-                    <button class="btn button button-green">Save</button>
-                </div>
-            </form>
         </div>
     </div>
 </div>
+
+
