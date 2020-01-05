@@ -107,6 +107,9 @@ class Contacts(models.Model):
         db_index = True,
         null = True,
     )
+    
+    def __str__(self):
+        return self.contact_name.upper()
 
     def is_customer_value(self):
         if self.is_customer:

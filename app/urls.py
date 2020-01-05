@@ -36,7 +36,8 @@ urlpatterns += [
 
 # Invoice
 urlpatterns += [
-    path('invoice/create_invoice/<int:ins>', login_required(invoice.create_invoice), name = 'create-invoice'),
+    path('invoice/', never_cache(login_required(invoice.Invoice.as_view())), name = 'invoice'),
+    path('invoice/create_invoice/', login_required(invoice.create_invoice), name = 'create-invoice'),
 ]
 
 
