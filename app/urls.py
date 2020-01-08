@@ -6,7 +6,7 @@ from django.views.generic.base import RedirectView
 from django.conf import settings
 from django.conf.urls.static import static
 
-from app.views import dashboard, contacts, base, invoice
+from app.views import dashboard, contacts, base, invoice, collections
 
 # Authorization
 urlpatterns = [
@@ -37,7 +37,12 @@ urlpatterns += [
 # Invoice
 urlpatterns += [
     path('invoice/', never_cache(login_required(invoice.Invoice.as_view())), name = 'invoice'),
-    path('invoice/create_invoice/', login_required(invoice.create_invoice), name = 'create-invoice'),
+    path('invoice/create_invoice/<int:ins>', login_required(invoice.create_invoice), name = 'create-invoice'),
+]
+
+# Collections
+urlpatterns += [
+    path('collections/', never_cache(login_required(collections.Collections.as_view())), name = 'collections'),
 ]
 
 
