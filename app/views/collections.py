@@ -82,3 +82,8 @@ class AddCollections(View):
             obj.save()
             return redirect('/collections/', permanent=True) 
         return render(request, self.template_name, self.data)
+
+class ContactCollections(View):
+    def get(self, request):
+        pass
+    

@@ -44,6 +44,7 @@ urlpatterns += [
 urlpatterns += [
     path('collections/', never_cache(login_required(collections.Collections.as_view())), name = 'collections'),
     path('collections/add_collections/', login_required(collections.AddCollections.as_view()), name = 'add-collections'),
+    path('collections/contact_collections/<int:ins>/', login_required(collections.ContactCollections.as_view()), name = 'contact-collections'),
 ]
 
 
