@@ -6,6 +6,7 @@ from django.contrib import messages
 
 from app.models.contacts_model import *
 from app.models.users_model import *
+from app.models.collects_model import Collections as Collect
 from app.forms.collection_forms import *
 
 import json
@@ -32,7 +33,10 @@ class Collections(View):
 
     #
     #
-    def get(self, request):        
+    def get(self, request):    
+
+        self.data["collections"] = Collect.objects.filter(user = request.user)
+
         return render(request, self.template_name, self.data)
 
 #=====================================================================================
@@ -62,7 +66,7 @@ class AddCollections(View):
     #
     #
     def post(self, request):
-        collection_form = CollectionsForm(request.user, request.POST)
+        collection_form = CollectionsForm(request.user, request.POST or None)
         
         if collection_form.is_valid():
             try:

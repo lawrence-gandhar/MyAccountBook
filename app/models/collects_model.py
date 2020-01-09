@@ -76,3 +76,4 @@ class Collections(models.Model):
 
     def __str__(self):
         return self.contact.contact_name
+
