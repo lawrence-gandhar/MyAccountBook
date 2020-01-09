@@ -39,17 +39,23 @@ class Collections(View):
 #   ADD COLLECTION
 #=====================================================================================
 #
-def add_collections(request):
-    data = defaultdict()
+class AddCollections(View):
 
     # Template 
     template_name = 'app/app_files/collections/index.html'
+
+    data = defaultdict()
+
     data["included_template"] = 'app/app_files/collections/add_collections.html'
 
     data["css_files"] = ['all_page/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css']
     data["js_files"] = ['all_page/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js', 'custom_files/js/collections.js']
 
     data["active_link"] = 'Collections'
-    data["collection_form"] = CollectionsForm(request.user)
-
-    return render(request, template_name, data)
+    
+    def get(self, request):
+        self.data["collection_form"] = CollectionsForm(request.user)
+        return render(request, self.template_name, self.data)
+    
+    def post(self, request):
+        pass
