@@ -62,4 +62,19 @@ class AddCollections(View):
     #
     #
     def post(self, request):
-        pass
+        collection_form = CollectionsForm(request.user, request.POST)
+        
+        if collection_form.is_valid():
+            try:
+                contact = Contacts.objects.get(pk = int(request.POST["contact"]))
+            except:
+                self.data["collection_form"] = CollectionsForm(request.user)
+                return render(request, self.template_name, self.data)
+
+            collection_form.save(commit = False)
+            collection_form.contact = contact                        
+            obj = collection_form.save()
+            obj.user = request.user
+            obj.save()
+            return redirect('/collections/', permanent=True) 
+        return render(request, self.template_name, self.data)

@@ -5,7 +5,7 @@ from app.models.contacts_model import Contacts
 #=====================================================================
 # MULTIPLE COLLECTION METHODS
 #=====================================================================
-class Collection_model(models.Model):
+class Collections(models.Model):
 
     PAYMENT_MODES = (
         (1, 'Cash'),
@@ -73,3 +73,6 @@ class Collection_model(models.Model):
         auto_now_add = True,
         auto_now = False,
     )
+
+    def __str__(self):
+        return self.contact.contact_name

@@ -3,6 +3,7 @@ from django.contrib import admin
 from app.models.contacts_model import Contacts, Contacts_Email, Contact_Addresses, Contact_Account_Details
 from app.models.invoice_model import Invoice
 from app.models.users_model import Profile, User_Account_Details, User_Address_Details
+from app.models.collects_model import *
 # Register your models here.
 
 @admin.register(Contacts)
@@ -36,4 +37,8 @@ class Contact_Account_Details(admin.ModelAdmin):
 @admin.register(Invoice)
 class Invoice(admin.ModelAdmin):
     model = Invoice
+
+@admin.register(Collections)
+class Collections(admin.ModelAdmin):
+    model = Collections
 

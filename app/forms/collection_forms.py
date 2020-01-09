@@ -27,7 +27,7 @@ class CollectionsForm(ModelForm):
             (3, 'Collected'),
         )        
 
-        model = Collection_model
+        model = Collections
         fields = (
                     'contact', 'collection_due_date', 'amount', 'payment_type',
                     'collection_status', 'collection_date',
