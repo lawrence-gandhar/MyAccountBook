@@ -33,9 +33,17 @@ class Collections(View):
 
     #
     #
-    def get(self, request):    
+    def get(self, request, *args, **kwargs):  
 
         self.data["collections"] = Collect.objects.filter(user = request.user)
+        
+        if 'ins' in kwargs:
+            try:
+                contact = Contacts.objects.get(pk = int(kwargs["ins"]))
+            except:
+                return redirect('/unauthorized/', permanent = True)
+
+            self.data["collections"] = self.data["collections"].filter(contact = contact)
 
         return render(request, self.template_name, self.data)
 
@@ -83,7 +91,4 @@ class AddCollections(View):
             return redirect('/collections/', permanent=True) 
         return render(request, self.template_name, self.data)
 
-class ContactCollections(View):
-    def get(self, request):
-        pass
-    
+

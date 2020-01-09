@@ -21,7 +21,7 @@
         <li class="nav-item" style="float:left;padding:0px 10px;">
             <a href="{% url 'contacts' %}?view=grid" style="color:#FFFFFF; text-decoration:none;" title="View Contacts As Grid">
                 <i class="fas fw fa-th"></i>
-            </a>
+            </a>            
         </li>
     </ul>
 </div>
@@ -73,10 +73,10 @@
                             <a href="{% url 'add-contacts' 'step1' contact.id %}" class="btn btn-primary">
                                 <i class="fas fas-fw fa-pencil-alt"></i>
                             </a>
-                            <a href="{% url 'contact-collections' contact.id %}" class="btn btn-success">
+                            <a href="{% url 'collections' contact.id %}" class="btn btn-success">
                                 <i class="fas fas-fw fa-dollar-sign"></i>
                             </a>
-                            <a href="{% url 'contact-collections' contact.id %}" class="btn btn-warning">
+                            <a href="{% url 'collections' contact.id %}" class="btn btn-warning">
                                 <i class="fas fas-fw fa-money-bill-alt"></i>
                             </a>
                         </div>                      
@@ -118,6 +118,12 @@
                                         <td>
                                             <a href="{% url 'add-contacts' 'step1' contact.id %}" class="btn btn-primary btn-sm">
                                                 <i class="fas fas-fw fa-pencil-alt"></i>
+                                            </a>
+                                            <a href="{% url 'collections' contact.id %}" class="btn btn-success btn-sm">
+                                                <i class="fas fas-fw fa-dollar-sign"></i>
+                                            </a>
+                                            <a href="{% url 'collections' contact.id %}" class="btn btn-warning btn-sm">
+                                                <i class="fas fas-fw fa-money-bill-alt"></i>
                                             </a>
                                         </td>                        
                                     </tr>
