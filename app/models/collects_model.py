@@ -67,3 +67,9 @@ class Collection_model(models.Model):
         blank = True,
         db_index = True,
     )
+
+    created_on = models.DateTimeField(
+        db_index = True,
+        auto_now_add = True,
+        auto_now = False,
+    )
