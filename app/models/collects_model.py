@@ -1,52 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from app.models.contacts_model import Contacts
-
-class Collects_Model(models.Model):
-
-    user = models.ForeignKey(
-        User,
-        on_delete = models.SET_NULL
-        db_index = True,
-        blank = True,
-        null = True,
-    )
-
-    contact = models.ForeignKey(
-        Contacts,
-        on_delete = models.SET_NULL
-        db_index = True,
-        blank = True,
-        null = True,
-    )
-
-    
-
-#=====================================================================
-# COLLECTION DUE DATES & REMINDERS
-#=====================================================================
-class Collection_Due_model(models.Model):
-
-    collects = models.ForeignKey(
-        Collects_Model,
-        on_delete = models.CASCADE,
-        blank = True,
-        null = True,
-        db_index = True,
-    )
-
-    collection_due_date = models.DateTimeField(
-        null = True,
-        blank = True,
-        db_index = True,
-    )
-
-    amount = models.FloatField(
-        blank = True,
-        null = True,
-        db_index = True,
-    )
-
+  
 #=====================================================================
 # MULTIPLE COLLECTION METHODS
 #=====================================================================
@@ -65,15 +20,23 @@ class Collection_model(models.Model):
         (3, 'Collected'),
     )
 
-    collects = models.ForeignKey(
-        Collects_Model,
-        on_delete = models.CASCADE,
+    user = models.ForeignKey(
+        User,
+        on_delete = models.SET_NULL,
+        db_index = True,
         blank = True,
         null = True,
-        db_index = True,
     )
 
-    collection_date = models.DateTimeField(
+    contact = models.ForeignKey(
+        Contacts,
+        on_delete = models.SET_NULL,
+        db_index = True,
+        blank = True,
+        null = True,
+    )
+
+    collection_due_date = models.DateTimeField(
         null = True,
         blank = True,
         db_index = True,

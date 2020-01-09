@@ -6,7 +6,7 @@ from django.contrib import messages
 
 from app.models.contacts_model import Contacts as C
 from app.models.users_model import *
-from app.forms.contact_forms import *
+from app.forms.collection_forms import *
 
 import json
 
@@ -17,7 +17,7 @@ import json
 class Collections(View):
 
     # Template 
-    template_name = 'app/app_files/contacts/index.html'
+    template_name = 'app/app_files/collections/index.html'
 
     # Initialize 
     data = defaultdict()
@@ -33,9 +33,19 @@ class Collections(View):
     def get(self, request):        
         return render(request, self.template_name, self.data)
 
+#=====================================================================================
+#   ADD COLLECTION
+#=====================================================================================
+#
+def add_collections(request):
+    data = defaultdict()
 
-    #
-    #
-    #
-    def post(self, request):
-        pass
+    data["collection_form"] = CollectionsForm()
+
+    # Template 
+    template_name = 'app/app_files/contacts/add_contacts.html'
+    data["included_template"] = 'app/app_files/contacts/add_contacts_step1.html'
+    
+    print(data)
+
+    return render(request, template_name, self.data)

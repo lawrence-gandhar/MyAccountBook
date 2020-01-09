@@ -43,6 +43,7 @@ urlpatterns += [
 # Collections
 urlpatterns += [
     path('collections/', never_cache(login_required(collections.Collections.as_view())), name = 'collections'),
+    path('add_collections/', login_required(collections.add_collections), name = 'add-collections'),
 ]
 
 

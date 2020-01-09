@@ -1,1 +1,1 @@
-from . import contacts_model, users_model, invoice_model 
+from . import contacts_model, users_model, invoice_model, collects_model 
