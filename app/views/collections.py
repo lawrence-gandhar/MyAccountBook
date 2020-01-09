@@ -53,9 +53,13 @@ class AddCollections(View):
 
     data["active_link"] = 'Collections'
     
+    #
+    #
     def get(self, request):
         self.data["collection_form"] = CollectionsForm(request.user)
         return render(request, self.template_name, self.data)
     
+    #
+    #
     def post(self, request):
         pass
