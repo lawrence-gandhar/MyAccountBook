@@ -34,5 +34,10 @@ class CollectionsForm(ModelForm):
                 )
 
         widgets = {
-            'contact' : Select(attrs={'class':'form-control input-sm',}),
+            'contact' : Select(attrs={'class':'form-control input-sm'}),
+            'collection_due_date' : DateInput(attrs={'class':'form-control input-sm', 'data-toggle':'datepicker'}),
+            'amount' : NumberInput(attrs={'class':'form-control input-sm'}),
+            'payment_type' : Select(attrs={'class':'form-control input-sm'}, choices = PAYMENT_MODES),
+            'collection_status' : Select(attrs={'class':'form-control input-sm'}, choices = COLLECTION_STATUS),
+            'collection_date' : DateInput(attrs={'class':'form-control input-sm','data-toggle':'datepicker'}),
         }

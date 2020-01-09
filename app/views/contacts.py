@@ -60,7 +60,7 @@ def add_contacts(request, slug = None, ins = None):
     data["included_template"] = 'app/app_files/contacts/add_contacts_step1.html'
     
     # Custom CSS/JS Files For Inclusion into template
-    data["css_files"] = ['']
+    data["css_files"] = []
     data["js_files"] = ['custom_files/js/contacts.js']
 
     # Set link as active in menubar

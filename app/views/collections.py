@@ -4,7 +4,7 @@ from django.views import View
 from collections import OrderedDict, defaultdict
 from django.contrib import messages
 
-from app.models.contacts_model import Contacts as C
+from app.models.contacts_model import *
 from app.models.users_model import *
 from app.forms.collection_forms import *
 
@@ -45,6 +45,9 @@ def add_collections(request):
     # Template 
     template_name = 'app/app_files/collections/index.html'
     data["included_template"] = 'app/app_files/collections/add_collections.html'
+
+    data["css_files"] = ['all_page/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css']
+    data["js_files"] = ['all_page/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js', 'custom_files/js/collections.js']
 
     data["active_link"] = 'Collections'
     data["collection_form"] = CollectionsForm(request.user)
