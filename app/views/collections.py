@@ -28,6 +28,8 @@ class Collections(View):
     data["css_files"] = []
     data["js_files"] = []
 
+    data["included_template"] = 'app/app_files/collections/view_collections.html'
+
     #
     #
     def get(self, request):        
@@ -40,12 +42,11 @@ class Collections(View):
 def add_collections(request):
     data = defaultdict()
 
-    data["collection_form"] = CollectionsForm()
-
     # Template 
-    template_name = 'app/app_files/contacts/add_contacts.html'
-    data["included_template"] = 'app/app_files/contacts/add_contacts_step1.html'
-    
-    print(data)
+    template_name = 'app/app_files/collections/index.html'
+    data["included_template"] = 'app/app_files/collections/add_collections.html'
 
-    return render(request, template_name, self.data)
+    data["active_link"] = 'Collections'
+    data["collection_form"] = CollectionsForm(request.user)
+
+    return render(request, template_name, data)

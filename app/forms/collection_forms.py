@@ -4,6 +4,14 @@ from app.models.contacts_model import *
 from django.contrib.auth.models import User
 
 class CollectionsForm(ModelForm):
+
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super(CollectionsForm, self).__init__(*args, **kwargs)
+        self.fields['contact'].queryset = Contacts.objects.filter(user = self.user)
+
+    #CONTACTS = Contacts.objects.filter(user = self.instance.user)
+
     class Meta:
 
         PAYMENT_MODES = (
@@ -17,7 +25,7 @@ class CollectionsForm(ModelForm):
             (1, 'Collection Expected'),
             (2, 'Still Collecting'),
             (3, 'Collected'),
-        )
+        )        
 
         model = Collection_model
         fields = (
@@ -28,7 +36,3 @@ class CollectionsForm(ModelForm):
         widgets = {
             'contact' : Select(attrs={'class':'form-control input-sm',}),
         }
-
-        def __init__(self, user, *args, **kwargs):
-            super(CollectionsForm, self).__init__(*args, **kwargs)
-            self.fields['contact'].queryset = Contacts.objects.filter(user=user) 
