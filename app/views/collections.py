@@ -127,7 +127,6 @@ class AddPartialCollection(View):
         ins = int(self.kwargs["ins"])
 
         self.data["collection_form"] = CollectPartialForm()
-
         return render(request, self.template_name, self.data)
 
     #
