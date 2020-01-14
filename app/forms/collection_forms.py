@@ -41,3 +41,33 @@ class CollectionsForm(ModelForm):
             'collection_status' : Select(attrs={'class':'form-control input-sm'}, choices = COLLECTION_STATUS),
             'collection_date' : DateInput(attrs={'class':'form-control input-sm','data-toggle':'datepicker'}),
         }
+
+class CollectPartialForm(ModelForm):
+    class Meta:
+
+        PAYMENT_MODES = (
+            (1, 'Cash'),
+            (2, 'Cheque'),
+            (3, 'Demand Draft'),
+            (4, 'Payment Gateway'),
+        )
+
+        COLLECTION_STATUS = (
+            (1, 'Collection Expected'),
+            (2, 'Still Collecting'),
+            (3, 'Collected'),
+        )        
+
+        model = CollectPartial
+        fields = (
+                    'collection_due_date', 'amount', 'payment_type',
+                    'collection_status', 'collection_date',
+                )
+
+        widgets = {
+            'collection_due_date' : DateInput(attrs={'class':'form-control input-sm', 'data-toggle':'datepicker'}),
+            'amount' : NumberInput(attrs={'class':'form-control input-sm'}),
+            'payment_type' : Select(attrs={'class':'form-control input-sm'}, choices = PAYMENT_MODES),
+            'collection_status' : Select(attrs={'class':'form-control input-sm'}, choices = COLLECTION_STATUS),
+            'collection_date' : DateInput(attrs={'class':'form-control input-sm','data-toggle':'datepicker'}),
+        }

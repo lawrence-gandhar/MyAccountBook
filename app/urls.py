@@ -46,6 +46,7 @@ urlpatterns += [
     path('collections/', never_cache(login_required(collections.Collections.as_view())), name = 'collections'),
     path('collections/<int:ins>', never_cache(login_required(collections.Collections.as_view())), name = 'collections'),
     path('collections/add_collections/', login_required(collections.AddCollections.as_view()), name = 'add-collections'),
+    path('collections/add_collections/partial/<int:ins>', login_required(collections.AddPartialCollection.as_view()), name = 'add-partial-collections'),
 ]
 
 

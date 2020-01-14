@@ -93,6 +93,14 @@ class CollectPartial(models.Model):
         (3, 'Collected'),
     )
 
+    user = models.ForeignKey(
+        User,
+        on_delete = models.SET_NULL,
+        db_index = True,
+        blank = True,
+        null = True,
+    )
+
     collect_part = models.ForeignKey(
         Collections,
         on_delete = models.CASCADE,
@@ -107,7 +115,7 @@ class CollectPartial(models.Model):
         db_index = True,
     )
 
-    collected_amount = models.FloatField(
+    amount = models.FloatField(
         blank = True,
         null = True,
         db_index = True,
