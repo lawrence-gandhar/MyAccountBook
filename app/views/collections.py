@@ -35,7 +35,7 @@ def view_collections(request):
     return render(request, template_name, data)
 
 #=====================================================================================
-#   CONTACT COLLECTIONS
+#   VIEW CONTACT COLLECTIONS
 #=====================================================================================
 #
 def view_contact_collections(request, *args, **kwargs):
@@ -49,7 +49,10 @@ def view_contact_collections(request, *args, **kwargs):
 
     data["included_template"] = 'app/app_files/collections/view_collections.html'
 
-    contact = Contacts.objects.get(pk = int(kwargs["ins"]))
+    try:
+        contact = Contacts.objects.get(pk = int(kwargs["ins"]))
+    except:
+        return redirect('/unauthorized/', permanent = True)
 
     data["collections"] = Collect.objects.filter(user = request.user) 
     data["collections"] = data["collections"].filter(contact = contact)
@@ -89,19 +92,18 @@ class AddCollections(View):
             try:
                 contact = Contacts.objects.get(pk = int(request.POST["contact"]))
             except:
-                self.data["collection_form"] = CollectionsForm(request.user)
-                return render(request, self.template_name, self.data)
+                return redirect('/unauthorized/', permanent = True)
 
-            collection_form.save(commit = False)
-            collection_form.contact = contact                        
             obj = collection_form.save()
+            obj.contact = contact         
             obj.user = request.user
             obj.save()
             return redirect('/collections/', permanent=True) 
         return render(request, self.template_name, self.data)
 
-#
-#
+#=====================================================================================
+#   ADD COLLECTION IN PARTS
+#=====================================================================================
 #
 class AddPartialCollection(View):
 
@@ -126,6 +128,14 @@ class AddPartialCollection(View):
         
         ins = int(self.kwargs["ins"])
 
+        try:
+            collect = Collect.objects.get(pk = ins, collection_status__lt = 3)
+        except:
+            return redirect('/unauthorized/', permanent = True)
+
+        self.data["collections"] = Collect.objects.filter(pk = ins)
+        self.data["partial_collections"] = CollectPartial.objects.filter(collect_part = collect)
+
         self.data["collection_form"] = CollectPartialForm()
         return render(request, self.template_name, self.data)
 
@@ -140,9 +150,8 @@ class AddPartialCollection(View):
         collection_form = CollectPartialForm(request.POST or None)
 
         if collection_form.is_valid():            
-            collection_form.save(commit = False)
-            collection_form.collect_part = collect                        
             obj = collection_form.save()
+            obj.collect_part = collect  
             obj.user = request.user
             obj.save()
             return redirect('/collections/', permanent=True) 
