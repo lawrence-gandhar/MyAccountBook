@@ -77,3 +77,65 @@ class Collections(models.Model):
     def __str__(self):
         return self.contact.contact_name
 
+
+
+class CollectPartial(models.Model):
+    PAYMENT_MODES = (
+        (1, 'Cash'),
+        (2, 'Cheque'),
+        (3, 'Demand Draft'),
+        (4, 'Payment Gateway'),
+    )
+
+    COLLECTION_STATUS = (
+        (1, 'Collection Expected'),
+        (2, 'Still Collecting'),
+        (3, 'Collected'),
+    )
+
+    collect_part = models.ForeignKey(
+        Collections,
+        on_delete = models.CASCADE,
+        db_index = True,
+        null = True,
+        blank = True,
+    )
+
+    collection_due_date = models.DateTimeField(
+        null = True,
+        blank = True,
+        db_index = True,
+    )
+
+    collected_amount = models.FloatField(
+        blank = True,
+        null = True,
+        db_index = True,
+    )
+
+    payment_type = models.IntegerField(
+        null = True,
+        blank = True,
+        db_index = True,
+        choices = PAYMENT_MODES,
+    )
+
+    collection_status = models.IntegerField(
+        null = True,
+        blank = True,
+        db_index = True,
+        choices = COLLECTION_STATUS,
+    )
+
+    collection_date = models.DateTimeField(
+        null = True,
+        blank = True,
+        db_index = True,
+    )
+
+    created_on = models.DateTimeField(
+        db_index = True,
+        auto_now_add = True,
+        auto_now = False,
+    )
+    
