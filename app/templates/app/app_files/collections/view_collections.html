@@ -40,6 +40,10 @@
                                         <a href="{% url 'add-partial-collections' record.id %}" class="btn button-orange btn-sm" title="Add Partial Collection">
                                             <i class="fas fas-fw fa-hand-holding-usd"></i>
                                         </a>
+                                        {% else %}
+                                        <a href="{% url 'create-collection-invoice' record.id %}" class="btn button-black btn-sm" title="Create Invoice">
+                                            <i style="color:#FFFFFF" class="fas fas-fw fa-file-invoice"></i style="color:#FFFFFF">
+                                        </a>
                                         {% endif %}
                                     </td>                 
                                 </tr>

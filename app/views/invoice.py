@@ -51,13 +51,11 @@ class InvoiceDesigner(View):
         return render(request, self.template_name, self.data)
 
 
-
-
 #=====================================================================================
-#   CONTACT - CREATE INVOICE
+#   BASE - CREATE INVOICE
 #=====================================================================================
 #
-def create_invoice(request, ins = None):
+class CreateInvoice(View):
     
     # Initialize 
     data = defaultdict()
@@ -76,4 +74,77 @@ def create_invoice(request, ins = None):
     # Initialize Forms
     data["invoice__template_design_form"] = ''
 
-    return render(request, template_name, data)
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, self.data)
+
+#=====================================================================================
+#   CONTACT - CREATE INVOICE
+#=====================================================================================
+#
+class CreateContactInvoice(View):
+    
+    # Initialize 
+    data = defaultdict()
+    
+    # Template 
+    template_name = 'app/app_files/invoice/create_invoice.html'
+    data["included_template"] = 'app/app_files/invoice/template_design_form.html'
+
+    # Set link as active in menubar
+    data["active_link"] = 'Invoice'
+
+    # Custom CSS/JS Files For Inclusion into template
+    data["css_files"] = []
+    data['js_files'] = ['custom_files/js/design_template.js']
+
+    # Initialize Forms
+    data["invoice__template_design_form"] = ''
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, self.data)
+
+
+#=====================================================================================
+#   COLLECTIONS - CREATE INVOICE
+#=====================================================================================
+#
+class CreateCollectionInvoice(View):
+    
+    # Initialize 
+    data = defaultdict()
+    
+    # Template 
+    template_name = 'app/app_files/invoice/create_invoice.html'
+    data["included_template"] = 'app/app_files/invoice/create_collection_invoice_form.html'
+
+    # Set link as active in menubar
+    data["active_link"] = 'Invoice'
+
+    # Custom CSS/JS Files For Inclusion into template
+    data["css_files"] = []
+    data['js_files'] = ['custom_files/js/design_template.js']
+
+    # Initialize Forms
+    data["invoice__template_design_form"] = ''
+
+    #
+    #
+    #
+    def get(self, request, *args, **kwargs):
+
+        ins = int(self.kwargs['ins'])
+
+        try:
+            collect = Collections.objects.get(pk = ins)
+        except:
+            return redirect('/unauthorized/', permanent = True)
+
+        self.data["contact"] = collect.contact.contact_name
+        self.data["collections"] = Collect.objects.filter(pk = ins)
+        self.data["partial_collections"] = CollectPartial.objects.filter(collect_part = collect)
+
+        return render(request, self.template_name, self.data)
+
+    #
+    # 
+    #     

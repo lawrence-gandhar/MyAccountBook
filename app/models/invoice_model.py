@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from app.models.contacts_model import Contacts
+from app.models.collects_model import Collections
 
 class Invoice_Templates(models.Model):
 
@@ -156,6 +157,14 @@ class Invoice(models.Model):
         blank = True,
         null = True,
     )
+
+    collect = models.ForeignKey(
+        Collections,
+        db_index = True,
+        blank = True,
+        null = True,
+        on_delete = models.CASCADE,
+    ) 
 
     total_amount = models.FloatField(
         default = 0,
