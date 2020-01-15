@@ -5,7 +5,9 @@ from collections import OrderedDict, defaultdict
 from django.contrib import messages
 
 from app.models.invoice_model import Invoice
+from app.models.collects_model import *
 from app.forms.invoice_forms import *
+
 
 import json
 
@@ -140,7 +142,7 @@ class CreateCollectionInvoice(View):
             return redirect('/unauthorized/', permanent = True)
 
         self.data["contact"] = collect.contact.contact_name
-        self.data["collections"] = Collect.objects.filter(pk = ins)
+        self.data["collections"] = collect
         self.data["partial_collections"] = CollectPartial.objects.filter(collect_part = collect)
 
         return render(request, self.template_name, self.data)
