@@ -13,13 +13,34 @@
     padding:0px;
 }
 
-.template_header img{
-    height:100px;
-    width:auto;
-    margin-left:10px;
+.template_header_orange{
+    background-color: rgb(250, 112, 0);
+    color:#FFFFFF;
+    font-weight:bold;
+    border-top:10px solid rgb(192, 79, 3);
+    border-left:10px solid rgb(192, 79, 3);
+    border-right:10px solid rgb(192, 79, 3);
+    padding:0px;
 }
 
-.template_header p{
+.template_header_blue{
+    background-color: rgb(1, 121, 233);
+    color:#FFFFFF;
+    font-weight:bold;
+    border-top:10px solid rgb(0, 37, 248);
+    border-left:10px solid rgb(0, 37, 248);
+    border-right:10px solid rgb(0, 37, 248);
+    padding:0px;
+}
+
+#invoice_template_body .card-header img{
+    height:100px;
+    width:auto;
+    margin-left:11px;
+    margin-top:1px;
+}
+
+#invoice_template_body .card-header p{
     padding:5px 10px 0px 0px;
     color:#000000;
     margin-bottom:0px;
@@ -76,6 +97,7 @@ button.color-button{
     border-radius:100%;
     border:10px solid #EEEEEE;
     cursor:pointer;
+    font-weight:bold;
 }
 
 .color-button-green{
@@ -115,19 +137,19 @@ button.color-button{
                 <div class="table">
                     <div class="d-table-row" style="padding:10px 0px;">
                         <div class="d-table-cell" style="padding:0px 10px;">
-                            <button class="color-button color-button-green" title="Green Template"></button>
+                            <button class="color-button color-button-green" title="Green Template" type="button">1</button>
                         </div>      
                         <div class="d-table-cell" style="padding:0px 10px;">
-                            <button class="color-button color-button-orange" title="Orange Template"></button>
+                            <button class="color-button color-button-orange" title="Orange Template" type="button">2</button>
                         </div>      
                         <div class="d-table-cell" style="padding:0px 10px;">
-                            <button class="color-button color-button-blue" title="Blue Template"></button>
+                            <button class="color-button color-button-blue" title="Blue Template" type="button">3</button>
                         </div>      
                         <div class="d-table-cell" style="padding:0px 10px;">
-                            <button class="color-button color-button-white" title="White Template"></button>
+                            <button class="color-button color-button-white" title="White Template" type="button">4</button>
                         </div>  
                         <div class="d-table-cell" style="padding:0px 10px;">
-                            <button class="color-button color-button-grey" title="Grey Template"></button>
+                            <button class="color-button color-button-grey" title="Grey Template" type="button">5</button>
                         </div>         
                     </div>
                 </div>
