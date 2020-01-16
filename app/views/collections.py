@@ -3,6 +3,9 @@ from django.http import HttpResponse, Http404, JsonResponse
 from django.views import View
 from collections import OrderedDict, defaultdict
 from django.contrib import messages
+from django.utils import timezone 
+from django.db.models import *
+
 
 from app.models.contacts_model import *
 from app.models.users_model import *
@@ -89,11 +92,8 @@ class AddCollections(View):
         collection_form = CollectionsForm(request.user, request.POST or None)
         
         if collection_form.is_valid():
-            try:
-                contact = Contacts.objects.get(pk = int(request.POST["contact"]))
-            except:
-                return redirect('/unauthorized/', permanent = True)
-
+            contact = Contacts.objects.get(pk = int(request.POST["contact"]))
+            
             obj = collection_form.save()
             obj.contact = contact         
             obj.user = request.user
@@ -129,11 +129,18 @@ class AddPartialCollection(View):
         ins = int(self.kwargs["ins"])
 
         try:
-            collect = Collect.objects.get(pk = ins, collection_status__lt = 3)
+            collect = Collect.objects.get(pk = ins)
         except:
             return redirect('/unauthorized/', permanent = True)
+        #///////////////////////////////////////////////////////////////
+        # Send Data for display
+        #///////////////////////////////////////////////////////////////
 
-        self.data["collections"] = Collect.objects.filter(pk = ins)
+        try:
+            self.data["collections"] = Collect.objects.get(pk = ins)
+        except:
+            return redirect('/unauthorized/', permanent = True)
+            
         self.data["partial_collections"] = CollectPartial.objects.filter(collect_part = collect)
 
         self.data["collection_form"] = CollectPartialForm()
@@ -145,8 +152,11 @@ class AddPartialCollection(View):
     def post(self, request, *args, **kwargs):
         ins = int(self.kwargs["ins"])
 
-        collect = Collect.objects.get(pk = ins, user = request.user)
-        
+        try:
+            collect = Collect.objects.get(pk = ins, user = request.user)
+        except:
+            return redirect('/unauthorized/', permanent = True)
+
         collection_form = CollectPartialForm(request.POST or None)
 
         if collection_form.is_valid():            
@@ -154,5 +164,21 @@ class AddPartialCollection(View):
             obj.collect_part = collect  
             obj.user = request.user
             obj.save()
-            return redirect('/collections/', permanent=True) 
+
+            #///////////////////////////////////////////////////////////////
+            # Auto change collection status if the total amount is paid
+            #///////////////////////////////////////////////////////////////
+            
+            total_paid_qset = CollectPartial.objects.filter(collect_part = collect, collection_status = 2).values()
+
+            paid = 0
+            for record in total_paid_qset:
+                if record["collection_status"] == 2:
+                    paid += record["amount"]
+
+            if paid >= collect.amount:
+                collect.collection_status = 3
+                collect.collection_date = timezone.now()
+                collect.save()
+            return redirect('/collections/add_collections/partial/{}/'.format(ins), permanent=True) 
         return render(request, self.template_name, self.data)

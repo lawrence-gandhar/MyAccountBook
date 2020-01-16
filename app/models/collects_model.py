@@ -89,8 +89,7 @@ class CollectPartial(models.Model):
 
     COLLECTION_STATUS = (
         (1, 'Collection Expected'),
-        (2, 'Still Collecting'),
-        (3, 'Collected'),
+        (2, 'Collected'),
     )
 
     user = models.ForeignKey(
