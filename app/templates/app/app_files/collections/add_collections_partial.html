@@ -5,49 +5,65 @@
     <div class="col-lg-12" style="padding:0px">
         <div class="card">              
             <div class="card-header">
-                <h4>ADD PARTIAL COLLECTION LIST                
+                <h4>ADD PARTIAL COLLECTION LIST     
+                    {% if record.collection_status < 3 %}           
                     <button class="btn button button-green pull-right" data-toggle="modal" data-target="#add_partial">New Entry</button>
+                    {% endif %}
                     <a href="" class="btn button button-black" style="float:right; color:#FFFFFF; margin-right:10px">Create Invoice</a>
                 </h4>   
             </div>
             <div class="card-body">
                 <div class="table">
                     <table class="table-bordered" width="100%" cellspacing="0" style="color:#000000">
-                        <thead>
-                            <th>Contact Name</th>
-                            <th>Amount</th>
-                            <th>Payment Type</th>
-                            <th>Status</th>
-                            <th>Due Date</th>
-                            <th>Collected On Date</th>
-                            <th>Created On Date</th>               
-                            <th>Action</th>                
+                        <thead style="background-color: #EEEEEE; color:#000000; font-size:11px">
+                            <th style="padding: 10px;" class="text-center">Contact Name</th>
+                            <th style="padding: 10px;" class="text-center">Total Amount</th>
+                            <th class="text-center">Payment Type</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-center">Due Date</th>
+                            <th class="text-center">Collected On Date</th>
+                            <th class="text-center">Created On Date</th>               
+                            <th class="text-center">Action</th>                
                         </thead>
-                        <tbody>
-                            {% for record in collections %}
-                                <tr
-                                    {% if record.collection_status == 1 %}
-                                        style="background-color:#ffa50069"
-                                    {% elif record.collection_status == 2 %}   
-                                        style="background-color:rgba(125, 205, 241, 0.5)"
-                                    {% else %} 
-                                        style="background-color:rgba(12, 235, 19, 0.5)"
-                                    {% endif %}
-                                >
-                                    <td>{{record.contact.contact_name}}</td>
-                                    <td>{{record.amount|safe}}</td>
-                                    <td>{{record.get_payment_type_display|upper}}</td>
-                                    <td>{{record.get_collection_status_display|upper}}</td>
-                                    <td>{{record.collection_due_date}}</td>
-                                    <td>{{record.collection_date}}</td>
-                                    <td>{{record.created_on}}</td>                      
-                                    <td>
-                                        <a href="" class="btn btn-primary btn-sm" title="Edit Collection">
-                                            <i class="fas fas-fw fa-pencil-alt"></i>
-                                        </a>
-                                    </td>                 
-                                </tr>
-                            {% endfor %}
+                        <tbody>                            
+                            <tr
+                                {% if record.collection_status == 1 %}
+                                    style="background-color:#ffa50069"
+                                {% elif record.collection_status == 2 %}   
+                                    style="background-color:rgba(125, 205, 241, 0.5)"
+                                {% else %} 
+                                    style="background-color:rgba(12, 235, 19, 0.5)"
+                                {% endif %}
+                            >
+                                <td>{{record.contact.contact_name}}</td>
+                                <td>{{record.amount|safe}}</td>
+                                <td>{{record.get_payment_type_display|upper}}</td>
+                                <td>{{record.get_collection_status_display|upper}}</td>
+                                <td>{{record.collection_due_date}}</td>
+                                <td>{{record.collection_date}}</td>
+                                <td>{{record.created_on}}</td>                      
+                                <td>
+                                    <a href="" class="btn btn-primary btn-sm" title="Edit Collection">
+                                        <i class="fas fas-fw fa-pencil-alt"></i>
+                                    </a>
+                                </td>                 
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table" style="padding:10px;">
+                    <h5>PARTIAL COLLECTIONS</h5>
+                    <table class="table-bordered" width="100%" cellspacing="0" style="color:#000000">
+                        <thead style="background-color: #535353; color:#FFFFFF; font-size:11px">
+                            <th style="padding: 10px;" class="text-center">Amount</th>
+                            <th class="text-center">Payment Type</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-center">Due Date</th>
+                            <th class="text-center">Collected On Date</th>
+                            <th class="text-center">Created On Date</th>               
+                            <th class="text-center">Action</th>                
+                        </thead>
+                        <tbody>    
                             {% for record in partial_collections %}
                                 <tr
                                     {% if record.collection_status == 1 %}
@@ -56,7 +72,6 @@
                                         style="background-color:rgba(12, 235, 19, 0.5)"
                                     {% endif %}
                                 >
-                                    <td class="text-center"> -- </td>
                                     <td>{{record.amount|safe}}</td>
                                     <td>{{record.get_payment_type_display|upper}}</td>
                                     <td>{{record.get_collection_status_display|upper}}</td>

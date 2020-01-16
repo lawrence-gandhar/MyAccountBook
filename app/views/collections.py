@@ -136,7 +136,7 @@ class AddPartialCollection(View):
         #///////////////////////////////////////////////////////////////
 
         try:
-            self.data["collections"] = Collect.objects.get(pk = ins)
+            self.data["record"] = Collect.objects.get(pk = ins)
         except:
             return redirect('/unauthorized/', permanent = True)
 
