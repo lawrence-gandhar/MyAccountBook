@@ -3,7 +3,6 @@ from django.http import HttpResponse, Http404, JsonResponse
 from django.views import View
 from collections import OrderedDict, defaultdict
 from django.contrib import messages
-from django.utils import timezone 
 from django.db.models import *
 
 
