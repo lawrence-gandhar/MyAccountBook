@@ -140,7 +140,7 @@ class AddPartialCollection(View):
             self.data["collections"] = Collect.objects.get(pk = ins)
         except:
             return redirect('/unauthorized/', permanent = True)
-            
+
         self.data["partial_collections"] = CollectPartial.objects.filter(collect_part = collect)
 
         self.data["collection_form"] = CollectPartialForm()
@@ -178,7 +178,7 @@ class AddPartialCollection(View):
 
             if paid >= collect.amount:
                 collect.collection_status = 3
-                collect.collection_date = timezone.now()
+                collect.collection_date = record["collection_date"]
                 collect.save()
             return redirect('/collections/add_collections/partial/{}/'.format(ins), permanent=True) 
         return render(request, self.template_name, self.data)
