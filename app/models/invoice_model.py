@@ -3,6 +3,23 @@ from django.contrib.auth.models import User
 from app.models.contacts_model import Contacts
 from app.models.collects_model import Collections
 
+from uuid import uuid4
+import os
+
+#==========================================================================
+#   CHANGE LOGO FILE NAMES
+#==========================================================================
+#
+def logo_rename(instance, filename):
+
+    upload_path = 'logos'
+    ext = filename.split('.')[-1]
+    return  os.path.join(upload_path,'{}.{}'.format(uuid4().hex, ext))
+
+#==========================================================================
+#   USER INVOICE DESIGN MODEL
+#==========================================================================
+#
 class Invoice_Templates(models.Model):
 
     user = models.ForeignKey(
@@ -24,6 +41,7 @@ class Invoice_Templates(models.Model):
     logo = models.FileField(
         null = True,
         blank = True,
+        upload_to = logo_rename,
     )
 
     header_bgcolor = models.CharField(
@@ -57,6 +75,10 @@ class Invoice_Templates(models.Model):
     def __str__(self):
         return self.template_name.upper() 
 
+
+#==========================================================================
+#   INVOICE MODEL
+#==========================================================================
 
 class Invoice(models.Model):
 

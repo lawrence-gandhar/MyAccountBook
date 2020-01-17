@@ -17,7 +17,7 @@ class InvoiceDesignerForm(ModelForm):
         )
 
         widgets = {
-            'template_name' : TextInput(attrs={'class':'form-control input-sm',}),
+            'template_name' : TextInput(attrs={'class':'form-control input-sm', 'required':'true'}),
             'design_number' : TextInput(attrs={'hidden':'true',}),
             'logo' : FileInput(attrs={'class':'form-control input-sm',}),
             'header_bgcolor' : TextInput(attrs={'class':'form-control input-sm','type':'color'}),

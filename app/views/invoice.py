@@ -55,7 +55,11 @@ class InvoiceDesigner(View):
         self.data["invoice_design_form"] = InvoiceDesignerForm()
         return render(request, self.template_name, self.data)
 
-
+    def post(self, request, *args, **kwargs):
+        form = InvoiceDesignerForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+        return render(request, self.template_name, self.data)    
 #=====================================================================================
 #   BASE - CREATE INVOICE
 #=====================================================================================
