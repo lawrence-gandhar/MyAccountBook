@@ -45,21 +45,53 @@ class InvoiceDesigner(View):
     data["view"] = ""
     data["active_link"] = 'Invoice'
     data["included_template"] = 'app/app_files/invoice/template_design_form.html'
+    data["breadcrumb_title"] = 'INVOICE DESIGNER'
 
     # Custom CSS/JS Files For Inclusion into template
     data["css_files"] = []
     data["js_files"] = ['custom_files/js/design_template.js']
-
+    data["invoice_design_form"] = InvoiceDesignerForm()
 
     def get(self, request, *args, **kwargs):
-        self.data["invoice_design_form"] = InvoiceDesignerForm()
         return render(request, self.template_name, self.data)
 
     def post(self, request, *args, **kwargs):
         form = InvoiceDesignerForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            obj = form.save(commit = False)
+            obj.user = request.user
+            obj.save()
+            return redirect('/invoice/invoice_designer/', permanent = True)
         return render(request, self.template_name, self.data)    
+
+#=====================================================================================
+#   BASE - CREATE INVOICE
+#=====================================================================================
+#
+
+def manage_invoice_designs(request):
+    
+    # Template 
+    template_name = 'app/app_files/invoice/index.html'
+
+    # Initialize 
+    data = defaultdict()
+    data["view"] = ""
+    data["active_link"] = 'Invoice'
+    data["included_template"] = 'app/app_files/invoice/manage_invoice_designs.html'
+    data["breadcrumb_title"] = 'INVOICE DESIGNER'
+
+    # Custom CSS/JS Files For Inclusion into template
+    data["css_files"] = []
+    data["js_files"] = []
+
+    data["designs"] = Invoice_Templates.objects.filter(user = request.user)
+
+    return render(request, template, data)
+
+
+
+
 #=====================================================================================
 #   BASE - CREATE INVOICE
 #=====================================================================================
