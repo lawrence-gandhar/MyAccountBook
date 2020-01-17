@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from app.models.contacts_model import Contacts, Contacts_Email, Contact_Addresses, Contact_Account_Details
-from app.models.invoice_model import Invoice
+from app.models.invoice_model import Invoice, Invoice_Templates
 from app.models.users_model import Profile, User_Account_Details, User_Address_Details
 from app.models.collects_model import *
 # Register your models here.
@@ -41,4 +41,8 @@ class Invoice(admin.ModelAdmin):
 @admin.register(Collections)
 class Collections(admin.ModelAdmin):
     model = Collections
+
+@admin.register(Invoice_Templates)
+class Collections(admin.ModelAdmin):
+    model = Invoice_Templates
 

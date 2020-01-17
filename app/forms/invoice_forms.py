@@ -14,6 +14,7 @@ class InvoiceDesignerForm(ModelForm):
 
         fields = (
             'template_name', 'design_number', 'logo', 'header_bgcolor', 'header_fgcolor', 'other_design_colors',
+            'is_active',
         )
 
         widgets = {
@@ -23,6 +24,7 @@ class InvoiceDesignerForm(ModelForm):
             'header_bgcolor' : TextInput(attrs={'class':'form-control input-sm','type':'color'}),
             'header_fgcolor' : TextInput(attrs={'class':'form-control input-sm','type':'color'}),
             'other_design_colors' : TextInput(attrs={'class':'form-control input-sm','type':'color'}),
+            'is_active' : Select(attrs={'class':'form-control input-sm',)
         }
 
 

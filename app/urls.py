@@ -38,7 +38,7 @@ urlpatterns += [
 urlpatterns += [
     path('invoice/', never_cache(login_required(invoice.Invoice.as_view())), name = 'invoice'),
     path('invoice/invoice_designer/', never_cache(login_required(invoice.InvoiceDesigner.as_view())), name = 'invoice-designer'),
-    path('invoice/invoice_designer/manage/', never_cache(login_required(invoice.manage_invoice_designs), name = 'manage-invoice-designs'),
+    path('invoice/invoice_designer/manage/', never_cache(login_required(invoice.manage_invoice_designs)), name = 'manage-invoice-designs'),
     path('invoice/create_invoice/contacts/', never_cache(login_required(invoice.CreateInvoice.as_view())), name = 'create-invoice'),
     path('invoice/create_invoice/contacts/<int:ins>/', never_cache(login_required(invoice.CreateContactInvoice.as_view())), name = 'create-contact-invoice'),
     path('invoice/create_invoice/collections/<int:ins>/', never_cache(login_required(invoice.CreateCollectionInvoice.as_view())), name = 'create-collection-invoice'),
@@ -51,6 +51,12 @@ urlpatterns += [
     path('collections/add_collections/', never_cache(login_required(collections.AddCollections.as_view())), name = 'add-collections'),
     path('collections/add_collections/partial/<int:ins>/', never_cache(login_required(collections.AddPartialCollection.as_view())), name = 'add-partial-collections'),
 ]
+
+#
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+else:
+    urlpatterns += staticfiles_urlpatterns()
 
 
 

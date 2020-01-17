@@ -61,7 +61,7 @@ class InvoiceDesigner(View):
             obj = form.save(commit = False)
             obj.user = request.user
             obj.save()
-            return redirect('/invoice/invoice_designer/', permanent = True)
+            return redirect('/invoice/invoice_designer/manage/', permanent = True)
         return render(request, self.template_name, self.data)    
 
 #=====================================================================================
@@ -87,7 +87,7 @@ def manage_invoice_designs(request):
 
     data["designs"] = Invoice_Templates.objects.filter(user = request.user)
 
-    return render(request, template, data)
+    return render(request, template_name, data)
 
 
 
@@ -136,7 +136,7 @@ class CreateContactInvoice(View):
     data['js_files'] = ['custom_files/js/design_template.js']
 
     # Initialize Forms
-    data["invoice__template_design_form"] = ''
+    data["invoice_template_design_form"] = ''
 
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name, self.data)

@@ -22,6 +22,17 @@ def logo_rename(instance, filename):
 #
 class Invoice_Templates(models.Model):
 
+    DESIGN_STYLES = (
+        (1, 'GREEN TEMPLATE'),
+        (2, 'ORANGE TEMPLATE'),
+        (3, 'BLUE TEMPLATE'),
+        (4, 'WHITE TEMPLATE'),
+        (5, 'GREY TEMPLATE'),
+        (6, 'CUSTOM TEMPLATE')
+    )
+
+    IS_ACTIVE = ((True, 'YES'), (False, 'NO'))
+
     user = models.ForeignKey(
         User, 
         db_index = True, 
@@ -30,12 +41,17 @@ class Invoice_Templates(models.Model):
         blank = True,
     )
 
-    design_number = models.CharField(
-        max_length = 10,
+    template_name = models.CharField(
+        max_length = 250,
         db_index = True,
-        blank = True,
-        null = True,
-        default = 1
+        null = False,
+        blank = False,
+    )
+
+    design_number = models.IntegerField(        
+        db_index = True,
+        default = 1,
+        choices = DESIGN_STYLES,
     )
 
     logo = models.FileField(
@@ -65,11 +81,21 @@ class Invoice_Templates(models.Model):
         default = "#FFFFFF",
     )
 
-    template_name = models.CharField(
-        max_length = 250,
+    is_active = models.BooleanField(
         db_index = True,
-        null = False,
-        blank = False,
+        choices =  IS_ACTIVE,
+        default = True,
+    )
+
+    total_usage = models.IntegerField(
+        db_index = True,
+        null = True,
+        blank = True,
+    )
+
+    created_on = models.DateTimeField(
+        auto_now = True,
+        db_index = True,
     )
 
     def __str__(self):
