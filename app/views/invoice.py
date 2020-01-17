@@ -44,12 +44,15 @@ class InvoiceDesigner(View):
     data = defaultdict()
     data["view"] = ""
     data["active_link"] = 'Invoice'
+    data["included_template"] = 'app/app_files/invoice/template_design_form.html'
 
     # Custom CSS/JS Files For Inclusion into template
     data["css_files"] = []
-    data["js_files"] = []
+    data["js_files"] = ['custom_files/js/design_template.js']
 
-    def get(self, request):
+
+    def get(self, request, *args, **kwargs):
+        self.data["invoice_design_form"] = InvoiceDesignerForm()
         return render(request, self.template_name, self.data)
 
 
@@ -71,10 +74,7 @@ class CreateInvoice(View):
 
     # Custom CSS/JS Files For Inclusion into template
     data["css_files"] = []
-    data['js_files'] = ['custom_files/js/design_template.js']
-
-    # Initialize Forms
-    data["invoice__template_design_form"] = ''
+    data['js_files'] = []
 
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name, self.data)

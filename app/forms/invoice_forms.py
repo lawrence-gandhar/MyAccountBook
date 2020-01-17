@@ -2,6 +2,36 @@ from django.forms import *
 from app.models.invoice_model import *
 
 
+#=======================================================================
+#   INVOICE DESIGNER FORM
+#=======================================================================
+
+class InvoiceDesignerForm(ModelForm):
+
+    class Meta:
+
+        model = Invoice_Templates
+
+        fields = (
+            'template_name', 'design_number', 'logo', 'header_bgcolor', 'header_fgcolor', 'other_design_colors',
+        )
+
+        widgets = {
+            'template_name' : TextInput(attrs={'class':'form-control input-sm',}),
+            'design_number' : TextInput(attrs={'hidden':'true',}),
+            'logo' : FileInput(attrs={'class':'form-control input-sm',}),
+            'header_bgcolor' : TextInput(attrs={'class':'form-control input-sm','type':'color'}),
+            'header_fgcolor' : TextInput(attrs={'class':'form-control input-sm','type':'color'}),
+            'other_design_colors' : TextInput(attrs={'class':'form-control input-sm','type':'color'}),
+        }
+
+
+
+
+
+#=======================================================================
+#   INVOICE FORM
+#=======================================================================
 class InvoiceForm(ModelForm):
     class Meta:
 

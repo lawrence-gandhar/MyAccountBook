@@ -44,6 +44,7 @@ class Invoice_Templates(models.Model):
         max_length = 20,
         blank =  True,
         null = True,
+        default = "#FFFFFF",
     )
 
     template_name = models.CharField(
