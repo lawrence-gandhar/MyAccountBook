@@ -34,7 +34,6 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    
                     <div class="table" style="padding:10px 0px;">
                         <div class="d-table-row" style="padding:10px 0px;">
                             <div class="d-table-cell" style="padding:0px 10px;">
@@ -42,6 +41,13 @@
                             </div>
                             <div class="d-table-cell" style="padding:5px 10px;">
                                 {{ invoice_design_form.template_name }}
+                            </div>
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:0px 10px;">
+                                <label>Select Design</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
                                 {{ invoice_design_form.design_number }}
                             </div>
                         </div>
@@ -53,7 +59,7 @@
                                 {{ invoice_design_form.logo }}
                             </div>
                         </div>
-                        <div class="d-table-row" style="padding:10px 0px;">
+                        <div class="hidden_div" style="padding:10px 0px; display:none">
                             <div class="d-table-cell" style="padding:0px 10px;">
                                 <label>Header Background Color</label>
                             </div>
@@ -61,7 +67,7 @@
                                 {{ invoice_design_form.header_bgcolor }}
                             </div>
                         </div>
-                        <div class="d-table-row" style="padding:10px 0px;">
+                        <div class="hidden_div" style="padding:10px 0px; display:none">
                             <div class="d-table-cell" style="padding:0px 10px;">
                                 <label>Header Font Color</label>
                             </div>
@@ -69,7 +75,7 @@
                                 {{ invoice_design_form.header_fgcolor }}
                             </div>
                         </div>
-                        <div class="d-table-row" style="padding:10px 0px;">
+                        <div class="hidden_div" style="padding:10px 0px; display:none;">
                             <div class="d-table-cell" style="padding:0px 10px;">
                                 <label>Border Color</label>
                             </div>
