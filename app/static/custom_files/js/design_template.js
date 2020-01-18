@@ -11,7 +11,7 @@ $(document).ready(function(){
     $("button.color-button").on('click', function(){
         var x = $(this).text();
 
-        $("div.hidden_div").css('display','none !important');
+        $("div.hidden_div").removeClass('d-table-row');
 
         $("#invoice_template_body").find(".card-header").removeClass().addClass("card-header").addClass(backgrounds[x][0]);
         $("#template_body").removeClass().addClass("card-body").addClass(backgrounds[x][1]);
@@ -26,11 +26,25 @@ $(document).ready(function(){
 
         if(x == 6){
             $("div.hidden_div").addClass('d-table-row');
-        }else{
+        }
+        else{
+            $("#invoice_template_body").find(".card-header").removeClass().addClass("card-header").addClass(backgrounds[x][0]);
+            $("#template_body").removeClass().addClass("card-body").addClass(backgrounds[x][1]);
+            $("#address_bar").removeClass().addClass(backgrounds[x][2])
+
             $("div.hidden_div").removeClass('d-table-row');
         }
-    })
+    });
 
+    $("#id_header_bgcolor").change(function(){
+        var bg_color = $(this).val();
+        $("#invoice_template_body").find(".card-header").removeClass().addClass("card-header").css('background-color',bg_color);
+    });
+
+    $("#id_header_fgcolor").change(function(){
+        var fg_color = $(this).val();
+        $("#invoice_template_body").find(".card-header").removeClass().addClass("card-header").find('p').css('color',fg_color);
+    });
 
 
 });

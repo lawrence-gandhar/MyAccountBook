@@ -458,10 +458,11 @@ input[type="checkbox"]:after{
   padding: 10px ;
   color:#000000;
 }
+
 #data_bar th { 
   border: 1px #000000 solid ;
   padding: 10px ;
-  background-color: rgb(13, 36, 3);
+  background-color: rgb(0, 0, 0);
   color:#FFFFFF;
   font-size:12px;
 }
