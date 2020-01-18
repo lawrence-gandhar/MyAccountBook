@@ -49,15 +49,13 @@ class Collections(models.Model):
     )
 
     payment_type = models.IntegerField(
-        null = True,
-        blank = True,
+        default = 1,
         db_index = True,
         choices = PAYMENT_MODES,
     )
 
     collection_status = models.IntegerField(
-        null = True,
-        blank = True,
+        default = 1,
         db_index = True,
         choices = COLLECTION_STATUS,
     )
@@ -121,15 +119,13 @@ class CollectPartial(models.Model):
     )
 
     payment_type = models.IntegerField(
-        null = True,
-        blank = True,
+        default = 1,
         db_index = True,
         choices = PAYMENT_MODES,
     )
 
     collection_status = models.IntegerField(
-        null = True,
-        blank = True,
+        default = 1,
         db_index = True,
         choices = COLLECTION_STATUS,
     )

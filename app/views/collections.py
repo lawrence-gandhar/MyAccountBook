@@ -142,6 +142,15 @@ class AddPartialCollection(View):
 
         self.data["partial_collections"] = CollectPartial.objects.filter(collect_part = collect)
 
+        total_paid_qset = self.data["partial_collections"].filter(collection_status = 2).values()
+
+        paid = 0
+        for record in total_paid_qset:
+            if record["collection_status"] == 2:
+                paid += record["amount"]
+
+        self.data["balance_amount"] = collect.amount - paid 
+
         self.data["collection_form"] = CollectPartialForm()
         return render(request, self.template_name, self.data)
 

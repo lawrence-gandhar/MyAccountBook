@@ -46,6 +46,8 @@ $(document).ready(function(){
         $("#invoice_template_body").find(".card-header").removeClass().addClass("card-header").find('p').css('color',fg_color);
     });
 
+    
+
 
 });
 
