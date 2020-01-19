@@ -16,6 +16,7 @@
                 <div class="table">
                     <table class="table-bordered" width="100%" cellspacing="0" style="color:#000000">
                         <thead style="background-color: #EEEEEE; color:#000000; font-size:11px">
+                            <th style="padding: 10px;" class="text-center">UID</th>
                             <th style="padding: 10px;" class="text-center">Contact Name</th>
                             <th style="padding: 10px;" class="text-center">Total Amount</th>
                             <th style="padding: 10px;" class="text-center">Payment Type</th>
@@ -35,6 +36,7 @@
                                     style="background-color:rgba(12, 235, 19, 0.5)"
                                 {% endif %}
                             >
+                                <td>C-0000{{record.id}}</td>
                                 <td>{{record.contact.contact_name}}</td>
                                 <td>{{record.amount|safe}}</td>
                                 <td>{{record.get_payment_type_display|upper}}</td>
@@ -74,7 +76,7 @@
                                         style="background-color:rgba(12, 235, 19, 0.5)"
                                     {% endif %}
                                 >
-                                    <td>P-{{record.id|safe}}</td>
+                                    <td>P-0000{{record.id|safe}}</td>
                                     <td>{{record.amount|safe}}</td>
                                     <td>{{record.get_payment_type_display|upper}}</td>
                                     <td>{{record.get_collection_status_display|upper}}</td>
