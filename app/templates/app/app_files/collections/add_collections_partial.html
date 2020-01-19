@@ -9,7 +9,7 @@
                     {% if record.collection_status < 3 %}           
                     <button class="btn button button-green pull-right" data-toggle="modal" data-target="#add_partial">New Entry</button>
                     {% endif %}
-                    <a href="" class="btn button button-black" style="float:right; color:#FFFFFF; margin-right:10px">Create Invoice</a>
+                    <a href="{% url 'create-collection-invoice' record.id %}" class="btn button button-black" style="float:right; color:#FFFFFF; margin-right:10px">Create Invoice</a>
                 </h4>   
             </div>
             <div class="card-body">
