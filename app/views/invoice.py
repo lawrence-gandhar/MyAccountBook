@@ -56,7 +56,8 @@ class InvoiceDesigner(View):
         return render(request, self.template_name, self.data)
 
     def post(self, request, *args, **kwargs):
-        form = InvoiceDesignerForm(request.POST, request.FILES)
+        form = InvoiceDesignerForm(request.POST, request.FILES or None)
+        print(form.errors)
         if form.is_valid():
             obj = form.save(commit = False)
             obj.user = request.user

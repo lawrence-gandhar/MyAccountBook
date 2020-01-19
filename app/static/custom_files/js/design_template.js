@@ -13,8 +13,8 @@ $(document).ready(function(){
 
         $("div.hidden_div").removeClass('d-table-row');
 
-        $("#invoice_template_body").find(".card-header").removeClass().addClass("card-header").addClass(backgrounds[x][0]);
-        $("#template_body").removeClass().addClass("card-body").addClass(backgrounds[x][1]);
+        $("#invoice_template_body").find(".card-header").removeClass().addClass("card-header").removeAttr('style').addClass(backgrounds[x][0]);
+        $("#template_body").removeClass().addClass("card-body").removeAttr('style').addClass(backgrounds[x][1]);
         $("#address_bar").removeClass().addClass(backgrounds[x][2])
 
         $("#id_design_number").val(x);
@@ -28,7 +28,7 @@ $(document).ready(function(){
             $("div.hidden_div").addClass('d-table-row');
         }
         else{
-            $("#invoice_template_body").find(".card-header").removeClass().addClass("card-header").addClass(backgrounds[x][0]);
+            $("#invoice_template_body").find(".card-header").removeClass().addClass("card-header").removeAttr('style').addClass(backgrounds[x][0]);
             $("#template_body").removeClass().addClass("card-body").addClass(backgrounds[x][1]);
             $("#address_bar").removeClass().addClass(backgrounds[x][2])
 
@@ -45,9 +45,6 @@ $(document).ready(function(){
         var fg_color = $(this).val();
         $("#invoice_template_body").find(".card-header").removeClass().addClass("card-header").find('p').css('color',fg_color);
     });
-
-    
-
 
 });
 
