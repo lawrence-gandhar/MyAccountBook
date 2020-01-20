@@ -54,7 +54,7 @@ def view_contact_collections(request, *args, **kwargs):
     try:
         contact = Contacts.objects.get(pk = int(kwargs["ins"]))
     except:
-        return redirect('/unauthorized/', permanent = True)
+        return redirect('/unauthorized/', permanent = False)
 
     data["collections"] = Collect.objects.filter(user = request.user) 
     data["collections"] = data["collections"].filter(contact = contact)
@@ -97,7 +97,7 @@ class AddCollections(View):
             obj.contact = contact         
             obj.user = request.user
             obj.save()
-            return redirect('/collections/', permanent=True) 
+            return redirect('/collections/', permanent=False) 
         return render(request, self.template_name, self.data)
 
 #=====================================================================================
@@ -130,7 +130,7 @@ class AddPartialCollection(View):
         try:
             collect = Collect.objects.get(pk = ins)
         except:
-            return redirect('/unauthorized/', permanent = True)
+            return redirect('/unauthorized/', permanent = False)
         #///////////////////////////////////////////////////////////////
         # Send Data for display
         #///////////////////////////////////////////////////////////////
@@ -138,7 +138,7 @@ class AddPartialCollection(View):
         try:
             self.data["record"] = Collect.objects.get(pk = ins)
         except:
-            return redirect('/unauthorized/', permanent = True)
+            return redirect('/unauthorized/', permanent = False)
 
         self.data["partial_collections"] = CollectPartial.objects.filter(collect_part = collect)
 
@@ -163,7 +163,7 @@ class AddPartialCollection(View):
         try:
             collect = Collect.objects.get(pk = ins, user = request.user)
         except:
-            return redirect('/unauthorized/', permanent = True)
+            return redirect('/unauthorized/', permanent = False)
 
         collection_form = CollectPartialForm(request.POST or None)
 

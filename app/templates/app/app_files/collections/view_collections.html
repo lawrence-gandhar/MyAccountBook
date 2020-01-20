@@ -18,12 +18,12 @@
                         <tbody>
                             {% for record in collections %}
                                 <tr
-                                    {% if record.payment_type == 1 %}
+                                    {% if record.collection_status == 1 %}
                                         style="background-color:#ffa50069"
-                                    {% elif record.payment_type == 2 %}    
-                                        style="background-color:rgba(12, 235, 19, 0.5)"
-                                    {% else %}
+                                    {% elif record.collection_status == 2 %}    
                                         style="background-color:rgba(125, 205, 241, 0.5)"
+                                    {% else %}
+                                        style="background-color:rgba(12, 235, 19, 0.5)"
                                     {% endif %}
                                 >
                                     <td>C-0000{{record.id}}</td>

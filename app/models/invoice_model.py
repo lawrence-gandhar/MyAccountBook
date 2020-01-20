@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
-from app.models.contacts_model import Contacts
-from app.models.collects_model import Collections
+from app.models.contacts_model import *
+from app.models.collects_model import *
+from app.models.users_model import *
 
 from uuid import uuid4
 import os
@@ -32,6 +33,11 @@ class Invoice_Templates(models.Model):
     )
 
     IS_ACTIVE = ((True, 'YES'), (False, 'NO'))
+
+    USER_NAME_ON_TEMPLATE = (
+        (True, 'USE USER FIRSTNAME LASTNAME'),
+        (False,'USE CUSTOM USERNAME'),
+    )
 
     user = models.ForeignKey(
         User, 
@@ -85,6 +91,38 @@ class Invoice_Templates(models.Model):
         db_index = True,
         choices =  IS_ACTIVE,
         default = True,
+    )
+
+    user_display_name = models.BooleanField(
+        db_index = True,
+        choices = USER_NAME_ON_TEMPLATE,
+        default = True,
+    )
+
+    user_custom_name = models.CharField(
+        max_length = 250,
+        blank = True,
+        null = True,
+    )
+
+    user_phone = models.CharField(
+        max_length = 30,
+        blank = True,
+        null = True,
+    )
+
+    user_email = models.CharField(
+        max_length = 250,
+        blank = True,
+        null = True,
+    )
+
+    billing_address = models.ForeignKey(
+        User_Address_Details,
+        blank = True,
+        null = True,
+        db_index = True,
+        on_delete = models.SET_NULL,
     )
 
     total_usage = models.IntegerField(

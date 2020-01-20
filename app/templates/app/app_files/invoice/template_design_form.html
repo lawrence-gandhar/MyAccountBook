@@ -91,6 +91,46 @@
                                 {{ invoice_design_form.other_design_colors }}
                             </div>
                         </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:0px 10px;">
+                                <label>Name Display</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                {{ invoice_design_form.user_display_name }}
+                            </div>
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:0px 10px;">
+                                <label>Custom Name</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                {{ invoice_design_form.user_custom_name }}
+                            </div>
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:0px 10px;">
+                                <label>Phone</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                <select class="form-control input-sm" id="id_user_phone" name="user_phone">
+                                    {% for i,v in PHONE_NUMBERS %}
+                                        <option value="{{i}}">{{v}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>     
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:0px 10px;">
+                                <label>Email Address</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                <select class="form-control input-sm" id="id_user_email" name="user_email">
+                                    {% for i,v in EMAILS %}
+                                        <option value="{{i}}">{{v}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>                    
                     </div>                    
                 </div>
                 <div class="card-footer text-center">
@@ -112,9 +152,9 @@
                             <img src="{% static 'images/logo3.jpg' %}" class="img-responsive">
                         </div>
                         <div class="col-8" style="text-align:right;">
-                            <p>User Name</p>
-                            <p>abc@xyz.com</p>
-                            <p>+91 90008784664</p>
+                            <p id="invoice_username">{{user.first_name|upper}} {{user.last_name|upper}}</p>
+                            <p id="invoice_email">{{EMAILS.0.1}}</p id="invoice_username">
+                            <p id="invoice_phone">{{PHONE_NUMBERS.0.1}}</p id="invoice_username">
                         </div>
                     </div>
                 </div>

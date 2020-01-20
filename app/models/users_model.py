@@ -10,12 +10,51 @@ from django.utils.crypto import get_random_string
 #**************************************************************************
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, db_index = True,)
+    
     app_id = models.CharField(
         max_length = 30,
         db_index = True,
         blank = True,
         null = True,
     )
+
+    official_phone = models.CharField(
+        max_length = 30,
+        db_index = True,
+        blank = True,
+        null = True,
+    )
+
+    personal_phone = models.CharField(
+        max_length = 30,
+        db_index = True,
+        blank = True,
+        null = True,
+    )
+
+    alternative_phone = models.CharField(
+        max_length = 30,
+        db_index = True,
+        blank = True,
+        null = True,
+    )
+
+    official_email = models.CharField(
+        max_length = 250,
+        db_index = True,
+        blank = True,
+        null = True,
+    )
+
+    personal_email = models.CharField(
+        max_length = 250,
+        db_index = True,
+        blank = True,
+        null = True,
+    )
+
+    def __str__(self):
+        return self.user.username
 
     class Meta:
         verbose_name_plural = 'user_profile_tbl'
@@ -160,6 +199,9 @@ class User_Address_Details(models.Model):
         db_index = True,
         null = True,
     )
+
+    def __str__(self):
+        return self.user.username
 
     def is_billing_address_full(self):
         if self.is_billing_address:

@@ -10,8 +10,6 @@ class CollectionsForm(ModelForm):
         super(CollectionsForm, self).__init__(*args, **kwargs)
         self.fields['contact'].queryset = Contacts.objects.filter(user = self.user)
 
-    #CONTACTS = Contacts.objects.filter(user = self.instance.user)
-
     class Meta:
 
         PAYMENT_MODES = (

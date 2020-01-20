@@ -1,5 +1,7 @@
 from django.forms import *
+from django.contrib.auth.models import User
 from app.models.invoice_model import *
+from app.models.users_model import *
 
 
 #=======================================================================
@@ -7,9 +9,8 @@ from app.models.invoice_model import *
 #=======================================================================
 
 class InvoiceDesignerForm(ModelForm):
-
+           
     class Meta:
-
         IS_ACTIVE = ((True, 'YES'), (False, 'NO'))
 
         TEMPLATE_DESIGN = (
@@ -21,13 +22,19 @@ class InvoiceDesignerForm(ModelForm):
             (6, 'CUSTOM TEMPLATE'),
         )
 
+        USER_NAME_ON_TEMPLATE = (
+            (True, 'USE USER FIRSTNAME LASTNAME'),
+            (False,'USE CUSTOM USERNAME'),
+        )
+
         model = Invoice_Templates
 
         fields = (
             'template_name', 'design_number', 'logo', 'header_bgcolor', 'header_fgcolor', 
-            'other_design_colors', 'is_active',
+            'other_design_colors', 'is_active', 'user_display_name', 'user_custom_name',
+            'user_phone', 'user_email',
         )
-
+        
         widgets = {
             'template_name' : TextInput(attrs={'class':'form-control input-sm', 'required':'true'}),
             'design_number' : Select(attrs={'class': 'form-control input-sm',}, choices = TEMPLATE_DESIGN),
@@ -36,6 +43,8 @@ class InvoiceDesignerForm(ModelForm):
             'header_fgcolor' : TextInput(attrs={'class':'form-control input-sm','type':'color'}),
             'other_design_colors' : TextInput(attrs={'class':'form-control input-sm','type':'color'}),
             'is_active' : Select(attrs={'class':'form-control input-sm',}, choices = IS_ACTIVE),
+            'user_display_name' : Select(attrs={'class':'form-control input-sm',}, choices = USER_NAME_ON_TEMPLATE),
+            'user_custom_name' : TextInput(attrs={'class':'form-control input-sm',}),
         }
 
 

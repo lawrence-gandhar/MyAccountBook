@@ -50,9 +50,42 @@ class InvoiceDesigner(View):
     # Custom CSS/JS Files For Inclusion into template
     data["css_files"] = []
     data["js_files"] = ['custom_files/js/design_template.js']
-    data["invoice_design_form"] = InvoiceDesignerForm()
 
+    
+    
     def get(self, request, *args, **kwargs):
+
+        #
+        #   USER PHONE LIST
+        #
+        records = Profile.objects.filter(user = self.request.user)
+            
+        phone_records = records.values('official_phone', 'personal_phone', 'alternative_phone')    
+        PHONE_NUMBERS = []
+        for i in phone_records:
+            for x in i: 
+                if i[x] is not None:
+                    PHONE_NUMBERS.append((x,i[x]))
+        self.data["PHONE_NUMBERS"] = (tuple(PHONE_NUMBERS))
+
+        #
+        #   USER EMAIL ADDRESSES
+        #
+        email_records = records.values('official_email', 'personal_email') 
+        EMAILS = []
+        for i in email_records:
+            for x in i: 
+                if i[x] is not None:
+                    EMAILS.append((x,i[x]))
+        self.data["EMAILS"] = (tuple(EMAILS))
+
+        #
+        #   USER BILLING ADDRESSES
+        #
+        #billing_addresses = User_Address_Details
+
+
+        self.data["invoice_design_form"] = InvoiceDesignerForm()
         return render(request, self.template_name, self.data)
 
     def post(self, request, *args, **kwargs):
@@ -178,7 +211,7 @@ class CreateCollectionInvoice(View):
         except:
             return redirect('/unauthorized/', permanent = True)
 
-        self.data["contact"] = collect.contact.contact_name
+        self.data["contact_details"] = Contacts.objects.get(pk = collect.contact.id)
         self.data["collections"] = collect
         self.data["partial_collections"] = CollectPartial.objects.filter(collect_part = collect)
 
