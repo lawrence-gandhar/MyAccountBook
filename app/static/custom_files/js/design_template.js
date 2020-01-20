@@ -36,15 +36,32 @@ $(document).ready(function(){
         }
     });
 
-    $("#id_header_bgcolor").change(function(){
+    $("#id_header_bgcolor").on('change', function(){
         var bg_color = $(this).val();
         $("#invoice_template_body").find(".card-header").removeClass().addClass("card-header").css('background-color',bg_color);
     });
 
-    $("#id_header_fgcolor").change(function(){
+    $("#id_header_fgcolor").on('change', function(){
         var fg_color = $(this).val();
         $("#invoice_template_body").find(".card-header").removeClass().addClass("card-header").find('p').css('color',fg_color);
     });
+
+
+    $("#id_billing_address").on('change', function(){
+        var tex = $('#id_billing_address').children("option:selected").text();
+        
+        tex = tex.replace(/,/g,",<br/>");
+        $("#invoice_user_billing_address").empty().html(tex);
+    });
+
+    $("#id_user_email").on('change', function(){
+        $("#invoice_email").text($("#id_user_email").children("option:selected").text());
+    });
+
+    $("#id_user_phone").on('change', function(){
+        $("#invoice_phone").text($("#id_user_phone").children("option:selected").text());
+    });
+    
 
 });
 

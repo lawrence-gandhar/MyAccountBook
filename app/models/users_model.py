@@ -201,7 +201,10 @@ class User_Address_Details(models.Model):
     )
 
     def __str__(self):
-        return self.user.username
+        return self.flat_no +", "+self.street+", "+self.city
+
+    def complete_billing_address(self):
+        return self.flat_no +", "+self.street
 
     def is_billing_address_full(self):
         if self.is_billing_address:

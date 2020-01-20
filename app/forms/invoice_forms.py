@@ -9,7 +9,11 @@ from app.models.users_model import *
 #=======================================================================
 
 class InvoiceDesignerForm(ModelForm):
-           
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super(InvoiceDesignerForm, self).__init__(*args, **kwargs)
+        self.fields['billing_address'].queryset = User_Address_Details.objects.filter(user = self.user, is_billing_address = True)
+
     class Meta:
         IS_ACTIVE = ((True, 'YES'), (False, 'NO'))
 
@@ -32,7 +36,7 @@ class InvoiceDesignerForm(ModelForm):
         fields = (
             'template_name', 'design_number', 'logo', 'header_bgcolor', 'header_fgcolor', 
             'other_design_colors', 'is_active', 'user_display_name', 'user_custom_name',
-            'user_phone', 'user_email',
+            'user_phone', 'user_email', 'billing_address',
         )
         
         widgets = {
@@ -45,6 +49,7 @@ class InvoiceDesignerForm(ModelForm):
             'is_active' : Select(attrs={'class':'form-control input-sm',}, choices = IS_ACTIVE),
             'user_display_name' : Select(attrs={'class':'form-control input-sm',}, choices = USER_NAME_ON_TEMPLATE),
             'user_custom_name' : TextInput(attrs={'class':'form-control input-sm',}),
+            'billing_address' : Select(attrs={'class':'form-control input-sm','required':'true'}, ),
         }
 
 
