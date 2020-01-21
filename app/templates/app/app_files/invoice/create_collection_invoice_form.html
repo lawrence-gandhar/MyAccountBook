@@ -6,9 +6,18 @@
                 {% csrf_token %}
                 <div class="card-header bg-blue">
                     <h5 class="card-title"> 
-                            COLLECTION - INVOICE CREATION
+                            COLLECTION - INVOICE
                         </h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Add Invoice against a Collection</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Invoice against a Collection : C-0000{{collections.id}}</h6>
+                    <p>
+                        <div style="color:#FFFFFF">Select Template &nbsp; 
+                            <select id="template_design">
+                                {% for i in invoice_templates %}
+                                    <option value="{{i.id}}">{{i.template_name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </p>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -21,9 +30,9 @@
                                                 <img src="{% static 'images/logo3.jpg' %}" class="img-responsive">
                                             </div>
                                             <div class="col-8" style="text-align:right;">
-                                                <p>{{user.username}}</p>
-                                                <p>abc@xyz.com</p>
-                                                <p>+91 90008784664</p>
+                                                <p>{{ template_username}}</p>
+                                                <p>{{ template_email }}</p>
+                                                <p>{{ template_phone }}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -41,23 +50,25 @@
                                                 </thead> 
                                                 <tbody>
                                                     <tr>
-                                                        <td>User Address</td>
+                                                        <td><strong>{{ template_username}}, <br/> {{user_billing_address|safe}}</strong></td>
                                                         <td>Billing Address & Shipping Address of Contact</td>
                                                     </tr>
                                                 </tbody>                               
                                             </table>
                                         </div>
                                         <div class="col-12" style="padding-top:30px">
-                                            <h5>ITEMS/RECORDS</h5>
+                                            <h5>ITEMS</h5>
                                         </div>
                                         <div class="col-12" style="padding-top:10px">
                                             <table id="data_bar">
                                                 <thead>
                                                     <th scope="col" width="100px" class="text-center">Sl. No.</th>
+                                                    <th scope="col" width="100px" class="text-center">SKU/UID</th>
                                                     <th scope="col" class="text-center">Description</th>
                                                     <th scope="col" width="100px" class="text-center">Quantity</th>
-                                                    <th scope="col" width="150px" class="text-center">Unit Price</th>
-                                                    <th scope="col" width="150px" class="text-center">Total</th>
+                                                    <th scope="col" width="150px" class="text-center">Unit. Price</th>
+                                                    <th scope="col" width="150px" class="text-center">Discount</th>
+                                                    <th scope="col" width="150px" class="text-center">Amount</th>
                                                 </thead> 
                                                 <tbody>
                                                     <tr>
@@ -66,41 +77,86 @@
                                                         <td></td>
                                                         <td></td>
                                                         <td></td>
+                                                        <td></td>
+                                                        <td></td>
                                                     </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-12" style="padding-top:30px">
+                                            <h5>COLLECTION/PAYMENT HISTORY</h5>
+                                        </div>
+                                        <div class="col-12" style="padding-top:10px">
+                                            <table id="data_bar">
+                                                <thead>
+                                                    <th scope="col" width="100px" class="text-center">Sl. No.</th>
+                                                    <th scope="col" width="100px" class="text-center">C-UID</th>
+                                                    <th scope="col" class="text-center">Description</th>
+                                                    <th scope="col" width="100px" class="text-center">Due Date</th>
+                                                    <th scope="col" width="150px" class="text-center">Status</th>
+                                                    <th scope="col" width="150px" class="text-center">Collection Date</th>
+                                                    <th scope="col" width="150px" class="text-center">Amount</th>
+                                                </thead> 
+                                                <tbody>
                                                     <tr>
-                                                        <td colspan="4" style="text-align:right">SUB TOTAL</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-12" style="padding-top:30px">
+                                            <h5></h5>
+                                        </div>       
+                                        <div class="col-12" style="padding-top:10px">
+                                            <table id="data_bar">
+                                                <thead>
+                                                    <th colspan="3" scope="col">TRANSACTION DETAILS</th>
+                                                    <th scope="col" width="100px" class="text-center"></th>
+                                                    <th scope="col" width="150px" class="text-center"></th>
+                                                    <th scope="col" width="150px" class="text-center"></th>
+                                                    <th scope="col" width="150px" class="text-center"></th>
+                                                </thead> 
+                                                <tbody>
+                                                    <tr>
+                                                        <td colspan="6" style="text-align:right">SUB TOTAL</td>
                                                         <td></td>
                                                     </tr>
                                                     <tr>
-                                                        <td colspan="4" style="text-align:right">GST</td>
+                                                        <td colspan="6" style="text-align:right">GST</td>
                                                         <td></td>
                                                     </tr>
                                                     <tr>
-                                                        <td colspan="4" style="text-align:right">CGST</td>
+                                                        <td colspan="6" style="text-align:right">CGST</td>
                                                         <td></td>
                                                     </tr>
                                                     <tr>
-                                                        <td colspan="4" style="text-align:right">IGST</td>
+                                                        <td colspan="6" style="text-align:right">IGST</td>
                                                         <td></td>
                                                     </tr>
                                                     <tr>
-                                                        <td colspan="4" style="text-align:right">SHIPPING</td>
+                                                        <td colspan="6" style="text-align:right">SHIPPING</td>
                                                         <td></td>
                                                     </tr>
                                                     <tr>
-                                                        <td colspan="4" style="text-align:right">DISCOUNT/DEDUCTION</td>
+                                                        <td colspan="6" style="text-align:right">DISCOUNT/DEDUCTION</td>
                                                         <td></td>
                                                     </tr>
                                                     <tr>
-                                                        <td colspan="4" style="text-align:right">PAYMENTS</td>
+                                                        <td colspan="6" style="text-align:right">PAYMENTS</td>
                                                         <td></td>
                                                     </tr>
                                                     <tr>
-                                                        <td colspan="4" style="text-align:right">BALANCE</td>
+                                                        <td colspan="6" style="text-align:right">BALANCE</td>
                                                         <td></td>
                                                     </tr>
                                                     <tr>
-                                                        <td colspan="4" style="text-align:right">TOTAL AMOUNT</td>
+                                                        <td colspan="6" style="text-align:right">TOTAL AMOUNT</td>
                                                         <td></td>
                                                     </tr>                                    
                                                 </tbody>                               

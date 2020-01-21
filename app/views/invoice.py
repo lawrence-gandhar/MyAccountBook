@@ -4,10 +4,11 @@ from django.views import View
 from collections import OrderedDict, defaultdict
 from django.contrib import messages
 
-from app.models.invoice_model import Invoice
+from app.models.invoice_model import *
 from app.models.collects_model import *
 from app.forms.invoice_forms import *
 
+from app.other_constants import country_list
 
 import json
 
@@ -50,9 +51,7 @@ class InvoiceDesigner(View):
     # Custom CSS/JS Files For Inclusion into template
     data["css_files"] = []
     data["js_files"] = ['custom_files/js/design_template.js']
-
-    
-    
+  
     def get(self, request, *args, **kwargs):
 
         #
@@ -122,8 +121,6 @@ def manage_invoice_designs(request):
     data["designs"] = Invoice_Templates.objects.filter(user = request.user)
 
     return render(request, template_name, data)
-
-
 
 
 #=====================================================================================
@@ -196,9 +193,6 @@ class CreateCollectionInvoice(View):
     data["css_files"] = []
     data['js_files'] = ['custom_files/js/design_template.js']
 
-    # Initialize Forms
-    data["invoice__template_design_form"] = ''
-
     #
     #
     #
@@ -206,17 +200,86 @@ class CreateCollectionInvoice(View):
 
         ins = int(self.kwargs['ins'])
 
+        inv = Invoice_Templates.objects.filter(user = request.user)
+        inv_details = inv.values()[0]
+
+        #
+        # Profile & Address Details
+        #
+
+        profile = Profile.objects.get(user = request.user)
+
+        #
+        # USER - FIRSTNAME & LASTNAME
+        #
+        self.data["template_username"] = ""
+
+        if inv_details["user_display_name"]:
+            self.data["template_username"] = request.user.first_name.upper()+" "+request.user.last_name.upper()
+        else:
+            self.data["template_username"] = inv_details["user_custom_name"]
+
+        #
+        # EMAIL ON TEMPLATE
+        #
+        self.data["template_email"] = ""
+
+        if inv_details["user_email"] is not None:
+            if inv_details["user_email"] == 'official_email':
+                self.data["template_email"] = profile.official_email
+            else:
+                self.data["template_email"] = profile.personal_email
+        else:
+            if request.user.email is not None: 
+                self.data["template_email"] = request.user.email   
+
+        self.data["invoice_templates"] = inv.values('id', 'template_name')
+
         try:
             collect = Collections.objects.get(pk = ins)
         except:
             return redirect('/unauthorized/', permanent = True)
 
+        #
+        # PHONE ON TEMPLATE
+        #
+        self.data["template_phone"] = ""
+
+        if inv_details["user_phone"] is not None:
+            if inv_details["user_phone"] == 'official_phone':
+                self.data["template_phone"] = profile.official_phone
+            else:
+                self.data["template_phone"] = profile.personal_phone
+
+        #
+        # BILLING ADDRESS OF USER ON THE TEMPLATE 
+        #
+        self.data["user_billing_address"] = []
+
+        if inv_details["billing_address_id"] is not None:
+            
+            try:
+                billing_address = User_Address_Details.objects.get(user = request.user, pk = inv_details["billing_address_id"])
+                self.data["user_billing_address"].append(billing_address.flat_no)
+                self.data["user_billing_address"].append(billing_address.street)
+                self.data["user_billing_address"].append(billing_address.city+" - "+billing_address.pincode)
+                self.data["user_billing_address"].append(billing_address.state)
+                self.data["user_billing_address"].append(country_list.COUNTRIES_LIST_DICT[billing_address.country])
+            except:    
+                pass
+
+            self.data["user_billing_address"] = ',<br>'.join(self.data["user_billing_address"]).upper()
+
+
         self.data["contact_details"] = Contacts.objects.get(pk = collect.contact.id)
         self.data["collections"] = collect
         self.data["partial_collections"] = CollectPartial.objects.filter(collect_part = collect)
-
+        
         return render(request, self.template_name, self.data)
 
     #
     # 
     #     
+    def post(self, request, *args, **kwargs):
+        ins = int(self.kwargs['ins'])
+
