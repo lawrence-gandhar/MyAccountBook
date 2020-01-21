@@ -193,6 +193,17 @@ class CreateCollectionInvoice(View):
     data["css_files"] = []
     data['js_files'] = ['custom_files/js/design_template.js']
 
+    data["balance_amount"] = 0.00
+    data["paid_amount"] = 0.00
+    data["discount"] = 0.00
+    data["gst"] = 0.00
+    data["igst"] = 0.00
+    data["cgst"] = 0.00
+    data["sgst"] = 0.00
+    data["total_gst"] = 0.00
+    data["shipping"] = 0.00
+    data["total_amount"] = 0.00
+
     #
     #
     #
@@ -275,6 +286,22 @@ class CreateCollectionInvoice(View):
         self.data["collections"] = collect
         self.data["partial_collections"] = CollectPartial.objects.filter(collect_part = collect)
         
+        #
+        # AMOUNTS CALCULATIONS
+        #
+        total_paid_qset = self.data["partial_collections"].filter(collection_status = 2).values()
+
+        paid = 0
+        for record in total_paid_qset:
+            if record["collection_status"] == 2:
+                paid += record["amount"]
+
+        balance_check = paid - collect.amount
+
+        self.data["balance_amount"] += collect.amount - paid
+        self.data["paid_amount"] = paid 
+        self.data["total_amount"] = balance_check
+
         return render(request, self.template_name, self.data)
 
     #
