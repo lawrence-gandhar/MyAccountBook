@@ -281,7 +281,6 @@ class CreateCollectionInvoice(View):
 
             self.data["user_billing_address"] = ',<br>'.join(self.data["user_billing_address"]).upper()
 
-
         self.data["contact_details"] = Contacts.objects.get(pk = collect.contact.id)
         self.data["collections"] = collect
         self.data["partial_collections"] = CollectPartial.objects.filter(collect_part = collect)
