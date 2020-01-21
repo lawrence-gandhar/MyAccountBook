@@ -282,6 +282,39 @@ class CreateCollectionInvoice(View):
             self.data["user_billing_address"] = ',<br>'.join(self.data["user_billing_address"]).upper()
 
         self.data["contact_details"] = Contacts.objects.get(pk = collect.contact.id)
+
+        #
+        # CONTACT BILLING & SHIPPING DETAILS
+        #
+        self.data["contact_billing_address"] = []
+        self.data["contact_shipping_address"] = []
+
+        try:
+            contact_billing_address = Contact_Addresses.objects.get(contact = self.data["contact_details"], is_billing_address = True)
+            contact_shipping_address = Contact_Addresses.objects.get(contact = self.data["contact_details"], is_shipping_address = True)
+
+            self.data["contact_billing_address"].append(contact_billing_address.contact_name)
+            self.data["contact_billing_address"].append(contact_billing_address.flat_no)
+            self.data["contact_billing_address"].append(contact_billing_address.street)
+            self.data["contact_billing_address"].append(contact_billing_address.city+" - "+contact_billing_address.pincode)
+            self.data["contact_billing_address"].append(contact_billing_address.state)
+            self.data["contact_billing_address"].append(country_list.COUNTRIES_LIST_DICT[contact_billing_address.country])
+            #                
+            self.data["contact_shipping_address"].append(contact_billing_address.contact_name)
+            self.data["contact_shipping_address"].append(contact_billing_address.flat_no)
+            self.data["contact_shipping_address"].append(contact_billing_address.street)
+            self.data["contact_shipping_address"].append(contact_billing_address.city+" - "+contact_billing_address.pincode)
+            self.data["contact_shipping_address"].append(contact_billing_address.state)
+            self.data["contact_shipping_address"].append(country_list.COUNTRIES_LIST_DICT[contact_billing_address.country])
+        except:
+            pass
+
+        self.data["contact_billing_address"] = ',<br>'.join(self.data["contact_billing_address"]).upper()
+        self.data["contact_shipping_address"] = ',<br>'.join(self.data["contact_shipping_address"]).upper()
+
+        #
+        # COLLECTION DETAILS
+        #
         self.data["collections"] = collect
         self.data["partial_collections"] = CollectPartial.objects.filter(collect_part = collect)
         
@@ -297,7 +330,7 @@ class CreateCollectionInvoice(View):
 
         balance_check = paid - collect.amount
 
-        self.data["balance_amount"] += collect.amount - paid
+        self.data["balance_amount"] = collect.amount - paid
         self.data["paid_amount"] = paid 
         self.data["total_amount"] = balance_check
 
