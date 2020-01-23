@@ -59,7 +59,7 @@ class InvoiceDesignerForm(ModelForm):
 class InvoiceForm(ModelForm):
     class Meta:
 
-        model = Invoice
+        model = InvoiceModel
         fields = (
                     'service_recipient', 'provider_state_code', 'recipient_state_code', 
                     'sac_code', 'service_description', 'cgst', 'igst', 'sgst', 'total_gst', 'shipping', 'discount',

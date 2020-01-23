@@ -32,7 +32,7 @@ class Invoice(View):
     data["js_files"] = []
 
     def get(self, request, *args, **kwargs):
-        data["invoice_list"] = Invoice.objects.filter(service_provider = request.user)
+        self.data["invoice_list"] = InvoiceModel.objects.filter(service_provider = request.user)
         return render(request, self.template_name, self.data)
 
 #=====================================================================================

@@ -144,7 +144,7 @@ class Invoice_Templates(models.Model):
 #   INVOICE MODEL
 #==========================================================================
 
-class Invoice(models.Model):
+class InvoiceModel(models.Model):
 
     invoice_template = models.ForeignKey(
         Invoice_Templates,
