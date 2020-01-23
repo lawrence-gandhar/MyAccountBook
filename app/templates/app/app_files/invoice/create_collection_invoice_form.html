@@ -11,7 +11,7 @@
                     <h6 class="card-subtitle mb-2 text-muted">Invoice against a Collection : C-0000{{collections.id}}</h6>
                     <p>
                         <div style="color:#FFFFFF">Select Template &nbsp; 
-                            <select id="template_design">
+                            <select id="id_template_design" name="template_design">
                                 {% for i in invoice_templates %}
                                     <option value="{{i.id}}">{{i.template_name}}</option>
                                 {% endfor %}

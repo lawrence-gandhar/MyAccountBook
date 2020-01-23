@@ -52,6 +52,11 @@ urlpatterns += [
     path('collections/add_collections/partial/<int:ins>/', never_cache(login_required(collections.AddPartialCollection.as_view())), name = 'add-partial-collections'),
 ]
 
+urlpatterns +=[
+    path('invoice/get_pdf/', never_cache(login_required(invoice.get_pdf)), name = 'get_pdf'),
+    
+] 
+
 #
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -4,6 +4,8 @@ from django.views import View
 from collections import OrderedDict, defaultdict
 from django.contrib import messages
 
+from django.conf import settings
+
 from app.models.invoice_model import *
 from app.models.collects_model import *
 from app.forms.invoice_forms import *
@@ -341,7 +343,7 @@ class CreateCollectionInvoice(View):
 
         #
         # INVOICE FORM
-        #
+        #      
         self.data["invoice_form"] = InvoiceForm()
         return render(request, self.template_name, self.data)
 
@@ -370,5 +372,17 @@ class CreateCollectionInvoice(View):
             obj.service_recipient = contact_details
             obj.collect = collect
             obj.save()
+
             return redirect('/invoice/create_invoice/collections/{}'.format(ins), permanent = False)
         return render(request, self.template_name, self.data)
+
+#
+#
+#
+def get_pdf(request):
+    import pdfkit 
+
+    dest = settings.MEDIA_ROOT+'/pdfs/weasyprint-website.pdf'
+    pdfkit.from_url('http://localhost:8000/invoice/create_invoice/collections/12/',dest)
+
+    return HttpResponse('')
