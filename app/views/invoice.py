@@ -6,6 +6,8 @@ from django.contrib import messages
 
 from django.conf import settings
 
+from django.template.loader import get_template
+
 from app.models.invoice_model import *
 from app.models.collects_model import *
 from app.forms.invoice_forms import *
@@ -380,9 +382,142 @@ class CreateCollectionInvoice(View):
 #
 #
 def get_pdf(request):
-    import pdfkit 
+    
+    # Template 
+    template_name = 'app/app_files/invoice/index.html'
 
-    dest = settings.MEDIA_ROOT+'/pdfs/weasyprint-website.pdf'
-    pdfkit.from_url('http://localhost:8000/invoice/create_invoice/collections/12/',dest)
+    # Initialize 
+    data = defaultdict()
+    data["view"] = ""
+    data["active_link"] = 'Invoice'
+    data["included_template"] = 'app/app_files/invoice/temp_invoice.html'
 
-    return HttpResponse('')
+    # Custom CSS/JS Files For Inclusion into template
+    data["css_files"] = []
+    data["js_files"] = ['custom_files/js/jspdf.js','custom_files/js/html2canvas.js', 'custom_files/js/download_pdf.js']
+
+    ins = 3
+
+    data["invoice"] = InvoiceModel.objects.get(pk = ins)
+
+    collect = Collections.objects.get(pk = data["invoice"].collect.id)
+    data["contact_details"] = Contacts.objects.get(pk = data["invoice"].service_recipient.id)
+    
+    #
+    #   INVOICE TEMPLATE DETAILS
+    #
+    inv = Invoice_Templates.objects.filter(user = request.user)
+    inv_details = inv.values()[0]
+
+    #
+    # Profile & Address Details
+    #
+
+    profile = Profile.objects.get(user = request.user)
+
+    #
+    # USER - FIRSTNAME & LASTNAME
+    #
+    data["template_username"] = ""
+
+    if inv_details["user_display_name"]:
+        data["template_username"] = request.user.first_name.upper()+" "+request.user.last_name.upper()
+    else:
+        data["template_username"] = inv_details["user_custom_name"]
+
+    #
+    # CONTACT - FIRSTNAME & LASTNAME
+    #
+    data["template_contact_name"] = data["contact_details"].contact_name.upper()
+    
+    #
+    # EMAIL ON TEMPLATE
+    #
+    data["template_email"] = ""
+
+    if inv_details["user_email"] is not None:
+        if inv_details["user_email"] == 'official_email':
+            data["template_email"] = profile.official_email
+        else:
+            data["template_email"] = profile.personal_email
+    else:
+        if request.user.email is not None: 
+            data["template_email"] = request.user.email   
+
+    data["invoice_templates"] = inv.values('id', 'template_name')
+
+    #
+    # PHONE ON TEMPLATE
+    #
+    data["template_phone"] = ""
+
+    if inv_details["user_phone"] is not None:
+        if inv_details["user_phone"] == 'official_phone':
+            data["template_phone"] = profile.official_phone
+        else:
+            data["template_phone"] = profile.personal_phone
+
+    #
+    # BILLING ADDRESS OF USER ON THE TEMPLATE 
+    #
+    data["user_billing_address"] = []
+
+    if inv_details["billing_address_id"] is not None:
+        
+        try:
+            billing_address = User_Address_Details.objects.get(user = request.user, pk = inv_details["billing_address_id"])
+            data["user_billing_address"].append(billing_address.flat_no)
+            data["user_billing_address"].append(billing_address.street)
+            data["user_billing_address"].append(billing_address.city+" - "+billing_address.pincode)
+            data["user_billing_address"].append(billing_address.state)
+            data["user_billing_address"].append(country_list.COUNTRIES_LIST_DICT[billing_address.country])
+        except:    
+            pass
+
+    data["user_billing_address"] = ',<br>'.join(data["user_billing_address"]).upper()
+
+    #
+    # CONTACT BILLING & SHIPPING DETAILS
+    #
+    data["contact_shipping_address"] = []
+
+    try:
+        contact_shipping_address = Contact_Addresses.objects.get(contact = data["contact_details"], is_shipping_address = True)
+            
+        data["contact_shipping_address"].append(contact_billing_address.contact_name)
+        data["contact_shipping_address"].append(contact_billing_address.flat_no)
+        data["contact_shipping_address"].append(contact_billing_address.street)
+        data["contact_shipping_address"].append(contact_billing_address.city+" - "+contact_billing_address.pincode)
+        data["contact_shipping_address"].append(contact_billing_address.state)
+        data["contact_shipping_address"].append(country_list.COUNTRIES_LIST_DICT[contact_billing_address.country])
+    except:
+        pass
+
+    data["contact_shipping_address"] = ',<br>'.join(data["contact_shipping_address"]).upper()
+
+    #
+    # COLLECTION DETAILS
+    #
+    data["collections"] = collect
+    data["partial_collections"] = CollectPartial.objects.filter(collect_part = collect)
+    
+    #
+    # AMOUNTS CALCULATIONS
+    #
+    total_paid_qset = data["partial_collections"].filter(collection_status = 2).values()
+
+    paid = 0
+    for record in total_paid_qset:
+        if record["collection_status"] == 2:
+            paid += record["amount"]
+
+    if collect.collection_status == 3:
+        data["paid_amount"] = collect.amount
+    else:
+        balance_amount = collect.amount - paid
+        if balance_amount > 0 :
+            data["balance_amount"] = balance_amount
+        else:
+            data["paid_amount"] = paid 
+
+    return render(request, template_name, data)

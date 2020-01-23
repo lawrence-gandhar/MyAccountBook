@@ -398,24 +398,24 @@ input[type="checkbox"]:after{
 }
 #address_bar td { 
   width: 50%; 
-  border: 1px #000000 solid ;
+  border: 2px #000000 solid ;
   padding: 10px ;
 }
 #address_bar th { 
   width: 50%; 
-  border: 1px #000000 solid ;
+  border: 2px #000000 solid ;
   padding: 10px ;
   font-size:12px;
 }
 
 #data_bar td { 
-  border: 1px #000000 solid ;
+  border: 2px #000000 solid ;
   padding: 10px ;
   color:#000000;
 }
 
 #data_bar th { 
-  border: 1px #000000 solid ;
+  border: 2px #000000 solid ;
   padding: 10px ;
   background-color: rgb(0, 0, 0);
   color:#FFFFFF;
@@ -474,4 +474,8 @@ button.color-button{
 .th_grey{
   background-color: rgb(99, 99, 99);
   color:#FFFFFF;
+}
+
+td {
+  vertical-align: top !important;
 }
