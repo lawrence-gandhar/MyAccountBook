@@ -50,10 +50,10 @@
                                                 </thead> 
                                                 <tbody>
                                                     <tr>
-                                                        <td><strong>{{ template_username}}, <br/> {{user_billing_address|safe}}</strong></td>
+                                                        <td><strong>{{ template_username}}<br/> {{user_billing_address|safe}}</strong></td>
                                                         <td>
                                                             <strong>
-                                                            <p>{{ contact_shipping_address|safe }}</p>
+                                                            <p>{{template_contact_name}}<br/>{{ contact_shipping_address|safe }}</p>
                                                             </strong>
                                                         </td>
                                                     </tr>
@@ -157,6 +157,10 @@
                                                     <tr>
                                                         <td colspan="6" style="text-align:right">GST</td>
                                                         <td>{{invoice_form.total_gst}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="6" style="text-align:right">SGST</td>
+                                                        <td>{{invoice_form.sgst}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td colspan="6" style="text-align:right">CGST</td>

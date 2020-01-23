@@ -25,12 +25,14 @@ class Invoice(View):
     data = defaultdict()
     data["view"] = ""
     data["active_link"] = 'Invoice'
+    data["included_template"] = 'app/app_files/invoice/manage_invoices.html'
 
     # Custom CSS/JS Files For Inclusion into template
     data["css_files"] = []
     data["js_files"] = []
 
-    def get(self, request):
+    def get(self, request, *args, **kwargs):
+        data["invoice_list"] = Invoice.objects.filter(service_provider = request.user)
         return render(request, self.template_name, self.data)
 
 #=====================================================================================
@@ -57,7 +59,7 @@ class InvoiceDesigner(View):
         #
         #   USER PHONE LIST
         #
-        records = Profile.objects.filter(user = self.request.user)
+        records = Profile.objects.filter(user = request.user)
             
         phone_records = records.values('official_phone', 'personal_phone', 'alternative_phone')    
         PHONE_NUMBERS = []
@@ -210,6 +212,19 @@ class CreateCollectionInvoice(View):
 
         ins = int(self.kwargs['ins'])
 
+        try:
+            collect = Collections.objects.get(pk = ins)
+        except:
+            return redirect('/unauthorized/', permanent = True)
+
+        try:
+            self.data["contact_details"] = Contacts.objects.get(pk = collect.contact.id)
+        except:
+            return redirect('/unauthorized/', permanent = True)
+
+        #
+        #   INVOICE TEMPLATE DETAILS
+        #
         inv = Invoice_Templates.objects.filter(user = request.user)
         inv_details = inv.values()[0]
 
@@ -230,6 +245,11 @@ class CreateCollectionInvoice(View):
             self.data["template_username"] = inv_details["user_custom_name"]
 
         #
+        # CONTACT - FIRSTNAME & LASTNAME
+        #
+        self.data["template_contact_name"] = self.data["contact_details"].contact_name.upper()
+        
+        #
         # EMAIL ON TEMPLATE
         #
         self.data["template_email"] = ""
@@ -244,11 +264,6 @@ class CreateCollectionInvoice(View):
                 self.data["template_email"] = request.user.email   
 
         self.data["invoice_templates"] = inv.values('id', 'template_name')
-
-        try:
-            collect = Collections.objects.get(pk = ins)
-        except:
-            return redirect('/unauthorized/', permanent = True)
 
         #
         # PHONE ON TEMPLATE
@@ -278,27 +293,16 @@ class CreateCollectionInvoice(View):
             except:    
                 pass
 
-            self.data["user_billing_address"] = ',<br>'.join(self.data["user_billing_address"]).upper()
-
-        self.data["contact_details"] = Contacts.objects.get(pk = collect.contact.id)
+        self.data["user_billing_address"] = ',<br>'.join(self.data["user_billing_address"]).upper()
 
         #
         # CONTACT BILLING & SHIPPING DETAILS
         #
-        self.data["contact_billing_address"] = []
         self.data["contact_shipping_address"] = []
 
         try:
-            contact_billing_address = Contact_Addresses.objects.get(contact = self.data["contact_details"], is_billing_address = True)
             contact_shipping_address = Contact_Addresses.objects.get(contact = self.data["contact_details"], is_shipping_address = True)
-
-            self.data["contact_billing_address"].append(contact_billing_address.contact_name)
-            self.data["contact_billing_address"].append(contact_billing_address.flat_no)
-            self.data["contact_billing_address"].append(contact_billing_address.street)
-            self.data["contact_billing_address"].append(contact_billing_address.city+" - "+contact_billing_address.pincode)
-            self.data["contact_billing_address"].append(contact_billing_address.state)
-            self.data["contact_billing_address"].append(country_list.COUNTRIES_LIST_DICT[contact_billing_address.country])
-            #                
+             
             self.data["contact_shipping_address"].append(contact_billing_address.contact_name)
             self.data["contact_shipping_address"].append(contact_billing_address.flat_no)
             self.data["contact_shipping_address"].append(contact_billing_address.street)
@@ -308,7 +312,6 @@ class CreateCollectionInvoice(View):
         except:
             pass
 
-        self.data["contact_billing_address"] = ',<br>'.join(self.data["contact_billing_address"]).upper()
         self.data["contact_shipping_address"] = ',<br>'.join(self.data["contact_shipping_address"]).upper()
 
         #
@@ -347,15 +350,25 @@ class CreateCollectionInvoice(View):
     #     
     def post(self, request, *args, **kwargs):
         ins = int(self.kwargs['ins'])
+        self.data["invoice_form"] = InvoiceForm()
+
+        try:
+            collect = Collections.objects.get(pk = ins)
+        except:
+            return redirect('/unauthorized/', permanent = True)
+
+        try:
+            contact_details = Contacts.objects.get(pk = collect.contact.id)
+        except:
+            return redirect('/unauthorized/', permanent = True)
 
         invoice_form = InvoiceForm(request.POST or None)
 
         if invoice_form.is_valid():
-            invoice_form.save(commit = False)
-            invoice_form.service_provider = request.user
-            invoice_form.service_recipient
-
-            #invoice_form.recipient_billing_address = 
-            #invoice_form.recipient_billing_address = 
-
+            obj = invoice_form.save()
+            obj.service_provider = request.user
+            obj.service_recipient = contact_details
+            obj.collect = collect
+            obj.save()
+            return redirect('/invoice/create_invoice/collections/{}'.format(ins), permanent = False)
         return render(request, self.template_name, self.data)
