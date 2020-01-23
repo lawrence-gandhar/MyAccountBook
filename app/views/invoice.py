@@ -232,6 +232,8 @@ class CreateCollectionInvoice(View):
         inv = Invoice_Templates.objects.filter(user = request.user)
         inv_details = inv.values()[0]
 
+        self.data["template_logo"] = inv_details["logo"]
+
         #
         # Profile & Address Details
         #
