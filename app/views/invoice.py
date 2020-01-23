@@ -89,7 +89,6 @@ class InvoiceDesigner(View):
 
     def post(self, request, *args, **kwargs):
         form = InvoiceDesignerForm(request.user, request.POST, request.FILES or None)
-        print(form.errors)
         if form.is_valid():
             obj = form.save(commit = False)
             obj.user = request.user
@@ -328,12 +327,16 @@ class CreateCollectionInvoice(View):
             if record["collection_status"] == 2:
                 paid += record["amount"]
 
-        balance_check = paid - collect.amount
+        print(collect.amount - paid)
 
-        self.data["balance_amount"] = collect.amount - paid
+        if collect.amount - paid > 0 and collect.collection_status != 3:
+            self.data["balance_amount"] = collect.amount - paid
         self.data["paid_amount"] = paid 
-        self.data["total_amount"] = balance_check
 
+        #
+        # INVOICE FORM
+        #
+        self.data["invoice_form"] = InvoiceForm()
         return render(request, self.template_name, self.data)
 
     #
