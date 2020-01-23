@@ -170,29 +170,25 @@ class Invoice(models.Model):
         blank = True,
     )
 
-    recipient_billing_address = models.CharField(
-        max_length = 10,
+    recipient_billing_address = models.IntegerField(
         blank = True,
         null = True,
         db_index = True,
     )
 
-    recipient_shipping_address = models.CharField(
-        max_length = 10,
+    recipient_shipping_address = models.IntegerField(
         blank = True,
         null = True,
         db_index = True,
     )
 
-    provider_billing_address = models.CharField(
-        max_length = 10,
+    provider_billing_address = models.IntegerField(
         blank = True,
         null = True,
         db_index = True,
     )
 
-    provider_shipping_address = models.CharField(
-        max_length = 10,
+    provider_shipping_address = models.IntegerField(
         blank = True,
         null = True,
         db_index = True,
@@ -207,27 +203,6 @@ class Invoice(models.Model):
 
     recipient_state_code = models.CharField(
         max_length = 10,
-        null = True,
-        blank = True,
-        db_index = True,
-    ) 
-
-    provider_gstin = models.CharField(
-        max_length = 30,
-        null = True,
-        blank = True,
-        db_index = True,
-    ) 
-
-    recipient_gstin = models.CharField(
-        max_length = 30,
-        null = True,
-        blank = True,
-        db_index = True,
-    ) 
-
-    provider_pan = models.CharField(
-        max_length = 20,
         null = True,
         blank = True,
         db_index = True,
@@ -253,11 +228,6 @@ class Invoice(models.Model):
         on_delete = models.CASCADE,
     ) 
 
-    total_amount = models.FloatField(
-        default = 0,
-        db_index = True,
-    )
-
     cgst = models.FloatField(
         default = 0,
         db_index = True,
@@ -274,11 +244,6 @@ class Invoice(models.Model):
     )
 
     total_gst = models.FloatField(
-        default = 0,
-        db_index = True,
-    )
-
-    total_amount_after_tax = models.FloatField(
         default = 0,
         db_index = True,
     )
