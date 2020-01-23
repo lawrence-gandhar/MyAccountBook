@@ -327,11 +327,14 @@ class CreateCollectionInvoice(View):
             if record["collection_status"] == 2:
                 paid += record["amount"]
 
-        print(collect.amount - paid)
-
-        if collect.amount - paid > 0 and collect.collection_status != 3:
-            self.data["balance_amount"] = collect.amount - paid
-        self.data["paid_amount"] = paid 
+        if collect.collection_status == 3:
+            self.data["paid_amount"] = collect.amount
+        else:
+            balance_amount = collect.amount - paid
+            if balance_amount > 0 :
+                self.data["balance_amount"] = balance_amount
+            else:
+                self.data["paid_amount"] = paid 
 
         #
         # INVOICE FORM
