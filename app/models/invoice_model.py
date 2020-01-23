@@ -248,6 +248,16 @@ class Invoice(models.Model):
         db_index = True,
     )
 
+    shipping = models.IntegerField(
+        default = 0,
+        db_index = True,
+    )
+
+    discount = models.IntegerField(
+        default = 0,
+        db_index = True,
+    )
+
     created_on = models.DateTimeField(
         auto_now = True,
         db_index = True,

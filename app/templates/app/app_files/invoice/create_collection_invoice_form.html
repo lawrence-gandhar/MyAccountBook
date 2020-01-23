@@ -151,6 +151,10 @@
                                                         <td>{{invoice_form.recipient_state_code}}</td>
                                                     </tr>
                                                     <tr>
+                                                        <td colspan="6" style="text-align:right">SAC CODE</td>
+                                                        <td>{{invoice_form.sac_code}}</td>
+                                                    </tr>
+                                                    <tr>
                                                         <td colspan="6" style="text-align:right">GST</td>
                                                         <td>{{invoice_form.total_gst}}</td>
                                                     </tr>
@@ -185,16 +189,15 @@
                                                 </tbody>                               
                                             </table>
                                         </div>
-                                        <div class="col-12 text-center" style="padding-top:30px">
-                                            <p>COMPANY NAME</p>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="card-footer"></div>
+                <div class="card-footer text-center">
+                    <button class="btn button button-green">Save</button>
+                </div>
             </form>
         </div>
     </div>
