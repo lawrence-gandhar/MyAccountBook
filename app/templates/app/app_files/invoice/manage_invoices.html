@@ -28,11 +28,8 @@
                                         <a href="" class="btn btn-primary btn-sm" title="Edit Collection">
                                             <i class="fas fas-fw fa-pencil-alt"></i>
                                         </a>                                        
-                                        <a href="{% url 'add-partial-collections' record.id %}" class="btn button-orange btn-sm" title="View Invoice">
+                                        <a href="{% url 'get_pdf' record.id %}" class="btn button-orange btn-sm" title="View Invoice">
                                             <i class="fas fas-fw fa-eye"></i>
-                                        </a>
-                                        <a href="{% url 'add-partial-collections' record.id %}" class="btn button-black btn-sm" title="Print Invoice">
-                                            <i style="color:#FFFFFF" class="fas fas-fw fa-print"></i>
                                         </a>
                                         <a href="{% url 'add-partial-collections' record.id %}" class="btn button-red btn-sm" title="Delete Invoice">
                                             <i class="fas fas-fw fa-trash-alt"></i>

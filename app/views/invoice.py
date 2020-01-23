@@ -30,6 +30,7 @@ class Invoice(View):
     data["view"] = ""
     data["active_link"] = 'Invoice'
     data["included_template"] = 'app/app_files/invoice/manage_invoices.html'
+    data["breadcrumb_title"] = 'INVOICE'
 
     # Custom CSS/JS Files For Inclusion into template
     data["css_files"] = []
@@ -143,6 +144,7 @@ class CreateInvoice(View):
 
     # Set link as active in menubar
     data["active_link"] = 'Invoice'
+    data["breadcrumb_title"] = 'INVOICE'
 
     # Custom CSS/JS Files For Inclusion into template
     data["css_files"] = []
@@ -383,8 +385,11 @@ class CreateCollectionInvoice(View):
 #
 #
 #
-def get_pdf(request):
+def get_pdf(request, ins = None):
     
+    if ins is None:
+        return redirect('/unauthorized/', permanent = True)
+
     # Template 
     template_name = 'app/app_files/invoice/index.html'
 
@@ -408,8 +413,6 @@ def get_pdf(request):
     data["total_gst"] = 0.00
     data["shipping"] = 0.00
     data["total_amount"] = 0.00
-
-    ins = 3
 
     data["invoice"] = InvoiceModel.objects.get(pk = ins)
 

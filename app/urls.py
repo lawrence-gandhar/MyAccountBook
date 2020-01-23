@@ -53,7 +53,7 @@ urlpatterns += [
 ]
 
 urlpatterns +=[
-    path('invoice/get_pdf/', never_cache(login_required(invoice.get_pdf)), name = 'get_pdf'),
+    path('invoice/get_pdf/<int:ins>/', never_cache(login_required(invoice.get_pdf)), name = 'get_pdf'),
     
 ] 
 

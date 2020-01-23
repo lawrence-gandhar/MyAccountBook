@@ -17,7 +17,7 @@
                                 <div class="card-header template_header">
                                     <div class="row">
                                         <div class="col-4" style="padding:0px 5px">
-                                            <img src="{% 'media/logos/logo3.jpg' %}" class="img-responsive">
+                                            <img src="/media/{{invoice.invoice_template.logo}}" class="img-responsive">
                                         </div>
                                         <div class="col-8" style="text-align:right;">
                                             <p>{{ template_username}}</p>
@@ -28,9 +28,9 @@
                                 </div>
                                 <div class="card-body template_body_green" id="template_body">
                                     <div class="col-12">
-                                        <h3 style="padding-top:10px">Invoice No.: INV-0000{{invoice.id}}</h3>
-                                        <h5>16th January, 2020</h5>
-                                        <h5>Payment Collected/Due Date: <span style="color:#FF0000">20th January, 2020</span></h5>
+                                        <h3 style="padding-top:20px">Invoice No.: INV-0000{{invoice.id}}
+                                        <h5>{{invoice.created_on}}</h5>
+                                        <h5 style="padding-bottom:20px">Payment Collected/Due Date: <span style="color:#FF0000">{{invoice.collect.collection_date}}</span></h5 style="padding-top:20px">
                                     </div>
                                     <div class="col-12" style="padding-top:10px">
                                         <table id="address_bar" class="th_green">

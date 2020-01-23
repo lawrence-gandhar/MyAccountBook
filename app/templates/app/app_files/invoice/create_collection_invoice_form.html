@@ -10,10 +10,10 @@
                         </h5>
                     <h6 class="card-subtitle mb-2 text-muted">Invoice against a Collection : C-0000{{collections.id}}</h6>
                     <p>
-                        <div style="color:#FFFFFF">Select Template &nbsp; 
-                            <select id="id_template_design" name="template_design">
+                        <div style="color:#FFFFFF">
+                            <select id="id_template_design" name="template_design" class="form-control col-md-3" style="display:inline-block">
                                 {% for i in invoice_templates %}
-                                    <option value="{{i.id}}">{{i.template_name}}</option>
+                                    <option value="{{i.id}}">{{i.template_name|upper}}</option>
                                 {% endfor %}
                             </select>
                         </div>
@@ -38,9 +38,9 @@
                                     </div>
                                     <div class="card-body template_body_green" id="template_body">
                                         <div class="col-12">
-                                            <h3 style="padding-top:10px">Invoice No.: 00018776</h3>
+                                            <h3 style="padding-top:20px">Invoice No.: 00018776 <small>(sample data)</small></h3>
                                             <h5>16th January, 2020</h5>
-                                            <h5>Payment Collected/Due Date: <span style="color:#FF0000">20th January, 2020</span></h5>
+                                            <h5 style="padding-bottom:20px">Payment Collected/Due Date: <span style="color:#FF0000">20th January, 2020</span></h5 style="padding-top:20px">
                                         </div>
                                         <div class="col-12" style="padding-top:10px">
                                             <table id="address_bar" class="th_green">
@@ -189,7 +189,30 @@
                                                     <tr>
                                                         <td colspan="6" style="text-align:right">TOTAL AMOUNT</td>
                                                         <td>{{total_amount}}</td>
-                                                    </tr>                                    
+                                                    </tr>  
+                                                    <tr>
+                                                        <td colspan="6" style="text-align:left; background-color:#000000; color:#FFFFFF; font-weight:bold;">
+                                                            NOTES
+                                                        </td>
+                                                        <td style="text-align:center;background-color:#000000; color:#FFFFFF; font-weight:bold;">
+                                                            SIGNATURE
+                                                        </td>
+                                                    </tr> 
+                                                    <tr>
+                                                        <td colspan="6" style="text-align:left; height:100px;">
+                                                            {{notes}}
+                                                        </td>
+                                                        <td style="text-align:left; height:100px;">
+                                                            {{notes}}
+                                                        </td>
+                                                    </tr>   
+                                                    <tr>
+                                                        <td colspan="7" style="text-align:center; background-color:#000000; color:#FFFFFF">
+                                                            <strong>
+                                                                INVOICE ID - Creation Date
+                                                            </strong>                                                        
+                                                        </td>
+                                                    </tr>                                   
                                                 </tbody>                               
                                             </table>
                                         </div>
