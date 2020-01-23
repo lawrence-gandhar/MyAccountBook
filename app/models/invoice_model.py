@@ -170,30 +170,6 @@ class Invoice(models.Model):
         blank = True,
     )
 
-    recipient_billing_address = models.IntegerField(
-        blank = True,
-        null = True,
-        db_index = True,
-    )
-
-    recipient_shipping_address = models.IntegerField(
-        blank = True,
-        null = True,
-        db_index = True,
-    )
-
-    provider_billing_address = models.IntegerField(
-        blank = True,
-        null = True,
-        db_index = True,
-    )
-
-    provider_shipping_address = models.IntegerField(
-        blank = True,
-        null = True,
-        db_index = True,
-    )
-
     provider_state_code = models.CharField(
         max_length = 10,
         null = True,

@@ -348,3 +348,14 @@ class CreateCollectionInvoice(View):
     def post(self, request, *args, **kwargs):
         ins = int(self.kwargs['ins'])
 
+        invoice_form = InvoiceForm(request.POST or None)
+
+        if invoice_form.is_valid():
+            invoice_form.save(commit = False)
+            invoice_form.service_provider = request.user
+            invoice_form.service_recipient
+
+            #invoice_form.recipient_billing_address = 
+            #invoice_form.recipient_billing_address = 
+
+        return render(request, self.template_name, self.data)

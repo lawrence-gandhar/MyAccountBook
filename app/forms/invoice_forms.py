@@ -61,10 +61,8 @@ class InvoiceForm(ModelForm):
 
         model = Invoice
         fields = (
-                    'service_recipient', 'recipient_billing_address', 'recipient_shipping_address',
-                    'provider_billing_address', 'provider_shipping_address',
-                    'provider_state_code', 'recipient_state_code', 'sac_code', 'service_description', 
-                    'cgst', 'igst', 'sgst', 'total_gst', 'shipping', 'discount',
+                    'service_recipient', 'provider_state_code', 'recipient_state_code', 
+                    'sac_code', 'service_description', 'cgst', 'igst', 'sgst', 'total_gst', 'shipping', 'discount',
                 )
 
         widgets = {
