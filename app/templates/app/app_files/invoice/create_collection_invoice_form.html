@@ -27,7 +27,7 @@
                                     <div class="card-header template_header">
                                         <div class="row">
                                             <div class="col-4" style="padding:0px 5px">
-                                                <img src="{% static 'images/logo3.jpg' %}" class="img-responsive">
+                                                <img src="/media/{{invoice.invoice_template.logo}}" class="img-responsive">
                                             </div>
                                             <div class="col-8" style="text-align:right;">
                                                 <p>{{ template_username}}</p>
@@ -50,7 +50,7 @@
                                                 </thead> 
                                                 <tbody>
                                                     <tr>
-                                                        <td><strong>{{ template_username}}<br/> {{user_billing_address|safe}}</strong></td>
+                                                        <td><strong>{{template_username}}<br/> {{user_billing_address|safe}}</strong></td>
                                                         <td>
                                                             <strong>
                                                             <p>{{template_contact_name}}<br/>{{ contact_shipping_address|safe }}</p>

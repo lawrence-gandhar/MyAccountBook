@@ -396,6 +396,17 @@ def get_pdf(request):
     data["css_files"] = []
     data["js_files"] = ['custom_files/js/jspdf.js','custom_files/js/html2canvas.js', 'custom_files/js/download_pdf.js']
 
+    data["balance_amount"] = 0.00
+    data["paid_amount"] = 0.00
+    data["discount"] = 0.00
+    data["gst"] = 0.00
+    data["igst"] = 0.00
+    data["cgst"] = 0.00
+    data["sgst"] = 0.00
+    data["total_gst"] = 0.00
+    data["shipping"] = 0.00
+    data["total_amount"] = 0.00
+
     ins = 3
 
     data["invoice"] = InvoiceModel.objects.get(pk = ins)
