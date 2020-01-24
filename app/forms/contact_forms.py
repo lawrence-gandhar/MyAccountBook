@@ -1,34 +1,40 @@
 from django.forms import *
 from app.models.contacts_model import *
+from app.other_constants import *
 
 
 class ContactsForm(ModelForm):
     class Meta:
 
-        PAYMENT_DAYS = (
-            (1, 'On Due Date'),
-            (2, '10 Days'),
-            (3, '20 Days'),
-            (4, '30 Days'),
-            (5, '60 Days'),
-            (6, '90 Days'),
-        )
-
         model = Contacts
         fields = (
                     'is_customer', 'is_vendor', 'contact_name', 
-                    'pan', 'tds', 'gstin', 'invoice_terms', 'bills_terms',
+                    'organization_name', 'organization_type',
+                    'business_reg_no', 'pan', 'tds', 'gstin', 'tax_reg_no',
+                    'cst_reg_no', 'preferred_currency', 'opening_balance', 
+                    'preferred_payment_method', 'preferred_delivery', 
+                    'gst_reg_type', 'invoice_terms', 'bills_terms',
                 )
 
         widgets = {
             'is_customer': CheckboxInput(attrs={'class':'input-sm','value':'1',}),
             'is_vendor': CheckboxInput(attrs={'class':'input-sm','value':'1',}),
             'contact_name' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'200'}),
+            'organization_type' : Select(attrs={'class':'form-control input-sm',}, choices = user_constants.ORGANIZATION_TYPE, ),
+            'organization_name' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'200'}),
+            'business_reg_no' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'200'}),
             'pan' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'20'}),
             'tds' : NumberInput(attrs={'class':'form-control input-sm',}),
+            'gst_reg_type' : Select(attrs={'class':'form-control input-sm',}, choices = user_constants.GST_REG_TYPE, ),
             'gstin' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'20'}),
-            'invoice_terms' : Select(attrs={'class':'form-control input-sm',}, choices = PAYMENT_DAYS, ),
-            'bills_terms' : Select(attrs={'class':'form-control input-sm',}, choices = PAYMENT_DAYS, ),
+            'opening_balance' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'20'}),
+            'tax_reg_no' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'20'}),
+            'cst_reg_no' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'20'}),
+            'invoice_terms' : Select(attrs={'class':'form-control input-sm',}, choices = payment_constants.PAYMENT_DAYS, ),
+            'bills_terms' : Select(attrs={'class':'form-control input-sm',}, choices = payment_constants.PAYMENT_DAYS, ),
+            'preferred_currency' : Select(attrs={'class':'form-control input-sm',}, choices = payment_constants.CURRENCY, ),
+            'preferred_payment_method' : Select(attrs={'class':'form-control input-sm',}, choices = payment_constants.PREFERRED_PAYMENT_TYPE, ),
+            'preferred_delivery' : Select(attrs={'class':'form-control input-sm',}, choices = payment_constants.PREFERRED_DELIVERY, ),
         }
 
 class ContactsEmailForm(ModelForm):

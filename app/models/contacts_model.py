@@ -41,6 +41,7 @@ class Contacts(models.Model):
 
     organization_type = models.IntegerField(
         db_index = True,
+        choices = user_constants.ORGANIZATION_TYPE,
         default = 1,
     )
 
@@ -107,10 +108,9 @@ class Contacts(models.Model):
     )
 
     preferred_currency = models.IntegerField(
-        null = True,
-        blank = True,
         db_index = True,
         choices = payment_constants.CURRENCY,
+        default = 1,
     )
 
     opening_balance = models.IntegerField(
@@ -134,8 +134,7 @@ class Contacts(models.Model):
     )
 
     preferred_delivery = models.IntegerField(
-        null = True,
-        blank = True,
+        default = 0,
         db_index = True,
         choices = payment_constants.PREFERRED_DELIVERY,
     )
@@ -144,14 +143,14 @@ class Contacts(models.Model):
         null = True,
         blank = True,
         db_index = True,
-        choices = user_constants.PAYMENT_DAYS,
+        choices = payment_constants.PAYMENT_DAYS,
     )
 
     bills_terms = models.IntegerField(
         null = True,
         blank = True,
         db_index = True,
-        choices = user_constants.PAYMENT_DAYS,
+        choices = payment_constants.PAYMENT_DAYS,
     )
 
     notes = models.TextField(
