@@ -1,22 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
-from app.other_constants import country_list
+from app.other_constants import *
 
 #**************************************************************************
 #   CONTACT'S DATA
 #**************************************************************************
 class Contacts(models.Model):
-
-    IS_ACTIVE = ((True, 'YES'), (False, 'NO'))
-
-    PAYMENT_DAYS = (
-        (1, 'On Due Date'),
-        (2, '10 Days'),
-        (3, '20 Days'),
-        (4, '30 Days'),
-        (5, '60 Days'),
-        (6, '90 Days'),
-    )
 
     user = models.ForeignKey(User, on_delete = models.CASCADE, db_index = True, null = True,)
 
@@ -29,7 +18,7 @@ class Contacts(models.Model):
 
     is_customer = models.BooleanField(
         db_index = True,
-        choices = IS_ACTIVE,
+        choices = user_constants.IS_TRUE,
         default = False,
         null = True,
         blank = True,
@@ -37,7 +26,7 @@ class Contacts(models.Model):
 
     is_vendor = models.BooleanField(
         db_index = True,
-        choices = IS_ACTIVE,
+        choices = user_constants.IS_TRUE,
         default = False,
         null = True,
         blank = True,
@@ -50,9 +39,21 @@ class Contacts(models.Model):
         db_index = True,
     )
 
+    organization_type = models.IntegerField(
+        db_index = True,
+        default = 1,
+    )
+
+    organization_name = models.CharField(
+        max_length = 250,
+        db_index = True,
+        blank = True,
+        null = True,
+    )
+
     is_active = models.BooleanField(
         db_index = True,
-        choices =  IS_ACTIVE,
+        choices =  user_constants.IS_TRUE,
         default = True,
     )
 
@@ -70,6 +71,33 @@ class Contacts(models.Model):
         blank = True,
     )
 
+    gst_reg_type = models.IntegerField(
+        db_index = True,
+        default = 0,
+        choices = user_constants.GST_REG_TYPE,
+    )
+
+    business_reg_no = models.CharField(
+        max_length = 15,
+        blank = True,
+        null = True,
+        db_index = True,
+    )
+
+    tax_reg_no = models.CharField(
+        max_length = 15,
+        null = True,
+        blank = True,
+        db_index = True,
+    )
+
+    cst_reg_no = models.CharField(
+        max_length = 15,
+        blank = True,
+        null = True,
+        db_index = True,
+    )
+
     tds = models.DecimalField(
         db_index = True,
         null = True,
@@ -78,18 +106,52 @@ class Contacts(models.Model):
         decimal_places = 2
     )
 
+    preferred_currency = models.IntegerField(
+        null = True,
+        blank = True,
+        db_index = True,
+        choices = payment_constants.CURRENCY,
+    )
+
+    opening_balance = models.IntegerField(
+        blank = True,
+        null = True,
+        db_index = True,
+        default = 0.00,
+    )
+
+    as_of = models.DateTimeField(
+        auto_now = True,
+        db_index = True,
+    )
+
+    preferred_payment_method = models.IntegerField(
+        null = True,
+        blank = True,
+        db_index = True,
+        choices = payment_constants.PREFERRED_PAYMENT,
+        default = 0
+    )
+
+    preferred_delivery = models.IntegerField(
+        null = True,
+        blank = True,
+        db_index = True,
+        choices = payment_constants.PREFERRED_DELIVERY,
+    )
+
     invoice_terms = models.IntegerField(
         null = True,
         blank = True,
         db_index = True,
-        choices = PAYMENT_DAYS,
+        choices = user_constants.PAYMENT_DAYS,
     )
 
     bills_terms = models.IntegerField(
         null = True,
         blank = True,
         db_index = True,
-        choices = PAYMENT_DAYS,
+        choices = user_constants.PAYMENT_DAYS,
     )
 
     notes = models.TextField(
@@ -128,12 +190,12 @@ class Contacts(models.Model):
 
     def invoice_terms_full(self):
         if self.invoice_terms is not None:
-            return dict(self.PAYMENT_DAYS)[self.invoice_terms]
+            return dict(payment_constants.PAYMENT_DAYS)[self.invoice_terms]
         return '--'
     
     def bills_terms_full(self):
         if self.bills_terms is not None:
-            return dict(self.PAYMENT_DAYS)[self.bills_terms]
+            return dict(payment_constants.PAYMENT_DAYS)[self.bills_terms]
         return '--'
 
     def pan_value(self):
@@ -156,8 +218,6 @@ class Contacts(models.Model):
 #**************************************************************************
 class Contacts_Email(models.Model):
 
-    EMAIL_CHOICES = ((True, 'Yes'),(False, 'No'))
-
     contact = models.ForeignKey(
         Contacts, 
         on_delete = models.CASCADE, 
@@ -172,13 +232,13 @@ class Contacts_Email(models.Model):
 
     is_official = models.BooleanField(
         db_index = True,
-        choices = EMAIL_CHOICES,
+        choices = user_constants.IS_TRUE,
         default = True,
     )
 
     is_personal = models.BooleanField(
         db_index = True,
-        choices = EMAIL_CHOICES,
+        choices = user_constants.IS_TRUE,
         default = True,
     )
 
@@ -213,8 +273,6 @@ class Contacts_Email(models.Model):
 #**************************************************************************
 
 class Contact_Addresses(models.Model):
-
-    ADDRESS_CHOICES = ((True, 'Yes'),(False, 'No'))
 
     contact = models.ForeignKey(
         Contacts, 
@@ -274,13 +332,13 @@ class Contact_Addresses(models.Model):
 
     is_billing_address = models.BooleanField(
         db_index = True,
-        choices = ADDRESS_CHOICES,
+        choices = user_constants.IS_TRUE,
         default = False,
     ) 
 
     is_shipping_address = models.BooleanField(
         db_index = True,
-        choices = ADDRESS_CHOICES,
+        choices = user_constants.IS_TRUE,
         default = False,
     )
 
