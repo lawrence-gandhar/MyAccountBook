@@ -2,6 +2,13 @@
 #   PAYMENT TYPE
 #****************************************************************************
 PAYMENT_TYPE = (
+    (1, 'Cash'),
+    (2, 'Card'),
+    (3, 'Cheque'),
+    (4, 'Net banking'),
+)
+
+PREFERRED_PAYMENT_TYPE = (
     (0, 'Any'),
     (1, 'Cash'),
     (2, 'Card'),

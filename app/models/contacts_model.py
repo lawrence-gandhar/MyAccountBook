@@ -129,7 +129,7 @@ class Contacts(models.Model):
         null = True,
         blank = True,
         db_index = True,
-        choices = payment_constants.PREFERRED_PAYMENT,
+        choices = payment_constants.PREFERRED_PAYMENT_TYPE,
         default = 0
     )
 
@@ -186,7 +186,7 @@ class Contacts(models.Model):
     def is_active_value(self):
         if self.is_active:
             return "YES"
-        return "NO"    
+        return "NO"  
 
     def invoice_terms_full(self):
         if self.invoice_terms is not None:
