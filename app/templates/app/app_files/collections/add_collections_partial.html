@@ -19,6 +19,7 @@
                             <th style="padding: 10px;" class="text-center">UID</th>
                             <th style="padding: 10px;" class="text-center">Contact Name</th>
                             <th style="padding: 10px;" class="text-center">Total Amount</th>
+                            <th style="padding: 10px;" class="text-center">Currecy Type</th>
                             <th style="padding: 10px;" class="text-center">Payment Type</th>
                             <th style="padding: 10px;" class="text-center">Status</th>
                             <th style="padding: 10px;" class="text-center">Due Date</th>
@@ -39,13 +40,14 @@
                                 <td>C-0000{{record.id}}</td>
                                 <td>{{record.contact.contact_name}}</td>
                                 <td>{{record.amount|safe}}</td>
+                                <td>{{record.get_currency_type_display|safe}}</td>
                                 <td>{{record.get_payment_type_display|upper}}</td>
                                 <td>{{record.get_collection_status_display|upper}}</td>
                                 <td>{{record.collection_due_date}}</td>
                                 <td>{{record.collection_date}}</td>
                                 <td>{{record.created_on}}</td>                      
                                 <td>
-                                    <a href="" class="btn btn-primary btn-sm" title="Edit Collection">
+                                    <a href="{% url 'edit_collections' record.id %}" class="btn btn-primary btn-sm" title="Edit Collection">
                                         <i class="fas fas-fw fa-pencil-alt"></i>
                                     </a>
                                 </td>                 
@@ -60,6 +62,7 @@
                         <thead style="background-color: #535353; color:#FFFFFF; font-size:11px">
                             <th style="padding: 10px;" class="text-center">UID</th>
                             <th style="padding: 10px;" class="text-center">Amount</th>
+                            <th class="text-center">Currency Type</th>
                             <th class="text-center">Payment Type</th>
                             <th class="text-center">Status</th>
                             <th class="text-center">Due Date</th>
@@ -68,23 +71,26 @@
                             <th class="text-center">Action</th>                
                         </thead>
                         <tbody>    
-                            {% for record in partial_collections %}
+                            {% for p_record in partial_collections %}
                                 <tr
-                                    {% if record.collection_status == 1 %}
+                                    {% if p_record.collection_status == 1 %}
                                         style="background-color:#ffa50069"
-                                    {% elif record.collection_status == 2 %}    
+                                    {% elif p_record.collection_status == 2 %}    
+                                        style="background-color:rgba(125, 205, 241, 0.5)"
+                                    {% else %}
                                         style="background-color:rgba(12, 235, 19, 0.5)"
                                     {% endif %}
                                 >
-                                    <td>P-0000{{record.id|safe}}</td>
-                                    <td>{{record.amount|safe}}</td>
-                                    <td>{{record.get_payment_type_display|upper}}</td>
-                                    <td>{{record.get_collection_status_display|upper}}</td>
-                                    <td>{{record.collection_due_date}}</td>
-                                    <td>{{record.collection_date}}</td>
-                                    <td>{{record.created_on}}</td>                      
+                                    <td>P-0000{{p_record.id|safe}}</td>
+                                    <td>{{p_record.amount|safe}}</td>
+                                    <td>{{p_record.get_currency_type_display|safe}}</td>
+                                    <td>{{p_record.get_payment_type_display|upper}}</td>
+                                    <td>{{p_record.get_collection_status_display|upper}}</td>
+                                    <td>{{p_record.collection_due_date}}</td>
+                                    <td>{{p_record.collection_date}}</td>
+                                    <td>{{p_record.created_on}}</td>                      
                                     <td>
-                                        <a href="" class="btn btn-primary btn-sm" title="Edit Collection">
+                                        <a href="{% url 'edit_partial_collection' record.id p_record.id %}" class="btn btn-primary btn-sm" title="Edit Collection">
                                             <i class="fas fas-fw fa-pencil-alt"></i>
                                         </a>
                                     </td>                 
@@ -127,6 +133,14 @@
                             </div>
                             <div class="d-table-cell" style="padding:0px 13px;">
                                 {{collection_form.amount}}
+                            </div>                        
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                <label>Currency Type</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:0px 13px;">
+                                {{collection_form.currency_type}}
                             </div>                        
                         </div>
                         <div class="d-table-row" style="padding:10px 0px;">

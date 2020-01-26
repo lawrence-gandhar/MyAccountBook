@@ -36,7 +36,7 @@ class CollectPartialForm(ModelForm):
         model = CollectPartial
         fields = (
                     'collection_due_date', 'amount', 'payment_type',
-                    'collection_status', 'collection_date',
+                    'collection_status', 'collection_date', 'currency_type',
                 )
 
         widgets = {

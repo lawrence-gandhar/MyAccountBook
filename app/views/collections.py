@@ -25,11 +25,11 @@ def view_collections(request):
     # Initialize 
     data = defaultdict()
     data["view"] = ""
-    data["active_link"] = 'Collections'
 
     # Custom CSS/JS Files For Inclusion into template
     data["css_files"] = []
     data["js_files"] = []
+    data["active_link"] = 'Collections'
 
     data["included_template"] = 'app/app_files/collections/view_collections.html'
  
@@ -123,7 +123,7 @@ class AddPartialCollection(View):
     #
     def get(self, request, *args, **kwargs):
         
-        ins = int(self.kwargs["ins"])
+        ins = int(kwargs["ins"])
 
         try:
             collect = Collect.objects.get(pk = ins)
@@ -212,7 +212,7 @@ class Edit_Collection(View):
     #
     def get(self, request, *args, **kwargs):
 
-        ins = kwargs["ins"]
+        ins = int(kwargs["ins"])
 
         try:
             collect = Collect.objects.get(pk = int(ins))
@@ -227,19 +227,81 @@ class Edit_Collection(View):
     #
     def post(self, request, *args, **kwargs):
 
-        ins = kwargs["ins"]
+        ins = int(kwargs["ins"])
 
         try:
-            collect = Collect.objects.get(pk = int(ins))
+            collect = Collect.objects.get(pk = int(ins), user = request.user)
         except:
             return redirect('/unauthorized/', permanent = False)
 
-        collect_form = CollectionsForm(request.user, instance = collect)
+        collect_form = CollectionsForm(request.user, request.POST, instance = collect)
+
+        if collect_form.is_valid():
+            collect_form.save()
+        
+        return redirect('/collections/'.format(ins), permanent = False)
+        
+#
+#   EDIT PARTIAL COLLECTIONS
+#         
+class Edit_PartialCollection(View):
+
+    # Template 
+    template_name = 'app/app_files/collections/index.html'
+
+    data = defaultdict()
+
+    data["included_template"] = 'app/app_files/collections/add_collections.html'
+
+    data["css_files"] = ['all_page/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css']
+    data["js_files"] = ['all_page/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js', 'custom_files/js/collections.js']
+
+    data["active_link"] = 'Collections'
+
+    #
+    #
+    #
+    def get(self, request, *args, **kwargs):
+
+        ins = int(kwargs["ins"])
+        obj = int(kwargs["obj"])
+        
+        try:
+            collect = Collect.objects.get(pk = ins)
+        except:
+            return redirect('/unauthorized/', permanent = False)
+
+        try:
+            collect_partial = CollectPartial.objects.get(pk = obj, collect_part = collect)
+        except:
+            return redirect('/unauthorized/', permanent = False)
+
+        self.data["collection_form"] = CollectPartialForm(instance = collect_partial)
+
+        return render(request, self.template_name, self.data)
+
+    #
+    #
+    #
+    def post(self, request, *args, **kwargs):
+        ins = int(kwargs["ins"])
+        obj = int(kwargs["obj"])
+        
+        try:
+            collect = Collect.objects.get(pk = ins)
+        except:
+            return redirect('/unauthorized/', permanent = False)
+
+        try:
+            collect_partial = CollectPartial.objects.get(pk = obj, collect_part = collect)
+        except:
+            return redirect('/unauthorized/', permanent = False)
+
+        collect_form = CollectPartialForm(request.POST, instance = collect_partial)
 
         if collect_form.is_valid():
             collect_form.save()
 
-            
-
-        return redirect('/collections/edit/{}/'.format(ins), permanent = False)
-
+            return redirect('/collections/add_collections/partial/{}/'.format(ins), permanent = False)
+        else:
+            print(collect_form.errors)

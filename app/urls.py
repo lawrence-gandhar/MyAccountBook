@@ -51,6 +51,7 @@ urlpatterns += [
     path('collections/add_collections/', never_cache(login_required(collections.AddCollections.as_view())), name = 'add-collections'),
     path('collections/add_collections/partial/<int:ins>/', never_cache(login_required(collections.AddPartialCollection.as_view())), name = 'add-partial-collections'),
     path('collections/edit/<int:ins>/', never_cache(login_required(collections.Edit_Collection.as_view())), name = 'edit_collections'),
+    path('collections/edit_partial/<int:ins>/<int:obj>/', never_cache(login_required(collections.Edit_PartialCollection.as_view())), name = 'edit_partial_collection'),
 ]
 
 urlpatterns +=[

@@ -8,6 +8,7 @@
                             <th>UID</th>
                             <th class="text-center">Contact Name</th>
                             <th class="text-center">Amount</th>
+                            <th class="text-center">Currency Type</th>
                             <th class="text-center">Payment Type</th>
                             <th class="text-center">Status</th>
                             <th class="text-center">Due Date</th>
@@ -29,6 +30,7 @@
                                     <td>C-0000{{record.id}}</td>
                                     <td>{{record.contact.contact_name}}</td>
                                     <td>{{record.amount|safe}}</td>
+                                    <td>{{record.get_currency_type_display|safe}}</td>
                                     <td>{{record.get_payment_type_display|upper}}</td>
                                     <td>{{record.get_collection_status_display|upper}}</td>
                                     <td>{{record.collection_due_date}}</td>
