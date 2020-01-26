@@ -109,7 +109,7 @@ class Contacts(models.Model):
 
     preferred_currency = models.IntegerField(
         db_index = True,
-        choices = payment_constants.CURRENCY,
+        choices = currency_list.CURRENCY_CHOICES,
         default = 1,
     )
 

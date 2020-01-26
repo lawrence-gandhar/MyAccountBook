@@ -1,24 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 from app.models.contacts_model import Contacts
+from app.other_constants import *
   
 #=====================================================================
 # MULTIPLE COLLECTION METHODS
 #=====================================================================
 class Collections(models.Model):
-
-    PAYMENT_MODES = (
-        (1, 'Cash'),
-        (2, 'Cheque'),
-        (3, 'Demand Draft'),
-        (4, 'Payment Gateway'),
-    )
-
-    COLLECTION_STATUS = (
-        (1, 'Collection Expected'),
-        (2, 'Still Collecting'),
-        (3, 'Collected'),
-    )
 
     user = models.ForeignKey(
         User,
@@ -48,16 +36,22 @@ class Collections(models.Model):
         db_index = True,
     )
 
+    currency_type = models.IntegerField(
+        default = 1,
+        db_index = True,
+        choices = currency_list.CURRENCY_CHOICES,
+    )
+
     payment_type = models.IntegerField(
         default = 1,
         db_index = True,
-        choices = PAYMENT_MODES,
+        choices = payment_constants.PAYMENT_TYPE,
     )
 
     collection_status = models.IntegerField(
         default = 1,
         db_index = True,
-        choices = COLLECTION_STATUS,
+        choices = payment_constants.COLLECTION_STATUS,
     )
 
     collection_date = models.DateTimeField(
@@ -75,21 +69,12 @@ class Collections(models.Model):
     def __str__(self):
         return self.contact.contact_name
 
-
-
+#===================================================================================
+#   COLLECT PARTIAL MODEL
+#===================================================================================
+#
 class CollectPartial(models.Model):
-    PAYMENT_MODES = (
-        (1, 'Cash'),
-        (2, 'Cheque'),
-        (3, 'Demand Draft'),
-        (4, 'Payment Gateway'),
-    )
-
-    COLLECTION_STATUS = (
-        (1, 'Collection Expected'),
-        (2, 'Collected'),
-    )
-
+    
     user = models.ForeignKey(
         User,
         on_delete = models.SET_NULL,
@@ -118,16 +103,22 @@ class CollectPartial(models.Model):
         db_index = True,
     )
 
+    currency_type = models.IntegerField(
+        default = 1,
+        db_index = True,
+        choices = currency_list.CURRENCY_CHOICES,
+    )
+
     payment_type = models.IntegerField(
         default = 1,
         db_index = True,
-        choices = PAYMENT_MODES,
+        choices = payment_constants.PAYMENT_TYPE,
     )
 
     collection_status = models.IntegerField(
         default = 1,
         db_index = True,
-        choices = COLLECTION_STATUS,
+        choices = payment_constants.COLLECTION_STATUS,
     )
 
     collection_date = models.DateTimeField(
