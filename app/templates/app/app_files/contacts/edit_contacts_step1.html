@@ -9,7 +9,7 @@
                 </h5>
                 <h6 class="card-subtitle mb-2 text-muted">Edit Contact's Basic Details</h6>
             </div>
-            <form method="post" class="disabled_form_elements" action="/contacts/edit/step1/{{contact_form_instance}}">
+            <form method="post" class="disabled_form_elements" action="/contacts/edit/step1/{{contact_form_instance}}/">
                 <div class="card-body">
                     {% csrf_token %}
                     <div class="table" style="padding:10px 0px;">
@@ -29,10 +29,26 @@
                         </div>
                         <div class="d-table-row" style="padding:10px 0px;">
                             <div class="d-table-cell" style="padding:0px 10px;">
-                                <label>Contact/Organization Name</label>
+                                <label>Contact</label>
                             </div>
                             <div class="d-table-cell" style="padding:5px 10px;">
                                 {{ contact_form.contact_name }}
+                            </div>
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:0px 10px;">
+                                <label>Organisation Type</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                {{ contact_form.organization_type }}
+                            </div>
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:0px 10px;">
+                                <label>Organisation Name</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                {{ contact_form.organization_name }}
                             </div>
                         </div>
                         <div class="d-table-row" style="padding:10px 0px;">
@@ -53,10 +69,66 @@
                         </div>
                         <div class="d-table-row" style="padding:10px 0px;">
                             <div class="d-table-cell" style="padding:5px 10px;">
+                                <label>GST Reg. Type</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                {{ contact_form.gst_reg_type }}
+                            </div>
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:5px 10px;">
                                 <label>TDS %</label>
                             </div>
                             <div class="d-table-cell" style="padding:5px 10px;">
                                 {{ contact_form.tds }}
+                            </div>
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                <label>Tax Reg. No.</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                {{ contact_form.tax_reg_no }}
+                            </div>
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                <label>CGST Reg. No.</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                {{ contact_form.cst_reg_no }}
+                            </div>
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                <label>Opening Balance</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                {{ contact_form.opening_balance }}
+                            </div>
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                <label>Preferred Curreny</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                {{ contact_form.preferred_currency }}
+                            </div>
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                <label>Preferred Payment Method</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                {{ contact_form.preferred_payment_method }}
+                            </div>
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                <label>Preferred Payment Delivery</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                {{ contact_form.preferred_delivery }}
                             </div>
                         </div>
                         <div class="d-table-row" style="padding:10px 0px;">
