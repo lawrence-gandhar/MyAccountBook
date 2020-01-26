@@ -919,7 +919,7 @@ CURRENCY_DICT = dict({
 	},
 	"TOP": {
 		"symbol": "T$",
-		"name": "Tongan Paʻanga",
+		"name": "Tongan Paanga",
 		"symbol_native": "T$",
 		"decimal_digits": 2,
 		"rounding": 0,
@@ -1000,7 +1000,7 @@ CURRENCY_DICT = dict({
 	},
 	"VEF": {
 		"symbol": "Bs.F.",
-		"name": "Venezuelan Bolívar",
+		"name": "Venezuelan Bolivar",
 		"symbol_native": "Bs.F.",
 		"decimal_digits": 2,
 		"rounding": 0,
@@ -1069,7 +1069,7 @@ CURRENCY_DICT = dict({
 		"rounding": 0,
 		"code": "ZWL",
 		"name_plural": "Zimbabwean Dollar"
-	}
+	},
 }) 
 
 
@@ -1176,8 +1176,21 @@ CURRENCY_CHOICES = (
     ("SYP","Syrian Pound"),
     ("THB","Thai Baht"),
     ("TND","Tunisian Dinar"),
+	("TOP","Tongan Paanga"),
+	("TRY","Turkish Lira"),
+	("TTD","Trinidad and Tobago Dollar"),
+	("TWD","New Taiwan Dollar"),
+	("TZS","Tanzanian Shilling"),
+	("UAH","Ukrainian Hryvnia"),
+	("UGX","Ugandan Shilling"),
+	("UYU","Uruguayan Peso"),
+	("UZS","Uzbekistan Som"),
+	("VEF","Venezuelan Bolivar"),
+	("VND","Vietnamese Dong"),
+	("XAF","CFA Franc BEAC"),
+	("XOF","CFA Franc BCEAO"),
+	("YER","Yemeni Rial"),
+	("ZAR","South African Rand"),
+	("ZMK","Zambian Kwacha"),
+	("ZWL","Zimbabwean Dollar")
 )
-
-with open("curreny_list.txt","w") as f:
-    for key,val in CURRENCY_DICT.items():
-        f.write('("{}","{}"),'.format(key, val["name"]))
