@@ -107,10 +107,10 @@ class Contacts(models.Model):
         decimal_places = 2
     )
 
-    preferred_currency = models.IntegerField(
+    preferred_currency = models.CharField(
+        max_length = 5,
         db_index = True,
         choices = currency_list.CURRENCY_CHOICES,
-        default = 1,
     )
 
     opening_balance = models.IntegerField(

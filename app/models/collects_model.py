@@ -36,8 +36,8 @@ class Collections(models.Model):
         db_index = True,
     )
 
-    currency_type = models.IntegerField(
-        default = 1,
+    currency_type = models.CharField(
+        max_length = 5,
         db_index = True,
         choices = currency_list.CURRENCY_CHOICES,
     )
@@ -103,8 +103,8 @@ class CollectPartial(models.Model):
         db_index = True,
     )
 
-    currency_type = models.IntegerField(
-        default = 1,
+    currency_type = models.CharField(
+        max_length = 5,
         db_index = True,
         choices = currency_list.CURRENCY_CHOICES,
     )

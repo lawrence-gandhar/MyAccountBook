@@ -3,6 +3,8 @@ from app.models.collects_model import *
 from app.models.contacts_model import *
 from django.contrib.auth.models import User
 
+from app.other_constants import *
+
 class CollectionsForm(ModelForm):
 
     def __init__(self, user, *args, **kwargs):
@@ -12,49 +14,24 @@ class CollectionsForm(ModelForm):
 
     class Meta:
 
-        PAYMENT_MODES = (
-            (1, 'Cash'),
-            (2, 'Cheque'),
-            (3, 'Demand Draft'),
-            (4, 'Payment Gateway'),
-        )
-
-        COLLECTION_STATUS = (
-            (1, 'Collection Expected'),
-            (2, 'Still Collecting'),
-            (3, 'Collected'),
-        )        
-
         model = Collections
         fields = (
                     'contact', 'collection_due_date', 'amount', 'payment_type',
-                    'collection_status', 'collection_date',
+                    'collection_status', 'collection_date', 'currency_type',
                 )
 
         widgets = {
             'contact' : Select(attrs={'class':'form-control input-sm'}),
             'collection_due_date' : DateInput(attrs={'class':'form-control input-sm', 'data-toggle':'datepicker'}),
             'amount' : NumberInput(attrs={'class':'form-control input-sm'}),
-            'payment_type' : Select(attrs={'class':'form-control input-sm'}, choices = PAYMENT_MODES),
-            'collection_status' : Select(attrs={'class':'form-control input-sm'}, choices = COLLECTION_STATUS),
+            'payment_type' : Select(attrs={'class':'form-control input-sm'}, choices = payment_constants.PAYMENT_TYPE),
+            'collection_status' : Select(attrs={'class':'form-control input-sm'}, choices = payment_constants.COLLECTION_STATUS),
+            'currency_type' : Select(attrs={'class':'form-control input-sm'}, choices = currency_list.CURRENCY_CHOICES),
             'collection_date' : DateInput(attrs={'class':'form-control input-sm','data-toggle':'datepicker'}),
         }
 
 class CollectPartialForm(ModelForm):
     class Meta:
-
-        PAYMENT_MODES = (
-            (1, 'Cash'),
-            (2, 'Cheque'),
-            (3, 'Demand Draft'),
-            (4, 'Payment Gateway'),
-        )
-
-        COLLECTION_STATUS = (
-            (1, 'Collection Expected'),
-            (2, 'Still Collecting'),
-            (3, 'Collected'),
-        )        
 
         model = CollectPartial
         fields = (
@@ -65,7 +42,8 @@ class CollectPartialForm(ModelForm):
         widgets = {
             'collection_due_date' : DateInput(attrs={'class':'form-control input-sm', 'data-toggle':'datepicker'}),
             'amount' : NumberInput(attrs={'class':'form-control input-sm'}),
-            'payment_type' : Select(attrs={'class':'form-control input-sm'}, choices = PAYMENT_MODES),
-            'collection_status' : Select(attrs={'class':'form-control input-sm'}, choices = COLLECTION_STATUS),
+            'payment_type' : Select(attrs={'class':'form-control input-sm'}, choices = payment_constants.PAYMENT_TYPE),
+            'collection_status' : Select(attrs={'class':'form-control input-sm'}, choices = payment_constants.COLLECTION_STATUS),
             'collection_date' : DateInput(attrs={'class':'form-control input-sm','data-toggle':'datepicker'}),
+            'currency_type' : Select(attrs={'class':'form-control input-sm'}, choices = currency_list.CURRENCY_CHOICES),
         }

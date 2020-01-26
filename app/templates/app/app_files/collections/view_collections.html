@@ -35,7 +35,7 @@
                                     <td>{{record.collection_date}}</td>
                                     <td>{{record.created_on}}</td>                      
                                     <td>
-                                        <a href="" class="btn btn-primary btn-sm" title="Edit Collection">
+                                        <a href="{% url 'edit_collections' record.id %}" class="btn btn-primary btn-sm" title="Edit Collection">
                                             <i class="fas fas-fw fa-pencil-alt"></i>
                                         </a>                                        
                                         <a href="{% url 'add-partial-collections' record.id %}" class="btn button-orange btn-sm" title="Add Partial Collection">
