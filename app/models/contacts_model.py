@@ -16,6 +16,21 @@ class Contacts(models.Model):
         null = True,
     )
 
+    is_imported_user = models.BooleanField(
+        default = False,
+        db_index = True,
+        choices = user_constants.IS_TRUE,
+    )
+
+    imported_user = models.OneToOneField(
+        User,
+        related_name = 'imported_user',
+        db_index = True,
+        blank = True,
+        null = True,
+        on_delete = models.SET_NULL,
+    )
+
     is_customer = models.BooleanField(
         db_index = True,
         choices = user_constants.IS_TRUE,
@@ -32,7 +47,20 @@ class Contacts(models.Model):
         blank = True,
     )
 
+    salutation = models.IntegerField(
+        db_index = True,
+        default = 0,
+        choices = user_constants.SALUTATIONS,
+    )
+
     contact_name = models.CharField(
+        max_length = 250,
+        blank = False,
+        null = False,
+        db_index = True,
+    )
+
+    display_name = models.CharField(
         max_length = 250,
         blank = False,
         null = False,
@@ -52,78 +80,24 @@ class Contacts(models.Model):
         null = True,
     )
 
+    email = models.EmailField(
+        blank = False, 
+        null = False, 
+        db_index = True,
+    )
+
+    website = models.CharField(
+        max_length = 250,
+        db_index = True,
+        blank = True,
+        null = True,
+    )
+
     is_active = models.BooleanField(
         db_index = True,
         choices =  user_constants.IS_TRUE,
         default = True,
-    )
-
-    pan = models.CharField(
-        max_length = 10,
-        db_index = True,
-        null = True,
-        blank = True,
-    )
-
-    gstin = models.CharField(
-        max_length = 100,
-        db_index = True,
-        null = True,
-        blank = True,
-    )
-
-    gst_reg_type = models.IntegerField(
-        db_index = True,
-        default = 0,
-        choices = user_constants.GST_REG_TYPE,
-    )
-
-    business_reg_no = models.CharField(
-        max_length = 15,
-        blank = True,
-        null = True,
-        db_index = True,
-    )
-
-    tax_reg_no = models.CharField(
-        max_length = 15,
-        null = True,
-        blank = True,
-        db_index = True,
-    )
-
-    cst_reg_no = models.CharField(
-        max_length = 15,
-        blank = True,
-        null = True,
-        db_index = True,
-    )
-
-    tds = models.DecimalField(
-        db_index = True,
-        null = True,
-        blank = True,
-        max_digits = 20, 
-        decimal_places = 2
-    )
-
-    preferred_currency = models.CharField(
-        max_length = 5,
-        db_index = True,
-        choices = currency_list.CURRENCY_CHOICES,
-    )
-
-    opening_balance = models.IntegerField(
-        blank = True,
-        null = True,
-        db_index = True,
-        default = 0.00,
-    )
-
-    as_of = models.DateTimeField(
-        auto_now = True,
-        db_index = True,
-    )
+    )    
 
     preferred_payment_method = models.IntegerField(
         null = True,
@@ -196,16 +170,6 @@ class Contacts(models.Model):
         if self.bills_terms is not None:
             return dict(payment_constants.PAYMENT_DAYS)[self.bills_terms]
         return '--'
-
-    def pan_value(self):
-        if self.pan is not None:
-            return self.pan.upper()
-        return "--"
-
-    def gstin_value(self):
-        if self.gstin is not None:
-            return self.gstin.upper()
-        return "--"
 
     class Meta:
         verbose_name_plural = 'contacts_tbl'
