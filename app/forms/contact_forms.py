@@ -8,8 +8,8 @@ class ContactsForm(ModelForm):
 
         model = Contacts
         fields = (
-                    'is_customer', 'is_vendor', 'contact_name', 
-                    'organization_name', 'organization_type',
+                    'is_customer', 'is_vendor', 'is_imported_user', 'imported_user', 'contact_name', 
+                    'display_name', 'organization_name', 'organization_type', 'salutation',
                     'preferred_payment_method', 'preferred_delivery', 
                     'invoice_terms', 'bills_terms',
                 )
@@ -17,7 +17,11 @@ class ContactsForm(ModelForm):
         widgets = {
             'is_customer': CheckboxInput(attrs={'class':'input-sm','value':'1',}),
             'is_vendor': CheckboxInput(attrs={'class':'input-sm','value':'1',}),
+            'is_imported_user': CheckboxInput(attrs={'class':'input-sm','value':'1', 'disable': 'true',}),
+            'imported_user': TextInput(attrs={'class':'input-sm hide', 'disable': 'true',}),
+            'salutation' : Select(attrs={'class':'form-control input-sm',}, choices = user_constants.SALUTATIONS),
             'contact_name' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'200'}),
+            'display_name' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'200'}),
             'organization_type' : Select(attrs={'class':'form-control input-sm',}, choices = user_constants.ORGANIZATION_TYPE, ),
             'organization_name' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'200'}),
             'invoice_terms' : Select(attrs={'class':'form-control input-sm',}, choices = payment_constants.PAYMENT_DAYS, ),

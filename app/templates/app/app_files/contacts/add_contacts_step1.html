@@ -13,7 +13,7 @@
                             <label>Has Application ID</label>
                         </div>
                         <div class="d-table-cell" style="padding:0px 13px;">
-                            <input style="1px solid #ced4da;" type="checkbox" onclick="has_app_id(this)">
+                            <input type="checkbox" onclick="has_app_id(this)">
                         </div>                        
                     </div>
                     <div class="d-table-row hide-row" style="padding:10px 0px;" id="app_id_input">
@@ -24,8 +24,15 @@
                             <input class="form-control" type="text" name="app_id" id="id_app_id" onfocusout="check_app_id(this)">
                         </div>
                         <div class="d-table-cell" style="padding:0px 13px;" id="id_app_id_check"></div>
+
+                    </div>
+                    <div class="d-table-row hide-row-2" style="padding:10px 0px;">
+                        <div class="d-table-cell" style="padding:5px 10px;">
+                            <label>Add User To Contact</label>
+                        </div>
                         <div class="d-table-cell" style="padding:0px 13px;">
-                            <button type="button" onclick="send_contact_request()" class="btn btn-sm button-orange" id="id_app_id_button" style=" display:none">Send Request</button>
+                            {{ contact_form.is_imported_user }}
+                            {{ contact_form.imported_user }}
                         </div>
                     </div>
                     <div class="d-table-row" style="padding:10px 0px;">
@@ -46,10 +53,26 @@
                     </div>
                     <div class="d-table-row" style="padding:10px 0px;">
                         <div class="d-table-cell" style="padding:0px 10px;">
+                            <label>Salutation</label>
+                        </div>
+                        <div class="d-table-cell" style="padding:5px 10px;">
+                            {{ contact_form.salutation }}
+                        </div>
+                    </div>
+                    <div class="d-table-row" style="padding:10px 0px;">
+                        <div class="d-table-cell" style="padding:0px 10px;">
                             <label>Contact</label>
                         </div>
                         <div class="d-table-cell" style="padding:5px 10px;">
                             {{ contact_form.contact_name }}
+                        </div>
+                    </div>                    
+                    <div class="d-table-row" style="padding:10px 0px;">
+                        <div class="d-table-cell" style="padding:0px 10px;">
+                            <label>Contact Display Name</label>
+                        </div>
+                        <div class="d-table-cell" style="padding:5px 10px;">
+                            {{ contact_form.display_name }}
                         </div>
                     </div>
                     <div class="d-table-row" style="padding:10px 0px;">
@@ -66,70 +89,6 @@
                         </div>
                         <div class="d-table-cell" style="padding:5px 10px;">
                             {{ contact_form.organization_name }}
-                        </div>
-                    </div>
-                    <div class="d-table-row" style="padding:10px 0px;">
-                        <div class="d-table-cell" style="padding:5px 10px;">
-                            <label>PAN</label>
-                        </div>
-                        <div class="d-table-cell" style="padding:5px 10px;">
-                            {{ contact_form.pan }}
-                        </div>
-                    </div>                    
-                    <div class="d-table-row" style="padding:10px 0px;">
-                        <div class="d-table-cell" style="padding:5px 10px;">
-                            <label>GSTIN</label>
-                        </div>
-                        <div class="d-table-cell" style="padding:5px 10px;">
-                            {{ contact_form.gstin }}
-                        </div>
-                    </div>
-                    <div class="d-table-row" style="padding:10px 0px;">
-                        <div class="d-table-cell" style="padding:5px 10px;">
-                            <label>GST Reg. Type</label>
-                        </div>
-                        <div class="d-table-cell" style="padding:5px 10px;">
-                            {{ contact_form.gst_reg_type }}
-                        </div>
-                    </div>
-                    <div class="d-table-row" style="padding:10px 0px;">
-                        <div class="d-table-cell" style="padding:5px 10px;">
-                            <label>TDS %</label>
-                        </div>
-                        <div class="d-table-cell" style="padding:5px 10px;">
-                            {{ contact_form.tds }}
-                        </div>
-                    </div>
-                    <div class="d-table-row" style="padding:10px 0px;">
-                        <div class="d-table-cell" style="padding:5px 10px;">
-                            <label>Tax Reg. No.</label>
-                        </div>
-                        <div class="d-table-cell" style="padding:5px 10px;">
-                            {{ contact_form.tax_reg_no }}
-                        </div>
-                    </div>
-                    <div class="d-table-row" style="padding:10px 0px;">
-                        <div class="d-table-cell" style="padding:5px 10px;">
-                            <label>CGST Reg. No.</label>
-                        </div>
-                        <div class="d-table-cell" style="padding:5px 10px;">
-                            {{ contact_form.cst_reg_no }}
-                        </div>
-                    </div>
-                    <div class="d-table-row" style="padding:10px 0px;">
-                        <div class="d-table-cell" style="padding:5px 10px;">
-                            <label>Opening Balance</label>
-                        </div>
-                        <div class="d-table-cell" style="padding:5px 10px;">
-                            {{ contact_form.opening_balance }}
-                        </div>
-                    </div>
-                    <div class="d-table-row" style="padding:10px 0px;">
-                        <div class="d-table-cell" style="padding:5px 10px;">
-                            <label>Preferred Curreny</label>
-                        </div>
-                        <div class="d-table-cell" style="padding:5px 10px;">
-                            {{ contact_form.preferred_currency }}
                         </div>
                     </div>
                     <div class="d-table-row" style="padding:10px 0px;">
