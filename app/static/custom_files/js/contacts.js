@@ -38,23 +38,33 @@ function check_app_id(elem){
 
     if($(elem).val()!=""){
         $("#wait_Modal").show();
+        $("#wait_Modal").find("#loader_container").show();
+        $("#wait_Modal").find("#modal-text").empty()
+
         $.post('/contacts/check_appid/',{'id':$(elem).val(), 'csrfmiddlewaretoken':csrf}, function(data){
-            
+
             data = JSON.parse(data);
 
             if(data.ret == 0){ 
-                $("#wait_Modal").find(".modal-title").empty().text("Result");
-                $("#wait_Modal").find("#loader_container").hide();
-                $("#wait_Modal").find("#modal-text").empty().html('<span style="color:#FF0000; font-weight:bold">Invalid Application ID</span>');              
+                
+                $("#wait_Modal").find("#modal-text").html('<span style="color:#FF0000; font-weight:bold">Invalid Application ID</span>');              
                 $("#id_app_id_check").empty().append('<i class="fa fa-fw fa-times" style="color: #ff0000;"></i>');
                 $("#app_id_input_2").removeClass("show-row").addClass("hide-row");
+                $("#success_svg").hide();
+                $("#failure_svg").show().css("display", "block");
             }
             if(data.ret =='1'){
-                $("#wait_Modal").hide();
                 $("#id_app_id_check").empty().append('<i class="fa fa-fw fa-check" style="color: #11640b;"></i>');
-                $("#wait_Modal").find("#modal-text").empty().html('<span style="color:#00cc00; font-weight:bold">Found Application ID</span>');              
+                $("#wait_Modal").find("#modal-text").html('<span style="color:#00cc00; font-weight:bold">Found Application ID</span>');              
                 $("#app_id_input_2").removeClass("hide-row").addClass("show-row");
+                $("#failure_svg").hide();
+                $("#success_svg").show().css("display", "block");
+                $("#id_imported_user").val(data.id)
             }
+
+            $("#svg_container").show();
+            $("#wait_Modal").find(".modal-title").empty().text("Result");
+            $("#wait_Modal").find("#loader_container").hide();
         });
     }
 }

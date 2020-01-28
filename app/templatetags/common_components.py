@@ -31,10 +31,14 @@ def loader_component():
                     </div>
                     <div class="modal-body">                
                         <div id="loader_container" class="loader-custom"></div>
-                        <div>
-                            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                        <div id="svg_container" class="hide">
+                            <svg id="failure_svg" class="checkmark hide" style="box-shadow: inset 0px 0px 0px #FF0000; animation: fill_red .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" style="stroke: #FF0000;" />
                                 <path class="checkmark__check" fill="none" d="M16 16 36 36 M36 16 16 36" />
+                            </svg>
+                            <svg id="success_svg" class="checkmark hide" style="box-shadow: inset 0px 0px 0px #7ac142; animation: fill_green .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" style="stroke: #7ac142;" />
+                                <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
                             </svg>
                         </div> 
                         <div id="modal-text" class="text-center"></div>            

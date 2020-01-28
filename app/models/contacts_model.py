@@ -25,7 +25,7 @@ class Contacts(models.Model):
         blank = True,
     )
 
-    imported_user = models.OneToOneField(
+    imported_user = models.ForeignKey(
         User,
         related_name = 'imported_user',
         db_index = True,

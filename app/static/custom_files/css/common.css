@@ -289,7 +289,6 @@ input[type="checkbox"]:after{
   stroke-dashoffset: 166;
   stroke-width: 2;
   stroke-miterlimit: 10;
-  stroke: #FF0000;
   fill: none;
   animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
 }
@@ -302,8 +301,6 @@ input[type="checkbox"]:after{
   stroke: #fff;
   stroke-miterlimit: 10;
   margin: 10% auto;
-  box-shadow: inset 0px 0px 0px #FF0000;
-  animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
 }
 .checkmark__check {
   transform-origin: 50% 50%;
@@ -324,9 +321,16 @@ input[type="checkbox"]:after{
     transform: scale3d(1.1, 1.1, 1);
   }
 }
-@keyframes fill {
+
+@keyframes fill_red {
   100% {
     box-shadow: inset 0px 0px 0px 30px #FF0000;
+  }
+}
+
+@keyframes fill_green {
+  100% {
+    box-shadow: inset 0px 0px 0px 30px #7ac142;
   }
 }
 
@@ -478,4 +482,8 @@ button.color-button{
 
 td {
   vertical-align: top !important;
+}
+
+.hide{
+  display:none;
 }

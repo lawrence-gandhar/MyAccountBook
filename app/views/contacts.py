@@ -185,7 +185,11 @@ def add_contacts(request, slug = None, ins = None):
                         return redirect('/unauthorized/', permanent = False)
                     try:
                         contact_form_ins.imported_user = imp_user
-                        contact_form_ins.contact_name = imp_user.first_name.capitalize() +" "+imp_user.last_name.capitalize() 
+
+                        if imp_user.first_name is not None:
+                            contact_form_ins.contact_name = imp_user.first_name.capitalize() +" "+imp_user.last_name.capitalize() 
+                        else:
+                            contact_form_ins.contact_name = imp_user.username
                         contact_form_ins.save()
                         return redirect('/contacts/', permanent=False) 
                     except IntegrityError:
@@ -444,16 +448,30 @@ def edit_contact_forms(request):
 #================================================================================
 
 def check_app_id(request):
+
+    data = {'ret':0, 'id':None}
+
     if request.is_ajax():
         if request.POST: 
-
-            data = {'ret':0, 'data':None}
-
             try:
                 pro = Profile.objects.get(app_id__iexact = request.POST["id"])
                 data["ret"] = 1
+                data["id"] = pro.user_id
+
                 return HttpResponse(json.dumps(data))
             except:
                 return HttpResponse(json.dumps(data))
+        return HttpResponse(json.dumps(data))
+    return HttpResponse(json.dumps(data))
+
+#================================================================================
+# CHECK APPLICATION ID EXISTS IN THE CONTACT LIST
+#================================================================================
+
+def user_exists_in_list(request):
+    if request.is_ajax():
+        if request.POST:
+            total = Contacts.objects.filter(user = request.user, imported_user_id = int(id)).count()
+            return HttpResponse(int(total))    
         return HttpResponse(json.dumps(data))
     return HttpResponse(json.dumps(data))
