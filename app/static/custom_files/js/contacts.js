@@ -59,11 +59,11 @@ function check_app_id(elem){
     }
 }
 
+$("#id_is_imported_user").on("click", function(){
 
-//******************************************* 
-//  CHECK IF APPLICATION ID EXISTS 
-//********************************************
-
-function send_contact_request(){
-    
-}
+    var r = confirm("Do you want to use the existing details of this user as the contact details");
+    if (r == true) {
+        $("#id_contact_name").val('Existing User');
+        $("form").submit();
+    }
+});

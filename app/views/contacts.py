@@ -24,6 +24,7 @@ class Contacts(View):
     data["view"] = ""
     data["contacts"] = {}
     data["active_link"] = 'Contacts'
+    data["breadcrumb_title"] = 'CONTACTS'
 
     # Custom CSS/JS Files For Inclusion into template
     data["css_files"] = []
@@ -174,12 +175,14 @@ def add_contacts(request, slug = None, ins = None):
                     email_ins.is_official = True
                     email_ins.save()
 
-                return redirect('/contacts/add/step3/{}'.format(data["contact_form_instance"].pk), permanent=True) 
+                if contact_form_ins.is_imported_user:
+                    return redirect('/contacts/'.format(data["contact_form_instance"].pk), permanent=False) 
+                return redirect('/contacts/add/step3/{}'.format(data["contact_form_instance"].pk), permanent=False) 
         
         try:
             c = C.objects.get(pk = data["contact_form_instance"], user = request.user)
         except C.DoesNotExist:
-            return redirect('/unauthorized/', permanent = True)
+            return redirect('/unauthorized/', permanent = False)
 
         if data["breadcrumbs_index"] == 2:            
             contact_email_form = ContactsEmailForm(request.POST or None)
@@ -187,7 +190,7 @@ def add_contacts(request, slug = None, ins = None):
                 contact_email = contact_email_form.save(commit = False)    
                 contact_email.contact = c
                 contact_email.save()
-                return redirect('/contacts/add/step2/{}'.format(data["contact_form_instance"]), permanent=True) 
+                return redirect('/contacts/add/step2/{}'.format(data["contact_form_instance"]), permanent=False) 
 
         if data["breadcrumbs_index"] == 3:            
             contact_address_form = ContactsAddressForm(request.POST or None)
@@ -195,7 +198,7 @@ def add_contacts(request, slug = None, ins = None):
                 contact_address = contact_address_form.save(commit = False)    
                 contact_address.contact = c
                 contact_address.save()                 
-                return redirect('/contacts/add/step3/{}'.format(data["contact_form_instance"]), permanent=True) 
+                return redirect('/contacts/add/step3/{}'.format(data["contact_form_instance"]), permanent=False) 
             
         if data["breadcrumbs_index"] == 4:            
             contact_account_details_form = ContactAccountDetailsForm(request.POST or None)
@@ -203,7 +206,7 @@ def add_contacts(request, slug = None, ins = None):
                 contact_account_details = contact_account_details_form.save(commit = False)    
                 contact_account_details.contact = c
                 contact_account_details.save()                
-                return redirect('/contacts/add/step4/{}'.format(data["contact_form_instance"]), permanent=True) 
+                return redirect('/contacts/add/step4/{}'.format(data["contact_form_instance"]), permanent=False) 
 
     return render(request, template_name, data)
 
