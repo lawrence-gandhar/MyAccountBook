@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from app.other_constants import *
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 #**************************************************************************
 #   CONTACT'S DATA
@@ -82,9 +84,16 @@ class Contacts(models.Model):
     )
 
     email = models.EmailField(
-        blank = False, 
-        null = False, 
+        blank = True, 
+        null = True, 
         db_index = True,
+    )
+
+    phone = models.CharField(
+        max_length = 250,
+        db_index = True,
+        blank = True,
+        null = True,
     )
 
     website = models.CharField(
@@ -190,7 +199,7 @@ class Contacts_Email(models.Model):
     
     email = models.EmailField(
         blank = False, 
-        null = False, 
+        null = True, 
         db_index = True,
     )
 
@@ -395,4 +404,3 @@ class Contact_Account_Details(models.Model):
 
     class Meta:
         verbose_name_plural = 'contacts_account_details_tbl'
-

@@ -10,15 +10,18 @@ class ContactsForm(ModelForm):
         fields = (
                     'is_customer', 'is_vendor', 'is_imported_user', 'imported_user', 'contact_name', 
                     'display_name', 'organization_name', 'organization_type', 'salutation',
-                    'preferred_payment_method', 'preferred_delivery', 
-                    'invoice_terms', 'bills_terms',
+                    'preferred_payment_method', 'preferred_delivery', 'app_id', 'website',
+                    'invoice_terms', 'bills_terms', 'email', 'phone',
                 )
 
         widgets = {
             'is_customer': CheckboxInput(attrs={'class':'input-sm','value':'1',}),
             'is_vendor': CheckboxInput(attrs={'class':'input-sm','value':'1',}),
             'is_imported_user': CheckboxInput(attrs={'class':'input-sm','value':'1',}),
-            'imported_user': TextInput(attrs={'class':'input-sm', 'type':'hidden'}),
+            'imported_user': TextInput(attrs={'class':'form-control input-sm', 'type':'hidden'}),
+            'email': TextInput(attrs={'class':'form-control input-sm', }),
+            'phone': TextInput(attrs={'class':'form-control input-sm', }),
+            'website': TextInput(attrs={'class':'form-control input-sm', }),
             'salutation' : Select(attrs={'class':'form-control input-sm',}, choices = user_constants.SALUTATIONS),
             'contact_name' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'200'}),
             'display_name' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'200'}),

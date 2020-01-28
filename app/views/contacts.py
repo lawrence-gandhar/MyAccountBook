@@ -167,7 +167,14 @@ def add_contacts(request, slug = None, ins = None):
                 data["contact_form_instance"] = contact_form_ins = contact_form.save(commit = False)
                 contact_form_ins.user = request.user
                 contact_form_ins.save()
-                return redirect('/contacts/add/step2/{}'.format(data["contact_form_instance"].pk), permanent=True) 
+
+                if contact_form_ins.email is not None:
+                    email_ins = Contacts_Email.objects.create(contact = contact_form_ins)
+                    email_ins.email = contact_form_ins.email
+                    email_ins.is_official = True
+                    email_ins.save()
+
+                return redirect('/contacts/add/step3/{}'.format(data["contact_form_instance"].pk), permanent=True) 
         
         try:
             c = C.objects.get(pk = data["contact_form_instance"], user = request.user)
