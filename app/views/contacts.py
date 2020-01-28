@@ -8,6 +8,8 @@ from app.models.contacts_model import Contacts as C, Contacts_Email, Contact_Add
 from app.models.users_model import *
 from app.forms.contact_forms import *
 
+from django.db import *
+
 import json
 
 #=====================================================================================
@@ -176,7 +178,18 @@ def add_contacts(request, slug = None, ins = None):
                     email_ins.save()
 
                 if contact_form_ins.is_imported_user:
-                    return redirect('/contacts/'.format(data["contact_form_instance"].pk), permanent=False) 
+                    try:
+                        profile = Profile.objects.get(app_id__iexact = contact_form_ins.app_id)
+                        imp_user = User.objects.get(pk = profile.user_id)
+                    except:
+                        return redirect('/unauthorized/', permanent = False)
+                    try:
+                        contact_form_ins.imported_user = imp_user
+                        contact_form_ins.contact_name = imp_user.first_name.capitalize() +" "+imp_user.last_name.capitalize() 
+                        contact_form_ins.save()
+                        return redirect('/contacts/', permanent=False) 
+                    except IntegrityError:
+                        return redirect('/contacts/add/step1/{}'.format(data["contact_form_instance"].pk), permanent=False) 
                 return redirect('/contacts/add/step3/{}'.format(data["contact_form_instance"].pk), permanent=False) 
         
         try:
@@ -225,8 +238,8 @@ def edit_contact(request, slug = None, ins = None):
                 if contact_form.is_valid(): 
                     contact_form.save()    
             except C.DoesNotExists:
-                return redirect('/unauthorized/', permanent=True)
-    return redirect('/contacts/add/step1/{}'.format(ins), permanent=True)
+                return redirect('/unauthorized/', permanent=False)
+    return redirect('/contacts/add/step1/{}'.format(ins), permanent=False)
 
 #=======================================================================================
 #   FETCH EDIT CONTACT EXTRA FORMS
