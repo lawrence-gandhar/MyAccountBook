@@ -18,7 +18,16 @@ $(document).ready(function(){
     for (var i = 0; i < disabled_elems.length; i++) {
         disabled_elems[i].disabled = !disabled_elems[i].disabled;
     }
-})
+
+});
+
+//
+//
+//
+function close_modal(elem){
+    $("#wait_Modal").hide();
+}
+
 
 //************************************************************* */
 // LOAD FORMS FOR EDIT
@@ -33,8 +42,8 @@ function edit_form_button(form_type, obj){
         $.each(data, function(i,v){
             htm += '<div class="d-table-row" style="padding:10px 0px;">';
             htm += '<div class="d-table-cell" style="padding:0px 10px;">';
-            htm += '<label style="'+v["label_style"]+'">'+v["label"]+'</label></div>';
-            htm += '<div class="d-table-cell" style="padding:5px 10px;">'+v["field"]+'</div>';
+            htm += '<label style="'+v.label_style+'">'+v.label+'</label></div>';
+            htm += '<div class="d-table-cell" style="padding:5px 10px;">'+v.field+'</div>';
             htm += '</div>';
         });
 

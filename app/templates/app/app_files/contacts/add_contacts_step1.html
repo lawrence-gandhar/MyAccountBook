@@ -13,7 +13,7 @@
                             <label>Has Application ID</label>
                         </div>
                         <div class="d-table-cell" style="padding:0px 13px;">
-                            <input type="checkbox" onclick="has_app_id(this)">
+                            <input type="checkbox" id="id_has_app" onclick="has_app_id(this)">
                         </div>                        
                     </div>
                     <div class="d-table-row hide-row" style="padding:10px 0px;" id="app_id_input">
@@ -26,9 +26,9 @@
                         <div class="d-table-cell" style="padding:0px 13px;" id="id_app_id_check"></div>
 
                     </div>
-                    <div class="d-table-row hide-row-2" style="padding:10px 0px;">
+                    <div class="d-table-row hide-row" style="padding:10px 0px;" id="app_id_input_2">
                         <div class="d-table-cell" style="padding:5px 10px;">
-                            <label>Add User To Contact</label>
+                            <label>Use User Details</label>
                         </div>
                         <div class="d-table-cell" style="padding:0px 13px;">
                             {{ contact_form.is_imported_user }}

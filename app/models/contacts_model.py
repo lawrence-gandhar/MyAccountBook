@@ -20,6 +20,7 @@ class Contacts(models.Model):
         default = False,
         db_index = True,
         choices = user_constants.IS_TRUE,
+        blank = True,
     )
 
     imported_user = models.OneToOneField(
@@ -62,8 +63,8 @@ class Contacts(models.Model):
 
     display_name = models.CharField(
         max_length = 250,
-        blank = False,
-        null = False,
+        blank = True,
+        null = True,
         db_index = True,
     )
 
