@@ -37,18 +37,10 @@
                     </div>
                     <div class="d-table-row" style="padding:10px 0px;">
                         <div class="d-table-cell" style="padding:5px 10px;">
-                            <label>Is Customer</label>
+                            <label>Customer Type</label>
                         </div>
                         <div class="d-table-cell" style="padding:0px 13px;">
-                            {{ contact_form.is_customer }}
-                        </div>
-                    </div>
-                    <div class="d-table-row" style="padding:10px 0px;">
-                        <div class="d-table-cell" style="padding:5px 10px;">
-                            <label>Is Vendor</label>
-                        </div>
-                        <div class="d-table-cell" style="padding:0px 13px;">
-                            {{ contact_form.is_vendor }}
+                            {{ contact_form.customer_type }}
                         </div>
                     </div>
                     <div class="d-table-row" style="padding:10px 0px;">
@@ -129,39 +121,6 @@
                         </div>
                         <div class="d-table-cell" style="padding:5px 10px;">
                             {{ contact_form.twitter }}
-                        </div>
-                    </div>
-
-                    <div class="d-table-row" style="padding:10px 0px;">
-                        <div class="d-table-cell" style="padding:5px 10px;">
-                            <label>Preferred Payment Method</label>
-                        </div>
-                        <div class="d-table-cell" style="padding:5px 10px;">
-                            {{ contact_form.preferred_payment_method }}
-                        </div>
-                    </div>
-                    <div class="d-table-row" style="padding:10px 0px;">
-                        <div class="d-table-cell" style="padding:5px 10px;">
-                            <label>Preferred Payment Delivery</label>
-                        </div>
-                        <div class="d-table-cell" style="padding:5px 10px;">
-                            {{ contact_form.preferred_delivery }}
-                        </div>
-                    </div>
-                    <div class="d-table-row" style="padding:10px 0px;">
-                        <div class="d-table-cell" style="padding:5px 10px;">
-                            <label>Terms Of Invoice</label>
-                        </div>
-                        <div class="d-table-cell" style="padding:5px 10px;">
-                            {{ contact_form.invoice_terms }}
-                        </div>
-                    </div>
-                    <div class="d-table-row" style="padding:10px 0px;">
-                        <div class="d-table-cell" style="padding:5px 10px;">
-                            <label>Terms Of Billing</label>
-                        </div>
-                        <div class="d-table-cell" style="padding:5px 10px;">
-                            {{ contact_form.bills_terms }}
                         </div>
                     </div>
                 </div>

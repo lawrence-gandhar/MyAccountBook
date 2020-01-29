@@ -7,6 +7,7 @@ from django.contrib import messages
 from app.models.contacts_model import Contacts as C, Contacts_Email, Contact_Addresses, Contact_Account_Details, ContactsFileUpload
 from app.models.users_model import *
 from app.forms.contact_forms import *
+from app.forms.tax_form import *
 
 from django.conf import *
 
@@ -81,6 +82,7 @@ def add_contacts(request, slug = None, ins = None):
 
     # Initialize Forms
     data["contact_form"] = ContactsForm()
+    data["tax_form"] = TaxForm()
     data["contact_email_form"] = ContactsEmailForm()
     data["contact_address_form"] = ContactsAddressForm()
     data["contact_account_details_form"] = ContactAccountDetailsForm()
@@ -95,9 +97,10 @@ def add_contacts(request, slug = None, ins = None):
 
     breadcrumbs_list = [
             '<li class="nav-item" style="float:left;padding:0px 10px;margin-left:20px;"><a href="/contacts/add/step1/'+ str(data["contact_form_instance"]) +qStr+'" style="color:#FFFFFF; text-decoration:none;"><i class="fas fw fa-user"></i> Basic Details</a></li>',
-            '<li class="nav-item" style="float:left;padding:0px 10px; margin-left:10px;"><a href="/contacts/add/step2/'+ str(data["contact_form_instance"]) +qStr+'" style="color:#FFFFFF; text-decoration:none;"><i class="fas fw fa-envelope-open"></i> Email Details</a></li>',
+            '<li class="nav-item" style="float:left;padding:0px 10px; margin-left:10px;"><a href="/contacts/add/step2/'+ str(data["contact_form_instance"]) +qStr+'" style="color:#FFFFFF; text-decoration:none;"><i class="fas fw fa-percent"></i>Tax Details</a></li>',            
             '<li class="nav-item" style="float:left;padding:0px 10px; margin-left:10px;"><a href="/contacts/add/step3/'+ str(data["contact_form_instance"]) +qStr+'" style="color:#FFFFFF; text-decoration:none;"><i class="fas fw fa-id-card"></i> Address Details</a></li>',
-            '<li class="nav-item" style="float:left;padding:0px 10px; margin-left:10px;"><a href="/contacts/add/step4/'+ str(data["contact_form_instance"]) +qStr+'" style="color:#FFFFFF; text-decoration:none;"><i class="fas fw fa-credit-card"></i> Account Details</a></li>'
+            '<li class="nav-item" style="float:left;padding:0px 10px; margin-left:10px;"><a href="/contacts/add/step4/'+ str(data["contact_form_instance"]) +qStr+'" style="color:#FFFFFF; text-decoration:none;"><i class="fas fw fa-credit-card"></i> Account Details</a></li>',
+            '<li class="nav-item" style="float:left;padding:0px 10px; margin-left:10px;"><a href="/contacts/add/step5/'+ str(data["contact_form_instance"]) +qStr+'" style="color:#FFFFFF; text-decoration:none;"><i class="fas fw fa-envelope-open"></i> Email Details</a></li>',
         ]
 
     if ins is not None:
@@ -125,8 +128,14 @@ def add_contacts(request, slug = None, ins = None):
                     counter = 1
 
                 if data["breadcrumbs_index"] == 2:
-                    data["contact_emails"] = Contacts_Email.objects.filter(contact = data["contact_form_instance"])
-                    counter = data["contact_emails"].count()
+                    try:
+                        tax_record = User_Tax_Details.objects.get(contact = contact, is_user = False)
+                        counter = 1
+                        data["tax_form"] = TaxForm(instance = tax_record)
+                    except:
+                        counter = 0
+                        data["tax_form"] = TaxForm()
+                    
                     
                 if data["breadcrumbs_index"] == 3:
                     data["contact_addresses"] = Contact_Addresses.objects.filter(contact = data["contact_form_instance"])
@@ -135,6 +144,10 @@ def add_contacts(request, slug = None, ins = None):
                 if data["breadcrumbs_index"] == 4:                    
                     data["contact_account_details"] = Contact_Account_Details.objects.filter(contact = data["contact_form_instance"])
                     counter = data["contact_account_details"].count()
+
+                if data["breadcrumbs_index"] == 5:
+                    data["contact_emails"] = Contacts_Email.objects.filter(contact = data["contact_form_instance"])
+                    counter = data["contact_emails"].count()
 
                 if counter == 0 :
                     data["included_template"] = 'app/app_files/contacts/add_contacts_'+data["slug"]+'.html'
@@ -189,21 +202,20 @@ def add_contacts(request, slug = None, ins = None):
                     email_ins.is_official = True
                     email_ins.save()
 
-                    return redirect('/contacts/', permanent=False) 
-                return redirect('/contacts/add/step3/{}'.format(data["contact_form_instance"].pk), permanent=False) 
+                return redirect('/contacts/add/step2/{}'.format(data["contact_form_instance"].pk), permanent=False) 
         
         try:
             c = C.objects.get(pk = data["contact_form_instance"], user = request.user)
         except C.DoesNotExist:
             return redirect('/unauthorized/', permanent = False)
 
-        if data["breadcrumbs_index"] == 2:            
-            contact_email_form = ContactsEmailForm(request.POST or None)
-            if contact_email_form.is_valid():
-                contact_email = contact_email_form.save(commit = False)    
-                contact_email.contact = c
-                contact_email.save()
-                return redirect('/contacts/add/step2/{}'.format(data["contact_form_instance"]), permanent=False) 
+        if data["breadcrumbs_index"] == 2: 
+            contacts_tax_form = TaxForm(request.POST or None)
+            if contacts_tax_form.is_valid():
+                obj = contacts_tax_form.save()
+                obj.contact = c
+                obj.save()
+                return redirect('/contacts/add/step3/{}'.format(data["contact_form_instance"]), permanent=False) 
 
         if data["breadcrumbs_index"] == 3:            
             contact_address_form = ContactsAddressForm(request.POST or None)
@@ -211,7 +223,7 @@ def add_contacts(request, slug = None, ins = None):
                 contact_address = contact_address_form.save(commit = False)    
                 contact_address.contact = c
                 contact_address.save()                 
-                return redirect('/contacts/add/step3/{}'.format(data["contact_form_instance"]), permanent=False) 
+                return redirect('/contacts/add/step4/{}'.format(data["contact_form_instance"]), permanent=False) 
             
         if data["breadcrumbs_index"] == 4:            
             contact_account_details_form = ContactAccountDetailsForm(request.POST or None)
@@ -219,7 +231,16 @@ def add_contacts(request, slug = None, ins = None):
                 contact_account_details = contact_account_details_form.save(commit = False)    
                 contact_account_details.contact = c
                 contact_account_details.save()                
-                return redirect('/contacts/add/step4/{}'.format(data["contact_form_instance"]), permanent=False) 
+                return redirect('/contacts/add/step5/{}'.format(data["contact_form_instance"]), permanent=False) 
+
+        if data["breadcrumbs_index"] == 5:          
+            contact_email_form = ContactsEmailForm(request.POST or None)
+            if contact_email_form.is_valid():
+                contact_email = contact_email_form.save(commit = False)    
+                contact_email.contact = c
+                contact_email.save()
+                return redirect('/contacts/add/step5/{}'.format(data["contact_form_instance"]), permanent=False) 
+            
 
     return render(request, template_name, data)
 

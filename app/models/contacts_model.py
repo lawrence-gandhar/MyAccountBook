@@ -48,18 +48,10 @@ class Contacts(models.Model):
         on_delete = models.SET_NULL,
     )
 
-    is_customer = models.BooleanField(
+    customer_type = models.IntegerField(
         db_index = True,
-        choices = user_constants.IS_TRUE,
-        default = False,
-        null = True,
-        blank = True,
-    )
-
-    is_vendor = models.BooleanField(
-        db_index = True,
-        choices = user_constants.IS_TRUE,
-        default = False,
+        choices = user_constants.CUSTOMER_TYPE,
+        default = 1,
         null = True,
         blank = True,
     )
@@ -135,34 +127,6 @@ class Contacts(models.Model):
         default = True,
     )    
 
-    preferred_payment_method = models.IntegerField(
-        null = True,
-        blank = True,
-        db_index = True,
-        choices = payment_constants.PREFERRED_PAYMENT_TYPE,
-        default = 0
-    )
-
-    preferred_delivery = models.IntegerField(
-        default = 0,
-        db_index = True,
-        choices = payment_constants.PREFERRED_DELIVERY,
-    )
-
-    invoice_terms = models.IntegerField(
-        null = True,
-        blank = True,
-        db_index = True,
-        choices = payment_constants.PAYMENT_DAYS,
-    )
-
-    bills_terms = models.IntegerField(
-        null = True,
-        blank = True,
-        db_index = True,
-        choices = payment_constants.PAYMENT_DAYS,
-    )
-
     notes = models.TextField(
         blank = True,
         null = True,
@@ -182,30 +146,10 @@ class Contacts(models.Model):
     def __str__(self):
         return self.contact_name.upper()
 
-    def is_customer_value(self):
-        if self.is_customer:
-            return "YES"
-        return "NO"
-
-    def is_vendor_value(self):
-        if self.is_vendor:
-            return "YES"
-        return "NO"
-
     def is_active_value(self):
         if self.is_active:
             return "YES"
         return "NO"  
-
-    def invoice_terms_full(self):
-        if self.invoice_terms is not None:
-            return dict(payment_constants.PAYMENT_DAYS)[self.invoice_terms]
-        return '--'
-    
-    def bills_terms_full(self):
-        if self.bills_terms is not None:
-            return dict(payment_constants.PAYMENT_DAYS)[self.bills_terms]
-        return '--'
 
     class Meta:
         verbose_name_plural = 'contacts_tbl'

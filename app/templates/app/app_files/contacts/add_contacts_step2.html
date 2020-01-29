@@ -5,36 +5,116 @@
             <div class="card-header bg-blue">
                 <h5 class="card-title">
                 <span style="color:#000000; background-color:#FFFFFF; padding:0px 10px;margin-right:10px">{{instance_title|upper}}</span>
-                CONTACT'S EMAIL ADDRESSES
+                CONTACT'S TAX DETAILS
                 <a href="{% url 'create-contact-invoice' contact_form_instance %}" class="btn btn-sm button-black" style="float:right; color:#FFFFFF">Create Invoice</a>
                 </h5>
-                <h6 class="card-subtitle mb-2 text-muted">Add Contact's Email Address</h6>
+                <h6 class="card-subtitle mb-2 text-muted">Add Contact's Tax Details</h6>
             </div>
             <div class="card-body">
                 {% csrf_token %}
                 <div class="table" style="padding:10px 0px;">
                     <div class="d-table-row" style="padding:10px 0px;">
                         <div class="d-table-cell" style="padding:0px 10px;">
-                            <label>Email Address</label>
+                            <label>PAN</label>
                         </div>
                         <div class="d-table-cell required-field" style="padding:5px 10px;">
-                            {{ contact_email_form.email }}
+                            {{ tax_form.pan }}
                         </div>
                     </div>
                     <div class="d-table-row" style="padding:10px 0px;">
                         <div class="d-table-cell" style="padding:0px 10px;">
-                            <label>Is Official Email</label>
+                            <label>GSTIN</label>
                         </div>
                         <div class="d-table-cell" style="padding:5px 10px;">
-                            {{ contact_email_form.is_official }}
+                            {{ tax_form.gstin }}
                         </div>
                     </div>
                     <div class="d-table-row" style="padding:10px 0px;">
                         <div class="d-table-cell" style="padding:0px 10px;">
-                            <label>Is Personal Email</label>
+                            <label>GSTIN Reg. No.</label>
                         </div>
                         <div class="d-table-cell" style="padding:5px 10px;">
-                            {{ contact_email_form.is_personal }}
+                            {{ tax_form.gst_reg_type }}
+                        </div>
+                    </div>
+                    <div class="d-table-row" style="padding:10px 0px;">
+                        <div class="d-table-cell" style="padding:0px 10px;">
+                            <label>Business Reg. No.</label>
+                        </div>
+                        <div class="d-table-cell" style="padding:5px 10px;">
+                            {{ tax_form.business_reg_no }}
+                        </div>
+                    </div>
+                    <div class="d-table-row" style="padding:10px 0px;">
+                        <div class="d-table-cell" style="padding:0px 10px;">
+                            <label>Tax Reg. No.</label>
+                        </div>
+                        <div class="d-table-cell" style="padding:5px 10px;">
+                            {{ tax_form.tax_reg_no }}
+                        </div>
+                    </div>
+                    <div class="d-table-row" style="padding:10px 0px;">
+                        <div class="d-table-cell" style="padding:0px 10px;">
+                            <label>CGST Reg. No.</label>
+                        </div>
+                        <div class="d-table-cell" style="padding:5px 10px;">
+                            {{ tax_form.cst_reg_no }}
+                        </div>
+                    </div>
+                    <div class="d-table-row" style="padding:10px 0px;">
+                        <div class="d-table-cell" style="padding:0px 10px;">
+                            <label>TDS%.</label>
+                        </div>
+                        <div class="d-table-cell" style="padding:5px 10px;">
+                            {{ tax_form.tds }}
+                        </div>
+                    </div>
+                    <div class="d-table-row" style="padding:10px 0px;">
+                        <div class="d-table-cell" style="padding:0px 10px;">
+                            <label>Preferred Currency</label>
+                        </div>
+                        <div class="d-table-cell" style="padding:5px 10px;">
+                            {{ tax_form.preferred_currency }}
+                        </div>
+                    </div>
+                    <div class="d-table-row" style="padding:10px 0px;">
+                        <div class="d-table-cell" style="padding:0px 10px;">
+                            <label>Opening Balance</label>
+                        </div>
+                        <div class="d-table-cell" style="padding:5px 10px;">
+                            {{ tax_form.opening_balance }}
+                        </div>
+                    </div>
+                    <div class="d-table-row" style="padding:10px 0px;">
+                        <div class="d-table-cell" style="padding:0px 10px;">
+                            <label>Preferred Payment Method</label>
+                        </div>
+                        <div class="d-table-cell" style="padding:5px 10px;">
+                            {{ tax_form.preferred_payment_method }}
+                        </div>
+                    </div>
+                    <div class="d-table-row" style="padding:10px 0px;">
+                        <div class="d-table-cell" style="padding:0px 10px;">
+                            <label>Preferred Delivery</label>
+                        </div>
+                        <div class="d-table-cell" style="padding:5px 10px;">
+                            {{ tax_form.preferred_delivery }}
+                        </div>
+                    </div>
+                    <div class="d-table-row" style="padding:10px 0px;">
+                        <div class="d-table-cell" style="padding:0px 10px;">
+                            <label>Invoice Terms</label>
+                        </div>
+                        <div class="d-table-cell" style="padding:5px 10px;">
+                            {{ tax_form.invoice_terms }}
+                        </div>
+                    </div>
+                    <div class="d-table-row" style="padding:10px 0px;">
+                        <div class="d-table-cell" style="padding:0px 10px;">
+                            <label>Billing Terms</label>
+                        </div>
+                        <div class="d-table-cell" style="padding:5px 10px;">
+                            {{ tax_form.bills_terms }}
                         </div>
                     </div>
                 </div>

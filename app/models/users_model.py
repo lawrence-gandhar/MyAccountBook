@@ -5,6 +5,8 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.crypto import get_random_string
 
+from app.models.contacts_model import *
+
 #**************************************************************************
 #   USER'S PROFILE DETAILS
 #**************************************************************************
@@ -267,10 +269,26 @@ class User_Address_Details(models.Model):
 
 class User_Tax_Details(models.Model):
     
-    user = models.OneToOneField(
+    is_user = models.BooleanField(
+        db_index = True,
+        default = False,
+        choices = user_constants.IS_TRUE,
+    )
+
+    user = models.ForeignKey(
         User,
         db_index = True,
-        on_delete = models.CASCADE
+        on_delete = models.CASCADE,
+        null = True,
+        blank = True,
+    )
+
+    contact = models.ForeignKey(
+        Contacts,
+        db_index = True,
+        on_delete = models.CASCADE,
+        null = True,
+        blank = True,
     )
 
     pan = models.CharField(
@@ -382,17 +400,3 @@ def create_user_profile(sender, instance, created, **kwargs):
         pro.app_id = 'APK-'+get_random_string(length=10)
         pro.save()
 
-@receiver(post_save, sender=User)
-def create_user_account_details(sender, instance, created, **kwargs):
-    if created:
-        User_Account_Details.objects.create(user=instance)
-
-@receiver(post_save, sender=User)
-def create_user_address_details(sender, instance, created, **kwargs):
-    if created:
-        User_Address_Details.objects.create(user=instance)
-
-@receiver(post_save, sender=User)
-def create_user_tax_details(sender, instance, created, **kwargs):
-    if created:
-        User_Tax_Details.objects.create(user=instance)

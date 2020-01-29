@@ -1,0 +1,120 @@
+<div class="row">
+    <div class="col-lg-12" style="padding:0px">
+        <div class="card">
+            <div class="card-header bg-blue">
+                <h5 class="card-title">
+                    <span style="color:#000000; background-color:#FFFFFF; padding:0px 10px;margin-right:10px">{{instance_title|upper}}</span>
+                    CONTACT'S EMAIL DETAILS
+                    <a href="{% url 'create-contact-invoice' contact_form_instance %}" class="btn btn-sm button-black" style="float:right; color:#FFFFFF">Create Invoice</a>
+                </h5>
+                <h6 class="card-subtitle mb-2 text-muted">Manage Contact's Email Addresses</h6>
+            </div>
+            <div class="card-body">
+                <div class="table">
+                    <table class="table-bordered" width="100%" cellspacing="0">
+                        <tr style="background-color:#5d5d5d;">
+                            <td class="text-center font-bold font-white" style="padding:10px;">Email Address</td>
+                            <td class="text-center font-bold font-white">Is Official</td>
+                            <td class="text-center font-bold font-white">Is Personal</td class="text-center font-bold font-white">
+                            <td class="text-center font-bold font-white">Created On</td class="text-center font-bold font-white">
+                            <td class="text-center font-bold font-white">Action</td class="text-center font-bold font-white">
+                        </tr>
+                        {% for email in contact_emails %}
+                            <tr>
+                                <td>{{email.email}}</td>
+                                <td class="text-center">{{email.is_official_full}}</td>
+                                <td class="text-center">{{email.is_personal_full}}</tdclass="text-center>
+                                <td>{{email.created_on}}</td>
+                                <td class="text-center" width="80px">
+                                    {% csrf_token %}
+                                    <button class="btn btn-primary btn-sm" style="margin-right: 2px" onclick="edit_form_button('edit_contact_email',{{email.id}})">
+                                        <i class="fas fa-fw fa-pencil-alt" style="font-size:70%"></i>
+                                    </button>
+                                    <a class="btn btn-danger btn-sm" href="{% url 'delete-contacts' 'step2' contact_form_instance email.id %}">
+                                        <i class="fas fa-fw fa-trash-alt" style="font-size:70%"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}    
+                    </table>
+                </div>                
+            </div>
+            <div class="card-footer text-center">
+                <a href="{% url 'add-contacts' 'step1' contact_form_instance %}" type="button" class="btn button button-blue">Back</a>
+                <button type="button" class="btn button button-green" data-toggle="modal" data-target="#addModal">Add Another</button>
+                <a href="{% url 'add-contacts' 'step3' contact_form_instance %}" type="button" class="btn button button-blue">Next</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Modal -->
+<div class="modal" id="addModal">
+    <div class="modal-dialog">
+        <div class="modal-content">            
+            <form method="post" action="">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Email Address</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="table" style="padding:10px 0px;">
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:0px 10px;">
+                                <label>Email Address</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                {{ contact_email_form.email }}
+                            </div>
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:0px 10px;">
+                                <label>Is Official Email</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                {{ contact_email_form.is_official }}
+                            </div>
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:0px 10px;">
+                                <label>Is Personal Email</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                {{ contact_email_form.is_personal }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn button button-green">Submit</button>
+                    <button type="button" class="btn button button-red" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal" id="editModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" action="{% url 'edit-contact-forms' %}">
+                <input type="hidden" name="slug" value="{{slug}}">
+                <input type="hidden" name="form_ins" value="{{contact_form_instance}}">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Email Details</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" id="extra_form_layout">
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn button button-green">Submit</button>
+                    <button type="button" class="btn button button-red" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

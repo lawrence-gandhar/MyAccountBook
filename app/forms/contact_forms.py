@@ -16,15 +16,13 @@ class ContactsForm(ModelForm):
 
         model = Contacts
         fields = (
-                    'is_customer', 'is_vendor', 'is_imported_user', 'imported_user', 'contact_name', 
+                    'customer_type', 'is_imported_user', 'imported_user', 'contact_name', 
                     'display_name', 'organization_name', 'organization_type', 'salutation',
-                    'preferred_payment_method', 'preferred_delivery', 'app_id', 'website',
-                    'invoice_terms', 'bills_terms', 'email', 'phone', 'facebook', 'twitter',
+                    'app_id', 'website', 'email', 'phone', 'facebook', 'twitter',
                 )
 
         widgets = {
-            'is_customer': CheckboxInput(attrs={'class':'input-sm','value':'1',}),
-            'is_vendor': CheckboxInput(attrs={'class':'input-sm','value':'1',}),
+            'customer_type': Select(attrs={'class':'form-control input-sm'}, choices = user_constants.CUSTOMER_TYPE),
             'is_imported_user': CheckboxInput(attrs={'class':'input-sm','value':'1',}),
             'imported_user': TextInput(attrs={'class':'form-control input-sm', 'type':'hidden'}),
             'email': TextInput(attrs={'class':'form-control input-sm', }),
@@ -37,10 +35,6 @@ class ContactsForm(ModelForm):
             'twitter' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'200'}),
             'organization_type' : Select(attrs={'class':'form-control input-sm',}, choices = user_constants.ORGANIZATION_TYPE, ),
             'organization_name' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'200'}),
-            'invoice_terms' : Select(attrs={'class':'form-control input-sm',}, choices = payment_constants.PAYMENT_DAYS, ),
-            'bills_terms' : Select(attrs={'class':'form-control input-sm',}, choices = payment_constants.PAYMENT_DAYS, ),
-            'preferred_payment_method' : Select(attrs={'class':'form-control input-sm',}, choices = payment_constants.PREFERRED_PAYMENT_TYPE, ),
-            'preferred_delivery' : Select(attrs={'class':'form-control input-sm',}, choices = payment_constants.PREFERRED_DELIVERY, ),
         }
 
 class ContactsEmailForm(ModelForm):

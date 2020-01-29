@@ -4,117 +4,130 @@
             <div class="card-header bg-blue">
                 <h5 class="card-title">
                     <span style="color:#000000; background-color:#FFFFFF; padding:0px 10px;margin-right:10px">{{instance_title|upper}}</span>
-                    CONTACT'S EMAIL DETAILS
+                    TAX DETAILS
                     <a href="{% url 'create-contact-invoice' contact_form_instance %}" class="btn btn-sm button-black" style="float:right; color:#FFFFFF">Create Invoice</a>
                 </h5>
-                <h6 class="card-subtitle mb-2 text-muted">Manage Contact's Email Addresses</h6>
+                <h6 class="card-subtitle mb-2 text-muted">Edit Contact's Tax Details</h6>
             </div>
-            <div class="card-body">
-                <div class="table">
-                    <table class="table-bordered" width="100%" cellspacing="0">
-                        <tr style="background-color:#5d5d5d;">
-                            <td class="text-center font-bold font-white" style="padding:10px;">Email Address</td>
-                            <td class="text-center font-bold font-white">Is Official</td>
-                            <td class="text-center font-bold font-white">Is Personal</td class="text-center font-bold font-white">
-                            <td class="text-center font-bold font-white">Created On</td class="text-center font-bold font-white">
-                            <td class="text-center font-bold font-white">Action</td class="text-center font-bold font-white">
-                        </tr>
-                        {% for email in contact_emails %}
-                            <tr>
-                                <td>{{email.email}}</td>
-                                <td class="text-center">{{email.is_official_full}}</td>
-                                <td class="text-center">{{email.is_personal_full}}</tdclass="text-center>
-                                <td>{{email.created_on}}</td>
-                                <td class="text-center" width="80px">
-                                    {% csrf_token %}
-                                    <button class="btn btn-primary btn-sm" style="margin-right: 2px" onclick="edit_form_button('edit_contact_email',{{email.id}})">
-                                        <i class="fas fa-fw fa-pencil-alt" style="font-size:70%"></i>
-                                    </button>
-                                    <a class="btn btn-danger btn-sm" href="{% url 'delete-contacts' 'step2' contact_form_instance email.id %}">
-                                        <i class="fas fa-fw fa-trash-alt" style="font-size:70%"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        {% endfor %}    
-                    </table>
-                </div>                
-            </div>
-            <div class="card-footer text-center">
-                <a href="{% url 'add-contacts' 'step1' contact_form_instance %}" type="button" class="btn button button-blue">Back</a>
-                <button type="button" class="btn button button-green" data-toggle="modal" data-target="#addModal">Add Another</button>
-                <a href="{% url 'add-contacts' 'step3' contact_form_instance %}" type="button" class="btn button button-blue">Next</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Add Modal -->
-<div class="modal" id="addModal">
-    <div class="modal-dialog">
-        <div class="modal-content">            
-            <form method="post" action="">
-                {% csrf_token %}
-                <div class="modal-header">
-                    <h4 class="modal-title">Add Email Address</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
+            <form method="post" class="disabled_form_elements" action="/contacts/edit/step1/{{contact_form_instance}}/">
+                <div class="card-body">
+                    {% csrf_token %}
                     <div class="table" style="padding:10px 0px;">
                         <div class="d-table-row" style="padding:10px 0px;">
                             <div class="d-table-cell" style="padding:0px 10px;">
-                                <label>Email Address</label>
+                                <label>PAN</label>
                             </div>
-                            <div class="d-table-cell" style="padding:5px 10px;">
-                                {{ contact_email_form.email }}
-                            </div>
-                        </div>
-                        <div class="d-table-row" style="padding:10px 0px;">
-                            <div class="d-table-cell" style="padding:0px 10px;">
-                                <label>Is Official Email</label>
-                            </div>
-                            <div class="d-table-cell" style="padding:5px 10px;">
-                                {{ contact_email_form.is_official }}
+                            <div class="d-table-cell required-field" style="padding:5px 10px;">
+                                {{ tax_form.pan }}
                             </div>
                         </div>
                         <div class="d-table-row" style="padding:10px 0px;">
                             <div class="d-table-cell" style="padding:0px 10px;">
-                                <label>Is Personal Email</label>
+                                <label>GSTIN</label>
                             </div>
                             <div class="d-table-cell" style="padding:5px 10px;">
-                                {{ contact_email_form.is_personal }}
+                                {{ tax_form.gstin }}
+                            </div>
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:0px 10px;">
+                                <label>GSTIN Reg. No.</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                {{ tax_form.gst_reg_type }}
+                            </div>
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:0px 10px;">
+                                <label>Business Reg. No.</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                {{ tax_form.business_reg_no }}
+                            </div>
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:0px 10px;">
+                                <label>Tax Reg. No.</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                {{ tax_form.tax_reg_no }}
+                            </div>
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:0px 10px;">
+                                <label>CGST Reg. No.</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                {{ tax_form.cst_reg_no }}
+                            </div>
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:0px 10px;">
+                                <label>TDS%.</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                {{ tax_form.tds }}
+                            </div>
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:0px 10px;">
+                                <label>Preferred Currency</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                {{ tax_form.preferred_currency }}
+                            </div>
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:0px 10px;">
+                                <label>Opening Balance</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                {{ tax_form.opening_balance }}
+                            </div>
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:0px 10px;">
+                                <label>Preferred Payment Method</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                {{ tax_form.preferred_payment_method }}
+                            </div>
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:0px 10px;">
+                                <label>Preferred Delivery</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                {{ tax_form.preferred_delivery }}
+                            </div>
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:0px 10px;">
+                                <label>Invoice Terms</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                {{ tax_form.invoice_terms }}
+                            </div>
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:0px 10px;">
+                                <label>Billing Terms</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                {{ tax_form.bills_terms }}
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button class="btn button button-green">Submit</button>
-                    <button type="button" class="btn button button-red" data-dismiss="modal">Close</button>
+                </div>
+                <div class="card-footer text-center">
+                    <button type="button" class="btn button button-orange" id="edit_contact">Edit</button>
+                    <button style="display:none;" type="button" class="btn button button-red" id="cancel_edit_contact">Cancel</button>
+                    <button style="display:none;" class="btn button button-green" id="save_edit_contact">Save</button>
+                    <a href="{% url 'add-contacts' 'step2' contact_form_instance %}" type="button" class="btn button button-blue">Next</a>
                 </div>
             </form>
         </div>
     </div>
 </div>
 
-<!-- Edit Modal -->
-<div class="modal" id="editModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form method="post" action="{% url 'edit-contact-forms' %}">
-                <input type="hidden" name="slug" value="{{slug}}">
-                <input type="hidden" name="form_ins" value="{{contact_form_instance}}">
-                {% csrf_token %}
-                <div class="modal-header">
-                    <h4 class="modal-title">Edit Email Details</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body" id="extra_form_layout">
-
-                </div>
-                <div class="modal-footer">
-                    <button class="btn button button-green">Submit</button>
-                    <button type="button" class="btn button button-red" data-dismiss="modal">Close</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
