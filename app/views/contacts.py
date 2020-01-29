@@ -4,13 +4,15 @@ from django.views import View
 from collections import OrderedDict, defaultdict
 from django.contrib import messages
 
-from app.models.contacts_model import Contacts as C, Contacts_Email, Contact_Addresses, Contact_Account_Details
+from app.models.contacts_model import Contacts as C, Contacts_Email, Contact_Addresses, Contact_Account_Details, ContactsFileUpload
 from app.models.users_model import *
 from app.forms.contact_forms import *
 
+from django.conf import *
+
 from django.db import *
 
-import json
+import json, os, csv
 
 #=====================================================================================
 #   CONTACTS VIEW
@@ -473,7 +475,7 @@ def user_exists_in_list(request):
 #
 #
 #
-class ContactsFileUpload(View):
+class ContactsFileUploadView(View):
     
     # Template 
     template_name = 'app/app_files/contacts/add_contacts.html'
@@ -500,6 +502,17 @@ class ContactsFileUpload(View):
         self.data["upload_form"] = UploadContactsForm(request.POST, request.FILES)
 
         if self.data["upload_form"].is_valid():
-            self.data["upload_form"].save()
+            self.data["upload_form"].save(commit = False)
+            self.data["upload_form"].user = request.user
+            obj = self.data["upload_form"].save()
+
+            #ContactsFileUpload.objects.get(pk = obj.id)
+
+            file_path = settings.MEDIA_ROOT+"/"+str(obj.csv_file)
+
+            with open(file_path) as csvfile:
+                records = csv.reader(csvfile, delimiter=',')
+                for row in records:
+                    print(row) 
 
         return render(request, self.template_name, self.data)

@@ -8,7 +8,7 @@ class UploadContactsForm(ModelForm):
         fields = ('csv_file',)
 
         widgets = {
-            'csv_file' : FileInput(attrs = {'class':'form-control input-sm'}),
+            'csv_file' : FileInput(attrs = {'class':'form-control input-sm', 'accept': ".csv"}),
         }
 
 class ContactsForm(ModelForm):
