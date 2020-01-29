@@ -4,7 +4,7 @@ from django.views import View
 from collections import OrderedDict, defaultdict
 from django.contrib import messages
 
-from app.models.contacts_model import Contacts as C, Contacts_Email, Contact_Addresses, Contact_Account_Details, ContactsFileUpload
+from app.models.contacts_model import Contacts, Contacts_Email, Contact_Addresses, Contact_Account_Details, ContactsFileUpload
 from app.models.users_model import *
 from app.forms.contact_forms import *
 from app.forms.tax_form import *
@@ -41,7 +41,7 @@ class Contacts(View):
 
         view_type = request.GET.get('view',False)
 
-        contacts = C.objects.filter(user = request.user)
+        contacts = Contacts.objects.filter(user = request.user)
         self.data["contacts"] = contacts
 
         if view_type:
@@ -105,7 +105,7 @@ def add_contacts(request, slug = None, ins = None):
 
     if ins is not None:
         try: 
-            contact = C.objects.get(pk = data["contact_form_instance"], user = request.user)
+            contact = Contacts.objects.get(pk = data["contact_form_instance"], user = request.user)
             data["instance_title"] = contact.contact_name
         except C.DoesNotExist:
             return redirect('/unauthorized/', permanent = True)
@@ -120,9 +120,6 @@ def add_contacts(request, slug = None, ins = None):
         else:
             
             try:
-                contact = C.objects.get(pk = data["contact_form_instance"], user = request.user)
-                data["instance_title"] = contact.contact_name
-
                 if data["breadcrumbs_index"] == 1:
                     data["contact_form"] = ContactsForm(instance = contact)
                     counter = 1
@@ -205,8 +202,8 @@ def add_contacts(request, slug = None, ins = None):
                 return redirect('/contacts/add/step2/{}'.format(data["contact_form_instance"].pk), permanent=False) 
         
         try:
-            c = C.objects.get(pk = data["contact_form_instance"], user = request.user)
-        except C.DoesNotExist:
+            c = Contacts.objects.get(pk = data["contact_form_instance"], user = request.user)
+        except Contacts.DoesNotExist:
             return redirect('/unauthorized/', permanent = False)
 
         if data["breadcrumbs_index"] == 2: 
@@ -253,7 +250,7 @@ def edit_contact(request, slug = None, ins = None):
     if request.POST:
         if slug is not None and ins is not None:
             try:
-                contact = C.objects.get(pk = int(ins), user = request.user)
+                contact = Contacts.objects.get(pk = int(ins), user = request.user)
                 contact_form = ContactsForm(request.POST, instance = contact)
                 
                 if contact_form.is_valid(): 
@@ -360,7 +357,7 @@ def delete_contacts(request, slug = None, ins = None, obj = None):
 
     if slug is not None and ins is not None and obj is not None:
         try: 
-            contact = C.objects.get(pk = ins, user = request.user)
+            contact = Contacts.objects.get(pk = ins, user = request.user)
         except C.DoesNotExist:
             return redirect('/unauthorized/', permanent = True)
 
@@ -480,7 +477,7 @@ def get_app_user_id(app_id):
 #================================================================================
 
 def count_user_in_contact_list(user_id, imp_user_id):
-    return C.objects.filter(user = user_id, imported_user_id = int(imp_user_id)).count()
+    return Contacts.objects.filter(user = user_id, imported_user_id = int(imp_user_id)).count()
 
 #================================================================================
 # USER - CONTACT ALREADY PRESENT IN THE CONTACT LIST
@@ -570,9 +567,31 @@ def csv_2_contacts(user, file_path):
                 
                 #
                 #
+
+                contact = Contacts(
+                    salutation = row["salutation"],
+                    customer_type = row["customer_type"],
+                    is_sub_customer = row["is_sub_customer"],
+                    contact_name = row["contact_name"],
+                    display_name = row["display_name"],
+                    organization_type = row["organization_type"],
+                    is_msme_reg = row["is_msme_reg"],
+                    email = row["email"],
+                    phone = row["phone"],
+                    website = row["website"],
+                    facebook = row["facebook"],
+                    twitter = row["twitter"],
+                )
+                xtrem = contact.save()
+
+                if row["use_app_user_details"] == 'TRUE': 
+                    xterm.is_imported_user = row["use_app_user_details"]
+
+
+
                 if row["app_id"].strip() !="":
                     ret = get_app_user_id(row["app_id"])
-                    
+
                     #   If @ret is TRUE and user is not present in the  
                     #   contact list then add user to contact list.
                     #   If user is present then overwrite the data with the 
@@ -585,6 +604,14 @@ def csv_2_contacts(user, file_path):
                                 app_id = row["app_id"],
                             )
 
-                            contact.save()
+                            obj = contact.save()
+
+
                             print('data saved')
+                else:
+                    contact = Contacts(
+                                user = user,
+                            )
+
+                    contact.save()
                 row_count += 1
