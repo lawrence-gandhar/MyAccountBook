@@ -169,13 +169,6 @@ def add_contacts(request, slug = None, ins = None):
             if contact_form.is_valid():
                 data["contact_form_instance"] = contact_form_ins = contact_form.save(commit = False)
                 contact_form_ins.user = request.user
-                contact_form_ins.save()
-
-                if contact_form_ins.email is not None:
-                    email_ins = Contacts_Email.objects.create(contact = contact_form_ins)
-                    email_ins.email = contact_form_ins.email
-                    email_ins.is_official = True
-                    email_ins.save()
 
                 if contact_form_ins.is_imported_user:
                     try:
@@ -183,17 +176,18 @@ def add_contacts(request, slug = None, ins = None):
                         imp_user = User.objects.get(pk = profile.user_id)
                     except:
                         return redirect('/unauthorized/', permanent = False)
-                    try:
-                        contact_form_ins.imported_user = imp_user
+                    
+                    contact_form_ins.imported_user = imp_user
+                
+                contact_form_ins.save()
+                
+                if contact_form_ins.email is not None:
+                    email_ins = Contacts_Email.objects.create(contact = contact_form_ins)
+                    email_ins.email = contact_form_ins.email
+                    email_ins.is_official = True
+                    email_ins.save()
 
-                        if imp_user.first_name is not None:
-                            contact_form_ins.contact_name = imp_user.first_name.capitalize() +" "+imp_user.last_name.capitalize() 
-                        else:
-                            contact_form_ins.contact_name = imp_user.username
-                        contact_form_ins.save()
-                        return redirect('/contacts/', permanent=False) 
-                    except IntegrityError:
-                        return redirect('/contacts/add/step1/{}'.format(data["contact_form_instance"].pk), permanent=False) 
+                    return redirect('/contacts/', permanent=False) 
                 return redirect('/contacts/add/step3/{}'.format(data["contact_form_instance"].pk), permanent=False) 
         
         try:
@@ -471,7 +465,7 @@ def check_app_id(request):
 def user_exists_in_list(request):
     if request.is_ajax():
         if request.POST:
-            total = Contacts.objects.filter(user = request.user, imported_user_id = int(id)).count()
-            return HttpResponse(int(total))    
-        return HttpResponse(json.dumps(data))
-    return HttpResponse(json.dumps(data))
+            total = C.objects.filter(user = request.user, imported_user_id = int(request.POST["id"])).count()
+            return HttpResponse(total)    
+        return HttpResponse(-1)
+    return HttpResponse(-1)

@@ -71,9 +71,28 @@ function check_app_id(elem){
 
 $("#id_is_imported_user").on("click", function(){
 
-    var r = confirm("Do you want to use the existing details of this user as the contact details");
-    if (r == true) {
-        $("#id_contact_name").val('Existing User');
-        $("form").submit();
+    if($(this).prop("checked") === true){
+
+        csrf = $("form").find("input[name='csrfmiddlewaretoken']").val();
+
+        $.post('/contacts/user_exists_in_list/',{'id':$("#id_imported_user").val(), 'csrfmiddlewaretoken':csrf}, function(data){
+                        
+            if(data == 0){
+                var r = confirm("Do you want to use the existing details of this user as the contact details");
+                if (r === true) {
+                    $("#id_contact_name").val('Existing App User');
+                }else{
+                    $(this).prop("checked", false);
+                }
+            }
+            if(data >=1){
+                var r = confirm("A user with the same AppId exists in your contact list. Do you still want to create a new contact?");
+                if (r === true) {
+                    $("#id_contact_name").val('Existing App User');
+                }else{
+                    $(this).prop("checked", false);
+                }
+            }
+        });
     }
 });

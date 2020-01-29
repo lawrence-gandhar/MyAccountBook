@@ -32,6 +32,7 @@ urlpatterns += [
     path('contacts/delete_contacts/<slug:slug>/<int:ins>/<int:obj>/', never_cache(login_required(contacts.delete_contacts)), name = 'delete-contacts'),
     path('contacts/edit_contact_forms/', never_cache(login_required(contacts.edit_contact_forms)), name = 'edit-contact-forms'),
     path('contacts/check_appid/', never_cache(login_required(contacts.check_app_id)), name='check-appid'),
+    path('contacts/user_exists_in_list/', never_cache(login_required(contacts.user_exists_in_list)), name='check-appid-user-exist'),
 ]
 
 # Invoice
