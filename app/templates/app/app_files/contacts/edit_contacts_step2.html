@@ -121,10 +121,11 @@
                 </div>
                 </div>
                 <div class="card-footer text-center">
+                    <a href="{% url 'add-contacts' 'step1' contact_form_instance %}" type="button" class="btn button button-blue">Back</a>
                     <button type="button" class="btn button button-orange" id="edit_contact">Edit</button>
                     <button style="display:none;" type="button" class="btn button button-red" id="cancel_edit_contact">Cancel</button>
                     <button style="display:none;" class="btn button button-green" id="save_edit_contact">Save</button>
-                    <a href="{% url 'add-contacts' 'step2' contact_form_instance %}" type="button" class="btn button button-blue">Next</a>
+                    <a href="{% url 'add-contacts' 'step3' contact_form_instance %}" type="button" class="btn button button-blue">Next</a>
                 </div>
             </form>
         </div>

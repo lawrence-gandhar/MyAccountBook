@@ -18,11 +18,14 @@ class ContactsForm(ModelForm):
         fields = (
                     'customer_type', 'is_imported_user', 'imported_user', 'contact_name', 
                     'display_name', 'organization_name', 'organization_type', 'salutation',
-                    'app_id', 'website', 'email', 'phone', 'facebook', 'twitter',
+                    'app_id', 'website', 'email', 'phone', 'facebook', 'twitter', 
+                    'is_sub_customer', 'is_msme_reg',
                 )
 
         widgets = {
             'customer_type': Select(attrs={'class':'form-control input-sm'}, choices = user_constants.CUSTOMER_TYPE),
+            'is_sub_customer': Select(attrs={'class':'form-control input-sm'}, choices = user_constants.IS_SUB_CUSTOMER),
+            'is_msme_reg': Select(attrs={'class':'form-control input-sm'}, choices = user_constants.IS_TRUE),
             'is_imported_user': CheckboxInput(attrs={'class':'input-sm','value':'1',}),
             'imported_user': TextInput(attrs={'class':'form-control input-sm', 'type':'hidden'}),
             'email': TextInput(attrs={'class':'form-control input-sm', }),

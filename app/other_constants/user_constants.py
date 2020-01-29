@@ -77,3 +77,9 @@ CUSTOMER_TYPE = (
     (3, 'EMPLOYEE'),
     (4, 'OTHERS'),
 )
+
+IS_SUB_CUSTOMER = (
+    (1, 'Parent Customer'),
+    (2, 'Bill With Parent'),
+    (3, 'Bill with Customer'),
+)

@@ -56,6 +56,14 @@ class Contacts(models.Model):
         blank = True,
     )
 
+    is_sub_customer = models.IntegerField(
+        choices = user_constants.IS_SUB_CUSTOMER,
+        default = 1,
+        db_index = True,
+        null = True,
+        blank = True,
+    )
+
     salutation = models.IntegerField(
         db_index = True,
         default = 0,
@@ -87,6 +95,12 @@ class Contacts(models.Model):
         db_index = True,
         blank = True,
         null = True,
+    )
+
+    is_msme_reg = models.BooleanField(
+        db_index = True,
+        choices = user_constants.IS_TRUE,
+        default = False,
     )
 
     email = models.EmailField(
