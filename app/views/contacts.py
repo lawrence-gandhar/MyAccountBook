@@ -462,24 +462,37 @@ def edit_contact_forms(request):
 
 #================================================================================
 # CHECK APPLICATION ID
+# GET USER ID BASED ON THE CHECK
+#================================================================================
+
+def get_app_user_id(app_id):
+    data = {'ret':0, 'id':None}
+    try:
+        pro = Profile.objects.get(app_id__iexact = app_id)
+        data["ret"] = 1
+        data["id"] = pro.user_id
+    except:
+        pass
+    return data
+
+#================================================================================
+# CHECK APPLICATION ID
+#================================================================================
+
+def count_user_in_contact_list(user_id, imp_user_id):
+    return C.objects.filter(user = user_id, imported_user_id = int(imp_user_id)).count()
+
+#================================================================================
+# USER - CONTACT ALREADY PRESENT IN THE CONTACT LIST
 #================================================================================
 
 def check_app_id(request):
-
-    data = {'ret':0, 'id':None}
-
+    data = {}
     if request.is_ajax():
         if request.POST: 
-            try:
-                pro = Profile.objects.get(app_id__iexact = request.POST["id"])
-                data["ret"] = 1
-                data["id"] = pro.user_id
-
-                return HttpResponse(json.dumps(data))
-            except:
-                return HttpResponse(json.dumps(data))
-        return HttpResponse(json.dumps(data))
+            data = get_app_user_id(request.POST["id"])
     return HttpResponse(json.dumps(data))
+
 
 #================================================================================
 # CHECK APPLICATION ID EXISTS IN THE CONTACT LIST
@@ -488,14 +501,15 @@ def check_app_id(request):
 def user_exists_in_list(request):
     if request.is_ajax():
         if request.POST:
-            total = C.objects.filter(user = request.user, imported_user_id = int(request.POST["id"])).count()
+            total = count_user_in_contact_list(request.user, request.POST["id"])
             return HttpResponse(total)    
         return HttpResponse(-1)
     return HttpResponse(-1)
 
-#
-#
-#
+#================================================================================
+# CONTACTS FILE UPLOAD VIEW
+#================================================================================
+
 class ContactsFileUploadView(View):
     
     # Template 
@@ -513,9 +527,11 @@ class ContactsFileUploadView(View):
     data["js_files"] = []
 
     data["included_template"] = 'app/app_files/contacts/upload_contacts.html'
+    
     #
     #
     def get(self, request):        
+        self.data["error"] = ""
         self.data["upload_form"] = UploadContactsForm()
         return render(request, self.template_name, self.data)
 
@@ -523,17 +539,52 @@ class ContactsFileUploadView(View):
         self.data["upload_form"] = UploadContactsForm(request.POST, request.FILES)
 
         if self.data["upload_form"].is_valid():
-            self.data["upload_form"].save(commit = False)
-            self.data["upload_form"].user = request.user
-            obj = self.data["upload_form"].save()
 
-            #ContactsFileUpload.objects.get(pk = obj.id)
+            if str(request.FILES['csv_file']).lower().endswith('.csv'):
 
-            file_path = settings.MEDIA_ROOT+"/"+str(obj.csv_file)
+                self.data["upload_form"].save(commit = False)
+                self.data["upload_form"].user = request.user
+                obj = self.data["upload_form"].save()
 
-            with open(file_path) as csvfile:
-                records = csv.reader(csvfile, delimiter=',')
-                for row in records:
-                    print(row) 
+                #
+                #   Write data to database
+                #
+                file_path = settings.MEDIA_ROOT+"/"+str(obj.csv_file)
+                csv_2_contacts(request.user,file_path)
 
+                return redirect('/contacts/', permanent=False)
+            else:
+                self.data["error"] = "Only CSV file is supported"
         return render(request, self.template_name, self.data)
+
+#==============================================================================
+#
+#==============================================================================
+#
+def csv_2_contacts(user, file_path):
+    row_count = 0
+    with open(file_path, newline='', encoding='utf-8') as csvfile:
+        records = csv.DictReader(csvfile)
+        for row in records:
+            if row["is_parent_record"] == 'TRUE':
+                
+                #
+                #
+                if row["app_id"].strip() !="":
+                    ret = get_app_user_id(row["app_id"])
+                    
+                    #   If @ret is TRUE and user is not present in the  
+                    #   contact list then add user to contact list.
+                    #   If user is present then overwrite the data with the 
+                    #   csv record data.
+                    #    
+                    if ret["ret"] == 1:
+                        if count_user_in_contact_list(user, ret["id"]) == 0:
+                            contact = Contacts(
+                                user = user,
+                                app_id = row["app_id"],
+                            )
+
+                            contact.save()
+                            print('data saved')
+                row_count += 1

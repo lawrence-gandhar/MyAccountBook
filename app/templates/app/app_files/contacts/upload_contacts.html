@@ -11,6 +11,13 @@
             <form method="post" enctype="multipart/form-data">
                 <div class="card-body">
                     {% csrf_token %}
+
+                    {% if error %}
+                        <div class="alert alert-danger">
+                            {{ error|safe }}
+                        </div>
+                    {% endif %}
+
                     <div class="table" style="padding:10px 0px;">
                         <div class="d-table-row" style="padding:10px 0px;">
                             <div class="d-table-cell" style="padding:0px 10px;">
