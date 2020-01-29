@@ -4,6 +4,20 @@ from app.other_constants import *
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+from uuid import uuid4
+import os
+
+#==========================================================================
+#   CHANGE LOGO FILE NAMES
+#==========================================================================
+#
+def file_rename(instance, filename):
+
+    upload_path = 'contact_csv_imports'
+    ext = filename.split('.')[-1]
+    return  os.path.join(upload_path,'{}.{}'.format(uuid4().hex, ext))
+
+
 #**************************************************************************
 #   CONTACT'S DATA
 #**************************************************************************
@@ -101,6 +115,18 @@ class Contacts(models.Model):
         db_index = True,
         blank = True,
         null = True,
+    )
+
+    facebook = models.CharField(
+        blank = True,
+        null = True,
+        max_length = 250,
+    )
+
+    twitter = models.CharField(
+        blank = True,
+        null = True,
+        max_length = 250,
     )
 
     is_active = models.BooleanField(
@@ -404,3 +430,34 @@ class Contact_Account_Details(models.Model):
 
     class Meta:
         verbose_name_plural = 'contacts_account_details_tbl'
+
+#===================================================================================
+# CONTACTS FILE UPLOAD 
+#===================================================================================
+
+class ContactsFileUpload(models.Model):
+
+    user = models.ForeignKey(
+        User,
+        db_index = True,
+        blank = True,
+        null = True,
+        on_delete = models.CASCADE,
+    )
+
+    csv_file = models.FileField(
+        upload_to = file_rename,
+        db_index = True,
+        blank = True,
+        null = True,
+    )
+
+    created_date = models.DateTimeField(
+        auto_now_add = True,
+        auto_now = False,
+        db_index = True,
+    )
+
+    class Meta:
+        verbose_name_plural = 'contacts_fileupload_tbl'
+    

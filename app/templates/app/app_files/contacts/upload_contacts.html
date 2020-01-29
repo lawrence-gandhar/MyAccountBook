@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="col-lg-12" style="padding:0px">
+        <div class="card">
+            <div class="card-header bg-blue">
+                <h5 class="card-title">
+                        <span style="color:#000000; background-color:#FFFFFF; padding:0px 10px;margin-right:10px">{{instance_title|upper}}</span> 
+                        UPLOAD CONTACTS
+                    </h5>
+                <h6 class="card-subtitle mb-2 text-muted">Upload CSV To Import Contacts</h6>
+            </div>
+            <form method="post" enctype="multipart/form-data">
+                <div class="card-body">
+                    {% csrf_token %}
+                    <div class="table" style="padding:10px 0px;">
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:0px 10px;">
+                                <label>Upload CSV</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                {{ upload_form.csv_file }}
+                                <button class="btn button button-green">Upload</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

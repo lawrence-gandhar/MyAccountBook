@@ -469,3 +469,37 @@ def user_exists_in_list(request):
             return HttpResponse(total)    
         return HttpResponse(-1)
     return HttpResponse(-1)
+
+#
+#
+#
+class ContactsFileUpload(View):
+    
+    # Template 
+    template_name = 'app/app_files/contacts/add_contacts.html'
+    
+    # Initialize 
+    data = defaultdict()
+    data["view"] = ""
+    data["contacts"] = {}
+    data["active_link"] = 'Contacts'
+    data["breadcrumb_title"] = 'CONTACTS'
+
+    # Custom CSS/JS Files For Inclusion into template
+    data["css_files"] = []
+    data["js_files"] = []
+
+    data["included_template"] = 'app/app_files/contacts/upload_contacts.html'
+    #
+    #
+    def get(self, request):        
+        self.data["upload_form"] = UploadContactsForm()
+        return render(request, self.template_name, self.data)
+
+    def post(self, request):
+        self.data["upload_form"] = UploadContactsForm(request.POST, request.FILES)
+
+        if self.data["upload_form"].is_valid():
+            self.data["upload_form"].save()
+
+        return render(request, self.template_name, self.data)

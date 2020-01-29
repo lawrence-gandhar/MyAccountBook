@@ -2,6 +2,14 @@ from django.forms import *
 from app.models.contacts_model import *
 from app.other_constants import *
 
+class UploadContactsForm(ModelForm):
+    class Meta:
+        model = ContactsFileUpload
+        fields = ('csv_file',)
+
+        widgets = {
+            'csv_file' : FileInput(attrs = {'class':'form-control input-sm'}),
+        }
 
 class ContactsForm(ModelForm):
     class Meta:
@@ -11,7 +19,7 @@ class ContactsForm(ModelForm):
                     'is_customer', 'is_vendor', 'is_imported_user', 'imported_user', 'contact_name', 
                     'display_name', 'organization_name', 'organization_type', 'salutation',
                     'preferred_payment_method', 'preferred_delivery', 'app_id', 'website',
-                    'invoice_terms', 'bills_terms', 'email', 'phone',
+                    'invoice_terms', 'bills_terms', 'email', 'phone', 'facebook', 'twitter',
                 )
 
         widgets = {
@@ -25,6 +33,8 @@ class ContactsForm(ModelForm):
             'salutation' : Select(attrs={'class':'form-control input-sm',}, choices = user_constants.SALUTATIONS),
             'contact_name' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'200'}),
             'display_name' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'200'}),
+            'facebook' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'200'}),
+            'twitter' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'200'}),
             'organization_type' : Select(attrs={'class':'form-control input-sm',}, choices = user_constants.ORGANIZATION_TYPE, ),
             'organization_name' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'200'}),
             'invoice_terms' : Select(attrs={'class':'form-control input-sm',}, choices = payment_constants.PAYMENT_DAYS, ),
