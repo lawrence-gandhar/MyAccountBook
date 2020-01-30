@@ -571,7 +571,7 @@ def csv_2_contacts(user, file_path):
             if row["is_parent_record"] == 'TRUE':
                 
                 #
-                #
+                # Initiate Create
 
                 contact = Contacts(
                     salutation = row["salutation"],
@@ -610,6 +610,9 @@ def csv_2_contacts(user, file_path):
                                 
                             contact.save()
                         else:
+                            #
+                            # Initiate Update
+
                             contact = Contacts.objects.get(app_id__iexact = row["app_id"], user = user)
                             contact.salutation = row["salutation"]
                             contact.customer_type = row["customer_type"]
@@ -631,5 +634,9 @@ def csv_2_contacts(user, file_path):
                     contact.save()
                 row_count += 1
 
-    print(error_row)
+                #
+                # Address Details
+
+                
+
     return error_row, row_count
