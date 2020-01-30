@@ -87,9 +87,9 @@ def add_contacts(request, slug = None, ins = None):
     data["contact_address_form"] = ContactsAddressForm()
     data["contact_account_details_form"] = ContactAccountDetailsForm()
 
-    #=========================================
+    #***************************************************************
     # Breadcrumbs List & Links
-    #=========================================
+    #***************************************************************
 
     qStr = ''
     if data["query_string"] is not None and data["query_string"] == 'all':
@@ -110,6 +110,9 @@ def add_contacts(request, slug = None, ins = None):
         except:
             return redirect('/unauthorized/', permanent = True)
 
+    #***************************************************************
+    # Check SLUG - for creation of Forms 
+    #***************************************************************
 
     if data["slug"] is not None and data["contact_form_instance"] is not None:
 
@@ -160,9 +163,10 @@ def add_contacts(request, slug = None, ins = None):
 
         data["breadcrumbs"] = ''.join(breadcrumbs)
 
-    #=========================================
-    # Check Slug - for creation of breadcrumbs 
-    #=========================================
+    #***************************************************************
+    # Check QueryString - for creation of breadcrumbs 
+    #***************************************************************
+
     if data["query_string"] is not None:
         if data["query_string"] == '':
             return redirect('/unauthorized/', permanent = True)
@@ -171,9 +175,10 @@ def add_contacts(request, slug = None, ins = None):
         else:
             return redirect('/unauthorized/', permanent = True)
 
-    #=========================================
+    #***************************************************************
     # POST REQUEST
-    #=========================================
+    #***************************************************************
+
     if request.POST:
 
         if data["slug"] is None:
@@ -273,9 +278,10 @@ def fetch_extra_edit_forms(request):
 
             if form_type is not None and obj_ins is not None:
                 
-                #=====================================================
+                #***************************************************************
                 # Edit Email Form
-                #=====================================================
+                #***************************************************************
+
                 if form_type == 'edit_contact_email':
                     labels = {
                         'email' : 'Email Address',
@@ -288,9 +294,10 @@ def fetch_extra_edit_forms(request):
                     except:
                         return HttpResponse('0')
 
-                #=====================================================
+                #***************************************************************
                 # Edit Address Form
-                #=====================================================
+                #***************************************************************
+
                 if form_type == 'edit_contact_address':
                     labels = {
                         'contact_name' : 'Contact Person',
@@ -309,9 +316,10 @@ def fetch_extra_edit_forms(request):
                     except:
                         return HttpResponse('0')
 
-                #=====================================================
+                #***************************************************************
                 # Edit Account Form
-                #=====================================================
+                #***************************************************************
+
                 if form_type == 'edit_contact_account_details':
                     labels = {
                         'account_number':'Account Number',
@@ -328,9 +336,10 @@ def fetch_extra_edit_forms(request):
                         return HttpResponse('0')
 
 
-                #=====================================================
+                #***************************************************************
                 # Convert Form Fields to JSON
-                #=====================================================                
+                #***************************************************************
+                           
                 form_html["id"] = {
                     'label':'id', 
                     'field':'<input type="hidden" value="'+obj_ins+'" name="id">', 
@@ -363,9 +372,10 @@ def delete_contacts(request, slug = None, ins = None, obj = None):
 
         slug = int(slug.replace('step',''))
 
-        #=====================================================
+        #***************************************************************
         # DELETE CONTACTS EMAIL
-        #=====================================================
+        #***************************************************************
+
         if slug == 2:
             try:
                 CE = Contacts_Email.objects.get(pk = obj, contact = contact)
@@ -374,9 +384,10 @@ def delete_contacts(request, slug = None, ins = None, obj = None):
             except CE.DoesNotExists:
                 return redirect('/unauthorized/', permanent = True)
 
-        #=====================================================
+        #***************************************************************
         # DELETE CONTACTS ADDRESS
-        #=====================================================
+        #***************************************************************
+
         if slug == 3:
             try:
                 CE = Contact_Addresses.objects.get(pk = obj, contact = contact)
@@ -385,9 +396,10 @@ def delete_contacts(request, slug = None, ins = None, obj = None):
             except CE.DoesNotExists:
                 return redirect('/unauthorized/', permanent = True)
     
-        #=====================================================
+        #***************************************************************
         # DELETE CONTACTS ACCOUNT DETAILS
-        #=====================================================
+        #***************************************************************
+
         if slug == 4:
             try:
                 CE = Contact_Account_Details.objects.get(pk = obj, contact = contact)
@@ -412,9 +424,10 @@ def edit_contact_forms(request):
 
             redirect_url = False
 
-            #==========================================================
+            #***************************************************************
             # EDIT EMAIL
-            #==========================================================
+            #***************************************************************
+
             if slug == "step2":
                 obj = Contacts_Email.objects.get(pk = int(obj_ins))
                 email_form = ContactsEmailForm(request.POST, instance = obj)
@@ -423,9 +436,9 @@ def edit_contact_forms(request):
                     email_form.save()
                     redirect_url = True
             
-            #==========================================================
+            #***************************************************************
             # EDIT ADDRESS DETAILS
-            #==========================================================
+            #***************************************************************
 
             if slug == "step3":
                 obj = Contact_Addresses.objects.get(pk = int(obj_ins))
@@ -435,9 +448,9 @@ def edit_contact_forms(request):
                     address_form.save()
                     redirect_url = True
 
-            #==========================================================
+            #***************************************************************
             # EDIT ACCOUNT DETAILS
-            #==========================================================
+            #***************************************************************
 
             if slug == "step4":
                 obj = Contact_Account_Details.objects.get(pk = int(obj_ins))
@@ -447,9 +460,10 @@ def edit_contact_forms(request):
                     accounts_form.save()
                     redirect_url = True
 
-            #==========================================================
+            #***************************************************************
             # REDIRECTION ON SUCCESS OR FAILURE
-            #==========================================================
+            #***************************************************************
+
             if redirect_url:                
                 return redirect('/contacts/add/{}/{}'.format(slug, form_ins), permanent=True)
             return redirect('/unauthorized/', permanent = True)
@@ -546,9 +560,10 @@ class ContactsFileUploadView(View):
                 self.data["upload_form"].user = request.user
                 obj = self.data["upload_form"].save()
 
-                #
+                #***************************************************************
                 #   Write data to database
-                #
+                #***************************************************************
+
                 file_path = settings.MEDIA_ROOT+"/"+str(obj.csv_file)
                 err, self.data["row_count"] = csv_2_contacts(request.user,file_path)
 
@@ -572,14 +587,15 @@ def csv_2_contacts(user, file_path):
 
         for row in records:
 
-            #
+            #***************************************************************
             # Phase 1
-            #
+            #***************************************************************
 
             if row["is_parent_record"] == 'TRUE':
                 
-                #
+                #***************************************************************
                 # Initiate Create
+                #***************************************************************
 
                 contact = Contacts(
                     salutation = row["salutation"],
@@ -599,11 +615,13 @@ def csv_2_contacts(user, file_path):
                     notes = row["notes"],
                 )
                 
+                #***************************************************************
                 #   If @ret is TRUE and user is not present in the  
                 #   contact list then add user to contact list.
                 #   If user is present then overwrite the data with the 
                 #   csv record data.
-                #   
+                #***************************************************************  
+                 
                 if row["app_id"].strip() !="":
                     ret = get_app_user_id(row["app_id"])
 
@@ -620,8 +638,9 @@ def csv_2_contacts(user, file_path):
                             contact.save()
                             contact_ins = contact
                         else:
-                            #
+                            #***************************************************************
                             # Initiate Update
+                            #***************************************************************
 
                             contact_ins = contact = Contacts.objects.get(app_id__iexact = row["app_id"], user = user)
                             contact.salutation = row["salutation"]
@@ -647,14 +666,16 @@ def csv_2_contacts(user, file_path):
                     contact_ins = contact
                 row_count += 1
 
-            #
+            #***************************************************************
             # Phase 2
-            #
+            #***************************************************************
+
             if contact_ins is not None:
                 
-                #
+                #***************************************************************
                 # Address Details
-                #
+                #***************************************************************
+
                 if row["is_contact_address"] == "TRUE":
                 
 
@@ -681,11 +702,12 @@ def csv_2_contacts(user, file_path):
                     )
                     contact_address.save()
 
-                if row["is_contact_account_details"] == "TRUE":
-                    #
-                    # Account Details
-                    #
+                #***************************************************************
+                # Account Details
+                #***************************************************************
 
+                if row["is_contact_account_details"] == "TRUE":
+                    
                     contact_account_details = Contact_Account_Details(
                         contact = contact_ins,
                         account_number = row["account_number"],
@@ -694,6 +716,6 @@ def csv_2_contacts(user, file_path):
                         bank_name = row["bank_name"],
                         bank_branch_name = row["branch_name"],
                     )
-
                     contact_account_details.save()
+
     return error_row, row_count
