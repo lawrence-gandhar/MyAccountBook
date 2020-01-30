@@ -35,48 +35,53 @@ ORGANIZATION_TYPE = (
 
 SALUTATIONS = (
     (0, 'Mr.'),
-    (0, 'Mrs.'),
-    (0, 'Miss'),
-    (0, 'Dr.'),
-    (0, 'Ms.'),
-    (0, 'Prof.'),
-    (0, 'Rev.'),
-    (0, 'Lady'),
-    (0, 'Sir'),
-    (0, 'Capt.'),
-    (0, 'Major'),
-    (0, 'Lt.-Col.'),
-    (0, 'Col.'),
-    (0, 'Lady'),
-    (0, 'Lt.-Cmdr.'),
-    (0, 'The Hon.'),
-    (0, 'Cmdr.'),
-    (0, 'Flt. Lt.'),
-    (0, 'Brgdr.'),
-    (0, 'Judge'),
-    (0, 'Lord'),
-    (0, 'The Hon. Mrs'),
-    (0, 'Wng. Cmdr.'),
-    (0, 'Group Capt.'),
-    (0, 'Rt. Hon. Lord'),
-    (0, 'Revd. Father'),
-    (0, 'Revd Canon'),
-    (0, 'Maj.-Gen.'),
-    (0, 'Air Cdre.'),
-    (0, 'Viscount'),
-    (0, 'Dame'),
-    (0, 'Rear Admrl.')
+    (1, 'Mrs.'),
+    (2, 'Miss'),
+    (3, 'Dr.'),
+    (4, 'Ms.'),
+    (5, 'Prof.'),
+    (6, 'Rev.'),
+    (7, 'Lady'),
+    (8, 'Sir'),
+    (9, 'Capt.'),
+    (10, 'Major'),
+    (11, 'Lt.-Col.'),
+    (12, 'Col.'),
+    (13, 'Lady'),
+    (14, 'Lt.-Cmdr.'),
+    (15, 'The Hon.'),
+    (16, 'Cmdr.'),
+    (17, 'Flt. Lt.'),
+    (18, 'Brgdr.'),
+    (19, 'Judge'),
+    (20, 'Lord'),
+    (21, 'The Hon. Mrs'),
+    (22, 'Wng. Cmdr.'),
+    (23, 'Group Capt.'),
+    (24, 'Rt. Hon. Lord'),
+    (25, 'Revd. Father'),
+    (26, 'Revd Canon'),
+    (27, 'Maj.-Gen.'),
+    (28, 'Air Cdre.'),
+    (29, 'Viscount'),
+    (30, 'Dame'),
+    (31, 'Rear Admrl.')
 )
 
 #============================================================================
 #
-#
+#============================================================================
+
 CUSTOMER_TYPE = (
     (1, 'CUSTOMER'),
     (2, 'VENDOR'),
     (3, 'EMPLOYEE'),
     (4, 'OTHERS'),
 )
+
+#============================================================================
+#
+#============================================================================
 
 IS_SUB_CUSTOMER = (
     (1, 'Parent Customer'),

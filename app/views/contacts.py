@@ -19,7 +19,7 @@ import json, os, csv
 #   CONTACTS VIEW
 #=====================================================================================
 #
-class Contacts(View):
+class ContactsView(View):
 
     # Template 
     template_name = 'app/app_files/contacts/index.html'
@@ -510,7 +510,7 @@ def user_exists_in_list(request):
 class ContactsFileUploadView(View):
     
     # Template 
-    template_name = 'app/app_files/contacts/add_contacts.html'
+    template_name = 'app/app_files/contacts/base.html'
     
     # Initialize 
     data = defaultdict()
@@ -525,6 +525,9 @@ class ContactsFileUploadView(View):
 
     data["included_template"] = 'app/app_files/contacts/upload_contacts.html'
     
+    data["error_now"] = []
+    data["row_count"] = 0
+
     #
     #
     def get(self, request):        
@@ -547,9 +550,9 @@ class ContactsFileUploadView(View):
                 #   Write data to database
                 #
                 file_path = settings.MEDIA_ROOT+"/"+str(obj.csv_file)
-                csv_2_contacts(request.user,file_path)
+                err, self.data["row_count"] = csv_2_contacts(request.user,file_path)
 
-                return redirect('/contacts/', permanent=False)
+                self.data["error"] = '<br>'.join(err)
             else:
                 self.data["error"] = "Only CSV file is supported"
         return render(request, self.template_name, self.data)
@@ -560,6 +563,8 @@ class ContactsFileUploadView(View):
 #
 def csv_2_contacts(user, file_path):
     row_count = 0
+    error_row = []
+
     with open(file_path, newline='', encoding='utf-8') as csvfile:
         records = csv.DictReader(csvfile)
         for row in records:
@@ -574,44 +579,57 @@ def csv_2_contacts(user, file_path):
                     is_sub_customer = row["is_sub_customer"],
                     contact_name = row["contact_name"],
                     display_name = row["display_name"],
-                    organization_type = row["organization_type"],
-                    is_msme_reg = row["is_msme_reg"],
+                    organization_type = row["organisation_type"],
+                    organization_name = row["organisation_name"],
+                    is_msme_reg = True if row["is_msme_reg"] == 'TRUE' else False,
                     email = row["email"],
                     phone = row["phone"],
                     website = row["website"],
                     facebook = row["facebook"],
                     twitter = row["twitter"],
+                    user = user,
                 )
-                xtrem = contact.save()
-
-                if row["use_app_user_details"] == 'TRUE': 
-                    xterm.is_imported_user = row["use_app_user_details"]
-
-
-
+                
+                #   If @ret is TRUE and user is not present in the  
+                #   contact list then add user to contact list.
+                #   If user is present then overwrite the data with the 
+                #   csv record data.
+                #   
                 if row["app_id"].strip() !="":
                     ret = get_app_user_id(row["app_id"])
 
-                    #   If @ret is TRUE and user is not present in the  
-                    #   contact list then add user to contact list.
-                    #   If user is present then overwrite the data with the 
-                    #   csv record data.
-                    #    
-                    if ret["ret"] == 1:
+                    if ret["ret"] == 1:                        
                         if count_user_in_contact_list(user, ret["id"]) == 0:
-                            contact = Contacts(
-                                user = user,
-                                app_id = row["app_id"],
-                            )
+                            contact.save()
 
-                            obj = contact.save()
+                            contact.imported_user_id = ret["id"]
+                            contact.app_id = row["app_id"]
 
-
-                            print('data saved')
+                            if row["use_app_user_details"] == 'TRUE': 
+                                contact.is_imported_user = True
+                                
+                            contact.save()
+                        else:
+                            contact = Contacts.objects.get(app_id__iexact = row["app_id"], user = user)
+                            contact.salutation = row["salutation"]
+                            contact.customer_type = row["customer_type"]
+                            contact.is_sub_customer = row["is_sub_customer"]
+                            contact.contact_name = row["contact_name"]
+                            contact.display_name = row["display_name"]
+                            contact.organization_type = row["organisation_type"]
+                            contact.organization_name = row["organisation_name"]
+                            contact.is_msme_reg = True if row["is_msme_reg"] == 'TRUE' else False
+                            contact.email = row["email"]
+                            contact.phone = row["phone"]
+                            contact.website = row["website"]
+                            contact.facebook = row["facebook"]
+                            contact.twitter = row["twitter"]
+                            contact.save()
+                    else:
+                        error_row.append("Error On Row {}: In-Valid APP ID. Row Skipped".format(row_count))    
                 else:
-                    contact = Contacts(
-                                user = user,
-                            )
-
                     contact.save()
                 row_count += 1
+
+    print(error_row)
+    return error_row, row_count
