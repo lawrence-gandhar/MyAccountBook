@@ -686,7 +686,14 @@ def csv_2_contacts(user, file_path):
                     # Account Details
                     #
 
-                    
+                    contact_account_details = Contact_Account_Details(
+                        contact = contact_ins,
+                        account_number = row["account_number"],
+                        account_holder_name = row["account_holder_name"],
+                        ifsc_code = row["ifsc_code"],
+                        bank_name = row["bank_name"],
+                        bank_branch_name = row["branch_name"],
+                    )
 
-
+                    contact_account_details.save()
     return error_row, row_count
