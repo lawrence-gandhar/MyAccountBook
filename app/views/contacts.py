@@ -107,7 +107,7 @@ def add_contacts(request, slug = None, ins = None):
         try: 
             contact = Contacts.objects.get(pk = data["contact_form_instance"], user = request.user)
             data["instance_title"] = contact.contact_name
-        except C.DoesNotExist:
+        except:
             return redirect('/unauthorized/', permanent = True)
 
 
@@ -558,7 +558,7 @@ class ContactsFileUploadView(View):
         return render(request, self.template_name, self.data)
 
 #==============================================================================
-#
+# Function to insert contact import csv data into database
 #==============================================================================
 #
 def csv_2_contacts(user, file_path):
@@ -567,7 +567,15 @@ def csv_2_contacts(user, file_path):
 
     with open(file_path, newline='', encoding='utf-8') as csvfile:
         records = csv.DictReader(csvfile)
+        
+        contact_ins = None
+
         for row in records:
+
+            #
+            # Phase 1
+            #
+
             if row["is_parent_record"] == 'TRUE':
                 
                 #
@@ -588,6 +596,7 @@ def csv_2_contacts(user, file_path):
                     facebook = row["facebook"],
                     twitter = row["twitter"],
                     user = user,
+                    notes = row["notes"],
                 )
                 
                 #   If @ret is TRUE and user is not present in the  
@@ -609,11 +618,12 @@ def csv_2_contacts(user, file_path):
                                 contact.is_imported_user = True
                                 
                             contact.save()
+                            contact_ins = contact
                         else:
                             #
                             # Initiate Update
 
-                            contact = Contacts.objects.get(app_id__iexact = row["app_id"], user = user)
+                            contact_ins = contact = Contacts.objects.get(app_id__iexact = row["app_id"], user = user)
                             contact.salutation = row["salutation"]
                             contact.customer_type = row["customer_type"]
                             contact.is_sub_customer = row["is_sub_customer"]
@@ -627,16 +637,56 @@ def csv_2_contacts(user, file_path):
                             contact.website = row["website"]
                             contact.facebook = row["facebook"]
                             contact.twitter = row["twitter"]
+                            contact.notes = row["notes"]
                             contact.save()
                     else:
                         error_row.append("Error On Row {}: In-Valid APP ID. Row Skipped".format(row_count))    
+                        contact_ins = None
                 else:
                     contact.save()
+                    contact_ins = contact
                 row_count += 1
 
+            #
+            # Phase 2
+            #
+            if contact_ins is not None:
+                
                 #
                 # Address Details
-
+                #
+                if row["is_contact_address"] == "TRUE":
                 
+
+                    is_billing_address = False
+                    is_shipping_address = False
+
+                    if row["is_billing_address"] == "True":
+                        is_billing_address = True
+
+                    if row["is_shipping_address"] == "True":
+                        is_shipping_address = True
+
+                    contact_address = Contact_Addresses(
+                        contact_name = row["contact_person"], 
+                        flat_no = row["flat_door_no"],
+                        street = row["street"],
+                        city = row["city"],
+                        pincode = row["pincode"],
+                        state = row["state"],
+                        country = row["country"],
+                        is_billing_address = is_billing_address,
+                        is_shipping_address = is_shipping_address,
+                        contact = contact_ins,
+                    )
+                    contact_address.save()
+
+                if row["is_contact_account_details"] == "TRUE":
+                    #
+                    # Account Details
+                    #
+
+                    
+
 
     return error_row, row_count
