@@ -588,40 +588,47 @@ def csv_2_contacts(user, file_path):
 
         fields = records.fieldnames
 
-        #*************************************************************** 
-        # Check Existence of fields
-        #***************************************************************
-        salutation = row["salutation"] if "salutation" in fields else None
-        customer_type = row["customer_type"] if "customer_type" in fields else None
-        is_sub_customer = row["is_sub_customer"] if "is_sub_customer" in fields else 1
-        contact_name = row["contact_name"] if "contact_name" in fields else None
-        display_name = row["display_name"] if "display_name" in fields else None
-        organization_type = row["organisation_type"] if "organisation_type" in fields else 1
-        organization_name = row["organisation_name"] if "organisation_name" in fields else None
-        
-        if "is_msme_reg" in fields:
-            is_msme_reg = True if row["is_msme_reg"] == 'TRUE' else False
-        else:
-            is_msme_reg = False
-
-        email = row["email"] if "email" in fields else None
-        phone = row["phone"] if "phone" in fields else None
-        website = row["website"] if "website" in fields else None
-        facebook = row["facebook"] if "facebook" in fields else None
-        twitter = row["twitter"] if "twitter" in fields else None
-        notes = row["notes"] if "notes" in fields else None
-
-        contact_name = row["contact_person"] if "contact_person" in fields else None, 
-        flat_no = row["flat_door_no"] if "flat_door_no" in fields else None,
-        street = row["street"] if "street" in fields else None,
-        city = row["city"] if "city" in fields else None,
-        pincode = row["pincode"] if "pincode" in fields else None,
-        state = row["state"] if "state" in fields else None,
-        country = row["country"] if "country" in fields else None,
-        
         contact_ins = None
 
         for row in records:
+
+            #*************************************************************** 
+            # Get and Set Missing/Existence of fields
+            #***************************************************************
+            salutation = row["salutation"] if "salutation" in fields else None
+            customer_type = row["customer_type"] if "customer_type" in fields else None
+            is_sub_customer = row["is_sub_customer"] if "is_sub_customer" in fields else 1
+            contact_name = row["contact_name"] if "contact_name" in fields else None
+            display_name = row["display_name"] if "display_name" in fields else None
+            organization_type = row["organisation_type"] if "organisation_type" in fields else 1
+            organization_name = row["organisation_name"] if "organisation_name" in fields else None
+            
+            if "is_msme_reg" in fields:
+                is_msme_reg = True if row["is_msme_reg"] == 'TRUE' else False
+            else:
+                is_msme_reg = False
+
+            email = row["email"] if "email" in fields else None
+            phone = row["phone"] if "phone" in fields else None
+            website = row["website"] if "website" in fields else None
+            facebook = row["facebook"] if "facebook" in fields else None
+            twitter = row["twitter"] if "twitter" in fields else None
+            notes = row["notes"] if "notes" in fields else None
+
+            contact_name = row["contact_person"] if "contact_person" in fields else None
+            flat_no = row["flat_door_no"] if "flat_door_no" in fields else None
+            street = row["street"] if "street" in fields else None
+            city = row["city"] if "city" in fields else None
+            pincode = row["pincode"] if "pincode" in fields else None
+            state = row["state"] if "state" in fields else None
+            country = row["country"] if "country" in fields else None
+
+            account_number = row["account_number"] if "account_number" in fields else None 
+            account_holder_name = row["account_holder_name"] if "account_holder_name" in fields else None 
+            ifsc_code = row["ifsc_code"] if "ifsc_code" in fields else None, 
+            bank_name = row["bank_name"] if "bank_name" in fields else None, 
+            bank_branch_name = row["branch_name"] if "branch_name" in fields else None, 
+            
 
             #***************************************************************
             # Phase 1
@@ -712,16 +719,15 @@ def csv_2_contacts(user, file_path):
                 # Address Details
                 #***************************************************************
 
-                if row["is_contact_address"] == "TRUE":
+                if "is_contact_address" in fields and row["is_contact_address"] == "TRUE":
                 
-
                     is_billing_address = False
                     is_shipping_address = False
 
-                    if row["is_billing_address"] == "True":
+                    if "is_billing_address" in fields and row["is_billing_address"] == "True":
                         is_billing_address = True
 
-                    if row["is_shipping_address"] == "True":
+                    if "is_shipping_address" in fields and row["is_shipping_address"] == "True":
                         is_shipping_address = True
 
                     contact_address = Contact_Addresses(
@@ -742,15 +748,15 @@ def csv_2_contacts(user, file_path):
                 # Account Details
                 #***************************************************************
 
-                if row["is_contact_account_details"] == "TRUE":
+                if "is_contact_account_details" in fields and row["is_contact_account_details"] == "TRUE":
                     
                     contact_account_details = Contact_Account_Details(
                         contact = contact_ins,
-                        account_number = row["account_number"],
-                        account_holder_name = row["account_holder_name"],
-                        ifsc_code = row["ifsc_code"],
-                        bank_name = row["bank_name"],
-                        bank_branch_name = row["branch_name"],
+                        account_number = account_number,
+                        account_holder_name = account_holder_name,
+                        ifsc_code = ifsc_code,
+                        bank_name = bank_name,
+                        bank_branch_name = bank_branch_name,
                     )
                     contact_account_details.save()
 
