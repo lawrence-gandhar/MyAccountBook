@@ -1,3 +1,10 @@
+<style>
+p{
+    margin-bottom:0px;
+    line-height:20px;
+}
+</style>
+
 <div class="row">
     <div class="col-lg-12" style="padding:0px">
         <div class="card">
@@ -33,6 +40,45 @@
                     </div>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+<!-- 
+    DOCUMENTATION FOR CSV
+-->
+
+<div class="row">
+    <div class="col-lg-12" style="padding:0px">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">                         
+                        CSV DOCUMENTATION FOR IMPORTING CONTACTS
+                    </h5>
+                <h6 class="card-subtitle mb-2 text-muted">Please follow the documentation</h6>
+            </div>
+            <div class="card-body">
+                <div class="table table-responsive">
+                    <table class="table table-bordered" style="background-color:#FFFFFF">
+                        <tr class="bg-blue">
+                            <td width="200px">Column Header</td>
+                            <td>Column Value</td>
+                            <td>Datatype</td>
+                            <td>Optional</td>
+                            <td width="400px">Description</td width="200px">
+                        </tr>
+                        {% for i,v in documentation_dict.items %}
+                        <tr>
+                            <td style="font-size:110%"><strong>{{i}}</strong></td>
+                            <td>{{v.value|safe}}</td>
+                            <td style="font-size:110%"><strong>{{v.datatype}}</strong></td>
+                            <td class="text-center">{{v.optional|safe}}</td>
+                            <td>{{v.description|safe}}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>

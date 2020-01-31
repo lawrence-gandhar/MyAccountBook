@@ -542,6 +542,9 @@ class ContactsFileUploadView(View):
     data["error_now"] = []
     data["row_count"] = 0
 
+    # Documentation Import
+    data["documentation_dict"] = documentation_dict.CSV_IMPORT_DICT
+
     #
     #
     def get(self, request):        
