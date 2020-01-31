@@ -585,6 +585,31 @@ def csv_2_contacts(user, file_path):
 
     with open(file_path, newline='', encoding='utf-8') as csvfile:
         records = csv.DictReader(csvfile)
+
+        fields = records.fieldnames
+
+        #*************************************************************** 
+        # Check Existence of fields
+        #***************************************************************
+        salutation = row["salutation"] if "salutation" in fields else None
+        customer_type = row["customer_type"] if "customer_type" in fields else None
+        is_sub_customer = row["is_sub_customer"] if "is_sub_customer" in fields else 1
+        contact_name = row["contact_name"] if "contact_name" in fields else None
+        display_name = row["display_name"] if "display_name" in fields else None
+        organization_type = row["organisation_type"] if "organisation_type" in fields else 1
+        organization_name = row["organisation_name"] if "organisation_name" in fields else None
+        
+        if "is_msme_reg" in fields:
+            is_msme_reg = True if row["is_msme_reg"] == 'TRUE' else False
+        else:
+            is_msme_reg = False
+
+        email = row["email"] if "email" in fields else None
+        phone = row["phone"] if "phone" in fields else None
+        website = row["website"] if "website" in fields else None
+        facebook = row["facebook"] if "facebook" in fields else None
+        twitter = row["twitter"] if "twitter" in fields else None
+        notes = row["notes"] if "notes" in fields else None
         
         contact_ins = None
 
@@ -601,21 +626,21 @@ def csv_2_contacts(user, file_path):
                 #***************************************************************
 
                 contact = Contacts(
-                    salutation = row["salutation"],
-                    customer_type = row["customer_type"],
-                    is_sub_customer = row["is_sub_customer"],
-                    contact_name = row["contact_name"],
-                    display_name = row["display_name"],
-                    organization_type = row["organisation_type"],
-                    organization_name = row["organisation_name"],
-                    is_msme_reg = True if row["is_msme_reg"] == 'TRUE' else False,
-                    email = row["email"],
-                    phone = row["phone"],
-                    website = row["website"],
-                    facebook = row["facebook"],
-                    twitter = row["twitter"],
+                    salutation = salutation,
+                    customer_type = customer_type,
+                    is_sub_customer = is_sub_customer,
+                    contact_name = contact_name,
+                    display_name = display_name,
+                    organization_type = organization_type,
+                    organization_name = organization_name,
+                    is_msme_reg = is_msme_reg,
+                    email = email,
+                    phone = phone,
+                    website = website,
+                    facebook = facebook,
+                    twitter = twitter,
                     user = user,
-                    notes = row["notes"],
+                    notes = notes,
                 )
                 
                 #***************************************************************
@@ -646,20 +671,20 @@ def csv_2_contacts(user, file_path):
                             #***************************************************************
 
                             contact_ins = contact = Contacts.objects.get(app_id__iexact = row["app_id"], user = user)
-                            contact.salutation = row["salutation"]
-                            contact.customer_type = row["customer_type"]
-                            contact.is_sub_customer = row["is_sub_customer"]
-                            contact.contact_name = row["contact_name"]
-                            contact.display_name = row["display_name"]
-                            contact.organization_type = row["organisation_type"]
-                            contact.organization_name = row["organisation_name"]
-                            contact.is_msme_reg = True if row["is_msme_reg"] == 'TRUE' else False
-                            contact.email = row["email"]
-                            contact.phone = row["phone"]
-                            contact.website = row["website"]
-                            contact.facebook = row["facebook"]
-                            contact.twitter = row["twitter"]
-                            contact.notes = row["notes"]
+                            contact.salutation = salutation
+                            contact.customer_type = customer_type
+                            contact.is_sub_customer = is_sub_customer
+                            contact.contact_name = contact_name
+                            contact.display_name = display_name
+                            contact.organization_type = organization_type
+                            contact.organization_name = organization_name
+                            contact.is_msme_reg = is_msme_reg
+                            contact.email = email
+                            contact.phone = phone
+                            contact.website = website
+                            contact.facebook = facebook
+                            contact.twitter = twitter
+                            contact.notes = notes
                             contact.save()
                     else:
                         error_row.append("Error On Row {}: In-Valid APP ID. Row Skipped".format(row_count))    
