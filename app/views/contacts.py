@@ -610,6 +610,14 @@ def csv_2_contacts(user, file_path):
         facebook = row["facebook"] if "facebook" in fields else None
         twitter = row["twitter"] if "twitter" in fields else None
         notes = row["notes"] if "notes" in fields else None
+
+        contact_name = row["contact_person"] if "contact_person" in fields else None, 
+        flat_no = row["flat_door_no"] if "flat_door_no" in fields else None,
+        street = row["street"] if "street" in fields else None,
+        city = row["city"] if "city" in fields else None,
+        pincode = row["pincode"] if "pincode" in fields else None,
+        state = row["state"] if "state" in fields else None,
+        country = row["country"] if "country" in fields else None,
         
         contact_ins = None
 
@@ -717,13 +725,13 @@ def csv_2_contacts(user, file_path):
                         is_shipping_address = True
 
                     contact_address = Contact_Addresses(
-                        contact_name = row["contact_person"], 
-                        flat_no = row["flat_door_no"],
-                        street = row["street"],
-                        city = row["city"],
-                        pincode = row["pincode"],
-                        state = row["state"],
-                        country = row["country"],
+                        contact_name = contact_name, 
+                        flat_no = flat_no,
+                        street = street,
+                        city = city,
+                        pincode = pincode,
+                        state = state,
+                        country = country,
                         is_billing_address = is_billing_address,
                         is_shipping_address = is_shipping_address,
                         contact = contact_ins,
