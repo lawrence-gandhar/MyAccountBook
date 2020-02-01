@@ -60,21 +60,26 @@ p{
             <div class="card-body">
                 <div class="table table-responsive">
                     <table class="table table-bordered" style="background-color:#FFFFFF">
-                        <tr class="bg-blue">
-                            <td width="200px">Column Header</td>
-                            <td>Column Value</td>
-                            <td>Datatype</td>
-                            <td>Optional</td>
-                            <td width="400px">Description</td width="200px">
+                        <tr class="bg-blue" style="color:#FFFFFF; font-weight:bold">
+                            <td width="200px" style="font-size:110%; padding:10px;">Column Header</td>
+                            <td style="font-size:110%; padding:10px;">Column Value</td style="font-size:110%; padding:10px;">
+                            <td style="font-size:110%; padding:10px;">Datatype</td style="font-size:110%; padding:10px;">
+                            <td style="font-size:110%; padding:10px;">Optional</td style="font-size:110%; padding:10px;">
+                            <td width="400px" style="font-size:110%; padding:10px;">Description</td width="200px">
                         </tr>
-                        {% for i,v in documentation_dict.items %}
-                        <tr>
-                            <td style="font-size:110%"><strong>{{i}}</strong></td>
-                            <td>{{v.value|safe}}</td>
-                            <td style="font-size:110%"><strong>{{v.datatype}}</strong></td>
-                            <td class="text-center">{{v.optional|safe}}</td>
-                            <td>{{v.description|safe}}</td>
+                        {% for i,j in documentation_dict.items %}
+                        <tr style="background-color: #000000; color:#FFFFFF; ">
+                            <td colspan="5" style="font-size:110%; padding:10px;"><strong>{{i}}</strong></td>
                         </tr>
+                            {% for x,v in j.items %}
+                                <tr>
+                                    <td style="font-size:110%"><strong>{{x}}</strong></td>
+                                    <td>{{v.value|safe}}</td>
+                                    <td style="font-size:110%"><strong>{{v.datatype}}</strong></td>
+                                    <td class="text-center">{{v.optional|safe}}</td>
+                                    <td>{{v.description|safe}}</td>
+                                </tr>
+                            {% endfor %}
                         {% endfor %}
                     </table>
                 </div>
