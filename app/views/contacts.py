@@ -625,10 +625,24 @@ def csv_2_contacts(user, file_path):
 
             account_number = row["account_number"] if "account_number" in fields else None 
             account_holder_name = row["account_holder_name"] if "account_holder_name" in fields else None 
-            ifsc_code = row["ifsc_code"] if "ifsc_code" in fields else None, 
-            bank_name = row["bank_name"] if "bank_name" in fields else None, 
-            bank_branch_name = row["branch_name"] if "branch_name" in fields else None, 
+            ifsc_code = row["ifsc_code"] if "ifsc_code" in fields else None 
+            bank_name = row["bank_name"] if "bank_name" in fields else None 
+            bank_branch_name = row["branch_name"] if "branch_name" in fields else None
             
+            pan = row["pan"] if "pan" in fields else None
+            gstin = row["gstin"] if "gstin" in fields else None
+            gst_reg_type = row["gst_reg_type"] if "gst_reg_type" in fields else None
+            business_reg_no = row["business_reg_no"] if "business_reg_no" in fields else None
+            tax_reg_no = row["tax_reg_no"] if "tax_reg_no" in fields else None
+            cst_reg_no = row["cst_reg_no"] if "cst_reg_no" in fields else None
+            tds = row["tds"] if "tds" in fields else None
+            preferred_currency = row["preferred_currency"] if "preferred_currency" in fields else None
+            opening_balance = row["opening_balance"] if "opening_balance" in fields else None
+            as_of = row["as_of"] if "as_of" in fields else None
+            preferred_payment_method = row["preferred_payment_method"] if "preferred_payment_method" in fields else None
+            preferred_delivery = row["preferred_delivery"] if "preferred_delivery" in fields else None
+            invoice_terms = row["invoice_terms"] if "invoice_terms" in fields else None
+            bills_terms = row["billing_terms"] if "billing_terms" in fields else None
 
             #***************************************************************
             # Phase 1
@@ -759,5 +773,47 @@ def csv_2_contacts(user, file_path):
                         bank_branch_name = bank_branch_name,
                     )
                     contact_account_details.save()
+
+                #***************************************************************
+                # Tax Details
+                #***************************************************************
+                if "is_contact_tax_details" in fields and row["is_contact_tax_details"] == "TRUE":
+                    try:
+                        tax_details = User_Tax_Details.objects.get(contact = contact_ins)
+
+                        tax_details.pan = pan
+                        tax_details.gstin = gstin
+                        tax_details.gst_reg_type = gst_reg_type
+                        tax_details.business_reg_no = business_reg_no
+                        tax_details.tax_reg_no = tax_reg_no
+                        tax_details.cst_reg_no = cst_reg_no
+                        tax_details.preferred_currency = preferred_currency
+                        tax_details.opening_balance = opening_balance
+                        tax_details.as_of = as_of
+                        tax_details.preferred_payment_method = preferred_payment_method
+                        tax_details.preferred_delivery = preferred_delivery
+                        tax_details.invoice_terms = invoice_terms
+                        tax_details.bills_terms = bills_terms
+
+                    except:
+                        tax_details = User_Tax_Details(
+                            is_user = False,
+                            contact = contact_ins,
+                            pan = pan,
+                            gstin = gstin,
+                            gst_reg_type = gst_reg_type,
+                            business_reg_no = business_reg_no,
+                            tax_reg_no = tax_reg_no,
+                            cst_reg_no = cst_reg_no,
+                            preferred_currency = preferred_currency,
+                            opening_balance = opening_balance,
+                            as_of = as_of,
+                            preferred_payment_method = preferred_payment_method,
+                            preferred_delivery = preferred_delivery,
+                            invoice_terms = invoice_terms,
+                            bills_terms = bills_terms,
+                        )
+                    
+                    tax_details.save()
 
     return error_row, row_count
