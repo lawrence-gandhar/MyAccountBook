@@ -115,13 +115,13 @@ def add_contacts(request, slug = None, ins = None):
     #***************************************************************
 
     if data["slug"] is not None and data["contact_form_instance"] is not None:
-
+        
         data["breadcrumbs_index"] = int(data["slug"].replace('step',''))
 
         if data["contact_form_instance"] is None:
             data["included_template"] = 'app/app_files/contacts/add_contacts_'+data["slug"]+'.html'
         else:
-            
+            template_name = 'app/app_files/contacts/edit_contacts.html'
             try:
                 if data["breadcrumbs_index"] == 1:
                     data["contact_form"] = ContactsForm(instance = contact)

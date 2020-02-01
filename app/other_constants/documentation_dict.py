@@ -81,6 +81,18 @@ for record in user_constants.ORGANIZATION_TYPE:
 
 organisation_type = ''.join(organisation_type)
 
+#====================================================================
+# GST REGISTERATION TYPE
+#====================================================================
+gst_reg_type = []
+
+for record in user_constants.GST_REG_TYPE:
+    gst_reg_type.append("<li>{} - {}</li>".format(record[0], record[1]))
+
+gst_reg_type = ''.join(gst_reg_type)
+
+
+
 
 #====================================================================
 # CSV IMPORT DICTIONARY
@@ -301,12 +313,67 @@ CSV_IMPORT_DICT = {
         },	
     },
     "Tax Details" : {
-        "preferred_payment_method" :{
-            "value" : "<ul>"+preferred_delivery+"</ul>",
+        "is_contact_tax_details" : {
+            "value" : "TRUE/FALSE",
+            "datatype" : "TEXT",
+            "optional" : "NO",
+            "description" : """<p>If TRUE, then tax details will be inserted</p>
+                <p>Else, the details will be skipped</p>""",
+        },
+        "pan" :{
+            "value" : "",
             "datatype" : "TEXT",
             "optional" : "YES",
-            "description" : "",
+            "description" : "PAN Number",
+        },
+        "gstin" :{
+            "value" : "",
+            "datatype" : "TEXT",
+            "optional" : "YES",
+            "description" : "GSTIN Number",
         },	
+        "gst_reg_type" :{
+            "value" : "<ul>"+gst_reg_type+"</ul>",
+            "datatype" : "TEXT",
+            "optional" : "YES",
+            "description" : "GST Registeration Number",
+        },	
+        "business_reg_no" :{
+            "value" : "",
+            "datatype" : "TEXT",
+            "optional" : "YES",
+            "description" : "Business Registeration Number",
+        },	
+        "tax_reg_no" :{
+            "value" : "",
+            "datatype" : "TEXT",
+            "optional" : "YES",
+            "description" : "Tax Registeration Number",
+        },	
+        "cst_reg_no" :{
+            "value" : "",
+            "datatype" : "TEXT",
+            "optional" : "YES",
+            "description" : "CGST Registeration Number",
+        },	
+        "tds" :{
+            "value" : "Example : 10.2",
+            "datatype" : "INTEGER/DECIMAL",
+            "optional" : "YES",
+            "description" : "TDS Percent",
+        },
+        "opening_balance" :{
+            "value" : "Example : 10000.50",
+            "datatype" : "INTEGER/DECIMAL",
+            "optional" : "YES",
+            "description" : "Opening Balance",
+        },
+        "as_of" :{
+            "value" : "2019-12-23",
+            "datatype" : "DATE",
+            "optional" : "YES",
+            "description" : "Opening Balance Date",
+        },
         "preferred_currency" :{
             "value" : "<ul>"+preferred_currency+"</ul>",
             "datatype" : "TEXT",
