@@ -191,37 +191,7 @@ CSV_IMPORT_DICT = {
         "datatype" : "TEXT",
         "optional" : "YES",
         "description" : "Twitter Account Link",
-    },	
-    "preferred_payment_method" :{
-        "value" : "<ul>"+preferred_delivery+"</ul>",
-        "datatype" : "TEXT",
-        "optional" : "YES",
-        "description" : "",
-    },	
-    "preferred_currency" :{
-        "value" : "<ul>"+preferred_currency+"</ul>",
-        "datatype" : "TEXT",
-        "optional" : "YES",
-        "description" : "Preferred currency for pay and collect.<p>Use abbreviation.</p>",
-    },	
-    "preferred_delivery" :{
-        "value" : "<ul>"+preferred_delivery+"</ul>",
-        "datatype" : "INTEGER",
-        "optional" : "NO",
-        "description" : "Delivery Terms and preferrence",
-    },	
-    "invoice_terms" :{
-        "value" : "<ul>"+billing_terms+"</ul>",
-        "datatype" : "INTEGER",
-        "optional" : "NO",
-        "description" : "Terms for Invoice",
-    },	
-    "billing_terms" :{
-        "value" : "<ul>"+billing_terms+"</ul>",
-        "datatype" : "INTEGER",
-        "optional" : "NO",
-        "description" : "Terms for Billing",
-    },	
+    },		
     "is_contact_address" :{
         "value" : "TRUE/FALSE",
         "datatype" : "TEXT",
@@ -324,4 +294,34 @@ CSV_IMPORT_DICT = {
         "optional" : "YES",
         "description" : "Bank Branch Name",
     },	
+    "preferred_payment_method" :{
+        "value" : "<ul>"+preferred_delivery+"</ul>",
+        "datatype" : "TEXT",
+        "optional" : "YES",
+        "description" : "",
+    },	
+    "preferred_currency" :{
+        "value" : "<ul>"+preferred_currency+"</ul>",
+        "datatype" : "TEXT",
+        "optional" : "YES",
+        "description" : "Preferred currency for pay and collect.<p>Use abbreviation.</p>",
+    },	
+    "preferred_delivery" :{
+        "value" : "<ul>"+preferred_delivery+"</ul>",
+        "datatype" : "INTEGER",
+        "optional" : "NO",
+        "description" : "Delivery Terms and preferrence",
+    },	
+    "invoice_terms" :{
+        "value" : "<ul>"+billing_terms+"</ul>",
+        "datatype" : "INTEGER",
+        "optional" : "NO",
+        "description" : "Terms for Invoice",
+    },	
+    "billing_terms" :{
+        "value" : "<ul>"+billing_terms+"</ul>",
+        "datatype" : "INTEGER",
+        "optional" : "NO",
+        "description" : "Terms for Billing",
+    },
 }
