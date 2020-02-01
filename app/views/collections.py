@@ -146,6 +146,8 @@ class AddPartialCollection(View):
         for record in total_paid_qset:
             if record["collection_status"] == 2:
                 paid += record["amount"]
+        print(paid)
+
 
         self.data["balance_amount"] = collect.amount - paid 
 

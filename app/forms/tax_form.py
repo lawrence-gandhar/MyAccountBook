@@ -20,7 +20,7 @@ class TaxForm(ModelForm):
             'tax_reg_no' : TextInput(attrs = {'class':'form-control input-sm'}),
             'cst_reg_no' : TextInput(attrs = {'class':'form-control input-sm'}), 
             'tds' : TextInput(attrs = {'class':'form-control input-sm', 'type':'interger'}), 
-            'preferred_currency' : Select(attrs = {'class':'form-control input-sm'}, choices = payment_constants.CURRENCY), 
+            'preferred_currency' : Select(attrs = {'class':'form-control input-sm'}, choices = currency_list.CURRENCY_CHOICES), 
             'opening_balance' : TextInput(attrs = {'class':'form-control input-sm', 'type':'integer'}),
             'preferred_payment_method' : Select(attrs = {'class':'form-control input-sm'}, choices = payment_constants.PREFERRED_PAYMENT_TYPE), 
             'preferred_delivery' : Select(attrs = {'class':'form-control input-sm'}, choices = payment_constants.PREFERRED_DELIVERY), 

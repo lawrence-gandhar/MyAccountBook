@@ -43,7 +43,7 @@ class CollectPartialForm(ModelForm):
             'collection_due_date' : DateInput(attrs={'class':'form-control input-sm', 'data-toggle':'datepicker'}),
             'amount' : NumberInput(attrs={'class':'form-control input-sm'}),
             'payment_type' : Select(attrs={'class':'form-control input-sm'}, choices = payment_constants.PAYMENT_TYPE),
-            'collection_status' : Select(attrs={'class':'form-control input-sm'}, choices = payment_constants.COLLECTION_STATUS),
+            'collection_status' : Select(attrs={'class':'form-control input-sm'}, choices = payment_constants.PARTIAL_COLLECTION_STATUS),
             'collection_date' : DateInput(attrs={'class':'form-control input-sm','data-toggle':'datepicker'}),
             'currency_type' : Select(attrs={'class':'form-control input-sm'}, choices = currency_list.CURRENCY_CHOICES),
         }

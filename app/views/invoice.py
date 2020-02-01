@@ -66,7 +66,7 @@ class InvoiceDesigner(View):
         #
         records = Profile.objects.filter(user = request.user)
             
-        phone_records = records.values('official_phone', 'personal_phone', 'alternative_phone')    
+        phone_records = records.values('official_phone', 'personal_phone',)    
         PHONE_NUMBERS = []
         for i in phone_records:
             for x in i: 
@@ -77,7 +77,7 @@ class InvoiceDesigner(View):
         #
         #   USER EMAIL ADDRESSES
         #
-        email_records = records.values('official_email', 'personal_email') 
+        email_records = records.values('official_email',) 
         EMAILS = []
         for i in email_records:
             for x in i: 

@@ -67,8 +67,10 @@ class Collections(models.Model):
     )
 
     def __str__(self):
-        return self.contact.contact_name
-
+        if self.contact is not None:
+            return self.contact.contact_name
+        else:
+            return 'Contact Deleted'
 #===================================================================================
 #   COLLECT PARTIAL MODEL
 #===================================================================================
@@ -118,7 +120,7 @@ class CollectPartial(models.Model):
     collection_status = models.IntegerField(
         default = 1,
         db_index = True,
-        choices = payment_constants.COLLECTION_STATUS,
+        choices = payment_constants.PARTIAL_COLLECTION_STATUS,
     )
 
     collection_date = models.DateTimeField(
