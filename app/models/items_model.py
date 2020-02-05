@@ -71,6 +71,14 @@ class ProductCategory(models.Model):
 
 class ProductsModel(models.Model):
 
+    user = models.ForeignKey(
+        User,
+        db_index = True,
+        on_delete = models.SET_NULL,
+        blank = True,
+        null = True,
+    )
+
     product_category = models.ForeignKey(
         ProductCategory,
         on_delete = models.SET_NULL,
