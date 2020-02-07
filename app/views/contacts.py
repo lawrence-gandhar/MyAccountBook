@@ -260,7 +260,7 @@ def edit_contact(request, slug = None, ins = None):
                 
                 if contact_form.is_valid(): 
                     contact_form.save()    
-            except C.DoesNotExists:
+            except:
                 return redirect('/unauthorized/', permanent=False)
     return redirect('/contacts/add/step1/{}'.format(ins), permanent=False)
 
@@ -817,3 +817,30 @@ def csv_2_contacts(user, file_path):
                     tax_details.save()
 
     return error_row, row_count
+
+#===================================================================================================
+# STATUS CHANGE
+#===================================================================================================
+def status_change(request, slug = None, ins = None):
+    
+    if slug is not None and ins is not None:
+        try:
+            contact = Contacts.objects.get(pk = int(ins))        
+        except:
+           return redirect('/unauthorized/', permanent=False)
+
+        if slug == 'deactivate':
+            contact.is_active = False
+        elif slug == 'activate':
+            contact.is_active = True
+        else:
+            return redirect('/unauthorized/', permanent=False)
+
+        contact.save()
+        return redirect('/contacts/', permanent=False)
+
+    return redirect('/unauthorized/', permanent=False)
+
+
+
+    

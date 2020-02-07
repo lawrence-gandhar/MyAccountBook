@@ -53,7 +53,7 @@
                             {% for contact in contacts %}
                                 <tr>
                                     <td>{{forloop.counter}}</td>
-                                    <td>{{contact.contact_name}}</td>
+                                    <td>{{contact.display_name}}</td>
                                     <td>{{contact.app_id}}</td>
                                     <td>{{contact.get_customer_type_display|upper}}</td>
                                     <td>{{contact.get_is_sub_customer_display|upper}}</td>
@@ -73,7 +73,16 @@
                                         <a href="{% url 'contact-collections' contact.id %}" class="btn btn-warning btn-sm">
                                             <i class="fas fas-fw fa-money-bill-alt"></i>
                                         </a>
-                                    </td>                        
+                                        {% if contact.is_active %}
+                                            <a href="{% url 'status-change' 'deactivate' contact.id %}" class="btn btn-sm btn-danger" title="deactivate">
+                                                <i class="fas fas-fw fa-times"></i>
+                                            </a>
+                                        {% else %}
+                                            <a href="{% url 'status-change' 'activate' contact.id %}" class="btn btn-sm btn-success" title="deactivate">
+                                                <i class="fas fas-fw fa-check"></i>
+                                            </a>
+                                        {% endif %}
+                                    </td>   
                                 </tr>
                             {% endfor %}
                         </tbody>

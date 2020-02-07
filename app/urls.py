@@ -34,6 +34,7 @@ urlpatterns += [
     path('contacts/check_appid/', never_cache(login_required(contacts.check_app_id)), name='check-appid'),
     path('contacts/user_exists_in_list/', never_cache(login_required(contacts.user_exists_in_list)), name='check-appid-user-exist'),
     path('contacts/upload/', never_cache(login_required(contacts.ContactsFileUploadView.as_view())), name='contacts-upload'),
+    path('contacts/status_change/<slug:slug>/<int:ins>', never_cache(login_required(contacts.status_change)), name='status-change'),
 ]
 
 # Invoice
