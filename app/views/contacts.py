@@ -842,5 +842,21 @@ def status_change(request, slug = None, ins = None):
     return redirect('/unauthorized/', permanent=False)
 
 
+#===================================================================================================
+# DELETE CHANGE
+#===================================================================================================
+#
 
-    
+def delete_contact(request, ins = None):
+    if ins is not None:
+        try:
+            contact = Contacts.objects.get(pk = int(ins))
+        except:
+            return redirect('/unauthorized/', permanent=False)
+
+        contact.delete()
+        return redirect('/contacts/', permanent=False)
+    return redirect('/unauthorized/', permanent=False)
+
+        
+

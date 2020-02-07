@@ -82,6 +82,9 @@
                                                 <i class="fas fas-fw fa-check"></i>
                                             </a>
                                         {% endif %}
+                                        <a href="{% url 'contacts-delete' contact.id %}" class="btn btn-danger btn-sm">
+                                            <i class="fas fas-fw fa-trash"></i>
+                                        </a>
                                     </td>   
                                 </tr>
                             {% endfor %}
