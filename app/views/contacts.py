@@ -615,7 +615,7 @@ def csv_2_contacts(user, file_path):
             twitter = row["twitter"] if "twitter" in fields else None
             notes = row["notes"] if "notes" in fields else None
 
-            contact_name = row["contact_person"] if "contact_person" in fields else None
+            contact_person = row["contact_person"] if "contact_person" in fields else None
             flat_no = row["flat_door_no"] if "flat_door_no" in fields else None
             street = row["street"] if "street" in fields else None
             city = row["city"] if "city" in fields else None
@@ -745,7 +745,7 @@ def csv_2_contacts(user, file_path):
                         is_shipping_address = True
 
                     contact_address = Contact_Addresses(
-                        contact_name = contact_name, 
+                        contact_name = contact_person, 
                         flat_no = flat_no,
                         street = street,
                         city = city,
