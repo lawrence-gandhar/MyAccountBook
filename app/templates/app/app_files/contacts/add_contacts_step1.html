@@ -4,7 +4,7 @@
 <div class="row">
 <div class="col-lg-12" style="padding:0px">
     <div class="card">    
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div class="card-body">
                 {% csrf_token %}
                 <div class="table" style="padding:10px 0px;">
@@ -137,6 +137,22 @@
                         </div>
                         <div class="d-table-cell" style="padding:5px 10px;">
                             {{ contact_form.twitter }}
+                        </div>
+                    </div>
+                    <div class="d-table-row" style="padding:10px 0px;">
+                        <div class="d-table-cell" style="padding:0px 10px;">
+                            <label>Notes</label>
+                        </div>
+                        <div class="d-table-cell" style="padding:5px 10px;">
+                            {{ contact_form.notes }}
+                        </div>
+                    </div>
+                    <div class="d-table-row" style="padding:10px 0px;">
+                        <div class="d-table-cell" style="padding:0px 10px;">
+                            <label>Attachments</label>
+                        </div>
+                        <div class="d-table-cell" style="padding:5px 10px;">
+                            {{ contact_form.attachements }}
                         </div>
                     </div>
                 </div>

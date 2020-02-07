@@ -19,10 +19,11 @@ class ContactsForm(ModelForm):
                     'customer_type', 'is_imported_user', 'imported_user', 'contact_name', 
                     'display_name', 'organization_name', 'organization_type', 'salutation',
                     'app_id', 'website', 'email', 'phone', 'facebook', 'twitter', 
-                    'is_sub_customer', 'is_msme_reg',
+                    'is_sub_customer', 'is_msme_reg', 'attachements', 'notes',
                 )
 
         widgets = {
+            'attachements' : FileInput(attrs = {'class':'form-control input-sm',}),
             'customer_type': Select(attrs={'class':'form-control input-sm'}, choices = user_constants.CUSTOMER_TYPE),
             'is_sub_customer': Select(attrs={'class':'form-control input-sm'}, choices = user_constants.IS_SUB_CUSTOMER),
             'is_msme_reg': Select(attrs={'class':'form-control input-sm'}, choices = user_constants.IS_TRUE),
@@ -38,6 +39,7 @@ class ContactsForm(ModelForm):
             'twitter' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'200'}),
             'organization_type' : Select(attrs={'class':'form-control input-sm',}, choices = user_constants.ORGANIZATION_TYPE, ),
             'organization_name' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'200'}),
+            'notes': Textarea(attrs = {'class':'form-control'})
         }
 
 class ContactsEmailForm(ModelForm):

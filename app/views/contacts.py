@@ -182,7 +182,7 @@ def add_contacts(request, slug = None, ins = None):
     if request.POST:
 
         if data["slug"] is None:
-            contact_form = ContactsForm(request.POST)
+            contact_form = ContactsForm(request.POST, request.FILES)
             if contact_form.is_valid():
                 data["contact_form_instance"] = contact_form_ins = contact_form.save(commit = False)
                 contact_form_ins.user = request.user
