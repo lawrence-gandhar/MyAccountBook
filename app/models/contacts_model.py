@@ -8,7 +8,7 @@ from uuid import uuid4
 import os
 
 #==========================================================================
-#   CHANGE LOGO FILE NAMES
+#   CHANGE CSV IMPORT FILE NAMES
 #==========================================================================
 #
 def file_rename(instance, filename):
@@ -16,6 +16,18 @@ def file_rename(instance, filename):
     upload_path = 'contact_csv_imports'
     ext = filename.split('.')[-1]
     return  os.path.join(upload_path,'{}.{}'.format(uuid4().hex, ext))
+
+
+#==========================================================================
+#   CHANGE CSV IMPORT FILE NAMES
+#==========================================================================
+#
+def attachments_rename(instance, filename):
+
+    upload_path = 'contact_attachments'
+    ext = filename.split('.')[-1]
+    return  os.path.join(upload_path,'{}.{}'.format(uuid4().hex, ext))
+
 
 
 #**************************************************************************
@@ -142,6 +154,13 @@ class Contacts(models.Model):
     )    
 
     notes = models.TextField(
+        blank = True,
+        null = True,
+    )
+
+    attachements = models.FileField(
+        upload_to = attachments_rename,
+        db_index = True,
         blank = True,
         null = True,
     )
