@@ -35,3 +35,20 @@ class ProductForm(ModelForm):
             'abatement' : NumberInput(attrs = {'class':'form-control input-sm',}),
             'unit' : NumberInput(attrs = {'class':'form-control input-sm',}),
         }
+
+#==================================================================================
+# PRODUCT IMAGE FORM
+#==================================================================================
+#
+
+class ProductPhotosForm(ModelForm):
+
+    class Meta:
+
+        model = ProductPhotos
+
+        fields= ('product_image',)
+
+        widgets = {
+            'product_image' : FileInput(attrs = {'class':'form-control input-sm', 'multiple' : 'true'})
+        }

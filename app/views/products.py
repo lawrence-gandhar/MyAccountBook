@@ -50,7 +50,7 @@ class AddProducts(View):
     data["included_template"] = 'app/app_files/products/add_products_form.html'
 
     data["add_product_form"] = ProductForm()
-
+    data["add_product_images_form"] = ProductPhotosForm()
     #
     #
     #
