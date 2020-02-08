@@ -6,7 +6,9 @@ from django.views.generic.base import RedirectView
 from django.conf import settings
 from django.conf.urls.static import static
 
-from app.views import dashboard, contacts, base, invoice, collections
+from app.views import dashboard, contacts, base, invoice, collections, \
+    products
+
 
 # Authorization
 urlpatterns = [
@@ -62,6 +64,13 @@ urlpatterns +=[
     path('invoice/get_pdf/<int:ins>/', never_cache(login_required(invoice.get_pdf)), name = 'get_pdf'),
     
 ] 
+
+# Products
+urlpatterns += [
+    path('products/', never_cache(login_required(products.ProductsView.as_view())), name = 'view_products'),
+]
+
+
 
 #
 if settings.DEBUG:
