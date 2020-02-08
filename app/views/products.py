@@ -56,3 +56,24 @@ class AddProducts(View):
     #
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name, self.data)
+
+    def post(self, request, *args, **kwargs):
+        
+        add_product = ProductForm(request.POST or None)
+        add_images = ProductPhotosForm(request.FILES or None)
+
+        if add_product.is_valid():
+            add_product.save(commit = False)
+            add_product.user = request.user
+            ins = add_product.save()
+
+        if add_images.is_valid():
+            for img in request.FILES.getlist('product_image'):
+                img_save = ProductPhotos(
+                    product_image = img,
+                    product = ins
+                )
+
+                img_save.save()
+        
+        return redirect('/products/', permanent = False)

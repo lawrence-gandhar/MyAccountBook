@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from app.other_constants import *
 
+from uuid import uuid4
+import os
 
 #==========================================================================
 #   CHANGE CATEGORY FILE NAMES
@@ -22,7 +24,7 @@ def product_file_rename(instance, filename):
 
     upload_path = 'products'
     ext = filename.split('.')[-1]
-    return  os.path.join(upload_path,'/{}/{}.{}'.format(instance.pk, uuid4().hex, ext))
+    return  os.path.join(upload_path,'/{}.{}'.format(uuid4().hex, ext))
 
 
 #=========================================================================================
