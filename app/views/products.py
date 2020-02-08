@@ -9,7 +9,31 @@ from app.forms.items_form import *
 import json
 
 
-class ProductsView(View):
+#========================================================================================
+#
+#========================================================================================
+
+def view_products(request, *args, **kwargs):
+    # Template 
+    template_name = 'app/app_files/products/index.html'
+
+    # Initialize 
+    data = defaultdict()
+    data["view"] = ""
+
+    # Custom CSS/JS Files For Inclusion into template
+    data["css_files"] = []
+    data["js_files"] = []
+    data["active_link"] = 'Products'
+
+    data["included_template"] = 'app/app_files/products/add_products_form.html'
+
+    return render(request, template_name, data)    
+
+#========================================================================================
+#
+#========================================================================================
+class AddProducts(View):
 
     # Template 
     template_name = 'app/app_files/products/index.html'

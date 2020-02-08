@@ -5,21 +5,28 @@
 {% load pagination %}
 
 {% block content %}
-
-<div class="row custom-row" style="padding:10px;background-color: #000000; background-size: cover;">
-    <ul style="list-style:none; margin:0px; color:#FFFFFF;">
-        <li class="nav-item" style="float:left;padding:0px 10px;">
-            <a href="" style="color:#FFFFFF; text-decoration:none;" title="View Products">
-                <i class="fas fw fa-th-list"></i>
-            </a>
-        </li>
-        <li class="nav-item" style="float:left;padding:0px 10px;">
-            <a href="" style="color:#FFFFFF; text-decoration:none;" title="Add Products">
-                <i class="fas fa-fw fa-plus-square"></i>
-            </a>
-        </li>        
-    </ul>
-</div>
+    <div class="row custom-row" style="padding:10px;background-color: #000000; background-size: cover;">
+        <ul style="list-style:none; margin:0px; color:#FFFFFF;">
+            <li class="nav-item" style="float:left;padding:0px 10px; line-height: 30px;">
+                <strong>PRODUCTS</strong> <i class="fa fa-fw fa-chevron-right"></i>
+            </li>
+            <li class="nav-item" style="float:left;padding:0px 10px;">
+                <a href="{% url 'add_products' %}" style="color:#FFFFFF; text-decoration:none; font-size: 20px;" title="Add Product">
+                    <i class="fas fa-fw fa-plus-square"></i>
+                </a>
+            </li>
+            <li class="nav-item" style="float:left;padding:0px 10px;">
+                <a href="{% url 'view_products' %}" style="color:#FFFFFF; text-decoration:none; font-size: 20px;" title="View Products As List">
+                    <i class="fas fw fa-th-list"></i>
+                </a>
+            </li>
+            <li class="nav-item" style="float:left;padding:0px 10px;">
+                <a href="/contacts/upload/" style="color:#FFFFFF; text-decoration:none; font-size: 20px;" title="Import Products">
+                    <i class="fas fw fa-upload"></i>
+                </a>            
+            </li>
+        </ul>
+    </div>
 
 <div class="container">
     {% include included_template %}

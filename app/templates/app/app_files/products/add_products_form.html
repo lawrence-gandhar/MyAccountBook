@@ -6,39 +6,143 @@
         <div class="card">    
             <form method="post">
                 <div class="card-header">
-                    <h4>PRODUCTS
-                    </h4>
+                    <h4>ADD COLLECTION</h4>
                 </div>
                 <div class="card-body">
+                    {% csrf_token %}
+                    <div class="table" style="padding:10px 0px;">
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                <label>Product Category</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 13px;">
+                                {{add_product_form.product_category}}
+                            </div>
+                            <div class="d-table-cell" style="padding:0px 0px;">
+                                <button type="button" class="btn btn-sm btn-warning" title="Add Category">
+                                    <i class="fas fas-fw fa-plus"></i>
+                                </button>
+                            </div>                        
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                <label>Product Type</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 13px;">
+                                {{add_product_form.product_type}}
+                            </div>                        
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                <label>SKU/Item/Product ID</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 13px;">
+                                {{add_product_form.sku}}
+                            </div>                        
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                <label>Product Name</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 13px;">
+                                {{add_product_form.product_name}}
+                            </div>                        
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                <label>Product Description</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 13px;">
+                                {{add_product_form.product_description}}
+                            </div>                        
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                <label>Product Dimensions</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 13px;">
+                                {{add_product_form.product_dimension}}
+                            </div>                        
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                <label>Cost Price</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 13px;">
+                                {{add_product_form.cost_price}}
+                            </div>                        
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                <label>Marked Price</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 13px;">
+                                {{add_product_form.marked_price}}
+                            </div>                        
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                <label>Selling Price</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 13px;">
+                                {{add_product_form.selling_price}}
+                            </div>                        
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                <label>Discount</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 13px;">
+                                {{add_product_form.discount}}
+                            </div>                        
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                <label>Tax</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 13px;">
+                                {{add_product_form.tax}}
+                            </div>                        
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                <label>GST</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 13px;">
+                                {{add_product_form.gst}}
+                            </div>                        
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                <label>HSN/SAC Code</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 13px;">
+                                {{add_product_form.hsn_code}}
+                            </div>                        
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                <label>Abatement</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 13px;">
+                                {{add_product_form.abatement}}
+                            </div>                        
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                <label>Units</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 13px;">
+                                {{add_product_form.unit}}
+                            </div>                        
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-center">
+                    <button type="reset" class="btn button button-orange">Cancel</button>
+                    <button class="btn button button-blue">Submit</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
-<!--
-
--->
-
-<form method="post">
-    <div class="card-header">
-        <h4>ADD PRODUCT</h4>
-    </div>
-    <div class="card-body">
-        {% csrf_token %}
-        <div class="table" style="padding:10px 0px;">
-            <div class="d-table-row" style="padding:10px 0px;">
-                <div class="d-table-cell" style="padding:5px 10px;">
-                    <label>Contact</label>
-                </div>
-                <div class="d-table-cell" style="padding:0px 13px;">
-                    {{add_product_form.product_category}}
-                </div>                        
-            </div>
-        </div>
-    </div>
-    <div class="card-footer text-center">
-        <button type="reset" class="btn button button-orange">Cancel</button>
-        <button class="btn button button-blue">Submit</button>
-    </div>
-</form>
