@@ -13,7 +13,7 @@ def category_file_rename(instance, filename):
 
     upload_path = 'category'
     ext = filename.split('.')[-1]
-    return  os.path.join(upload_path,'{}.{}'.format(instance.pk, uuid4().hex, ext))
+    return  os.path.join(upload_path,'{}.{}'.format(uuid4().hex, ext))
 
 
 #==========================================================================
@@ -24,13 +24,12 @@ def product_file_rename(instance, filename):
 
     upload_path = 'products'
     ext = filename.split('.')[-1]
-    return  os.path.join(upload_path,'/{}.{}'.format(uuid4().hex, ext))
-
+    return  os.path.join(upload_path,'{}.{}'.format(uuid4().hex, ext))
 
 #=========================================================================================
 # PRODUCT CATEGORY MODEL
 #=========================================================================================
-
+#
 class ProductCategory(models.Model):
     is_parent = models.BooleanField(
         db_index = True,
@@ -70,7 +69,7 @@ class ProductCategory(models.Model):
 #=========================================================================================
 # ITEMS/PRODUCT MODEL
 #=========================================================================================
-
+#
 class ProductsModel(models.Model):
 
     user = models.ForeignKey(
@@ -172,7 +171,7 @@ class ProductsModel(models.Model):
 #=========================================================================================
 # PRODUCT PHOTOS MODEL
 #=========================================================================================
-
+#
 class ProductPhotos(models.Model):
     product = models.ForeignKey(
         ProductsModel,

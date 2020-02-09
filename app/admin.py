@@ -1,9 +1,10 @@
 from django.contrib import admin
 
-from app.models.contacts_model import Contacts, Contacts_Email, Contact_Addresses, Contact_Account_Details
-from app.models.invoice_model import InvoiceModel, Invoice_Templates
-from app.models.users_model import Profile, User_Account_Details, User_Address_Details
+from app.models.contacts_model import *
+from app.models.invoice_model import *
+from app.models.users_model import *
 from app.models.collects_model import *
+from app.models.items_model import *
 # Register your models here.
 
 @admin.register(Contacts)
@@ -46,3 +47,16 @@ class Collections(admin.ModelAdmin):
 class Collections(admin.ModelAdmin):
     model = Invoice_Templates
 
+@admin.register(ProductsModel)
+class Products(admin.ModelAdmin):
+    model = ProductsModel
+
+@admin.register(ProductCategory)
+class ProductCategory(admin.ModelAdmin):
+    model = ProductCategory
+
+@admin.register(ProductPhotos)
+class ProductPhotos(admin.ModelAdmin):
+    model = ProductPhotos
+
+    
