@@ -36,6 +36,14 @@ class ProductCategory(models.Model):
         default = True,
     )
 
+    user = models.ForeignKey(
+        User,
+        on_delete = models.CASCADE,
+        db_index = True,
+        blank = True,
+        null = True,
+    )
+
     parent_category = models.ForeignKey(
         'self',
         db_index = True,
