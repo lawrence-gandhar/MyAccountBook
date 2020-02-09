@@ -26,7 +26,15 @@ def view_products(request, *args, **kwargs):
     data["js_files"] = []
     data["active_link"] = 'Products'
 
-    data["included_template"] = 'app/app_files/products/add_products_form.html'
+    data["included_template"] = 'app/app_files/products/view_products.html'
+
+    #*****************************************************************************
+    # PRODUCT LISTING
+    #*****************************************************************************
+
+    products = ProductsModel.objects.prefetch_related('productphotos_set').filter(user = request.user)
+
+    data["products"] = products
 
     return render(request, template_name, data)    
 
