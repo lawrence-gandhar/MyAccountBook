@@ -86,31 +86,3 @@ class AddProducts(View):
                 img_save.save()
         
         return redirect('/products/', permanent = False)
-
-#========================================================================================
-# ADD PRODUCT CATEGORY
-#========================================================================================
-#
-class ProductCategoryView(View):
-    
-    # Template 
-    template_name = 'app/app_files/products/index.html'
-
-    # Initialize 
-    data = defaultdict()
-    data["view"] = ""
-
-    # Custom CSS/JS Files For Inclusion into template
-    data["css_files"] = []
-    data["js_files"] = ['custom_files/js/tree_view.js']
-    data["active_link"] = 'Products'
-
-    data["included_template"] = 'app/app_files/products/view_product_category.html'
-
-    data["add_product_form"] = ProductForm()
-    data["add_product_images_form"] = ProductPhotosForm()
-    #
-    #
-    #
-    def get(self, request, *args, **kwargs):
-        return render(request, self.template_name, self.data)

@@ -10,20 +10,7 @@
                 </div>
                 <div class="card-body">
                     {% csrf_token %}
-                    <div class="table" style="padding:10px 0px;">
-                        <div class="d-table-row" style="padding:10px 0px;">
-                            <div class="d-table-cell" style="padding:5px 10px;">
-                                <label>Product Category</label>
-                            </div>
-                            <div class="d-table-cell" style="padding:5px 13px;">
-                                {{add_product_form.product_category}}
-                            </div>
-                            <div class="d-table-cell" style="padding:0px 0px;">
-                                <button type="button" class="btn btn-sm btn-warning" title="Add Category">
-                                    <i class="fas fas-fw fa-plus"></i>
-                                </button>
-                            </div>                        
-                        </div>
+                    <div class="table" style="padding:10px 0px;">                        
                         <div class="d-table-row" style="padding:10px 0px;">
                             <div class="d-table-cell" style="padding:5px 10px;">
                                 <label>Product Type</label>
