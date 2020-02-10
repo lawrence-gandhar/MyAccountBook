@@ -51,10 +51,6 @@ class Collections(admin.ModelAdmin):
 class Products(admin.ModelAdmin):
     model = ProductsModel
 
-@admin.register(ProductCategory)
-class ProductCategory(admin.ModelAdmin):
-    model = ProductCategory
-
 @admin.register(ProductPhotos)
 class ProductPhotos(admin.ModelAdmin):
     model = ProductPhotos

@@ -13,13 +13,12 @@ class ProductForm(ModelForm):
         model = ProductsModel
 
         fields = (
-            'product_category', 'product_type', 'sku', 'product_name', 'product_description',
+            'product_type', 'sku', 'product_name', 'product_description',
             'product_dimension', 'cost_price', 'marked_price', 'selling_price', 'discount', 
             'tax', 'gst', 'hsn_code', 'abatement', 'unit'
         )
 
         widgets = {
-            'product_category' : Select(attrs = {'class':'form-control input-sm',}),
             'product_type' : Select(attrs = {'class':'form-control input-sm',}, choices = items_constant.PRODUCT_TYPE),
             'sku' : TextInput(attrs = {'class':'form-control input-sm',}),
             'product_name' : TextInput(attrs = {'class':'form-control input-sm',}),
