@@ -1,38 +1,32 @@
 {% load static %}
 
-<div class="nk-sidebar">           
-    <div class="nk-nav-scroll">
-        <ul class="metismenu" id="menu">
-            <li>
-                <a href="{% url 'dashboard' %}">
-                    <i class="fas fas-fw fa-tachometer-alt menu-icon"></i><span class="nav-text">Dashboard</span>
+<div class="sidebar-wrapper ps-container ps-theme-default">
+    <div class="sidebar-background" style="background-image: url({% static 'all_page/img/sidebar-2.jpg' %}) "> 
+        <ul class="nav">
+            <li class="nav-item active  ">
+                <a class="nav-link" href="{% url 'dashboard' %}">
+                <i class="material-icons">dashboard</i>
+                <p>Dashboard</p>
+            </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{% url 'contacts' %}">
+                <i class="material-icons">person</i>
+                <p>Contacts</p>
                 </a>
             </li>
-            <li>
-                <a href="{% url 'contacts' %}">
-                    <i class="fas fas-fw fa-phone-alt menu-icon"></i><span class="nav-text">Contacts</span>
+            <li class="nav-item ">
+                <a class="nav-link" href="{% url 'view_products' %}">
+                <i class="material-icons">library_books</i>
+                <p>Products</p>
                 </a>
             </li>
-            <li>
-                <a href="{% url 'collections' %}">
-                    <i class="fas fa-fw fa-hand-holding-usd menu-icon"></i><span class="nav-text">Collect</span>
+            <li class="nav-item ">
+                <a class="nav-link" href="{% url 'collections' %}">
+                <i class="material-icons">content_paste</i>
+                <p>Collections</p>
                 </a>
-            </li>            
-            <li>
-                <a href="">
-                    <i class="fas fa-fw fa-wallet menu-icon"></i><span class="nav-text">Pay</span>
-                </a>
-            </li>
-            <li>
-                <a href="{% url 'view_products' %}">
-                    <i class="fas fa-fw fa-wallet menu-icon"></i><span class="nav-text">Products</span>
-                </a>
-            </li>
-            <li>
-                <a href="{% url 'invoice' %}">
-                    <i class="fas fas-fw fa-file-invoice menu-icon"></i><span class="nav-text">Invoice</span>
-                </a>
-            </li>
+            </li>         
         </ul>
     </div>
-</div>
+</div>  
