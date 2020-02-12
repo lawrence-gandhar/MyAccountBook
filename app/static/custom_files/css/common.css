@@ -8,6 +8,11 @@
     }
 }
 
+.custom-row{
+  padding: 10px; 
+  background: linear-gradient(60deg,#f5700c,#ff9800);
+}
+
 thead th, td{
     font-size: 11px;
 }

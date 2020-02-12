@@ -71,6 +71,7 @@ def add_contacts(request, slug = None, ins = None):
 
     # Set link as active in menubar
     data["active_link"] = 'Contacts'
+    data["breadcrumb_title"] = 'CONTACTS'
 
     data["slug"] = slug
     data["breadcrumbs"] = ''
