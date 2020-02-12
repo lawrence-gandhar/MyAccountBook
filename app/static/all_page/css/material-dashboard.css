@@ -16716,7 +16716,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 
 .table>thead>tr>th {
   border-bottom-width: 1px;
-  font-size: 1.0625rem;
+  font-size: 0.75rem;
   font-weight: 300;
 }
 
@@ -16760,7 +16760,9 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 }
 
 .table thead tr th {
-  font-size: 1.063rem;
+  font-size: 0.75rem;
+  text-align: center;
+  font-weight:600;
 }
 
 .table .th-description {
@@ -16789,6 +16791,11 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 .table>tbody>tr {
   position: relative;
 }
+
+.table>tbody>tr>td {
+  font-size: 11px;
+}
+
 
 .table-shopping>thead>tr>th {
   font-size: 0.75rem;
