@@ -52,8 +52,8 @@
         <div class="modal-content">            
             <form method="post" action="">
                 {% csrf_token %}
-                <div class="modal-header">
-                    <h4 class="modal-title">Add Email Address</h4>
+                <div class="modal-header bg-warning">
+                    <h4 class="modal-title"><strong>Add Email Address</strong></h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -85,8 +85,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn button button-green">Submit</button>
-                    <button type="button" class="btn button button-red" data-dismiss="modal">Close</button>
+                    <button class="btn btn-success">Submit</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </form>
         </div>
@@ -101,16 +101,16 @@
                 <input type="hidden" name="slug" value="{{slug}}">
                 <input type="hidden" name="form_ins" value="{{contact_form_instance}}">
                 {% csrf_token %}
-                <div class="modal-header">
-                    <h4 class="modal-title">Edit Email Details</h4>
+                <div class="modal-header bg-warning">
+                    <h4 class="modal-title"><strong>Edit Email Details</strong></h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body" id="extra_form_layout">
 
                 </div>
                 <div class="modal-footer">
-                    <button class="btn button button-green">Submit</button>
-                    <button type="button" class="btn button button-red" data-dismiss="modal">Close</button>
+                    <button class="btn btn-success">Submit</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </form>
         </div>
