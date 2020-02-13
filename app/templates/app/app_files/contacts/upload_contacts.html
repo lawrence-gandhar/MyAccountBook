@@ -8,13 +8,10 @@ p{
 <div class="row">
     <div class="col-lg-12" style="padding:0px">
         <div class="card">
-            <div class="card-header bg-blue">
-                <h5 class="card-title">
-                        <span style="color:#000000; background-color:#FFFFFF; padding:0px 10px;margin-right:10px">{{instance_title|upper}}</span> 
-                        UPLOAD CONTACTS
-                    </h5>
-                <h6 class="card-subtitle mb-2 text-muted">Upload CSV To Import Contacts</h6>
-            </div>
+            <div class="card-header card-header-primary">
+                <h4 class="card-title ">Import Contacts</h4>
+                <p class="card-category"><strong>Upload CSV</strong></p>
+            </div>  
             <form method="post" enctype="multipart/form-data">
                 <div class="card-body">
                     {% csrf_token %}
@@ -34,7 +31,7 @@ p{
                                 {{ upload_form.csv_file }}                                
                             </div>
                             <div class="d-table-cell" style="padding:0px;">
-                                <button class="btn button button-green" style="vertical-align: inherit;">Upload</button>
+                                <button class="btn btn-success" style="vertical-align: inherit;">Upload</button>
                             </div>
                         </div>
                     </div>
@@ -51,21 +48,19 @@ p{
 <div class="row">
     <div class="col-lg-12" style="padding:0px">
         <div class="card">
-            <div class="card-header">
-                <h5 class="card-title">                         
-                        CSV DOCUMENTATION FOR IMPORTING CONTACTS
-                    </h5>
-                <h6 class="card-subtitle mb-2 text-muted">Please follow the documentation</h6>
-            </div>
+            <div class="card-header card-header-info">
+                <h4 class="card-title ">CSV DOCUMENTATION FOR IMPORTING CONTACTS</h4>
+                <p class="card-category"><strong>Please fllow the documentation</p>
+            </div> 
             <div class="card-body">
                 <div class="table table-responsive">
                     <table class="table table-bordered" style="background-color:#FFFFFF">
-                        <tr class="bg-blue" style="color:#FFFFFF; font-weight:bold">
-                            <td width="200px" style="font-size:110%; padding:10px;">Column Header</td>
-                            <td style="font-size:110%; padding:10px;">Column Value</td style="font-size:110%; padding:10px;">
-                            <td style="font-size:110%; padding:10px;">Datatype</td style="font-size:110%; padding:10px;">
-                            <td style="font-size:110%; padding:10px;">Optional</td style="font-size:110%; padding:10px;">
-                            <td width="400px" style="font-size:110%; padding:10px;">Description</td width="200px">
+                        <tr class="bg-info" style="font-weight:bold">
+                            <td class="text-center" width="200px" style="font-size:110%; padding:10px; color:#000000 !important;">Column Header</td>
+                            <td class="text-center" style="font-size:110%; padding:10px; color:#000000 !important;">Column Value</td>
+                            <td class="text-center" style="font-size:110%; padding:10px; color:#000000 !important;">Datatype</td>
+                            <td class="text-center" style="font-size:110%; padding:10px; color:#000000 !important;">Optional</td>
+                            <td class="text-center" width="400px" style="font-size:110%; padding:10px; color:#000000 !important;">Description</td>
                         </tr>
                         {% for i,j in documentation_dict.items %}
                         <tr style="background-color: #000000; color:#FFFFFF; ">

@@ -22,8 +22,8 @@ import json, os, csv
 class ContactsView(View):
 
     # Template 
-    template_name = 'app/app_files/contacts/index.html'
-
+    template_name = 'app/app_files/contacts/base.html'
+    
     # Initialize 
     data = defaultdict()
     data["view"] = ""
@@ -35,6 +35,8 @@ class ContactsView(View):
     data["css_files"] = []
     data["js_files"] = []
 
+    data["included_template"] = 'app/app_files/contacts/view_contacts.html'
+    
     #
     #
     def get(self, request):        
@@ -62,7 +64,7 @@ def add_contacts(request, slug = None, ins = None):
     data = defaultdict()
 
     # Template 
-    template_name = 'app/app_files/contacts/add_contacts.html'
+    template_name = 'app/app_files/contacts/base.html'
     data["included_template"] = 'app/app_files/contacts/add_contacts_step1.html'
     
     # Custom CSS/JS Files For Inclusion into template
@@ -97,11 +99,11 @@ def add_contacts(request, slug = None, ins = None):
         qStr = '?section='+data["query_string"]
 
     breadcrumbs_list = [
-            '<li class="nav-item" style="float:left;padding:0px 10px;margin-left:20px;"><a href="/contacts/add/step1/'+ str(data["contact_form_instance"]) +qStr+'" style="color:#FFFFFF; text-decoration:none;"><i class="fas fw fa-user"></i> Basic Details</a></li>',
-            '<li class="nav-item" style="float:left;padding:0px 10px; margin-left:10px;"><a href="/contacts/add/step2/'+ str(data["contact_form_instance"]) +qStr+'" style="color:#FFFFFF; text-decoration:none;"><i class="fas fw fa-percent"></i>Tax Details</a></li>',            
-            '<li class="nav-item" style="float:left;padding:0px 10px; margin-left:10px;"><a href="/contacts/add/step3/'+ str(data["contact_form_instance"]) +qStr+'" style="color:#FFFFFF; text-decoration:none;"><i class="fas fw fa-id-card"></i> Address Details</a></li>',
-            '<li class="nav-item" style="float:left;padding:0px 10px; margin-left:10px;"><a href="/contacts/add/step4/'+ str(data["contact_form_instance"]) +qStr+'" style="color:#FFFFFF; text-decoration:none;"><i class="fas fw fa-credit-card"></i> Account Details</a></li>',
-            '<li class="nav-item" style="float:left;padding:0px 10px; margin-left:10px;"><a href="/contacts/add/step5/'+ str(data["contact_form_instance"]) +qStr+'" style="color:#FFFFFF; text-decoration:none;"><i class="fas fw fa-envelope-open"></i> Email Details</a></li>',
+            '<li class="nav-item" style="float:left;padding:0px 10px;"><a href="/contacts/add/step1/'+ str(data["contact_form_instance"]) +qStr+'" style="color:#FFFFFF; text-decoration:none;"><i class="material-icons">account_circle</i> <span style="position:relative; top: 2px;">Basic Details</span></a></li>',
+            '<li class="nav-item" style="float:left;padding:0px 10px; margin-left:10px;"><a href="/contacts/add/step2/'+ str(data["contact_form_instance"]) +qStr+'" style="color:#FFFFFF; text-decoration:none;"><i class="material-icons">account_balance</i> <span style="position:relative; top: 2px;">Tax Details</span></a></li>',            
+            '<li class="nav-item" style="float:left;padding:0px 10px; margin-left:10px;"><a href="/contacts/add/step3/'+ str(data["contact_form_instance"]) +qStr+'" style="color:#FFFFFF; text-decoration:none;"><i class="material-icons">house</i> <span style="position:relative; top: 2px;">Address Details</span></a></li>',
+            '<li class="nav-item" style="float:left;padding:0px 10px; margin-left:10px;"><a href="/contacts/add/step4/'+ str(data["contact_form_instance"]) +qStr+'" style="color:#FFFFFF; text-decoration:none;"><i class="material-icons">credit_card</i> <span style="position:relative; top: 2px;">Account Details</span></a></li>',
+            '<li class="nav-item" style="float:left;padding:0px 10px; margin-left:10px;"><a href="/contacts/add/step5/'+ str(data["contact_form_instance"]) +qStr+'" style="color:#FFFFFF; text-decoration:none;"><i class="material-icons">mail</i> <span style="position:relative; top: 2px;">Email Details</span></a></li>',
         ]
 
     if ins is not None:

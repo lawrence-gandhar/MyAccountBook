@@ -1,10 +1,12 @@
 $(document).ready(function(){
 
     $("#menu li").each(function(){
+
+        console.log($(this).html());
         
         $("#menu li").removeClass("active");
 
-        link_text = $(this).find("a").find("span").text();
+        link_text = $(this).find("a").find("p").text();
 
         if(active_link === link_text){            
             $(this).addClass("active");

@@ -16793,7 +16793,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 }
 
 .table>tbody>tr>td {
-  font-size: 11px;
+  font-size: 100%;
 }
 
 
