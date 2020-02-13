@@ -104,6 +104,7 @@ class ProductsModel(models.Model):
     unit = models.IntegerField(
         default = 0,
         db_index = True,
+        choices = items_constant.UNITS
     )
 
     def __str__(self):
