@@ -370,7 +370,7 @@ def delete_contacts(request, slug = None, ins = None, obj = None):
     if slug is not None and ins is not None and obj is not None:
         try: 
             contact = Contacts.objects.get(pk = ins, user = request.user)
-        except C.DoesNotExist:
+        except:
             return redirect('/unauthorized/', permanent = True)
 
         slug = int(slug.replace('step',''))
