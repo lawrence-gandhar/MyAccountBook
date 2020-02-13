@@ -1,24 +1,21 @@
 <div class="row">
     <div class="col-lg-12" style="padding:0px">
         <div class="card">
-            <div class="card-header bg-blue">
-                <h5 class="card-title">
-                    <span style="color:#000000; background-color:#FFFFFF; padding:0px 10px;margin-right:10px">{{instance_title|upper}}</span>
-                    CONTACT'S EMAIL DETAILS
-                    <a href="{% url 'create-contact-invoice' contact_form_instance %}" class="btn btn-sm button-black" style="float:right; color:#FFFFFF">Create Invoice</a>
-                </h5>
-                <h6 class="card-subtitle mb-2 text-muted">Manage Contact's Email Addresses</h6>
+            <div class="card-header card-header-primary">
+                <h4 class="card-title ">{{instance_title|upper}}</h4>
+                <p class="card-category"><strong>Manage Email Addresses</strong></p>
             </div>
             <div class="card-body">
-                <div class="table">
-                    <table class="table-bordered" width="100%" cellspacing="0">
-                        <tr style="background-color:#5d5d5d;">
-                            <td class="text-center font-bold font-white" style="padding:10px;">Email Address</td>
-                            <td class="text-center font-bold font-white">Is Official</td>
-                            <td class="text-center font-bold font-white">Is Personal</td class="text-center font-bold font-white">
-                            <td class="text-center font-bold font-white">Created On</td class="text-center font-bold font-white">
-                            <td class="text-center font-bold font-white">Action</td class="text-center font-bold font-white">
-                        </tr>
+                <div class="table-responsive">
+                    <table class="table table-bordered" width="100%" cellspacing="0">
+                        <thead class="text-primary">
+                            <th class="text-center">Email Address</th>
+                            <th class="text-center">Is Official</th>
+                            <th class="text-center">Is Personal</th>
+                            <th class="text-center">Created On</th>
+                            <th class="text-center">Action</th>
+                        </thead>
+                        <tbody>
                         {% for email in contact_emails %}
                             <tr>
                                 <td>{{email.email}}</td>
@@ -27,22 +24,23 @@
                                 <td>{{email.created_on}}</td>
                                 <td class="text-center" width="80px">
                                     {% csrf_token %}
-                                    <button class="btn btn-primary btn-sm" style="margin-right: 2px" onclick="edit_form_button('edit_contact_email',{{email.id}})">
-                                        <i class="fas fa-fw fa-pencil-alt" style="font-size:70%"></i>
+                                    <button class="btn btn-primary btn-sm" style="padding:5px 5px;" onclick="edit_form_button('edit_contact_email',{{email.id}})">
+                                        <i class="material-icons">create</i>
                                     </button>
-                                    <a class="btn btn-danger btn-sm" href="{% url 'delete-contacts' 'step2' contact_form_instance email.id %}">
-                                        <i class="fas fa-fw fa-trash-alt" style="font-size:70%"></i>
+                                    <a class="btn btn-danger btn-sm" style="padding:5px 5px;" href="{% url 'delete-contacts' 'step2' contact_form_instance email.id %}">
+                                        <i class="material-icons">delete_forever</i>
                                     </a>
                                 </td>
                             </tr>
                         {% endfor %}    
+                        </tbody>
                     </table>
                 </div>                
             </div>
-            <div class="card-footer text-center">
-                <a href="{% url 'add-contacts' 'step4' contact_form_instance %}" type="button" class="btn button button-blue">Back</a>
-                <button type="button" class="btn button button-green" data-toggle="modal" data-target="#addModal">Add Another</button>
-                <a href="{% url 'add-contacts' 'step5' contact_form_instance %}" type="button" class="btn button button-blue">Next</a>
+            <div class="card-footer text-center"  style="justify-content: center;">
+                <a href="{% url 'add-contacts' 'step4' contact_form_instance %}" type="button" class="btn btn-info">Back</a>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal">Add Another</button>
+                <a href="{% url 'add-contacts' 'step5' contact_form_instance %}" type="button" class="btn btn-warning">Next</a>
             </div>
         </div>
     </div>

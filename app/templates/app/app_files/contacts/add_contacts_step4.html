@@ -1,13 +1,10 @@
 <div class="row">
     <div class="col-lg-12" style="padding:0px">
         <div class="card">
-            <div class="card-header bg-blue">
-                <h5 class="card-title">
-                        <span style="color:#000000; background-color:#FFFFFF; padding:0px 10px;margin-right:10px">{{instance_title|upper}}</span> 
-                        CONTACT'S ACCOUNT DETAILS
-                    </h5>
-                <h6 class="card-subtitle mb-2 text-muted">Add Contact's Account Details</h6>
-            </div>
+            <div class="card-header card-header-primary">
+                <h4 class="card-title ">{{instance_title|upper}}</h4>
+                <p class="card-category"><strong>Add Account Details</strong></p>
+            </div>             
             <form method="post">
                 <div class="card-body">
                     {% csrf_token %}
@@ -54,9 +51,9 @@
                         </div>
                     </div>
                 </div>    
-                <div class="card-footer text-center">
-                    <a href="{% url 'add-contacts' 'step3' contact_form_instance %}" type="button" class="btn button button-blue">Back</a>
-                    <button class="btn button button-green">Save</button>
+                <div class="card-footer text-center"  style="justify-content: center;">
+                    <a href="{% url 'add-contacts' 'step3' contact_form_instance %}" type="button" class="btn btn-info">Back</a>
+                    <button class="btn btn-success">Save</button>
                 </div>
             </form>
         </div>
