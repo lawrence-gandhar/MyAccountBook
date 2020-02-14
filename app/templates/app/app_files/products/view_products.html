@@ -44,15 +44,15 @@
                                             <i class="material-icons">create</i>
                                         </a>
                                         {% if product.is_active %}
-                                            <a title="Deactivate Product" href="" class="btn btn-sm btn-default" style="padding:5px 5px;">
+                                            <a title="Deactivate Product" href="{% url 'product-status-change' 'deactivate' product.id %}" class="btn btn-sm btn-default" style="padding:5px 5px;">
                                                 <i class="material-icons">clear</i>
                                             </a>
                                         {% else %}
-                                            <a title="Activate Product" href="" class="btn btn-sm btn-success" style="padding:5px 5px;">
+                                            <a title="Activate Product" href="{% url 'product-status-change' 'activate' product.id %}" class="btn btn-sm btn-success" style="padding:5px 5px;">
                                                 <i class="material-icons">check</i>
                                             </a>
                                         {% endif %}
-                                        <a title="Delete Product" href="" class="btn btn-danger btn-sm" style="padding:5px 5px;">
+                                        <a title="Delete Product" href="{% url 'product-delete' product.id %}" class="btn btn-danger btn-sm" style="padding:5px 5px;">
                                             <i class="material-icons">delete_forever</i>
                                         </a>
                                     </td>

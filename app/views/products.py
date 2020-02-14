@@ -88,3 +88,43 @@ class AddProducts(View):
                 img_save.save()
         
         return redirect('/products/', permanent = False)
+
+#=========================================================================================
+# PRODUCT DELETE
+#=========================================================================================
+#
+def delete_product(request, ins = None):
+    if ins is not None:
+        try:
+            product = ProductsModel.objects.get(pk = int(ins))
+        except:
+            return redirect('/unauthorized/', permanent=False)
+
+        product.delete()
+        return redirect('/products/', permanent=False)
+    return redirect('/unauthorized/', permanent=False)
+
+
+#===================================================================================================
+# STATUS CHANGE
+#===================================================================================================
+#
+def status_change(request, slug = None, ins = None):
+    
+    if slug is not None and ins is not None:
+        try:
+            product = ProductsModel.objects.get(pk = int(ins))        
+        except:
+           return redirect('/unauthorized/', permanent=False)
+
+        if slug == 'deactivate':
+            product.is_active = False
+        elif slug == 'activate':
+            product.is_active = True
+        else:
+            return redirect('/unauthorized/', permanent=False)
+
+        product.save()
+        return redirect('/products/', permanent=False)
+
+    return redirect('/unauthorized/', permanent=False)

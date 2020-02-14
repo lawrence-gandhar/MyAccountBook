@@ -5,6 +5,7 @@ from django.contrib.auth import views as auth_views
 from django.views.generic.base import RedirectView
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from app.views import dashboard, contacts, base, invoice, collections, \
     products
@@ -36,8 +37,8 @@ urlpatterns += [
     path('contacts/check_appid/', never_cache(login_required(contacts.check_app_id)), name='check-appid'),
     path('contacts/user_exists_in_list/', never_cache(login_required(contacts.user_exists_in_list)), name='check-appid-user-exist'),
     path('contacts/upload/', never_cache(login_required(contacts.ContactsFileUploadView.as_view())), name='contacts-upload'),
-    path('contacts/status_change/<slug:slug>/<int:ins>', never_cache(login_required(contacts.status_change)), name='status-change'),
-    path('contacts/delete/<int:ins>', never_cache(login_required(contacts.delete_contact)), name='contacts-delete'),
+    path('contacts/status_change/<slug:slug>/<int:ins>', never_cache(login_required(contacts.status_change)), name='contact-status-change'),
+    path('contacts/delete/<int:ins>', never_cache(login_required(contacts.delete_contact)), name='contact-delete'),
 ]
 
 # Invoice
@@ -50,6 +51,11 @@ urlpatterns += [
     path('invoice/create_invoice/collections/<int:ins>/', never_cache(login_required(invoice.CreateCollectionInvoice.as_view())), name = 'create-collection-invoice'),
 ]
 
+urlpatterns +=[
+    path('invoice/get_pdf/<int:ins>/', never_cache(login_required(invoice.get_pdf)), name = 'get_pdf'),
+    
+] 
+
 # Collections
 urlpatterns += [
     path('collections/', never_cache(login_required(collections.view_collections)), name = 'collections'),
@@ -60,15 +66,12 @@ urlpatterns += [
     path('collections/edit_partial/<int:ins>/<int:obj>/', never_cache(login_required(collections.Edit_PartialCollection.as_view())), name = 'edit_partial_collection'),
 ]
 
-urlpatterns +=[
-    path('invoice/get_pdf/<int:ins>/', never_cache(login_required(invoice.get_pdf)), name = 'get_pdf'),
-    
-] 
-
 # Products
 urlpatterns += [
     path('products/', never_cache(login_required(products.view_products)), name = 'view_products'),
     path('products/add/', never_cache(login_required(products.AddProducts.as_view())), name = 'add_products'),
+    path('products/delete/<int:ins>', never_cache(login_required(products.delete_product)), name='product-delete'),
+    path('products/status_change/<slug:slug>/<int:ins>', never_cache(login_required(products.status_change)), name='product-status-change'),
 ]
 
 

@@ -207,6 +207,6 @@ class ProductPhotos(models.Model):
 #=========================================================================================
 #
 @receiver(models.signals.post_delete, sender=ProductPhotos)
-def submission_delete(sender, instance, **kwargs):
+def image_delete(sender, instance, **kwargs):
     instance.product_image.delete(False)
 

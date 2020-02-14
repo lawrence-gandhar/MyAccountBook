@@ -824,6 +824,7 @@ def csv_2_contacts(user, file_path):
 #===================================================================================================
 # STATUS CHANGE
 #===================================================================================================
+#
 def status_change(request, slug = None, ins = None):
     
     if slug is not None and ins is not None:
