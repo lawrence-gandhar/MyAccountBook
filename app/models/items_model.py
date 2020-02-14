@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from app.other_constants import *
+from django.dispatch import receiver
 
 from uuid import uuid4
 import os
@@ -201,5 +202,11 @@ class ProductPhotos(models.Model):
         null = True,
     )
 
-
+#
+#
+#
+#
+@receiver(models.signals.post_delete, sender=ProductPhotos)
+def submission_delete(sender, instance, **kwargs):
+    instance.file.delete(False)
 

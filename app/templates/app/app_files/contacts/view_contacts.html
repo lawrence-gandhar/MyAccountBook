@@ -45,24 +45,24 @@
                                     <td>{{contact.phone}}</td>
                                     <td>{{contact.website}}</td>                        
                                     <td class="text-center">
-                                        <a href="{% url 'add-contacts' 'step1' contact.id %}" class="btn btn-primary btn-sm" style="padding:5px 5px;">
+                                        <a title="Edit Contact" href="{% url 'add-contacts' 'step1' contact.id %}" class="btn btn-primary btn-sm" style="padding:5px 5px;">
                                             <i class="material-icons">create</i>
                                         </a>
-                                        <a href="{% url 'contact-collections' contact.id %}" class="btn btn-warning btn-sm" style="padding:5px 5px;">
-                                            <i class="material-icons">attach_money</i>
-                                        </a>
                                         {% if contact.is_active %}
-                                            <a href="{% url 'status-change' 'deactivate' contact.id %}" class="btn btn-sm btn-default" title="deactivate" style="padding:5px 5px;">
+                                            <a title="Deactivate Contact" href="{% url 'status-change' 'deactivate' contact.id %}" class="btn btn-sm btn-default" style="padding:5px 5px;">
                                                 <i class="material-icons">clear</i>
                                             </a>
                                         {% else %}
-                                            <a href="{% url 'status-change' 'activate' contact.id %}" class="btn btn-sm btn-success" title="deactivate" style="padding:5px 5px;">
+                                            <a title="Activate Contact" href="{% url 'status-change' 'activate' contact.id %}" class="btn btn-sm btn-success" style="padding:5px 5px;">
                                                 <i class="material-icons">check</i>
                                             </a>
                                         {% endif %}
-                                        <a href="{% url 'contacts-delete' contact.id %}" class="btn btn-danger btn-sm" style="padding:5px 5px;">
+                                        <a title="Delete Contact" href="{% url 'contacts-delete' contact.id %}" class="btn btn-danger btn-sm" style="padding:5px 5px;">
                                             <i class="material-icons">delete_forever</i>
                                         </a>
+                                        <a title="View Collection For Contact" href="{% url 'contact-collections' contact.id %}" class="btn btn-warning btn-sm" style="padding:5px 5px;">
+                                            <i class="material-icons">attach_money</i>
+                                        </a>                                        
                                     </td>   
                                 </tr>
                             {% endfor %}
