@@ -8,14 +8,20 @@ from app.other_constants import *
 #
 
 class ProductForm(ModelForm):
-    
+        
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super(ProductForm, self).__init__(*args, **kwargs)
+        self.fields['sales_account'].queryset = ProductAccounts.objects.filter(user = self.user, is_sales = True, is_active = True,)
+        self.fields['purchase_account'].queryset = ProductAccounts.objects.filter(user = self.user, is_sales = False, is_active = True,)
+
     class Meta:
         model = ProductsModel
 
         fields = (
-            'product_type', 'sku', 'product_name', 'product_description',
-            'product_dimension', 'cost_price', 'marked_price', 'selling_price', 'discount', 
-            'tax', 'gst', 'hsn_code', 'abatement', 'unit'
+            'product_type', 'sku', 'product_name', 'product_description', 'product_dimension', 
+            'cost_price', 'marked_price', 'selling_price', 'discount', 'tax', 'gst', 
+            'hsn_code', 'abatement', 'unit', 'is_sales', 'is_purchase', 'sales_account', 'purchase_account',
         )
 
         widgets = {
@@ -32,7 +38,11 @@ class ProductForm(ModelForm):
             'gst' : NumberInput(attrs = {'class':'form-control input-sm',}),
             'hsn_code' : TextInput(attrs = {'class':'form-control input-sm',}),
             'abatement' : NumberInput(attrs = {'class':'form-control input-sm',}),
-            'unit' : NumberInput(attrs = {'class':'form-control input-sm',}),
+            'unit' : Select(attrs = {'class':'form-control input-sm'}, choices = items_constant.UNITS),
+            'is_sales' : CheckboxInput(attrs = {'class':'form-check-input input-sm', 'checked':'true'},),
+            'is_purchase' : CheckboxInput(attrs = {'class':'form-check-input', 'checked':'true'},),
+            'purchase_account' : Select(attrs = {'class':'form-control input-sm'},),
+            'sales_account' : Select(attrs = {'class':'form-control input-sm'},),
         }
 
 #==================================================================================

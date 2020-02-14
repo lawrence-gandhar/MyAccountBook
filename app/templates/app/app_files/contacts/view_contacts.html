@@ -6,26 +6,28 @@
                 <h4 class="card-title ">View Contacts</h4>
             </div>
             <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" width="100%" cellspacing="0">
-                        <thead class="text-primary">
-                            <th>Sl. No.</th>
-                            <th>Contact Name</th>
-                            <th>User APP-ID</th>
-                            <th>Customer Type</th>
-                            <th>Is Sub Customer</th>
-                            <th>Active</th>
-                            <th>Organisation Type</th>
-                            <th>Organisation Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Website</th>                
-                            <th>Action</th>                
+                <div class="table">
+                    <table class="table-bordered" width="100%" cellspacing="0">
+                        <thead  style="background-color: #EEEEEE; color:#000000; font-size:11px">
+                            <th class="text-center" style="color:#000000; font-size:11px">SL. No.</th>
+                            <th class="text-center" style="color:#000000; font-size:11px">UID</th>
+                            <th class="text-center" style="color:#000000; font-size:11px">Contact Name</th>
+                            <th class="text-center" style="color:#000000; font-size:11px">User APP-ID</th>
+                            <th class="text-center" style="color:#000000; font-size:11px">Customer Type</th>
+                            <th class="text-center" style="color:#000000; font-size:11px">Is Sub Customer</th>
+                            <th class="text-center" style="color:#000000; font-size:11px">Active</th>
+                            <th class="text-center" style="color:#000000; font-size:11px">Organisation Type</th>
+                            <th class="text-center" style="color:#000000; font-size:11px">Organisation Name</th>
+                            <th class="text-center" style="color:#000000; font-size:11px">Email</th>
+                            <th class="text-center" style="color:#000000; font-size:11px">Phone</th>
+                            <th class="text-center" style="color:#000000; font-size:11px">Website</th>                
+                            <th class="text-center" style="color:#000000; font-size:11px">Action</th>                
                         </thead>
                         <tbody>
                             {% for contact in contacts %}
                                 <tr>
                                     <td>{{forloop.counter}}</td>
+                                    <td>CT-0000{{contact.id}}</td>
                                     <td>{{contact.display_name}}</td>
                                     <td>{{contact.app_id}}</td>
                                     <td>{{contact.get_customer_type_display|upper}}</td>

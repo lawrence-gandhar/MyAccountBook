@@ -42,6 +42,12 @@ class ProductAccounts(models.Model):
         choices = user_constants.IS_TRUE,
     )
 
+    is_sales = models.BooleanField(
+        default = True,
+        db_index = True,
+        choices = user_constants.IS_TRUE,
+    )
+
 
 #=========================================================================================
 # ITEMS/PRODUCT MODEL
@@ -149,6 +155,24 @@ class ProductsModel(models.Model):
         db_index = True,
         default = True,
         choices = user_constants.IS_TRUE,
+    )
+
+    sales_account = models.ForeignKey(
+        ProductAccounts,
+        on_delete = models.SET_NULL,
+        db_index = True,
+        related_name = "sales_account",
+        null = True,
+        blank = True,
+    )
+
+    purchase_account = models.ForeignKey(
+        ProductAccounts,
+        on_delete = models.SET_NULL,
+        db_index = True,
+        related_name = "purchase_account",
+        null = True,
+        blank = True,
     )
 
     def __str__(self):

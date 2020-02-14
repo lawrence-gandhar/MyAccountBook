@@ -1,6 +1,12 @@
 {% load common_components %}
 {% loader_component %}
 
+
+<style>
+select.form-control{padding:0px 10px;}
+select.form-control option{color : #000000; }
+</style>
+
 <div class="row">
     <div class="col-lg-12" style="padding:0px">
         <div class="card">    
@@ -59,37 +65,12 @@
                                 {{add_product_form.product_dimension}}
                             </div>                        
                         </div>
-                        
                         <div class="d-table-row" style="padding:10px 0px;">
                             <div class="d-table-cell" style="padding:5px 10px;">
-                                <label>Cost Price</label>
+                                <label>Units</label>
                             </div>
                             <div class="d-table-cell" style="padding:5px 13px;">
-                                {{add_product_form.cost_price}}
-                            </div>                        
-                        </div>
-                        <div class="d-table-row" style="padding:10px 0px;">
-                            <div class="d-table-cell" style="padding:5px 10px;">
-                                <label>Marked Price</label>
-                            </div>
-                            <div class="d-table-cell" style="padding:5px 13px;">
-                                {{add_product_form.marked_price}}
-                            </div>                        
-                        </div>
-                        <div class="d-table-row" style="padding:10px 0px;">
-                            <div class="d-table-cell" style="padding:5px 10px;">
-                                <label>Selling Price</label>
-                            </div>
-                            <div class="d-table-cell" style="padding:5px 13px;">
-                                {{add_product_form.selling_price}}
-                            </div>                        
-                        </div>
-                        <div class="d-table-row" style="padding:10px 0px;">
-                            <div class="d-table-cell" style="padding:5px 10px;">
-                                <label>Discount</label>
-                            </div>
-                            <div class="d-table-cell" style="padding:5px 13px;">
-                                {{add_product_form.discount}}
+                                {{add_product_form.unit}}
                             </div>                        
                         </div>
                         <div class="d-table-row" style="padding:10px 0px;">
@@ -125,18 +106,84 @@
                             </div>                        
                         </div>
                         <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:5px 13px; background-color:#000000; color:#FFFFFF;">
+                                SALES INFORMATION
+                            </div>
+                            <div class="d-table-cell form-check" style="padding:5px 13px; background-color:#000000; color:#FFFFFF;">    
+                                <label class="form-check-label">
+                                    {{add_product_form.is_sales}}
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>                        
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
                             <div class="d-table-cell" style="padding:5px 10px;">
-                                <label>Units</label>
+                                <label>Marked Price</label>
                             </div>
                             <div class="d-table-cell" style="padding:5px 13px;">
-                                {{add_product_form.unit}}
+                                {{add_product_form.marked_price}}
+                            </div>                        
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                <label>Selling Price</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 13px;">
+                                {{add_product_form.selling_price}}
+                            </div>                        
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                <label>Discount</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 13px;">
+                                {{add_product_form.discount}}
+                            </div>                        
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                <label>Accounts</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 13px;">
+                                {{add_product_form.sales_account}}
+                            </div>                        
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:5px 13px; background-color:#000000; color:#FFFFFF;">
+                                PURCHASE INFORMATION
+                            </div>
+                            <div class="d-table-cell form-check" style="padding:5px 13px; background-color:#000000; color:#FFFFFF;">
+                                <label class="form-check-label">
+                                    {{add_product_form.is_purchase}}
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>                        
+                        </div>
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                <label>Cost Price</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 13px;">
+                                {{add_product_form.cost_price}}
+                            </div>                        
+                        </div>                        
+                        <div class="d-table-row" style="padding:10px 0px;">
+                            <div class="d-table-cell" style="padding:5px 10px;">
+                                <label>Accounts</label>
+                            </div>
+                            <div class="d-table-cell" style="padding:5px 13px;">
+                                {{add_product_form.sales_account}}
                             </div>                        
                         </div>
                     </div>
                 </div>
-                <div class="card-footer text-center">
-                    <button type="reset" class="btn button button-orange">Cancel</button>
-                    <button class="btn button button-blue">Submit</button>
+                <div class="card-footer"  style="justify-content: center;">
+                    <button type="reset" class="btn btn-warning">Cancel</button>
+                    <button class="btn btn-success">Submit</button>
                 </div>
             </form>
         </div>

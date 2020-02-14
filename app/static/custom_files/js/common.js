@@ -1,9 +1,7 @@
 $(document).ready(function(){
 
     $("#menu li").each(function(){
-
-        console.log($(this).html());
-        
+      
         $("#menu li").removeClass("active");
 
         link_text = $(this).find("a").find("p").text();

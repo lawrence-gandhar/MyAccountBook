@@ -58,17 +58,17 @@ class AddProducts(View):
 
     data["included_template"] = 'app/app_files/products/add_products_form.html'
 
-    data["add_product_form"] = ProductForm()
     data["add_product_images_form"] = ProductPhotosForm()
     #
     #
     #
     def get(self, request, *args, **kwargs):
+        self.data["add_product_form"] = ProductForm(request.user)
         return render(request, self.template_name, self.data)
 
     def post(self, request, *args, **kwargs):
         
-        add_product = ProductForm(request.POST or None)
+        add_product = ProductForm(request.user, request.POST or None)
         add_images = ProductPhotosForm(request.FILES or None)
 
         if add_product.is_valid():
