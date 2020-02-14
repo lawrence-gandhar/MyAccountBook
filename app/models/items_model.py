@@ -48,6 +48,9 @@ class ProductAccounts(models.Model):
         choices = user_constants.IS_TRUE,
     )
 
+    def __str__(self):
+        return self.accounts_name.upper()
+
 
 #=========================================================================================
 # ITEMS/PRODUCT MODEL

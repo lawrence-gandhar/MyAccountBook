@@ -55,4 +55,8 @@ class Products(admin.ModelAdmin):
 class ProductPhotos(admin.ModelAdmin):
     model = ProductPhotos
 
+@admin.register(ProductAccounts)
+class ProductAccounts(admin.ModelAdmin):
+    model = ProductAccounts
+
     
