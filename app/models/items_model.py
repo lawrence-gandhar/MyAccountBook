@@ -202,11 +202,11 @@ class ProductPhotos(models.Model):
         null = True,
     )
 
-#
-#
-#
+#=========================================================================================
+# DELETE PRODUCT IMAGES FROM MEDIA ON DELETING A PRODUCT 
+#=========================================================================================
 #
 @receiver(models.signals.post_delete, sender=ProductPhotos)
 def submission_delete(sender, instance, **kwargs):
-    instance.file.delete(False)
+    instance.product_image.delete(False)
 
