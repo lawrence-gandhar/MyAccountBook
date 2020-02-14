@@ -16,6 +16,34 @@ def product_file_rename(instance, filename):
     return  os.path.join(upload_path,'{}.{}'.format(uuid4().hex, ext))
 
 #=========================================================================================
+# PRODUCT SALES/PURCHASE ACCOUNTS
+#=========================================================================================
+#
+class ProductAccounts(models.Model):
+
+    user = models.ForeignKey(
+        User,
+        db_index = True,
+        on_delete = models.CASCADE,
+        null = True,
+        blank = True,
+    )
+
+    accounts_name = models.CharField(
+        max_length = 250,
+        null = False,
+        blank = False,
+        db_index = True,
+    )
+
+    is_active = models.BooleanField(
+        db_index = True,
+        default = True,
+        choices = user_constants.IS_TRUE,
+    )
+
+
+#=========================================================================================
 # ITEMS/PRODUCT MODEL
 #=========================================================================================
 #
@@ -24,7 +52,7 @@ class ProductsModel(models.Model):
     user = models.ForeignKey(
         User,
         db_index = True,
-        on_delete = models.SET_NULL,
+        on_delete = models.CASCADE,
         blank = True,
         null = True,
     )
@@ -107,6 +135,22 @@ class ProductsModel(models.Model):
         choices = items_constant.UNITS
     )
 
+    is_sales = models.BooleanField(
+        db_index = True,
+        default = True,
+    )
+
+    is_purchase = models.BooleanField(
+        db_index = True,
+        default = True,
+    )
+
+    is_active = models.BooleanField(
+        db_index = True,
+        default = True,
+        choices = user_constants.IS_TRUE,
+    )
+
     def __str__(self):
         return "{} - ({})".format(self.product_name.upper(), self.sku.upper())
 
@@ -129,3 +173,6 @@ class ProductPhotos(models.Model):
         blank = True,
         null = True,
     )
+
+
+
