@@ -72,9 +72,13 @@ class AddProducts(View):
         add_images = ProductPhotosForm(request.FILES or None)
 
         if add_product.is_valid():
-            add_product.save(commit = False)
-            add_product.user = request.user
-            ins = add_product.save()
+            try:
+                add_product.save(commit = False)
+                add_product.user = request.user
+                ins = add_product.save()
+            except e as Exception:
+                print(e.msg)
+
 
         if add_images.is_valid():
             for img in request.FILES.getlist('product_image'):
