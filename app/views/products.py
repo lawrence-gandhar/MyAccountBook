@@ -71,12 +71,14 @@ class AddProducts(View):
         add_product = ProductForm(request.user, request.POST or None)
         add_images = ProductPhotosForm(request.FILES or None)
 
+        ins = None
+
         if add_product.is_valid():
             ins = add_product.save()
             ins.user = request.user
             ins.save()
         
-        if add_images.is_valid():
+        if add_images.is_valid() and ins is not None:
             for img in request.FILES.getlist('product_image'):
                 img_save = ProductPhotos(
                     product_image = img,
