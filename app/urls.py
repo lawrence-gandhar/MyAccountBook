@@ -8,7 +8,7 @@ from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from app.views import dashboard, contacts, base, invoice, collections, \
-    products
+    products, inventory
 
 
 # Authorization
@@ -72,6 +72,11 @@ urlpatterns += [
     path('products/add/', never_cache(login_required(products.AddProducts.as_view())), name = 'add_products'),
     path('products/delete/<int:ins>', never_cache(login_required(products.delete_product)), name='product-delete'),
     path('products/status_change/<slug:slug>/<int:ins>', never_cache(login_required(products.status_change)), name='product-status-change'),
+]
+
+# Inventory
+urlpatterns += [
+    path('inventory/', never_cache(login_required(inventory.view_inventory)), name = 'view_inventory'),
 ]
 
 

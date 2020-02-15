@@ -10,9 +10,9 @@ import json
 
 
 #========================================================================================
-#
+#   VIEW/LIST PRODUCTS
 #========================================================================================
-
+#
 def view_products(request, *args, **kwargs):
     # Template 
     template_name = 'app/app_files/products/index.html'
@@ -25,6 +25,7 @@ def view_products(request, *args, **kwargs):
     data["css_files"] = []
     data["js_files"] = []
     data["active_link"] = 'Products'
+    data["breadcrumb_title"] = 'PRODUCTS'
 
     data["included_template"] = 'app/app_files/products/view_products.html'
 
