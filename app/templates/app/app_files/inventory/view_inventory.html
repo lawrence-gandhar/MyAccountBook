@@ -12,7 +12,7 @@
                             <th class="text-center">UID</th>
                             <th class="text-center">Name</th>
                             <th class="text-center">In-Date</th>
-                            <th class="text-center">Is Cleared</th>            
+                            <th class="text-center">Cleared</th>            
                             <th class="text-center">Action</th>                
                         </thead>
                         <tbody>
@@ -22,27 +22,22 @@
                                     <td>I-0000{{ row.id }}</td>
                                     <td>{{ row.stock_name }}</td>
                                     <td>{{ row.in_date }}</td>
-                                    <td>{{ row.get_is_cleared_details }}</td>              
-                                    <td>
-                                        {% for img in product.productphotos_set.all %}
-                                            <img class="img img-responsive" style="width:auto; height:50px" src="/media/{{ img.product_image }}">
-                                        {% endfor %}
-                                    </td>               
-                                    <td>
-                                        <a title="Edit Product" href="" class="btn btn-primary btn-sm" style="padding:5px 5px;">
+                                    <td class="text-center" width="50px">
+                                        {% if row.is_active %}
+                                            <i class="material-icons">check</i>
+                                        {% else %}
+                                            <i class="material-icons">clear</i>
+                                        {% endif %}
+                                    </td>                             
+                                    <td width="120px">
+                                        <a title="Edit Inventory" href="" class="btn btn-primary btn-sm" style="padding:5px 5px;">
                                             <i class="material-icons">create</i>
                                         </a>
-                                        {% if product.is_active %}
-                                            <a title="Deactivate Product" href="{% url 'product-status-change' 'deactivate' product.id %}" class="btn btn-sm btn-default" style="padding:5px 5px;">
-                                                <i class="material-icons">clear</i>
-                                            </a>
-                                        {% else %}
-                                            <a title="Activate Product" href="{% url 'product-status-change' 'activate' product.id %}" class="btn btn-sm btn-success" style="padding:5px 5px;">
-                                                <i class="material-icons">check</i>
-                                            </a>
-                                        {% endif %}
-                                        <a title="Delete Product" href="{% url 'product-delete' product.id %}" class="btn btn-danger btn-sm" style="padding:5px 5px;">
+                                        <a title="Delete Inventory" href="" class="btn btn-danger btn-sm" style="padding:5px 5px;">
                                             <i class="material-icons">delete_forever</i>
+                                        </a>
+                                        <a title="Add Products To Stock" href="" class="btn btn-info btn-sm" style="padding:5px 5px;">
+                                            <i class="material-icons">queue</i>
                                         </a>
                                     </td>
                                 </tr>

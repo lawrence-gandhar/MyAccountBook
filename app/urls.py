@@ -77,6 +77,7 @@ urlpatterns += [
 # Inventory
 urlpatterns += [
     path('inventory/', never_cache(login_required(inventory.view_inventory)), name = 'view_inventory'),
+    path('inventory/add/', never_cache(login_required(inventory.AddInventory.as_view())), name = 'add_inventory'),
 ]
 
 

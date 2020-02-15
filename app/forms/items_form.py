@@ -63,3 +63,24 @@ class ProductPhotosForm(ModelForm):
         widgets = {
             'product_image' : FileInput(attrs = {'class':'form-control input-sm', 'multiple' : 'true'})
         }
+
+#==================================================================================
+# INVENTORY FORM
+#==================================================================================
+#
+
+class InventoryForm(ModelForm):
+
+    class Meta:
+        
+        model = StockModel
+
+        fields = ('stock_name', 'in_date',)
+
+        widgets = {
+            'stock_name' : TextInput(attrs = {'class':'form-control input-sm'}),
+            'in_date' : DateInput(attrs={'class':'form-control input-sm', 'type':'date', 'data-toggle':'datepicker'}),
+        }
+
+
+        
