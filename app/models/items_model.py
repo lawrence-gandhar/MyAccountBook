@@ -16,6 +16,46 @@ def product_file_rename(instance, filename):
     ext = filename.split('.')[-1]
     return  os.path.join(upload_path,'{}.{}'.format(uuid4().hex, ext))
 
+
+#=========================================================================================
+# INVETORY/STOCK 
+#=========================================================================================
+#
+class StockModel(models.Model):
+
+    user = models.ForeignKey(
+        User,
+        db_index = True,
+        on_delete = models.CASCADE,
+        null = True,
+        blank = True,
+    )
+
+    stock_name = models.CharField(
+        max_length = 250,
+        db_index = True,
+        blank = False,
+        null = False,
+    )
+
+    in_date = models.DateField(
+        null = True,
+        blank = True,
+        db_index = True,
+    )
+
+    stock_cleared = models.BooleanField(
+        db_index = True,
+        default = False,
+        choices = user_constants.IS_TRUE,
+    )
+
+    def __str__(self):
+        return self.stock_name.upper()
+
+    class Meta:
+        verbose_name_plural = 'stock_tbl'
+
 #=========================================================================================
 # PRODUCT SALES/PURCHASE ACCOUNTS
 #=========================================================================================
@@ -90,6 +130,26 @@ class ProductsModel(models.Model):
     product_description = models.TextField(
         blank = True,
         null = True,
+    )
+
+    stock = models.ForeignKey(
+        StockModel,
+        blank = True,
+        null = True,
+        db_index = True,
+        on_delete = models.CASCADE,
+    ) 
+
+    manufactured_date = models.DateField(
+        blank = True,
+        null = True,
+        db_index = True,
+    )
+
+    expiry_date = models.DateField(
+        blank = True,
+        null = True,
+        db_index = True,
     )
 
     product_dimension = models.TextField(
@@ -201,6 +261,125 @@ class ProductPhotos(models.Model):
         blank = True,
         null = True,
     )
+
+#=========================================================================================
+# STOCK PRODUCT COUNTER & NOTIFICATION 
+#=========================================================================================
+#
+class StockProduct(models.Model):
+
+    stock = models.ForeignKey(
+        StockModel,
+        db_index = True,
+        null = True,
+        blank = True,
+        on_delete = models.CASCADE,
+    )
+
+    product = models.ForeignKey(
+        ProductsModel,
+        db_index = True,
+        null = True,
+        blank = True,
+        on_delete = models.CASCADE,
+    )
+
+    quantity = models.IntegerField(
+        db_index = True,
+        default = 0,
+    )
+
+    unit = models.IntegerField(
+        db_index = True,
+        blank = True,
+        null = True,
+        choices = items_constant.UNITS,
+    )
+
+    threshold = models.IntegerField(
+        default = 0,
+        db_index = True,
+    )
+
+    stop_at_min_hold = models.IntegerField(
+        db_index = True,
+        default = 0,
+    )
+
+    notify_on_threshold = models.BooleanField(
+        db_index = True,
+        default = True,
+        choices = user_constants.IS_TRUE,
+    )
+
+    notify_on_min_hold = models.BooleanField(
+        db_index = True,
+        default = True,
+        choices = user_constants.IS_TRUE,
+    )
+
+    min_hold_date = models.DateField(
+        db_index = True,
+        null = True,
+        blank = True,
+    )
+
+    threshold_date = models.DateField(
+        db_index = True,
+        null = True,
+        blank = True,
+    )
+
+    min_hold_notify_trigger = models.IntegerField(
+        db_index = True,
+        null = True,
+        blank = True,
+        choices = items_constant.PRODUCT_STOCK_NOTIFICATION_TRIGGERS,
+    )
+
+    threshold_notify_trigger = models.IntegerField(
+        db_index = True,
+        null = True,
+        blank = True,
+        choices = items_constant.PRODUCT_STOCK_NOTIFICATION_TRIGGERS,
+    )
+
+    cleared_on = models.DateField(
+        db_index = True,
+        null = True,
+        blank = True,
+    )
+
+
+#=========================================================================================
+# STOCK PRODUCT NOTIFICATION REMINDERS 
+#=========================================================================================
+#    
+class StockNotificationRemiander(models.Model):
+
+    stock_product = models.ForeignKey(
+        StockProduct,
+        on_delete = models.CASCADE,
+        blank = True,
+        null = True,
+    )
+
+    is_threshold = models.BooleanField(
+        db_index = True,
+        default = True,
+        choices = user_constants.IS_TRUE,
+    )
+
+    details = models.TextField(
+        null = True,
+        blank = True,
+    )
+
+    created_on = models.DateTimeField(
+        auto_now_add = True,
+        db_index = True,
+    )
+
 
 #=========================================================================================
 # DELETE PRODUCT IMAGES FROM MEDIA ON DELETING A PRODUCT 

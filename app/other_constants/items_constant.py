@@ -47,4 +47,15 @@ UNITS = (
     (38, 'liter'),
 )
 
-
+PRODUCT_STOCK_NOTIFICATION_TRIGGERS = (
+    (0, '5 DAYS AGO'),
+    (1, '1 WEEK AGO'),
+    (2, '10 DAYS AGO'),
+    (3, '2 WEEKS AGO'),
+    (4, '1 MONTH AGO'),
+    (5, '45 DAYS AGO'),
+    (6, '2 MONTHS AGO'),
+    (7, '3 MONTHS AGO'),
+    (8, '6 MONTHS AGO'),
+    (9, '1 YEAR AGO'),
+)
