@@ -14,19 +14,19 @@ class ProductForm(ModelForm):
         super(ProductForm, self).__init__(*args, **kwargs)
         self.fields['sales_account'].queryset = ProductAccounts.objects.filter(user = self.user, is_sales = True, is_active = True,)
         self.fields['purchase_account'].queryset = ProductAccounts.objects.filter(user = self.user, is_sales = False, is_active = True,)
-        self.fields['stock'].queryset = StockModel.objects.filter(user = self.user)
+        self.fields['inventory'].queryset = Inventory.objects.filter(user = self.user)
 
     class Meta:
         model = ProductsModel
 
         fields = (
             'product_type', 'sku', 'product_name', 'product_description', 'product_dimension', 
-            'cost_price', 'marked_price', 'selling_price', 'discount', 'tax', 'gst', 'stock', 
+            'cost_price', 'marked_price', 'selling_price', 'discount', 'tax', 'gst', 'inventory', 
             'hsn_code', 'abatement', 'unit', 'is_sales', 'is_purchase', 'sales_account', 'purchase_account',
         )
 
         widgets = {
-            'stock' : Select(attrs = {'class':'form-control input-sm,'}),
+            'inventory' : Select(attrs = {'class':'form-control input-sm,'}),
             'product_type' : Select(attrs = {'class':'form-control input-sm',}, choices = items_constant.PRODUCT_TYPE),
             'sku' : TextInput(attrs = {'class':'form-control input-sm',}),
             'product_name' : TextInput(attrs = {'class':'form-control input-sm',}),
@@ -73,9 +73,9 @@ class InventoryForm(ModelForm):
 
     class Meta:
         
-        model = StockModel
+        model = Inventory
 
-        fields = ('stock_name', 'in_date',)
+        fields = ('inventory_name', 'in_date',)
 
         widgets = {
             'stock_name' : TextInput(attrs = {'class':'form-control input-sm'}),

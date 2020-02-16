@@ -76,3 +76,31 @@ class AddInventory(View):
             return redirect('/inventory/', permanent = False)
         return redirect('/inventory/add/', permanent = False)
         
+#========================================================================================
+#   INVENTORY PRODUCTS
+#========================================================================================
+#
+
+class InventoryProducts(View):
+
+    # Template 
+    template_name = 'app/app_files/inventory/index.html'
+
+    # Initialize 
+    data = defaultdict()
+    data["view"] = ""
+
+    # Custom CSS/JS Files For Inclusion into template
+    data["css_files"] = []
+    data["js_files"] = []
+    data["active_link"] = 'Inventory'
+    data["breadcrumb_title"] = 'INVENTORY'
+
+    data["included_template"] = 'app/app_files/inventory/view_inventory_products.html'
+
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, self.data)
+
+    def post(self, request, *args, **kwargs):
+        return render(request, self.template_name, self.data)

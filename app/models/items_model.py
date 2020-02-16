@@ -21,7 +21,7 @@ def product_file_rename(instance, filename):
 # INVETORY/STOCK 
 #=========================================================================================
 #
-class StockModel(models.Model):
+class Inventory(models.Model):
 
     user = models.ForeignKey(
         User,
@@ -31,7 +31,7 @@ class StockModel(models.Model):
         blank = True,
     )
 
-    stock_name = models.CharField(
+    inventory_name = models.CharField(
         max_length = 250,
         db_index = True,
         blank = False,
@@ -53,8 +53,6 @@ class StockModel(models.Model):
     def __str__(self):
         return self.stock_name.upper()
 
-    class Meta:
-        verbose_name_plural = 'stock_tbl'
 
 #=========================================================================================
 # PRODUCT SALES/PURCHASE ACCOUNTS
@@ -132,8 +130,8 @@ class ProductsModel(models.Model):
         null = True,
     )
 
-    stock = models.ForeignKey(
-        StockModel,
+    inventory = models.ForeignKey(
+        Inventory,
         blank = True,
         null = True,
         db_index = True,
@@ -266,10 +264,10 @@ class ProductPhotos(models.Model):
 # STOCK PRODUCT COUNTER & NOTIFICATION 
 #=========================================================================================
 #
-class StockProduct(models.Model):
+class InventoryProduct(models.Model):
 
-    stock = models.ForeignKey(
-        StockModel,
+    inventory = models.ForeignKey(
+        Inventory,
         db_index = True,
         null = True,
         blank = True,
@@ -355,10 +353,10 @@ class StockProduct(models.Model):
 # STOCK PRODUCT NOTIFICATION REMINDERS 
 #=========================================================================================
 #    
-class StockNotificationRemiander(models.Model):
+class InventoryNotificationRemiander(models.Model):
 
-    stock_product = models.ForeignKey(
-        StockProduct,
+    inventory_product = models.ForeignKey(
+        InventoryProduct,
         on_delete = models.CASCADE,
         blank = True,
         null = True,
