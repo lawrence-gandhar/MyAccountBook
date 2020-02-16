@@ -33,7 +33,7 @@ def view_inventory(request, *args, **kwargs):
     # PRODUCT LISTING
     #*****************************************************************************
 
-    inventory = StockModel.objects.filter(user = request.user)
+    inventory = Inventory.objects.filter(user = request.user)
     data["inventory"] = inventory
 
     return render(request, template_name, data)    
