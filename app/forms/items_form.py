@@ -55,7 +55,6 @@ class ProductForm(ModelForm):
 class ProductPhotosForm(ModelForm):
 
     class Meta:
-
         model = ProductPhotos
 
         fields= ('product_image',)
@@ -71,16 +70,40 @@ class ProductPhotosForm(ModelForm):
 
 class InventoryForm(ModelForm):
 
-    class Meta:
-        
+    class Meta:    
         model = Inventory
 
         fields = ('inventory_name', 'in_date',)
 
         widgets = {
-            'stock_name' : TextInput(attrs = {'class':'form-control input-sm'}),
+            'inventory_name' : TextInput(attrs = {'class':'form-control input-sm'}),
             'in_date' : DateInput(attrs={'class':'form-control input-sm', 'type':'date', 'data-toggle':'datepicker'}),
         }
 
+#==================================================================================
+# INVENTORY PRODUCT FORM
+#==================================================================================
+#
 
+class InventoryProductForm(ModelForm):
+
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super(InventoryProductForm, self).__init__(*args, **kwargs)
+        self.fields['product'].queryset = ProductsModel.objects.filter(user = self.user)
         
+    class Meta:
+        model = InventoryProduct
+
+        fields = (
+            'product', 'quantity', 'unit', 'threshold', 'stop_at_min_hold', 'notify_on_threshold',
+            'notify_on_min_hold', 'min_hold_date', 'threshold_date', 'min_hold_notify_trigger', 
+            'threshold_notify_trigger', 'cleared_on'
+        )
+        
+        widgets = {
+            'product' : Select(attrs = {'class':'form-control input-sm'}),
+            'quantity' : NumberInput(attrs = {'class':'form-control input-sm'}),
+            'unit' : Select(attrs = {'class':'form-control input-sm'}, choices = items_constant.UNITS),
+            'notify_on_threshold' : Select(attrs = {'class':'form-control input-sm'}, choices = user_constants.IS_TRUE),
+        }

@@ -98,9 +98,22 @@ class InventoryProducts(View):
 
     data["included_template"] = 'app/app_files/inventory/view_inventory_products.html'
 
-
+    #
+    #
+    #
     def get(self, request, *args, **kwargs):
-        return render(request, self.template_name, self.data)
 
+        if 'ins' in kwargs and 'ins' is not None:
+            
+            self.data["inventory_products"] = InventoryProduct.objects.filter(inventory = int(kwargs["ins"]))
+            self.data["inventory_product_form"] = InventoryProductForm(request.user)
+
+            return render(request, self.template_name, self.data)
+        else:
+            return redirect('/inventory/add/', permanent = False)
+
+    #
+    #
+    #
     def post(self, request, *args, **kwargs):
         return render(request, self.template_name, self.data)
