@@ -13,9 +13,6 @@
   background: linear-gradient(60deg,#f5700c,#ff9800);
 }
 
-thead th, td{
-    font-size: 11px;
-}
 
 .form-control{
     height: 33px !important;
@@ -274,10 +271,6 @@ Background STYLES
 .th_grey{
   background-color: rgb(99, 99, 99);
   color:#FFFFFF;
-}
-
-td {
-  vertical-align: top !important;
 }
 
 .hide{

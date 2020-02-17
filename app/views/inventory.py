@@ -116,4 +116,23 @@ class InventoryProducts(View):
     #
     #
     def post(self, request, *args, **kwargs):
+        form = InventoryProductForm(request.user, request.POST)
+        if form.is_valid():
+
+            inv_product = InventoryProduct.objects.filter(inventory = int(kwargs["ins"]), product_id = int(request.POST["product"])).count()
+
+            if inv_product > 0:
+                pass
+            else:
+                obj = form.save()
+                
+                try:
+                    inventory = Inventory.objects.get(pk = int(kwargs["ins"]))
+                except:
+                    return redirect('/unauthorized/', permanent = False)
+
+                obj.inventory = inventory
+                obj.save()
+                return redirect('/inventory/products/{}'.format(kwargs["ins"]), permanent = False)
+            
         return render(request, self.template_name, self.data)

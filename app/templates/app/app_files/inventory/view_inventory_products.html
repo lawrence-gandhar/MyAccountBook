@@ -21,8 +21,10 @@ select.form-control option{color : #000000; }
                         <thead  style="background-color: #EEEEEE; color:#000000; font-size:11px">
                             <th class="text-center">SL. No.</th>
                             <th class="text-center">UID</th>
-                            <th class="text-center">Name</th>
-                            <th class="text-center">In-Date</th>
+                            <th class="text-center">Product</th>
+                            <th class="text-center">SKU</th>
+                            <th class="text-center">Quantity</th>
+                            <th class="text-center">Unit</th>
                             <th class="text-center">Cleared</th>            
                             <th class="text-center">Action</th>                
                         </thead>
@@ -30,11 +32,26 @@ select.form-control option{color : #000000; }
                             {% for product in inventory_products %}
                                 <tr>
                                     <td>{{ forloop.counter }}</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>IPD-0000{{product.id}}</td>
+                                    <td>{{product.product.product_name}}</td>
+                                    <td>{{product.product.sku}}</td>
+                                    <td>{{product.quantity}}</td>
+                                    <td>{{product.get_unit_display}}</td>
+                                    <td class="text-center">
+                                        {% if product.is_cleared %}
+                                            <i class="material-icons">check</i>
+                                        {% else %}
+                                            <i class="material-icons">clear</i>
+                                        {% endif %}
+                                    </td>
+                                    <td class="text-center" style="width:80px;">
+                                        <a title="Edit Entry" href="" class="btn btn-primary btn-sm" style="padding:5px 5px;">
+                                            <i class="material-icons">create</i>
+                                        </a>
+                                        <a title="Delete Entry" href="" class="btn btn-danger btn-sm" style="padding:5px 5px;">
+                                            <i class="material-icons">delete_forever</i>
+                                        </a>
+                                    </td>
                                 </tr>
                             {% endfor %}
                         </tbody>
@@ -48,7 +65,7 @@ select.form-control option{color : #000000; }
 <!-- ADD INVENTORY PRODUCT MODAL -->
 
 <div class="modal fade" id="addInventoryProductModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content" style="background-color:currentcolor">
             <form method="post" style="margin:0px">
                 <div class="modal-header bg-warning">
@@ -60,50 +77,44 @@ select.form-control option{color : #000000; }
                 <div class="modal-body">
                     {% csrf_token %}
 
-                    <div class="table" style="padding:10px 0px;">
+                    <div class="table" style="padding:10px 0px; color:#FFFFFF; width:100%">
                         <table class="table-responsive">
-                            <tr>
-                                <td>Select Product</td>
-                                <td colspan="3">{{inventory_product_form.product}}</td>
-                            </tr>
-                            <tr>
-                                <td>Select Product</td>
-                                <td>Select Product</td>
-                                <td>Select Product</td>
-                                <td>Select Product</td>
-                            </tr>
+                            <tbody style=" width: 100%; display: inline-table;">
+                                <tr>
+                                    <td style="border:0px; vertical-align:bottom">Product</td>
+                                    <td style="border:0px;" colspan="3">{{inventory_product_form.product}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="border:0px; width:25%; vertical-align:bottom">Quantity</td>
+                                    <td style="border:0px; width:25%">{{inventory_product_form.quantity}}</td>
+                                    <td style="border:0px; width:25%; vertical-align:bottom; padding-left:10px;">Unit</td>
+                                    <td style="border:0px; width:25%">{{inventory_product_form.unit}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="border:0px; vertical-align:bottom">Threshold Limit</td>
+                                    <td style="border:0px;">{{inventory_product_form.threshold}}</td>
+                                    <td style="border:0px; vertical-align:bottom; padding-left:10px;">Enable Notification</td>
+                                    <td style="border:0px;">{{inventory_product_form.notify_on_threshold}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="border:0px; vertical-align:bottom">Mininum Hold</td>
+                                    <td style="border:0px;">{{inventory_product_form.stop_at_min_hold}}</td>
+                                    <td style="border:0px; vertical-align:bottom; padding-left:10px;">Enable Notification</td>
+                                    <td style="border:0px;">{{inventory_product_form.notify_on_min_hold}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="border:0px; vertical-align:bottom">Threshold Trigger</td>
+                                    <td style="border:0px;">{{inventory_product_form.threshold_notify_trigger}}</td>
+                                    <td style="border:0px; vertical-align:bottom; padding-left:10px;">Minimum Hold Trigger</td>
+                                    <td style="border:0px;">{{inventory_product_form.min_hold_notify_trigger}}</td>
+                                </tr>
+                            </tbody>
                         </table>
-                    </div>
-
-
-                    <div class="table" style="padding:10px 0px;">
-                        <div class="d-table-row" style="padding:10px 0px;">
-                            <div class="d-table-cell" style="padding:0px 10px;">
-                                <label>Select Product</label>
-                            </div>
-                            <div class="d-table-cell" style="padding:0px 1px 10px 10px;">
-                                {{inventory_product_form.product}}
-                            </div>
-                        </div>
-                        <div class="d-table-row" style="padding:10px 0px;">
-                            <div class="d-table-cell" style="padding:0px 10px;">
-                                <label>Quantity</label>
-                            </div>
-                            <div class="d-table-cell" style="padding:0px 1px 10px 10px;">
-                                {{inventory_product_form.quantity}}
-                            </div>
-                            <div class="d-table-cell" style="padding:0px 10px;">
-                                <label>Unit</label>
-                            </div>
-                            <div class="d-table-cell" style="padding:0px 1px 10px 10px;">
-                                {{inventory_product_form.unit}}
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="modal-footer" style="justify-content: center;">
                     <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success">Save</button>
+                    <button class="btn btn-success">Save</button>
                 </div>
             </form>
         </div>
