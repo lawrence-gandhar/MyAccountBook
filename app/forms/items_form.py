@@ -87,10 +87,14 @@ class InventoryForm(ModelForm):
 
 class InventoryProductForm(ModelForm):
 
-    def __init__(self, user, *args, **kwargs):
+    def __init__(self, user, inv, *args, **kwargs):
         self.user = user
         super(InventoryProductForm, self).__init__(*args, **kwargs)
-        self.fields['product'].queryset = ProductsModel.objects.filter(user = self.user)
+        
+        # Exclude product, if already assigned to the inventory instance
+        #
+        products_in_inv = InventoryProduct.objects.filter(inventory_id = inv)
+        self.fields['product'].queryset = ProductsModel.objects.filter(user = self.user).exclude(inventoryproduct__in = products_in_inv)
         
     class Meta:
         model = InventoryProduct

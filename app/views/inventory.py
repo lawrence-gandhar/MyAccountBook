@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404, JsonResponse
+from django.contrib import messages
 from django.views import View
 from collections import OrderedDict, defaultdict
 from django.db.models import *
@@ -106,7 +107,7 @@ class InventoryProducts(View):
         if 'ins' in kwargs and 'ins' is not None:
             
             self.data["inventory_products"] = InventoryProduct.objects.filter(inventory = int(kwargs["ins"]))
-            self.data["inventory_product_form"] = InventoryProductForm(request.user)
+            self.data["inventory_product_form"] = InventoryProductForm(request.user, kwargs["ins"])
 
             return render(request, self.template_name, self.data)
         else:
@@ -116,23 +117,19 @@ class InventoryProducts(View):
     #
     #
     def post(self, request, *args, **kwargs):
-        form = InventoryProductForm(request.user, request.POST)
+        
+        form = InventoryProductForm(request.user, kwargs["ins"], request.POST)
+
         if form.is_valid():
+            obj = form.save()
+            
+            try:
+                inventory = Inventory.objects.get(pk = int(kwargs["ins"]))
+            except:
+                return redirect('/unauthorized/', permanent = False)
 
-            inv_product = InventoryProduct.objects.filter(inventory = int(kwargs["ins"]), product_id = int(request.POST["product"])).count()
-
-            if inv_product > 0:
-                pass
-            else:
-                obj = form.save()
-                
-                try:
-                    inventory = Inventory.objects.get(pk = int(kwargs["ins"]))
-                except:
-                    return redirect('/unauthorized/', permanent = False)
-
-                obj.inventory = inventory
-                obj.save()
-                return redirect('/inventory/products/{}'.format(kwargs["ins"]), permanent = False)
+            obj.inventory = inventory
+            obj.save()
+            return redirect('/inventory/products/{}'.format(kwargs["ins"]), permanent = False)
             
         return render(request, self.template_name, self.data)
