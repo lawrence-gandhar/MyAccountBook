@@ -11,9 +11,11 @@ select.form-control option{color : #000000; }
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header card-header-primary">
-                <h4>VIEW/ADD INVENTORY PRODUCTS
+                <h4 class="card-title">
+                    {{inventory_name|upper}}                    
                     <i data-toggle="modal" data-target="#addInventoryProductModal" class="material-icons pull-right" style="cursor:pointer" title="Add Product To Inventory">add_box</i>
                 </h4>
+                <p class="card-category"><strong>Add/Manage Products In Inventory</strong></p>
             </div>
             <div class="card-body">
                 <div class="table">
@@ -32,7 +34,7 @@ select.form-control option{color : #000000; }
                             {% for product in inventory_products %}
                                 <tr>
                                     <td>{{ forloop.counter }}</td>
-                                    <td>IPD-0000{{product.id}}</td>
+                                    <td>P-0000{{product.product_id}}</td>
                                     <td>{{product.product.product_name}}</td>
                                     <td>{{product.product.sku}}</td>
                                     <td>{{product.quantity}}</td>
@@ -48,7 +50,7 @@ select.form-control option{color : #000000; }
                                         <a title="Edit Entry" href="" class="btn btn-primary btn-sm" style="padding:5px 5px;">
                                             <i class="material-icons">create</i>
                                         </a>
-                                        <a title="Delete Entry" href="" class="btn btn-danger btn-sm" style="padding:5px 5px;">
+                                        <a title="Delete Entry" href="{% url 'delete_inventory_product' product.id %}" class="btn btn-danger btn-sm" style="padding:5px 5px;">
                                             <i class="material-icons">delete_forever</i>
                                         </a>
                                     </td>

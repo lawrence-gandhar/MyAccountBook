@@ -105,6 +105,12 @@ class InventoryProducts(View):
 
         if 'ins' in kwargs and 'ins' is not None:
             
+            try:
+                inv = Inventory.objects.get(pk = int(kwargs["ins"]))
+                self.data["inventory_name"] = inv.inventory_name
+            except:
+                return
+
             self.data["inventory_products"] = InventoryProduct.objects.filter(inventory = int(kwargs["ins"]))
             self.data["inventory_product_form"] = InventoryProductForm(request.user, kwargs["ins"])
 
@@ -129,6 +135,22 @@ class InventoryProducts(View):
 
             obj.inventory = inventory
             obj.save()
-            return redirect('/inventory/products/{}'.format(kwargs["ins"]), permanent = False)
+            return redirect('/inventory/products/{}/'.format(kwargs["ins"]), permanent = False)
             
         return render(request, self.template_name, self.data)
+
+#========================================================================================
+#   DELETE INVENTORY PRODUCTS
+#========================================================================================
+#
+def delete_inventory_product(request, ins = None):
+    if ins is not None:
+        try:
+            product = InventoryProduct.objects.get(pk = int(ins))
+            obj = product.inventory_id            
+        except:
+            return redirect('/unauthorized/', permanent=False)      
+
+        product.delete()
+        return redirect('/inventory/products/{}/'.format(obj), permanent=False) 
+    return redirect('/unauthorized/', permanent=False)

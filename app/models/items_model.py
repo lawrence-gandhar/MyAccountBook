@@ -51,7 +51,7 @@ class Inventory(models.Model):
     )
 
     def __str__(self):
-        return self.stock_name.upper()
+        return self.inventory_name.upper()
 
 
 #=========================================================================================

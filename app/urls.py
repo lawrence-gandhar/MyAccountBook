@@ -37,8 +37,8 @@ urlpatterns += [
     path('contacts/check_appid/', never_cache(login_required(contacts.check_app_id)), name='check-appid'),
     path('contacts/user_exists_in_list/', never_cache(login_required(contacts.user_exists_in_list)), name='check-appid-user-exist'),
     path('contacts/upload/', never_cache(login_required(contacts.ContactsFileUploadView.as_view())), name='contacts-upload'),
-    path('contacts/status_change/<slug:slug>/<int:ins>', never_cache(login_required(contacts.status_change)), name='contact-status-change'),
-    path('contacts/delete/<int:ins>', never_cache(login_required(contacts.delete_contact)), name='contact-delete'),
+    path('contacts/status_change/<slug:slug>/<int:ins>/', never_cache(login_required(contacts.status_change)), name='contact-status-change'),
+    path('contacts/delete/<int:ins>/', never_cache(login_required(contacts.delete_contact)), name='contact-delete'),
 ]
 
 # Invoice
@@ -70,15 +70,16 @@ urlpatterns += [
 urlpatterns += [
     path('products/', never_cache(login_required(products.view_products)), name = 'view_products'),
     path('products/add/', never_cache(login_required(products.AddProducts.as_view())), name = 'add_products'),
-    path('products/delete/<int:ins>', never_cache(login_required(products.delete_product)), name='product-delete'),
-    path('products/status_change/<slug:slug>/<int:ins>', never_cache(login_required(products.status_change)), name='product-status-change'),
+    path('products/delete/<int:ins>/', never_cache(login_required(products.delete_product)), name='product-delete'),
+    path('products/status_change/<slug:slug>/<int:ins>/', never_cache(login_required(products.status_change)), name='product-status-change'),
 ]
 
 # Inventory
 urlpatterns += [
     path('inventory/', never_cache(login_required(inventory.view_inventory)), name = 'view_inventory'),
     path('inventory/add/', never_cache(login_required(inventory.AddInventory.as_view())), name = 'add_inventory'),
-    path('inventory/products/<int:ins>', never_cache(login_required(inventory.InventoryProducts.as_view())), name = 'view_inventory_products'),
+    path('inventory/products/<int:ins>/', never_cache(login_required(inventory.InventoryProducts.as_view())), name = 'view_inventory_products'),
+    path('inventory/products/delete/<int:ins>/', never_cache(login_required(inventory.delete_inventory_product)), name = 'delete_inventory_product'),
 ]
 
 

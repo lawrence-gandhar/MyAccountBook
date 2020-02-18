@@ -104,7 +104,7 @@ class InventoryProductForm(ModelForm):
         )
         
         widgets = {
-            'product' : Select(attrs = {'class':'form-control input-sm'}),
+            'product' : Select(attrs = {'class':'form-control input-sm', 'required':'true'}),
             'quantity' : NumberInput(attrs = {'class':'form-control input-sm'}),
             'unit' : Select(attrs = {'class':'form-control input-sm'}, choices = items_constant.UNITS),
             'threshold' : NumberInput(attrs = {'class':'form-control input-sm'}),
