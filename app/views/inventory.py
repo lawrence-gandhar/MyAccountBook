@@ -113,7 +113,6 @@ class InventoryProducts(View):
 
             self.data["inventory_products"] = InventoryProduct.objects.filter(inventory = int(kwargs["ins"]))
             self.data["inventory_product_form"] = InventoryProductForm(request.user, kwargs["ins"])
-
             return render(request, self.template_name, self.data)
         else:
             return redirect('/inventory/add/', permanent = False)
@@ -154,3 +153,9 @@ def delete_inventory_product(request, ins = None):
         product.delete()
         return redirect('/inventory/products/{}/'.format(obj), permanent=False) 
     return redirect('/unauthorized/', permanent=False)
+
+
+#========================================================================================
+#   DELETE INVENTORY PRODUCTS
+#========================================================================================
+#
