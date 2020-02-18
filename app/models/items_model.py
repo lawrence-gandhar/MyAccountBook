@@ -130,14 +130,7 @@ class ProductsModel(models.Model):
         null = True,
     )
 
-    inventory = models.ForeignKey(
-        Inventory,
-        blank = True,
-        null = True,
-        db_index = True,
-        on_delete = models.CASCADE,
-    ) 
-
+    
     manufactured_date = models.DateField(
         blank = True,
         null = True,

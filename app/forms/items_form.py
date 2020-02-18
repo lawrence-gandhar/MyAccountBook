@@ -21,12 +21,11 @@ class ProductForm(ModelForm):
 
         fields = (
             'product_type', 'sku', 'product_name', 'product_description', 'product_dimension', 
-            'cost_price', 'marked_price', 'selling_price', 'discount', 'tax', 'gst', 'inventory', 
-            'hsn_code', 'abatement', 'unit', 'is_sales', 'is_purchase', 'sales_account', 'purchase_account',
+            'cost_price', 'marked_price', 'selling_price', 'discount', 'tax', 'gst', 'purchase_account',
+            'hsn_code', 'abatement', 'unit', 'is_sales', 'is_purchase', 'sales_account', 
         )
 
         widgets = {
-            'inventory' : Select(attrs = {'class':'form-control input-sm,'}),
             'product_type' : Select(attrs = {'class':'form-control input-sm',}, choices = items_constant.PRODUCT_TYPE),
             'sku' : TextInput(attrs = {'class':'form-control input-sm',}),
             'product_name' : TextInput(attrs = {'class':'form-control input-sm',}),

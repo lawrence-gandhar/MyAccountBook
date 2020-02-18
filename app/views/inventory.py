@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404, JsonResponse
-from django.contrib import messages
 from django.views import View
 from collections import OrderedDict, defaultdict
 from django.db.models import *
