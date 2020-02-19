@@ -17,6 +17,7 @@ $("#cancel_edit_contact").click(function(){
 
 
 function has_app_id(elem){
+
     $("#app_id_input").find("input").val("").removeClass("wrong_input");
     $("#id_app_id_check").empty();
 

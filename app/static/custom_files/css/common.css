@@ -280,5 +280,5 @@ Background STYLES
 /*******************************************************************/
 
 .wrong_input{
-  background-color: #FF0000; 
+  background-color: #FF0000 !important; 
 }

@@ -27,7 +27,7 @@ class ContactsForm(ModelForm):
             'customer_type': Select(attrs={'class':'form-control input-sm'}, choices = user_constants.CUSTOMER_TYPE),
             'is_sub_customer': Select(attrs={'class':'form-control input-sm'}, choices = user_constants.IS_SUB_CUSTOMER),
             'is_msme_reg': Select(attrs={'class':'form-control input-sm'}, choices = user_constants.IS_TRUE),
-            'is_imported_user': CheckboxInput(attrs={'class':'form-check-input','value':'1',}),
+            'is_imported_user': CheckboxInput(attrs={'class':'form-check-input','value':'1', 'style':'margin:5px; height:15px; width:15px;'}),
             'imported_user': TextInput(attrs={'class':'form-control input-sm', 'type':'hidden'}),
             'email': TextInput(attrs={'class':'form-control input-sm', }),
             'phone': TextInput(attrs={'class':'form-control input-sm', }),

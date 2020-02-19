@@ -65,7 +65,7 @@ def add_contacts(request, slug = None, ins = None):
 
     # Template 
     template_name = 'app/app_files/contacts/base.html'
-    data["included_template"] = 'app/app_files/contacts/add_contacts.html'
+    data["included_template"] = 'app/app_files/contacts/add_contacts_step1.html'
     
     # Custom CSS/JS Files For Inclusion into template
     data["css_files"] = []
@@ -89,6 +89,163 @@ def add_contacts(request, slug = None, ins = None):
     data["contact_email_form"] = ContactsEmailForm()
     data["contact_address_form"] = ContactsAddressForm()
     data["contact_account_details_form"] = ContactAccountDetailsForm()
+
+    #***************************************************************
+    # Breadcrumbs List & Links
+    #***************************************************************
+
+    qStr = ''
+    if data["query_string"] is not None and data["query_string"] == 'all':
+        qStr = '?section='+data["query_string"]
+
+    breadcrumbs_list = [
+            '<li class="nav-item" style="float:left;padding:0px 10px;"><a href="/contacts/add/step1/'+ str(data["contact_form_instance"]) +qStr+'" style="color:#FFFFFF; text-decoration:none;"><i class="material-icons">account_circle</i> <span style="position:relative; top: 2px;">Basic Details</span></a></li>',
+            '<li class="nav-item" style="float:left;padding:0px 10px; margin-left:10px;"><a href="/contacts/add/step2/'+ str(data["contact_form_instance"]) +qStr+'" style="color:#FFFFFF; text-decoration:none;"><i class="material-icons">account_balance</i> <span style="position:relative; top: 2px;">Tax Details</span></a></li>',            
+            '<li class="nav-item" style="float:left;padding:0px 10px; margin-left:10px;"><a href="/contacts/add/step3/'+ str(data["contact_form_instance"]) +qStr+'" style="color:#FFFFFF; text-decoration:none;"><i class="material-icons">house</i> <span style="position:relative; top: 2px;">Address Details</span></a></li>',
+            '<li class="nav-item" style="float:left;padding:0px 10px; margin-left:10px;"><a href="/contacts/add/step4/'+ str(data["contact_form_instance"]) +qStr+'" style="color:#FFFFFF; text-decoration:none;"><i class="material-icons">credit_card</i> <span style="position:relative; top: 2px;">Account Details</span></a></li>',
+            '<li class="nav-item" style="float:left;padding:0px 10px; margin-left:10px;"><a href="/contacts/add/step5/'+ str(data["contact_form_instance"]) +qStr+'" style="color:#FFFFFF; text-decoration:none;"><i class="material-icons">mail</i> <span style="position:relative; top: 2px;">Email Details</span></a></li>',
+        ]
+
+    if ins is not None:
+        try: 
+            contact = Contacts.objects.get(pk = data["contact_form_instance"], user = request.user)
+            data["instance_title"] = contact.contact_name
+        except:
+            return redirect('/unauthorized/', permanent = True)
+
+    #***************************************************************
+    # Check SLUG - for creation of Forms 
+    #***************************************************************
+
+    if data["slug"] is not None and data["contact_form_instance"] is not None:
+        
+        data["breadcrumbs_index"] = int(data["slug"].replace('step',''))
+
+        if data["contact_form_instance"] is None:
+            data["included_template"] = 'app/app_files/contacts/add_contacts_'+data["slug"]+'.html'
+        else:
+            template_name = 'app/app_files/contacts/edit_contacts.html'
+            try:
+                if data["breadcrumbs_index"] == 1:
+                    data["contact_form"] = ContactsForm(instance = contact)
+                    counter = 1
+
+                if data["breadcrumbs_index"] == 2:
+                    try:
+                        tax_record = User_Tax_Details.objects.get(contact = contact, is_user = False)
+                        counter = 1
+                        data["tax_form"] = TaxForm(instance = tax_record)
+                    except:
+                        counter = 0
+                        data["tax_form"] = TaxForm()
+                    
+                    
+                if data["breadcrumbs_index"] == 3:
+                    data["contact_addresses"] = Contact_Addresses.objects.filter(contact = data["contact_form_instance"])
+                    counter = data["contact_addresses"].count()
+                    
+                if data["breadcrumbs_index"] == 4:                    
+                    data["contact_account_details"] = Contact_Account_Details.objects.filter(contact = data["contact_form_instance"])
+                    counter = data["contact_account_details"].count()
+
+                if data["breadcrumbs_index"] == 5:
+                    data["contact_emails"] = Contacts_Email.objects.filter(contact = data["contact_form_instance"])
+                    counter = data["contact_emails"].count()
+
+                if counter == 0 :
+                    data["included_template"] = 'app/app_files/contacts/add_contacts_'+data["slug"]+'.html'
+                else:
+                    data["included_template"] = 'app/app_files/contacts/edit_contacts_'+data["slug"]+'.html'
+                
+            except:
+                data["included_template"] = 'app/app_files/contacts/add_contacts_'+data["slug"]+'.html'
+
+        breadcrumbs = []
+        for i in range(data["breadcrumbs_index"]):
+            breadcrumbs.append(breadcrumbs_list[i])
+
+        data["breadcrumbs"] = ''.join(breadcrumbs)
+
+    #***************************************************************
+    # Check QueryString - for creation of breadcrumbs 
+    #***************************************************************
+
+    if data["query_string"] is not None:
+        if data["query_string"] == '':
+            return redirect('/unauthorized/', permanent = True)
+        elif data["query_string"] == 'all':
+            data["breadcrumbs"] = ''.join(breadcrumbs_list)
+        else:
+            return redirect('/unauthorized/', permanent = True)
+
+    #***************************************************************
+    # POST REQUEST
+    #***************************************************************
+
+    if request.POST:
+
+        if data["slug"] is None:
+            contact_form = ContactsForm(request.POST, request.FILES)
+            if contact_form.is_valid():
+                data["contact_form_instance"] = contact_form_ins = contact_form.save(commit = False)
+                contact_form_ins.user = request.user
+
+                if contact_form_ins.is_imported_user:
+                    try:
+                        profile = Profile.objects.get(app_id__iexact = contact_form_ins.app_id)
+                        imp_user = User.objects.get(pk = profile.user_id)
+                    except:
+                        return redirect('/unauthorized/', permanent = False)
+                    
+                    contact_form_ins.imported_user = imp_user
+                
+                contact_form_ins.save()
+                
+                if contact_form_ins.email is not None:
+                    email_ins = Contacts_Email.objects.create(contact = contact_form_ins)
+                    email_ins.email = contact_form_ins.email
+                    email_ins.is_official = True
+                    email_ins.save()
+
+                return redirect('/contacts/add/step2/{}'.format(data["contact_form_instance"].pk), permanent=False) 
+        
+        try:
+            c = Contacts.objects.get(pk = data["contact_form_instance"], user = request.user)
+        except Contacts.DoesNotExist:
+            return redirect('/unauthorized/', permanent = False)
+
+        if data["breadcrumbs_index"] == 2: 
+            contacts_tax_form = TaxForm(request.POST or None)
+            if contacts_tax_form.is_valid():
+                obj = contacts_tax_form.save()
+                obj.contact = c
+                obj.save()
+                return redirect('/contacts/add/step3/{}'.format(data["contact_form_instance"]), permanent=False) 
+
+        if data["breadcrumbs_index"] == 3:            
+            contact_address_form = ContactsAddressForm(request.POST or None)
+            if contact_address_form.is_valid():
+                contact_address = contact_address_form.save(commit = False)    
+                contact_address.contact = c
+                contact_address.save()                 
+                return redirect('/contacts/add/step4/{}'.format(data["contact_form_instance"]), permanent=False) 
+            
+        if data["breadcrumbs_index"] == 4:            
+            contact_account_details_form = ContactAccountDetailsForm(request.POST or None)
+            if contact_account_details_form.is_valid():
+                contact_account_details = contact_account_details_form.save(commit = False)    
+                contact_account_details.contact = c
+                contact_account_details.save()                
+                return redirect('/contacts/add/step5/{}'.format(data["contact_form_instance"]), permanent=False) 
+
+        if data["breadcrumbs_index"] == 5:          
+            contact_email_form = ContactsEmailForm(request.POST or None)
+            if contact_email_form.is_valid():
+                contact_email = contact_email_form.save(commit = False)    
+                contact_email.contact = c
+                contact_email.save()
+                return redirect('/contacts/add/step5/{}'.format(data["contact_form_instance"]), permanent=False) 
+            
 
     return render(request, template_name, data)
 
