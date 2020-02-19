@@ -86,7 +86,7 @@ select.form-control option{color : #000000; }
                                 </tr>                                
                                 <tr>
                                    <td colspan="3" style="border:none; padding:0px; padding-top:30px;">
-                                        <ul class="nav nav-tabs" id="myTab" role="tablist" style="padding:0px">
+                                        <ul class="nav nav-tabs" id="myTab" role="tablist" style="padding:0px; background-color:#556b2f">
                                             <li class="nav-item">
                                                 <a class="nav-link active" id="tax-tab" data-toggle="tab" href="#tax-form" role="tab" aria-controls="tax"
                                                 aria-selected="true">Tax & Payments</a>
@@ -316,17 +316,124 @@ select.form-control option{color : #000000; }
                                                     <tbody style=" width: 100%; display: inline-table;">
                                                         <tr>
                                                             <td style=" width:150px; border:0px; vertical-align: bottom">
-                                                                Email Address
+                                                                Contact Person
                                                             </td>
                                                             <td style="border:0px;">
-                                                                {{ contact_form.email }}
+                                                                {{ contact_address_form.contact_name}}
+                                                            </td>                                    
+                                                        </tr>
+                                                        <tr>
+                                                            <td style=" width:150px; border:0px; vertical-align: bottom">
+                                                                Flat/Office/Door No.
+                                                            </td>
+                                                            <td style="border:0px;">
+                                                                {{ contact_address_form.flat_no }}
+                                                            </td>                                    
+                                                        </tr>
+                                                        <tr>
+                                                            <td style=" width:150px; border:0px; vertical-align: bottom">
+                                                                Street
+                                                            </td>
+                                                            <td style="border:0px;">
+                                                                {{ contact_address_form.street }}
+                                                            </td>                                    
+                                                        </tr>
+                                                        <tr>
+                                                            <td style=" width:150px; border:0px; vertical-align: bottom">
+                                                                City
+                                                            </td>
+                                                            <td style="border:0px;">
+                                                                {{ contact_address_form.city }}
+                                                            </td>                                    
+                                                        </tr>
+                                                        <tr>
+                                                            <td style=" width:150px; border:0px; vertical-align: bottom">
+                                                                Zipcode/Pincode
+                                                            </td>
+                                                            <td style="border:0px;">
+                                                                {{ contact_address_form.pincode }}
+                                                            </td>                                    
+                                                        </tr>
+                                                        <tr>
+                                                            <td style=" width:150px; border:0px; vertical-align: bottom">
+                                                                State
+                                                            </td>
+                                                            <td style="border:0px;">
+                                                                {{ contact_address_form.state }}
+                                                            </td>                                    
+                                                        </tr>
+                                                        <tr>
+                                                            <td style=" width:150px; border:0px; vertical-align: bottom">
+                                                                Country
+                                                            </td>
+                                                            <td style="border:0px;">
+                                                                {{ contact_address_form.country }}
+                                                            </td>                                    
+                                                        </tr>
+                                                        <tr>
+                                                            <td style=" width:150px; border:0px; vertical-align: bottom">
+                                                                Is Billing Address
+                                                            </td>
+                                                            <td style="border:0px;">
+                                                                {{ contact_address_form.is_billing_address }}
+                                                            </td>                                    
+                                                        </tr>
+                                                        <tr>
+                                                            <td style=" width:150px; border:0px; vertical-align: bottom">
+                                                                Is Shipping Address
+                                                            </td>
+                                                            <td style="border:0px;">
+                                                                {{ contact_address_form.is_shipping_address }}
                                                             </td>                                    
                                                         </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
                                             <div class="tab-pane fade" id="accounts-form" role="tabpanel" aria-labelledby="accounts-tab" style="padding:10px 20px;">
-                                                accounts
+                                                <table class="table-responsive">
+                                                    <tbody style=" width: 100%; display: inline-table;">
+                                                        <tr>
+                                                            <td style=" width:150px; border:0px; vertical-align: bottom">
+                                                                Account Holder
+                                                            </td>
+                                                            <td style="border:0px;">
+                                                                {{ contact_account_details_form.account_holder_name }}
+                                                            </td>                                    
+                                                        </tr>
+                                                        <tr>
+                                                            <td style=" width:150px; border:0px; vertical-align: bottom">
+                                                                Account Number
+                                                            </td>
+                                                            <td style="border:0px;">
+                                                                {{ contact_account_details_form.account_number }}
+                                                            </td>                                    
+                                                        </tr>                                                        
+                                                        <tr>
+                                                            <td style=" width:150px; border:0px; vertical-align: bottom">
+                                                                IFSC Code
+                                                            </td>
+                                                            <td style="border:0px;">
+                                                                {{ contact_account_details_form.ifsc_code }}
+                                                            </td>                                    
+                                                        </tr>
+                                                        <tr>
+                                                            <td style=" width:150px; border:0px; vertical-align: bottom">
+                                                                Bank Name
+                                                            </td>
+                                                            <td style="border:0px;">
+                                                                {{ contact_account_details_form.bank_name }}
+                                                            </td>                                    
+                                                        </tr>
+                                                        <tr>
+                                                            <td style=" width:150px; border:0px; vertical-align: bottom">
+                                                                Branch Name
+                                                            </td>
+                                                            <td style="border:0px;">
+                                                                {{ contact_account_details_form.bank_branch_name }}
+                                                            </td>                                    
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
                                    </td> 
@@ -334,6 +441,10 @@ select.form-control option{color : #000000; }
                             </tbody>
                         </table>
                     </div>
+                </div>
+                <div class="card-footer text-center"  style="justify-content: center;">
+                    <button class="btn btn-warning">Cancel</button>
+                    <button class="btn btn-success">Save</button>
                 </div>
             </div>
         </div>
