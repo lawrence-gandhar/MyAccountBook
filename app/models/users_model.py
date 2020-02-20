@@ -173,29 +173,29 @@ class User_Address_Details(models.Model):
 
     flat_no = models.CharField(
         max_length = 250,
-        blank = False,
-        null = False,
+        blank = True,
+        null = True,
         db_index = True,
     )
 
     street = models.CharField(
         max_length = 250,
-        blank = False,
-        null = False,
+        blank = True,
+        null = True,
         db_index = True,
     )
 
     city = models.CharField(
         max_length = 250,
-        blank = False,
-        null = False,
+        blank = True,
+        null = True,
         db_index = True,
     )
 
     state = models.CharField(
         max_length = 250,
-        blank = False,
-        null = False,
+        blank = True,
+        null = True,
         db_index = True,
     )
 
@@ -209,8 +209,8 @@ class User_Address_Details(models.Model):
 
     pincode = models.CharField(
         max_length = 250,
-        blank = False,
-        null = False,
+        blank = True,
+        null = True,
         db_index = True,
     )
 
@@ -344,6 +344,8 @@ class User_Tax_Details(models.Model):
         max_length = 5,
         db_index = True,
         choices = currency_list.CURRENCY_CHOICES,
+        null = True,
+        blank = True,
     )
 
     opening_balance = models.IntegerField(

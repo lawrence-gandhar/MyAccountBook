@@ -15,7 +15,13 @@ $("#cancel_edit_contact").click(function(){
     $(".disabled_form_elements input, .disabled_form_elements select, .disabled_form_elements checkbox").prop("disabled", true);
 });
 
+$("#more_address_table").find("input").attr('disabled', "true");
+$("#more_address_table").find("select").attr('disabled', "true");
 
+
+/************************************************************ */
+//
+/************************************************************ */
 function has_app_id(elem){
 
     $("#app_id_input").find("input").val("").removeClass("wrong_input");
@@ -130,3 +136,27 @@ function edit_form_button(form_type, obj){
         $("#editModal").modal("show");
     });
 }
+
+
+/****************************************************************/
+//
+/****************************************************************/
+
+$("#add_more_addresses").on("click",function(){
+
+    console.log($(this).attr("params"));
+
+    if($(this).attr("params") == 1){
+        $("#more_address_table").find("input").removeAttr('disabled');
+        $("#more_address_table").find("select").removeAttr('disabled');
+        $("#more_address_table").removeClass("hide");
+        $(this).attr("params","2");
+        $(this).text("Remove Another Address");
+    }else{
+        $("#more_address_table").find("input").attr('disabled', "true");
+        $("#more_address_table").find("select").attr('disabled', "true");
+        $("#more_address_table").addClass("hide");
+        $(this).attr("params","1");
+        $(this).text("Add Another");
+    }
+});

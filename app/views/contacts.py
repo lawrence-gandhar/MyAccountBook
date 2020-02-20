@@ -86,10 +86,37 @@ def add_contacts(request, slug = None, ins = None):
     # Initialize Forms
     data["contact_form"] = ContactsForm()
     data["tax_form"] = TaxForm()
-    data["contact_email_form"] = ContactsEmailForm()
-    data["contact_address_form"] = ContactsAddressForm()
+    data["contact_address_form_1"] = ContactsAddressForm()
+    data["contact_address_form_2"] = ContactsAddressForm()
     data["contact_account_details_form"] = ContactAccountDetailsForm()
 
+    #
+    #
+    #
+    if request.POST:
+        contact_form = ContactsForm(request.POST)
+        tax_form = TaxForm(request.POST)
+        contact_address_form_1 = ContactsAddressForm(request.POST, prefix = 'form1')
+        contact_address_form_2 = ContactsAddressForm(request.POST, prefix = 'form2')
+        contact_account_details_form = ContactAccountDetailsForm(request.POST)
+
+        if contact_form.is_valid():
+            contact_form_ins = contact_form.save(commit = False)
+            contact_form_ins.user = request.user
+
+            if contact_form_ins.is_imported_user:
+                try:
+                    profile = Profile.objects.get(app_id__iexact = contact_form_ins.app_id)
+                    imp_user = User.objects.get(pk = profile.user_id)
+                except:
+                    return redirect('/unauthorized/', permanent = False)
+                
+                contact_form_ins.imported_user = imp_user
+            
+            contact_form_ins.save()    
+            return redirect('/contacts/', permanent = False)
+        else:
+            print(contact_form.errors)
     return render(request, template_name, data)
 
 

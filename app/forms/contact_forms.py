@@ -60,10 +60,10 @@ class ContactsAddressForm(ModelForm):
         ADDRESS_CHOICES = ((True, 'Yes'),(False, 'No'))
 
         model = Contact_Addresses
-        fields = ('contact_name', 'flat_no', 'street', 'city', 'state', 'country' , 'pincode', 'is_billing_address', 'is_shipping_address',)
+        fields = ('contact_person', 'flat_no', 'street', 'city', 'state', 'country' , 'pincode', 'is_billing_address', 'is_shipping_address',)
 
         widgets = {
-            'contact_name' : TextInput(attrs={'class':'form-control input-sm',}),
+            'contact_person' : TextInput(attrs={'class':'form-control input-sm',}),
             'flat_no' : TextInput(attrs={'class':'form-control input-sm',}),
             'street' : TextInput(attrs={'class':'form-control input-sm',}),
             'city' : TextInput(attrs={'class':'form-control input-sm',}),

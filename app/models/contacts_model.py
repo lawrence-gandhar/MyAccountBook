@@ -256,38 +256,38 @@ class Contact_Addresses(models.Model):
         db_index = True
     )
 
-    contact_name = models.CharField(
+    contact_person = models.CharField(
         max_length = 250,
-        blank = False,
-        null = False,
+        blank = True,
+        null = True,
         db_index = True,
     )
 
     flat_no = models.CharField(
         max_length = 250,
-        blank = False,
-        null = False,
+        blank = True,
+        null = True,
         db_index = True,
     )
 
     street = models.CharField(
         max_length = 250,
-        blank = False,
-        null = False,
+        blank = True,
+        null = True,
         db_index = True,
     )
 
     city = models.CharField(
         max_length = 250,
-        blank = False,
-        null = False,
+        blank = True,
+        null = True,
         db_index = True,
     )
 
     state = models.CharField(
         max_length = 250,
-        blank = False,
-        null = False,
+        blank = True,
+        null = True,
         db_index = True,
     )
 
@@ -301,8 +301,8 @@ class Contact_Addresses(models.Model):
 
     pincode = models.CharField(
         max_length = 250,
-        blank = False,
-        null = False,
+        blank = True,
+        null = True,
         db_index = True,
     )
 
