@@ -86,8 +86,8 @@ def add_contacts(request, slug = None, ins = None):
     # Initialize Forms
     data["contact_form"] = ContactsForm()
     data["tax_form"] = TaxForm()
-    data["contact_address_form_1"] = ContactsAddressForm()
-    data["contact_address_form_2"] = ContactsAddressForm()
+    data["contact_address_form_1"] = ContactsAddressForm(prefix = 'form1')
+    data["contact_address_form_2"] = ContactsAddressForm(prefix = 'form2')
     data["contact_account_details_form"] = ContactAccountDetailsForm()
 
     #
@@ -100,8 +100,10 @@ def add_contacts(request, slug = None, ins = None):
         contact_address_form_2 = ContactsAddressForm(request.POST, prefix = 'form2')
         contact_account_details_form = ContactAccountDetailsForm(request.POST)
 
+        ins = None
+
         if contact_form.is_valid():
-            contact_form_ins = contact_form.save(commit = False)
+            ins = contact_form_ins = contact_form.save(commit = False)
             contact_form_ins.user = request.user
 
             if contact_form_ins.is_imported_user:
@@ -113,10 +115,53 @@ def add_contacts(request, slug = None, ins = None):
                 
                 contact_form_ins.imported_user = imp_user
             
-            contact_form_ins.save()    
-            return redirect('/contacts/', permanent = False)
-        else:
-            print(contact_form.errors)
+            contact_form_ins.save() 
+
+        print(ins)   
+        if ins is not None:
+            #
+            # tax form save
+            if tax_form.is_valid(): 
+                obj_tax = tax_form.save(commit = False)
+                obj_tax.contact = ins
+                obj_tax.save()
+            else:
+                print(tax_form.errors)
+
+            #
+            # contact_account_details_form save
+            if contact_account_details_form.is_valid():
+                obj_acc = contact_account_details_form.save(commit = False)
+                obj_acc.contact = ins
+                obj_acc.save() 
+            else:
+                print(contact_account_details_form.errors)
+            
+            #
+            # address form save
+            if contact_address_form_1.is_valid():
+
+                print(contact_address_form_1)
+
+                obj_add1 = contact_address_form_1.save()
+                obj_add1.contact = ins
+                obj_add1.save() 
+            else:
+                print(contact_address_form_1.errors)
+
+            #
+            # address 2 form save
+            if contact_address_form_2.is_valid():
+                print(contact_address_form_2)
+                obj_add2 = contact_address_form_2.save()
+                obj_add2.contact = ins
+                obj_add2.save() 
+            else:
+                print(contact_address_form_2.errors)
+            
+            
+
+        
     return render(request, template_name, data)
 
 

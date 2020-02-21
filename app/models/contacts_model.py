@@ -253,7 +253,9 @@ class Contact_Addresses(models.Model):
     contact = models.ForeignKey(
         Contacts, 
         on_delete = models.CASCADE, 
-        db_index = True
+        db_index = True,
+        null = True,
+        blank = True,
     )
 
     contact_person = models.CharField(
@@ -310,12 +312,16 @@ class Contact_Addresses(models.Model):
         db_index = True,
         choices = user_constants.IS_TRUE,
         default = False,
+        null = True,
+        blank = True,
     ) 
 
     is_shipping_address = models.BooleanField(
         db_index = True,
         choices = user_constants.IS_TRUE,
         default = False,
+        null = True,
+        blank = True,
     )
 
     created_on = models.DateTimeField(
