@@ -151,8 +151,10 @@ $("#add_more_addresses").on("click",function(){
         $("#more_address_table").find("select").removeAttr('disabled');
         $("#more_address_table").removeClass("hide");
         $(this).attr("params","2");
+        $("#more_address_table_enabled").val(1);
         $(this).text("Remove Another Address");
     }else{
+        $("#more_address_table_enabled").val(0);
         $("#more_address_table").find("input").attr('disabled', "true");
         $("#more_address_table").find("select").attr('disabled', "true");
         $("#more_address_table").addClass("hide");

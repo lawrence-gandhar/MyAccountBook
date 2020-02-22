@@ -309,6 +309,8 @@ class User_Tax_Details(models.Model):
         db_index = True,
         default = 0,
         choices = user_constants.GST_REG_TYPE,
+        blank = True,
+        null = True,
     )
 
     business_reg_no = models.CharField(
@@ -372,6 +374,8 @@ class User_Tax_Details(models.Model):
         default = 0,
         db_index = True,
         choices = payment_constants.PREFERRED_DELIVERY,
+        null = True,
+        blank = True,
     )
 
     invoice_terms = models.IntegerField(

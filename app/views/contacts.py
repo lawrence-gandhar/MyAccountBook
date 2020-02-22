@@ -117,7 +117,6 @@ def add_contacts(request, slug = None, ins = None):
             
             contact_form_ins.save() 
 
-        print(ins)   
         if ins is not None:
             #
             # tax form save
@@ -140,9 +139,7 @@ def add_contacts(request, slug = None, ins = None):
             #
             # address form save
             if contact_address_form_1.is_valid():
-
                 print(contact_address_form_1)
-
                 obj_add1 = contact_address_form_1.save()
                 obj_add1.contact = ins
                 obj_add1.save() 
@@ -158,9 +155,6 @@ def add_contacts(request, slug = None, ins = None):
                 obj_add2.save() 
             else:
                 print(contact_address_form_2.errors)
-            
-            
-
         
     return render(request, template_name, data)
 
