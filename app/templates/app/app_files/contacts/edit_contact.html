@@ -6,7 +6,7 @@ select.form-control{padding:0px 10px;}
 select.form-control option{color : #000000; }
 </style>
 
-<form method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data" id="contacts_edit_form_main">
     {% csrf_token %}
     <div class="row">
         <div class="col-lg-12" style="padding:0px">
@@ -19,32 +19,11 @@ select.form-control option{color : #000000; }
                         <table class="table-responsive">
                             <tbody style=" width: 100%; display: inline-table;">
                                 <tr>
-                                    <td style="border:0px; width:150px; vertical-align: initial">
-                                        Has Application ID
-                                    </td>
-                                    <td style="border:0px; cursor:pointer;">
-                                        <input style="margin:5px; height:15px; width:15px;" type="checkbox" id="id_has_app" onclick="has_app_id(this)">
+                                    <td colspan="2">
+                                        <button class="btn btn-sm btn-warning pull-right" style="margin-bottom:15px; float:right" id="edit_contact_details_form" params="1" type="button">Edit Contact Details</button>
                                     </td>
                                 </tr>
-                                <tr class="hide-row" id="app_id_input">
-                                    <td style="border:0px; vertical-align: bottom">
-                                        Application ID
-                                    </td>
-                                    <td style="border:0px;">
-                                        <input autocomplete="off" class="form-control input-sm" type="text" name="app_id" id="id_app_id" onfocusout="check_app_id(this)">
-                                    </td>
-                                    <td style="border:0px;" id="id_app_id_check"></td>
-                                </tr>
-                                <tr class="hide-row" id="app_id_input_2">
-                                    <td style="border:0px; vertical-align:bottom; padding: 17px 5px;">
-                                        Use User Details
-                                    </td>
-                                    <td style="border:0px; padding: 17px 5px;">
-                                        {{ contact_form.is_imported_user }}
-                                        {{ contact_form.imported_user }}
-                                    </td>
-                                </tr>
-                                <tr>
+                                <tr class="edit_contact_details_form">
                                     <td style="border:0px; vertical-align: bottom">
                                         Customer Type
                                     </td>
@@ -52,7 +31,7 @@ select.form-control option{color : #000000; }
                                         {{ contact_form.customer_type }}
                                     </td>                                    
                                 </tr>
-                                <tr>
+                                <tr class="edit_contact_details_form">
                                     <td style="border:0px; vertical-align: bottom">
                                         Is Sub Customer
                                     </td>
@@ -60,7 +39,7 @@ select.form-control option{color : #000000; }
                                         {{ contact_form.is_sub_customer }}
                                     </td>                                    
                                 </tr>
-                                <tr>
+                                <tr class="edit_contact_details_form">
                                     <td style="border:0px; vertical-align: bottom">
                                         Salutation
                                     </td>
@@ -68,7 +47,7 @@ select.form-control option{color : #000000; }
                                         {{ contact_form.salutation }}
                                     </td>                                    
                                 </tr>
-                                <tr>
+                                <tr class="edit_contact_details_form">
                                     <td style="border:0px; vertical-align: bottom">
                                         Contact
                                     </td>
@@ -76,7 +55,7 @@ select.form-control option{color : #000000; }
                                         {{ contact_form.contact_name }}
                                     </td>                                    
                                 </tr>
-                                <tr>
+                                <tr class="edit_contact_details_form">
                                     <td style="border:0px; vertical-align: bottom">
                                         Contact Display Name
                                     </td>
@@ -84,7 +63,7 @@ select.form-control option{color : #000000; }
                                         {{ contact_form.display_name }}
                                     </td>                                    
                                 </tr>  
-                                <tr>
+                                <tr class="edit_contact_details_form">
                                     <td style=" width:150px; border:0px; vertical-align: bottom">
                                         Organisation Type
                                     </td>
@@ -92,7 +71,7 @@ select.form-control option{color : #000000; }
                                         {{ contact_form.organization_type }}
                                     </td>                                    
                                 </tr>
-                                <tr>
+                                <tr class="edit_contact_details_form">
                                     <td style="border:0px; vertical-align: bottom">
                                         Organisation Name
                                     </td>
@@ -100,7 +79,7 @@ select.form-control option{color : #000000; }
                                         {{ contact_form.organization_name }}
                                     </td>                                    
                                 </tr>
-                                <tr>
+                                <tr class="edit_contact_details_form">
                                     <td style="border:0px; vertical-align: bottom">
                                         Is MSME Registered
                                     </td>
@@ -108,7 +87,7 @@ select.form-control option{color : #000000; }
                                         {{ contact_form.is_msme_reg }}
                                     </td>                                    
                                 </tr>  
-                                <tr>
+                                <tr class="edit_contact_details_form">
                                     <td style=" width:150px; border:0px; vertical-align: bottom">
                                         Email Address
                                     </td>
@@ -116,7 +95,7 @@ select.form-control option{color : #000000; }
                                         {{ contact_form.email }}
                                     </td>                                    
                                 </tr>
-                                <tr>
+                                <tr class="edit_contact_details_form">
                                     <td style=" width:150px; border:0px; vertical-align: bottom">
                                         Phone/Mobile
                                     </td>

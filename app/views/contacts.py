@@ -75,14 +75,6 @@ def add_contacts(request, slug = None, ins = None):
     data["active_link"] = 'Contacts'
     data["breadcrumb_title"] = 'CONTACTS'
 
-    data["slug"] = slug
-    data["breadcrumbs"] = ''
-    data["breadcrumbs_index"] = 0
-    
-    data["instance_title"] = None
-    data["contact_form_instance"] = ins
-    data["query_string"] = request.GET.get('section', None)
-
     # Initialize Forms
     data["contact_form"] = ContactsForm()
     data["tax_form"] = TaxForm()
@@ -121,11 +113,11 @@ def add_contacts(request, slug = None, ins = None):
             #
             # tax form save
             if tax_form.is_valid(): 
-                obj_tax = tax_form.save(commit = False)
+                obj_tax = tax_form.save()
                 obj_tax.contact = ins
                 obj_tax.save()
             else:
-                print(tax_form.errors)
+                pass
 
             #
             # contact_account_details_form save
@@ -134,7 +126,7 @@ def add_contacts(request, slug = None, ins = None):
                 obj_acc.contact = ins
                 obj_acc.save() 
             else:
-                print(contact_account_details_form.errors)
+                pass
             
             #
             # address form save
@@ -144,17 +136,18 @@ def add_contacts(request, slug = None, ins = None):
                 obj_add1.contact = ins
                 obj_add1.save() 
             else:
-                print(contact_address_form_1.errors)
+                pass
 
             #
             # address 2 form save
             if contact_address_form_2.is_valid():
-                print(contact_address_form_2)
-                obj_add2 = contact_address_form_2.save()
-                obj_add2.contact = ins
-                obj_add2.save() 
+                x = request.POST.get("more_address_table_enabled", None)
+                if x == '1' and x is not None:
+                    obj_add2 = contact_address_form_2.save()
+                    obj_add2.contact = ins
+                    obj_add2.save() 
             else:
-                print(contact_address_form_2.errors)
+                pass
         
     return render(request, template_name, data)
 
@@ -163,19 +156,44 @@ def add_contacts(request, slug = None, ins = None):
 #   EDIT CONTACTS
 #=====================================================================================
 #
-def edit_contact(request, slug = None, ins = None):
-    if request.POST:
-        if slug is not None and ins is not None:
+def edit_contact(request, ins = None):
+        
+        # Initialize 
+        data = defaultdict()
+
+        # Template 
+        template_name = 'app/app_files/contacts/base.html'
+        data["included_template"] = 'app/app_files/contacts/edit_contact.html'
+        
+        # Custom CSS/JS Files For Inclusion into template
+        data["css_files"] = []
+        data["js_files"] = ['custom_files/js/contacts.js']
+
+        # Set link as active in menubar
+        data["active_link"] = 'Contacts'
+        data["breadcrumb_title"] = 'CONTACTS'
+
+        if ins is not None:
+
+            contact = None
+            tax_form = None
+            
             try:
-                contact = Contacts.objects.get(pk = int(ins), user = request.user)
-                contact_form = ContactsForm(request.POST, instance = contact)
-                
-                if contact_form.is_valid(): 
-                    contact_form.save()    
+                contact = Contacts.objects.get(pk = int(ins))
             except:
                 return redirect('/unauthorized/', permanent=False)
-    return redirect('/contacts/add/step1/{}'.format(ins), permanent=False)
 
+            data["contact_form"] = ContactsForm(instance = contact)
+
+            try:
+                tax_form = User_Tax_Details.objects.get(is_user = False, contact = contact)
+            except:
+                pass
+
+            data["tax_form"] = TaxForm(instance = tax_form)
+        else:    
+            return redirect('/unauthorized/', permanent = False)
+        return render(request, template_name, data)
 #=======================================================================================
 #   FETCH EDIT CONTACT EXTRA FORMS
 #=======================================================================================

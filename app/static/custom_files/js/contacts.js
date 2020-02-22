@@ -162,3 +162,7 @@ $("#add_more_addresses").on("click",function(){
         $(this).text("Add Another");
     }
 });
+
+$("form#contacts_edit_form_main").find("input").attr("disabled","true")
+$("form#contacts_edit_form_main").find("select").attr("disabled","true")
+

@@ -45,7 +45,7 @@
                                     <td>{{contact.phone}}</td>
                                     <td>{{contact.website}}</td>                        
                                     <td class="text-center">
-                                        <a title="Edit Contact" href="{% url 'add-contacts' 'step1' contact.id %}" class="btn btn-primary btn-sm" style="padding:5px 5px;">
+                                        <a title="Edit Contact" href="{% url 'edit-contact' contact.id %}" class="btn btn-primary btn-sm" style="padding:5px 5px;">
                                             <i class="material-icons">create</i>
                                         </a>
                                         {% if contact.is_active %}
