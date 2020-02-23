@@ -163,7 +163,9 @@ $("#add_more_addresses").on("click",function(){
     }
 });
 
-$("form#contacts_edit_form_main").find("input").attr("disabled","true")
 $(".edit_contact_details_form").find("input").attr("disabled","true")
 $(".edit_contact_details_form").find("select").attr("disabled","true")
+
+$(".edit_tax_details_form").find("input").attr("disabled","true")
+$(".edit_tax_details_form").find("select").attr("disabled","true")
 

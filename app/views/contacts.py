@@ -177,7 +177,11 @@ def edit_contact(request, ins = None):
 
             contact = None
             tax_form = None
-            
+            contact_address_form_1 = None
+            contact_address_form_2 = None
+
+            #
+            # Contact Details
             try:
                 contact = Contacts.objects.get(pk = int(ins))
             except:
@@ -185,12 +189,23 @@ def edit_contact(request, ins = None):
 
             data["contact_form"] = ContactsForm(instance = contact)
 
+            #
+            # Tax Details
             try:
                 tax_form = User_Tax_Details.objects.get(is_user = False, contact = contact)
             except:
                 pass
 
             data["tax_form"] = TaxForm(instance = tax_form)
+
+            #
+            # Addresses
+            contact_address_form = Contact_Addresses.objects.filter(contact = contact)
+            c_count = len(contact_address_form)
+
+            for i in range(c_count):
+                data["contact_address_form_{}".format(i+1)] = contact_address_form[i]
+
         else:    
             return redirect('/unauthorized/', permanent = False)
         return render(request, template_name, data)
