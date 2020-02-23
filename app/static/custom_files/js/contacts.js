@@ -169,3 +169,10 @@ $(".edit_contact_details_form").find("select").attr("disabled","true")
 $(".edit_tax_details_form").find("input").attr("disabled","true")
 $(".edit_tax_details_form").find("select").attr("disabled","true")
 
+$(".contact_address_form_1").find("input").attr("disabled","true")
+$(".contact_address_form_1").find("select").attr("disabled","true")
+
+//
+//{% url 'edit_contact_details_form' %}
+
+

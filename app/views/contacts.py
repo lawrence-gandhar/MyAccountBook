@@ -177,8 +177,7 @@ def edit_contact(request, ins = None):
 
             contact = None
             tax_form = None
-            contact_address_form_1 = None
-            contact_address_form_2 = None
+            accounts = None
 
             #
             # Contact Details
@@ -188,6 +187,8 @@ def edit_contact(request, ins = None):
                 return redirect('/unauthorized/', permanent=False)
 
             data["contact_form"] = ContactsForm(instance = contact)
+
+            data["contact_ins"] = contact.id
 
             #
             # Tax Details
@@ -201,104 +202,35 @@ def edit_contact(request, ins = None):
             #
             # Addresses
             contact_address_form = Contact_Addresses.objects.filter(contact = contact)
-            c_count = len(contact_address_form)
+            data["c_count"] = c_count = len(contact_address_form)
 
             for i in range(c_count):
-                data["contact_address_form_{}".format(i+1)] = contact_address_form[i]
+                data["contact_address_form_{}".format(i+1)] = ContactsAddressForm(instance = contact_address_form[i], prefix='form{}'.format(i+1))
+
+            #
+            # Accoounts
+            try:
+                accounts = Contact_Addresses.objects.get(contact = contact)
+            except:
+                pass
+
+            data["contact_account_details_form"] = ContactAccountDetailsForm(instance = accounts)
+
 
         else:    
             return redirect('/unauthorized/', permanent = False)
         return render(request, template_name, data)
+
+
 #=======================================================================================
-#   FETCH EDIT CONTACT EXTRA FORMS
+#   EDIT CONTACT DETAILS FORMS
 #=======================================================================================
 #
-def fetch_extra_edit_forms(request):
+def edit_contact_details_form(request):
+    
     if request.is_ajax():
         if request.POST:
-            form_type = request.POST.get('form_type', None)
-            obj_ins = request.POST.get('ins', None)
-
-            form_html = OrderedDict()
-
-            if form_type is not None and obj_ins is not None:
-                
-                #***************************************************************
-                # Edit Email Form
-                #***************************************************************
-
-                if form_type == 'edit_contact_email':
-                    labels = {
-                        'email' : 'Email Address',
-                        'is_official' : 'Is Official Email',
-                        'is_personal' : 'Is Personal Email'
-                    }
-                    try:
-                        obj = Contacts_Email.objects.get(pk = int(obj_ins))
-                        form_data = ContactsEmailForm(instance = obj) 
-                    except:
-                        return HttpResponse('0')
-
-                #***************************************************************
-                # Edit Address Form
-                #***************************************************************
-
-                if form_type == 'edit_contact_address':
-                    labels = {
-                        'contact_name' : 'Contact Person',
-                        'flat_no' : 'Flat/Door No',
-                        'street' : 'Street/Lane',
-                        'city' : 'City',
-                        'state' : 'State',
-                        'country' : 'Country',
-                        'pincode' : 'Zip Code',
-                        'is_billing_address' : 'Is Billing Address',
-                        'is_shipping_address' : 'Is Shipping Address',
-                    }
-                    try:
-                        obj = Contact_Addresses.objects.get(pk = int(obj_ins))
-                        form_data = ContactsAddressForm(instance = obj)
-                    except:
-                        return HttpResponse('0')
-
-                #***************************************************************
-                # Edit Account Form
-                #***************************************************************
-
-                if form_type == 'edit_contact_account_details':
-                    labels = {
-                        'account_number':'Account Number',
-                        'account_holder_name':'Account Holder',
-                        'ifsc_code':'IFSC Code',
-                        'bank_name':'Bank Name',
-                        'bank_branch_name':'Branch Name',
-                    }
-
-                    try:
-                        obj = Contact_Account_Details.objects.get(pk = int(obj_ins))
-                        form_data = ContactAccountDetailsForm(instance = obj)
-                    except:
-                        return HttpResponse('0')
-
-
-                #***************************************************************
-                # Convert Form Fields to JSON
-                #***************************************************************
-                           
-                form_html["id"] = {
-                    'label':'id', 
-                    'field':'<input type="hidden" value="'+obj_ins+'" name="id">', 
-                    'label_style':'display:none'
-                }
-                for key in form_data.fields:
-                    form_html[key] = {
-                        'label': labels[key], 
-                        'field':str(form_data[key]).replace("\n",""),
-                        'label_style':''
-                    }
-                return HttpResponse(json.dumps(form_html))
-
-            return HttpResponse('0')
+            pass
         return HttpResponse('0')
     return HttpResponse('0')
 
