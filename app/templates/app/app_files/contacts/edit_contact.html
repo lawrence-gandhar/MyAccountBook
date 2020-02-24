@@ -468,12 +468,12 @@ table{
                                         <div class="tab-pane fade" id="accounts-form" role="tabpanel" aria-labelledby="accounts-tab" style="padding:10px 20px;">
                                             <table class="table-responsive">
                                                 <tbody style=" width: 100%; display: inline-table;">
-                                                    <tr>
+                                                    <tr class="accounts_form">
                                                         <td colspan="2">
                                                             <button class="btn btn-sm btn-warning pull-right" style="margin-bottom:15px; float:right" type="button" data-toggle="modal" data-target="#editAccountsModal">Edit Accounts Details</button>
                                                         </td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr class="accounts_form">
                                                         <td style=" width:150px; border:0px; vertical-align: bottom">
                                                             Account Holder
                                                         </td>
@@ -481,7 +481,7 @@ table{
                                                             {{ contact_account_details_form.account_holder_name }}
                                                         </td>                                    
                                                     </tr>
-                                                    <tr>
+                                                    <tr class="accounts_form">
                                                         <td style=" width:150px; border:0px; vertical-align: bottom">
                                                             Account Number
                                                         </td>
@@ -489,7 +489,7 @@ table{
                                                             {{ contact_account_details_form.account_number }}
                                                         </td>                                    
                                                     </tr>                                                        
-                                                    <tr>
+                                                    <tr class="accounts_form">
                                                         <td style=" width:150px; border:0px; vertical-align: bottom">
                                                             IFSC Code
                                                         </td>
@@ -497,7 +497,7 @@ table{
                                                             {{ contact_account_details_form.ifsc_code }}
                                                         </td>                                    
                                                     </tr>
-                                                    <tr>
+                                                    <tr class="accounts_form">
                                                         <td style=" width:150px; border:0px; vertical-align: bottom">
                                                             Bank Name
                                                         </td>
@@ -505,7 +505,7 @@ table{
                                                             {{ contact_account_details_form.bank_name }}
                                                         </td>                                    
                                                     </tr>
-                                                    <tr>
+                                                    <tr class="accounts_form">
                                                         <td style=" width:150px; border:0px; vertical-align: bottom">
                                                             Branch Name
                                                         </td>
@@ -731,7 +731,7 @@ table{
                     {% csrf_token %}
                     <input type="hidden" value="{{contact_ins}}" name="ids">
                     <input type="hidden" value="1" name="prefix">
-                    <input type="text" value="{{contact_address_1}}" name="obj_ins">
+                    <input type="hidden" value="{{contact_address_1}}" name="obj_ins">
                     <table class="table-responsive">
                         <tbody style=" width: 100%; display: inline-table;">
                             <tr>
@@ -818,7 +818,6 @@ table{
     </div>
 </div>
 
-
 <!-- EDIT ADDRESS 2 MODAL -->
 
 <div class="modal fade" id="editAddress2Modal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -834,7 +833,7 @@ table{
                 <div class="modal-body">
                     <input type="hidden" value="{{contact_ins}}" name="ids">
                     <input type="hidden" value="2" name="prefix">
-                    <input type="text" value="{{contact_address_2}}" name="obj_ins">
+                    <input type="hidden" value="{{contact_address_2}}" name="obj_ins">
                     {% csrf_token %}
                     <table class="table-responsive">
                         <tbody style=" width: 100%; display: inline-table;">
@@ -921,6 +920,79 @@ table{
         </div>
     </div>
 </div>
+
+<!-- EDIT ACCOUNTS MODAL -->
+
+<div class="modal fade" id="editAccountsModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" style="background-color:currentcolor">
+            <form method="post" style="margin:0px" action="{% url 'edit_accounts_details_form' %}">
+                <div class="modal-header bg-warning">
+                    <h5 class="modal-title" style="color:#000000; font-weight:bold;">Edit Accounts Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" value="{{contact_ins}}" name="ids">
+                    <input type="hidden" value="{{accounts}}" name="obj_ins">
+                    {% csrf_token %}
+                    <table class="table-responsive">
+                        <tbody style=" width: 100%; display: inline-table;">
+                            <tr>
+                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
+                                    Account Holder
+                                </td>
+                                <td style="border:0px;">
+                                    {{ contact_account_details_form.account_holder_name }}
+                                </td>                                    
+                            </tr>
+                            <tr>
+                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
+                                    Account Number
+                                </td>
+                                <td style="border:0px;">
+                                    {{ contact_account_details_form.account_number }}
+                                </td>                                    
+                            </tr>
+                            <tr>
+                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
+                                    IFSC Code
+                                </td>
+                                <td style="border:0px;">
+                                    {{ contact_account_details_form.ifsc_code }}
+                                </td>                                    
+                            </tr>
+                            <tr>
+                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
+                                    Bank Name
+                                </td>
+                                <td style="border:0px;">
+                                    {{ contact_account_details_form.bank_name }}
+                                </td>                                    
+                            </tr>
+                            <tr>
+                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
+                                    Branch Name
+                                </td>
+                                <td style="border:0px;">
+                                    {{ contact_account_details_form.bank_branch_name }}
+                                </td>                                    
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-sm btn-warning close" type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
+                    <button class="btn btn-sm btn-success" type="submit">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
 
 
 <script>

@@ -260,8 +260,7 @@ def edit_tax_details_form(request):
 
         tax_form = TaxForm(request.POST, instance = obj_ins)
         if tax_form.is_valid():
-            tax_form.save() 
-        return redirect('/contacts/edit/{}/'.format(request.POST["ids"]), permanent = False)
+            tax_form.save()         
     return redirect('/contacts/edit/{}/'.format(request.POST["ids"]), permanent = False)
 
 #=======================================================================================
@@ -289,6 +288,22 @@ def edit_address_details_form(request):
 
     return redirect('/contacts/edit/{}/'.format(request.POST["ids"]), permanent = False)
 
+#=======================================================================================
+#   EDIT ACCOUNTS DETAILS
+#=======================================================================================
+#
+def edit_accounts_details_form(request):
+    if request.POST:
+        try:
+            account = Contact_Account_Details.objects.get(pk = int(request.POST["obj_ins"]))
+        except:
+            return redirect('/unauthorized/', permanent=False)
+
+        account_form = ContactAccountDetailsForm(request.POST, instance = account)
+        if account_form.is_valid():
+            account_form.save()
+
+    return redirect('/contacts/edit/{}/'.format(request.POST["ids"]), permanent = False)
 
 #=======================================================================================
 #   DELETE CONTACTS
