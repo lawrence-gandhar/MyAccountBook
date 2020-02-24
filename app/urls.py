@@ -41,6 +41,7 @@ urlpatterns += [
 
     path('contacts/edit_contact_details_form/', never_cache(login_required(contacts.edit_contact_details_form)), name = 'edit_contact_details_form'),
     path('contacts/edit_tax_details_form/', never_cache(login_required(contacts.edit_tax_details_form)), name = 'edit_tax_details_form'),
+    path('contacts/edit_address_details_form/', never_cache(login_required(contacts.edit_address_details_form)), name = 'edit_address_details_form'),
 
 ]
 

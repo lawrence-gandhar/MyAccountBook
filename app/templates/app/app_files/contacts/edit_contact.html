@@ -293,7 +293,7 @@ table{
                                         <div class="tab-pane fade" id="address-form" role="tabpanel" aria-labelledby="address-tab" style="padding:10px 0px;">
                                             
                                             {% if c_count <= 1 %}
-                                                <button class="btn btn-sm btn-warning pull-right" style="margin-bottom:15px; float:right" id="add_more_addresses" params="1" type="button">Add Another</button>
+                                                <button class="btn btn-sm btn-warning pull-right" style="margin-bottom:15px; float:right" type="button" data-toggle="modal" data-target="#editAddress2Modal">Add Another</button>
                                             {% endif %}
 
                                             <table class="table-responsive" style="background-color:#31374e;">
@@ -651,8 +651,8 @@ table{
                 </div>
                 <div class="modal-body">
                     {% csrf_token %}
-                    <input type="text" value="{{contact_ins}}" name="ids">
-                    <input type="text" value="{{tax_ins}}" name="obj_ins">
+                    <input type="hidden" value="{{contact_ins}}" name="ids">
+                    <input type="hidden" value="{{tax_ins}}" name="obj_ins">
                     <table class="table-responsive">
                         <tbody style=" width: 100%; display: inline-table;">
                             <tr>
@@ -720,7 +720,7 @@ table{
 <div class="modal fade" id="editAddress1Modal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content" style="background-color:currentcolor">
-            <form method="post" style="margin:0px">
+            <form method="post" style="margin:0px" action="{% url 'edit_address_details_form' %}">
                 <div class="modal-header bg-warning">
                     <h5 class="modal-title" style="color:#000000; font-weight:bold;">Edit Address 1 Details</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -729,13 +729,16 @@ table{
                 </div>
                 <div class="modal-body">
                     {% csrf_token %}
+                    <input type="hidden" value="{{contact_ins}}" name="ids">
+                    <input type="hidden" value="1" name="prefix">
+                    <input type="text" value="{{contact_address_1}}" name="obj_ins">
                     <table class="table-responsive">
                         <tbody style=" width: 100%; display: inline-table;">
                             <tr>
                                 <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
                                     Contact Person
                                 </td>
-                                <td style="border:0px;">
+                                <td style="border:0px;" class="set_required">
                                     {{ contact_address_form_1.contact_person}}
                                 </td>                                    
                             </tr>
@@ -821,7 +824,7 @@ table{
 <div class="modal fade" id="editAddress2Modal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content" style="background-color:currentcolor">
-            <form method="post" style="margin:0px">
+            <form method="post" style="margin:0px" action="{% url 'edit_address_details_form' %}">
                 <div class="modal-header bg-warning">
                     <h5 class="modal-title" style="color:#000000; font-weight:bold;">Edit Address 2 Details</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -829,6 +832,9 @@ table{
                     </button>
                 </div>
                 <div class="modal-body">
+                    <input type="hidden" value="{{contact_ins}}" name="ids">
+                    <input type="hidden" value="2" name="prefix">
+                    <input type="text" value="{{contact_address_2}}" name="obj_ins">
                     {% csrf_token %}
                     <table class="table-responsive">
                         <tbody style=" width: 100%; display: inline-table;">

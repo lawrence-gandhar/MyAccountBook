@@ -132,3 +132,4 @@ $(".edit_tax_details_form").find("select").attr("disabled","true")
 $(".contact_address_form_1").find("input").attr("disabled","true")
 $(".contact_address_form_1").find("select").attr("disabled","true")
 
+$("#editAddress1Modal .set_required").find("input").attr("required", "true");
