@@ -123,18 +123,10 @@ $("#add_more_addresses").on("click",function(){
     }
 });
 
-$(".edit_contact_details_form").find("input").attr("disabled","true");
-$(".edit_contact_details_form").find("select").attr("disabled","true");
+$(".disabled-tr").find("input").attr("disabled","true");
+$(".disabled-tr").find("select").attr("disabled","true");
 
-$(".edit_tax_details_form").find("input").attr("disabled","true");
-$(".edit_tax_details_form").find("select").attr("disabled","true");
-
-$(".contact_address_form_1").find("input").attr("disabled","true");
-$(".contact_address_form_1").find("select").attr("disabled","true");
-
-$(".accounts_form").find("input").attr("disabled","true");
-$(".accounts_form").find("select").attr("disabled","true");
-
-$("#editAddress1Modal .set_required").find("input").attr("required", "true");
+$(".set_required").find("input").attr("required", "true");
+$(".set_required").find("select").attr("required", "true");
 
 $("#editAccountsModal").find("input").attr("required", "true");

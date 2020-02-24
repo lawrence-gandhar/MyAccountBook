@@ -8,8 +8,7 @@ class TaxForm(ModelForm):
         model = User_Tax_Details
         fields = (
             'pan', 'gstin', 'gst_reg_type', 'business_reg_no', 'tax_reg_no',
-            'cst_reg_no', 'tds', 'preferred_currency', 'opening_balance',
-            'preferred_payment_method', 'preferred_delivery', 'invoice_terms', 'bills_terms',
+            'cst_reg_no', 'tds'
         )
 
         widgets = {
@@ -20,6 +19,18 @@ class TaxForm(ModelForm):
             'tax_reg_no' : TextInput(attrs = {'class':'form-control input-sm'}),
             'cst_reg_no' : TextInput(attrs = {'class':'form-control input-sm'}), 
             'tds' : TextInput(attrs = {'class':'form-control input-sm', 'type':'interger'}), 
+        }
+
+
+class OtherDetailsForm(ModelForm):
+    class Meta:
+        model = User_Tax_Details
+        fields = (
+            'preferred_currency', 'opening_balance', 'preferred_payment_method', 
+            'preferred_delivery', 'invoice_terms', 'bills_terms',
+        )
+
+        widgets = {
             'preferred_currency' : Select(attrs = {'class':'form-control input-sm'}, choices = currency_list.CURRENCY_CHOICES), 
             'opening_balance' : TextInput(attrs = {'class':'form-control input-sm', 'type':'integer'}),
             'preferred_payment_method' : Select(attrs = {'class':'form-control input-sm'}, choices = payment_constants.PREFERRED_PAYMENT_TYPE), 

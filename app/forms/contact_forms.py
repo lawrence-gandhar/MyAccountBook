@@ -42,6 +42,22 @@ class ContactsForm(ModelForm):
             'notes': Textarea(attrs = {'class':'form-control'})
         }
 
+class ContactsExtraForm(ModelForm):
+    class Meta:
+
+        model = Contacts
+        fields = (
+                    'website', 'facebook', 'twitter', 'attachements', 'notes',
+                )
+
+        widgets = {
+            'attachements' : FileInput(attrs = {'class':'form-control input-sm',}),
+            'website': TextInput(attrs={'class':'form-control input-sm', }),
+            'facebook' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'200'}),
+            'twitter' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'200'}),
+            'notes': Textarea(attrs = {'class':'form-control'})
+        }         
+
 class ContactsEmailForm(ModelForm):
     class Meta:
         EMAIL_CHOICES = ((True, 'Yes'),(False, 'No'))

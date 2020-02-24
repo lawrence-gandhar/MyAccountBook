@@ -2,11 +2,14 @@
 {% loader_component %}
 
 <style>
-select.form-control, input.form-control{padding:0px 10px;}
+select.form-control, input.form-control, textarea.form-control{
+    padding:0px 10px;
+}
 select.form-control option{color : #000000; }
 
 table{
-    font-size:12px;
+    font-size:14px;
+    color:#a7a4a4;
 }
 
 </style>
@@ -26,7 +29,7 @@ table{
                                     <button class="btn btn-sm btn-warning pull-right" style="margin-bottom:15px; float:right" type="button" data-toggle="modal" data-target="#editContactModal">Edit Contact Details</button>
                                 </td>
                             </tr>
-                            <tr class="edit_contact_details_form">
+                            <tr class="disabled-tr">
                                 <td style="border:0px; vertical-align: bottom">
                                     Customer Type
                                 </td>
@@ -34,7 +37,7 @@ table{
                                     {{ contact_form.customer_type }}
                                 </td>                                    
                             </tr>
-                            <tr class="edit_contact_details_form">
+                            <tr class="disabled-tr">
                                 <td style="border:0px; vertical-align: bottom">
                                     Is Sub Customer
                                 </td>
@@ -42,7 +45,7 @@ table{
                                     {{ contact_form.is_sub_customer }}
                                 </td>                                    
                             </tr>
-                            <tr class="edit_contact_details_form">
+                            <tr class="disabled-tr">
                                 <td style="border:0px; vertical-align: bottom">
                                     Salutation
                                 </td>
@@ -50,7 +53,7 @@ table{
                                     {{ contact_form.salutation }}
                                 </td>                                    
                             </tr>
-                            <tr class="edit_contact_details_form">
+                            <tr class="disabled-tr">
                                 <td style="border:0px; vertical-align: bottom">
                                     Contact
                                 </td>
@@ -58,7 +61,7 @@ table{
                                     {{ contact_form.contact_name }}
                                 </td>                                    
                             </tr>
-                            <tr class="edit_contact_details_form">
+                            <tr class="disabled-tr">
                                 <td style="border:0px; vertical-align: bottom">
                                     Contact Display Name
                                 </td>
@@ -66,7 +69,7 @@ table{
                                     {{ contact_form.display_name }}
                                 </td>                                    
                             </tr>  
-                            <tr class="edit_contact_details_form">
+                            <tr class="disabled-tr">
                                 <td style=" width:150px; border:0px; vertical-align: bottom">
                                     Organisation Type
                                 </td>
@@ -74,7 +77,7 @@ table{
                                     {{ contact_form.organization_type }}
                                 </td>                                    
                             </tr>
-                            <tr class="edit_contact_details_form">
+                            <tr class="disabled-tr">
                                 <td style="border:0px; vertical-align: bottom">
                                     Organisation Name
                                 </td>
@@ -82,7 +85,7 @@ table{
                                     {{ contact_form.organization_name }}
                                 </td>                                    
                             </tr>
-                            <tr class="edit_contact_details_form">
+                            <tr class="disabled-tr">
                                 <td style="border:0px; vertical-align: bottom">
                                     Is MSME Registered
                                 </td>
@@ -90,7 +93,7 @@ table{
                                     {{ contact_form.is_msme_reg }}
                                 </td>                                    
                             </tr>  
-                            <tr class="edit_contact_details_form">
+                            <tr class="disabled-tr">
                                 <td style=" width:150px; border:0px; vertical-align: bottom">
                                     Email Address
                                 </td>
@@ -98,7 +101,7 @@ table{
                                     {{ contact_form.email }}
                                 </td>                                    
                             </tr>
-                            <tr class="edit_contact_details_form">
+                            <tr class="disabled-tr">
                                 <td style=" width:150px; border:0px; vertical-align: bottom">
                                     Phone/Mobile
                                 </td>
@@ -139,7 +142,7 @@ table{
                                                             <button class="btn btn-sm btn-warning pull-right" style="margin-bottom:15px; float:right" type="button" data-toggle="modal" data-target="#editTaxModal">Edit Tax Details</button>
                                                         </td>
                                                     </tr>
-                                                    <tr class="edit_tax_details_form">
+                                                    <tr class="disabled-tr">
                                                         <td style=" width:150px; border:0px; vertical-align: bottom">
                                                             PAN
                                                         </td>
@@ -147,7 +150,7 @@ table{
                                                             {{ tax_form.pan }}
                                                         </td>                                    
                                                     </tr>
-                                                    <tr class="edit_tax_details_form">
+                                                    <tr class="disabled-tr">
                                                         <td style=" width:150px; border:0px; vertical-align: bottom">
                                                             GSTIN
                                                         </td>
@@ -155,7 +158,7 @@ table{
                                                             {{ tax_form.gstin }}
                                                         </td>                                    
                                                     </tr>
-                                                    <tr class="edit_tax_details_form">
+                                                    <tr class="disabled-tr">
                                                         <td style=" width:150px; border:0px; vertical-align: bottom">
                                                             GSTIN Reg. No.
                                                         </td>
@@ -163,7 +166,7 @@ table{
                                                             {{ tax_form.gst_reg_type }}
                                                         </td>                                    
                                                     </tr>
-                                                    <tr class="edit_tax_details_form">
+                                                    <tr class="disabled-tr">
                                                         <td style=" width:150px; border:0px; vertical-align: bottom">
                                                             Business Reg. No.
                                                         </td>
@@ -171,7 +174,7 @@ table{
                                                             {{ tax_form.business_reg_no }}
                                                         </td>                                    
                                                     </tr>
-                                                    <tr class="edit_tax_details_form">
+                                                    <tr class="disabled-tr">
                                                         <td style=" width:150px; border:0px; vertical-align: bottom">
                                                             Tax Reg. No.
                                                         </td>
@@ -179,7 +182,7 @@ table{
                                                             {{ tax_form.tax_reg_no }}
                                                         </td>                                    
                                                     </tr>
-                                                    <tr class="edit_tax_details_form">
+                                                    <tr class="disabled-tr">
                                                         <td style=" width:150px; border:0px; vertical-align: bottom">
                                                             CGST Reg. No.
                                                         </td>
@@ -192,53 +195,58 @@ table{
                                         </div>
                                         <div class="tab-pane fade" id="organisation-form" role="tabpanel" aria-labelledby="organisation-tab" style="padding:10px 0px;">
                                             <table class="table-responsive">
-                                                <tbody style=" width: 100%; display: inline-table;">                                                        
+                                                <tbody style=" width: 100%; display: inline-table;">   
                                                     <tr>
+                                                        <td colspan="2">
+                                                            <button class="btn btn-sm btn-warning pull-right" style="margin-bottom:15px; float:right" type="button" data-toggle="modal" data-target="#editOrganisationModal">Edit Other Details</button>
+                                                        </td>
+                                                    </tr>                                                     
+                                                    <tr class="disabled-tr">
                                                         <td style=" width:150px; border:0px; vertical-align: bottom">
                                                             Preferred Currency
                                                         </td>
                                                         <td style="border:0px;">
-                                                            {{ tax_form.preferred_currency }}
+                                                            {{ other_details_form.preferred_currency }}
                                                         </td>                                    
                                                     </tr>
-                                                    <tr>
+                                                    <tr class="disabled-tr">
                                                         <td style=" width:150px; border:0px; vertical-align: bottom">
                                                             Opening Balance
                                                         </td>
                                                         <td style="border:0px;">
-                                                            {{ tax_form.opening_balance }}
+                                                            {{ other_details_form.opening_balance }}
                                                         </td>                                    
                                                     </tr>
-                                                    <tr>
+                                                    <tr class="disabled-tr">
                                                         <td style=" width:150px; border:0px; vertical-align: bottom">
                                                             Payment Method
                                                         </td>
                                                         <td style="border:0px;">
-                                                            {{ tax_form.preferred_payment_method }}
+                                                            {{ other_details_form.preferred_payment_method }}
                                                         </td>                                    
                                                     </tr>
-                                                    <tr>
+                                                    <tr class="disabled-tr">
                                                         <td style=" width:150px; border:0px; vertical-align: bottom">
                                                             Preferred Delivery
                                                         </td>
                                                         <td style="border:0px;">
-                                                            {{ tax_form.preferred_delivery }}
+                                                            {{ other_details_form.preferred_delivery }}
                                                         </td>                                    
                                                     </tr>
-                                                    <tr>
+                                                    <tr class="disabled-tr">
                                                         <td style=" width:150px; border:0px; vertical-align: bottom">
                                                             Invoice Terms
                                                         </td>
                                                         <td style="border:0px;">
-                                                            {{ tax_form.invoice_terms }}
+                                                            {{ other_details_form.invoice_terms }}
                                                         </td>                                    
                                                     </tr>
-                                                    <tr>
+                                                    <tr class="disabled-tr">
                                                         <td style=" width:150px; border:0px; vertical-align: bottom">
                                                             Billing Terms
                                                         </td>
                                                         <td style="border:0px;">
-                                                            {{ tax_form.bills_terms }}
+                                                            {{ other_details_form.bills_terms }}
                                                         </td>                                    
                                                     </tr>
                                                 </tbody>
@@ -248,43 +256,40 @@ table{
                                             <table class="table-responsive">
                                                 <tbody style=" width: 100%; display: inline-table;">
                                                     <tr>
+                                                        <td colspan="2">
+                                                            <button class="btn btn-sm btn-warning pull-right" style="margin-bottom:15px; float:right" type="button" data-toggle="modal" data-target="#editSocialModal">Edit Social Details</button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="disabled-tr">
                                                         <td style=" width:150px; border:0px; vertical-align: bottom">
                                                             Website
                                                         </td>
                                                         <td style="border:0px;">
-                                                            {{ contact_form.website }}
+                                                            {{ social_form.website }}
                                                         </td>                                    
                                                     </tr>
-                                                    <tr>
+                                                    <tr class="disabled-tr">
                                                         <td style=" width:150px; border:0px; vertical-align: bottom">
                                                             Facebook
                                                         </td>
                                                         <td style="border:0px;">
-                                                            {{ contact_form.facebook }}
+                                                            {{ social_form.facebook }}
                                                         </td>                                    
                                                     </tr>
-                                                    <tr>
+                                                    <tr class="disabled-tr">
                                                         <td style=" width:150px; border:0px; vertical-align: bottom">
                                                             Twitter
                                                         </td>
                                                         <td style="border:0px;">
-                                                            {{ contact_form.twitter }}
+                                                            {{ social_form.twitter }}
                                                         </td>                                    
                                                     </tr>
-                                                    <tr>
+                                                    <tr class="disabled-tr">
                                                         <td style=" width:150px; border:0px; vertical-align: bottom">
                                                             Notes
                                                         </td>
                                                         <td style="border:0px;">
-                                                            {{ contact_form.notes }}
-                                                        </td>                                    
-                                                    </tr>
-                                                    <tr>
-                                                        <td style=" width:150px; border:0px; vertical-align: bottom">
-                                                            Attachments
-                                                        </td>
-                                                        <td style="border:0px;">
-                                                            {{ contact_form.attachements }}
+                                                            {{ social_form.notes }}
                                                         </td>                                    
                                                     </tr>
                                                 </tbody>
@@ -303,7 +308,7 @@ table{
                                                             <button class="btn btn-sm btn-warning pull-right" style="margin-bottom:15px; float:right" type="button" data-toggle="modal" data-target="#editAddress1Modal">Edit Address 1 Details</button>
                                                         </td>
                                                     </tr>
-                                                    <tr class="contact_address_form_1">
+                                                    <tr class="disabled-tr">
                                                         <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
                                                             Contact Person
                                                         </td>
@@ -311,7 +316,7 @@ table{
                                                             {{ contact_address_form_1.contact_person}}
                                                         </td>                                    
                                                     </tr>
-                                                    <tr class="contact_address_form_1">
+                                                    <tr class="disabled-tr">
                                                         <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
                                                             Flat/Office/Door No.
                                                         </td>
@@ -319,7 +324,7 @@ table{
                                                             {{ contact_address_form_1.flat_no }}
                                                         </td>                                    
                                                     </tr>
-                                                    <tr class="contact_address_form_1">
+                                                    <tr class="disabled-tr">
                                                         <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
                                                             Street
                                                         </td>
@@ -327,7 +332,7 @@ table{
                                                             {{ contact_address_form_1.street }}
                                                         </td>                                    
                                                     </tr>
-                                                    <tr class="contact_address_form_1">
+                                                    <tr class="disabled-tr">
                                                         <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
                                                             City
                                                         </td>
@@ -335,7 +340,7 @@ table{
                                                             {{ contact_address_form_1.city }}
                                                         </td>                                    
                                                     </tr>
-                                                    <tr class="contact_address_form_1">
+                                                    <tr class="disabled-tr">
                                                         <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
                                                             Zipcode/Pincode
                                                         </td>
@@ -343,7 +348,7 @@ table{
                                                             {{ contact_address_form_1.pincode }}
                                                         </td>                                    
                                                     </tr>
-                                                    <tr class="contact_address_form_1">
+                                                    <tr class="disabled-tr">
                                                         <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
                                                             State
                                                         </td>
@@ -351,7 +356,7 @@ table{
                                                             {{ contact_address_form_1.state }}
                                                         </td>                                    
                                                     </tr>
-                                                    <tr class="contact_address_form_1">
+                                                    <tr class="disabled-tr">
                                                         <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
                                                             Country
                                                         </td>
@@ -359,7 +364,7 @@ table{
                                                             {{ contact_address_form_1.country }}
                                                         </td>                                    
                                                     </tr>
-                                                    <tr class="contact_address_form_1">
+                                                    <tr class="disabled-tr">
                                                         <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
                                                             Is Shipping Address
                                                         </td>
@@ -367,7 +372,7 @@ table{
                                                             {{ contact_address_form_1.is_shipping_address }}
                                                         </td>                                    
                                                     </tr>
-                                                    <tr class="contact_address_form_1">
+                                                    <tr class="disabled-tr">
                                                         <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
                                                             Is Billing Address
                                                         </td>
@@ -387,7 +392,7 @@ table{
                                                             <button class="btn btn-sm btn-warning pull-right" style="margin-bottom:15px; float:right" type="button" data-toggle="modal" data-target="#editAddress2Modal">Edit Address 2 Details</button>
                                                         </td>
                                                     </tr>
-                                                    <tr class="contact_address_form_1">
+                                                    <tr class="disabled-tr">
                                                         <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
                                                             Contact Person
                                                         </td>
@@ -395,7 +400,7 @@ table{
                                                             {{ contact_address_form_2.contact_person}}
                                                         </td>                                    
                                                     </tr>
-                                                    <tr class="contact_address_form_1">
+                                                    <tr class="disabled-tr">
                                                         <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
                                                             Flat/Office/Door No.
                                                         </td>
@@ -403,7 +408,7 @@ table{
                                                             {{ contact_address_form_2.flat_no }}
                                                         </td>                                    
                                                     </tr>
-                                                    <tr class="contact_address_form_1">
+                                                    <tr class="disabled-tr">
                                                         <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
                                                             Street
                                                         </td>
@@ -411,7 +416,7 @@ table{
                                                             {{ contact_address_form_2.street }}
                                                         </td>                                    
                                                     </tr>
-                                                    <tr class="contact_address_form_1">
+                                                    <tr class="disabled-tr">
                                                         <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
                                                             City
                                                         </td>
@@ -419,7 +424,7 @@ table{
                                                             {{ contact_address_form_2.city }}
                                                         </td>                                    
                                                     </tr>
-                                                    <tr class="contact_address_form_1">
+                                                    <tr class="disabled-tr">
                                                         <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
                                                             Zipcode/Pincode
                                                         </td>
@@ -427,7 +432,7 @@ table{
                                                             {{ contact_address_form_2.pincode }}
                                                         </td>                                    
                                                     </tr>
-                                                    <tr class="contact_address_form_1">
+                                                    <tr class="disabled-tr">
                                                         <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
                                                             State
                                                         </td>
@@ -435,7 +440,7 @@ table{
                                                             {{ contact_address_form_2.state }}
                                                         </td>                                    
                                                     </tr>
-                                                    <tr class="contact_address_form_1">
+                                                    <tr class="disabled-tr">
                                                         <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
                                                             Country
                                                         </td>
@@ -443,7 +448,7 @@ table{
                                                             {{ contact_address_form_2.country }}
                                                         </td>                                    
                                                     </tr>
-                                                    <tr class="contact_address_form_1">
+                                                    <tr class="disabled-tr">
                                                         <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
                                                             Is Shipping Address
                                                         </td>
@@ -451,7 +456,7 @@ table{
                                                             {{ contact_address_form_2.is_shipping_address }}
                                                         </td>                                    
                                                     </tr>
-                                                    <tr class="contact_address_form_1">
+                                                    <tr class="disabled-tr">
                                                         <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
                                                             Is Billing Address
                                                         </td>
@@ -468,12 +473,12 @@ table{
                                         <div class="tab-pane fade" id="accounts-form" role="tabpanel" aria-labelledby="accounts-tab" style="padding:10px 20px;">
                                             <table class="table-responsive">
                                                 <tbody style=" width: 100%; display: inline-table;">
-                                                    <tr class="accounts_form">
+                                                    <tr class="disabled-tr">
                                                         <td colspan="2">
                                                             <button class="btn btn-sm btn-warning pull-right" style="margin-bottom:15px; float:right" type="button" data-toggle="modal" data-target="#editAccountsModal">Edit Accounts Details</button>
                                                         </td>
                                                     </tr>
-                                                    <tr class="accounts_form">
+                                                    <tr class="disabled-tr">
                                                         <td style=" width:150px; border:0px; vertical-align: bottom">
                                                             Account Holder
                                                         </td>
@@ -481,7 +486,7 @@ table{
                                                             {{ contact_account_details_form.account_holder_name }}
                                                         </td>                                    
                                                     </tr>
-                                                    <tr class="accounts_form">
+                                                    <tr class="disabled-tr">
                                                         <td style=" width:150px; border:0px; vertical-align: bottom">
                                                             Account Number
                                                         </td>
@@ -489,7 +494,7 @@ table{
                                                             {{ contact_account_details_form.account_number }}
                                                         </td>                                    
                                                     </tr>                                                        
-                                                    <tr class="accounts_form">
+                                                    <tr class="disabled-tr">
                                                         <td style=" width:150px; border:0px; vertical-align: bottom">
                                                             IFSC Code
                                                         </td>
@@ -497,7 +502,7 @@ table{
                                                             {{ contact_account_details_form.ifsc_code }}
                                                         </td>                                    
                                                     </tr>
-                                                    <tr class="accounts_form">
+                                                    <tr class="disabled-tr">
                                                         <td style=" width:150px; border:0px; vertical-align: bottom">
                                                             Bank Name
                                                         </td>
@@ -505,7 +510,7 @@ table{
                                                             {{ contact_account_details_form.bank_name }}
                                                         </td>                                    
                                                     </tr>
-                                                    <tr class="accounts_form">
+                                                    <tr class="disabled-tr">
                                                         <td style=" width:150px; border:0px; vertical-align: bottom">
                                                             Branch Name
                                                         </td>
@@ -991,9 +996,154 @@ table{
     </div>
 </div>
 
+<!-- EDIT ORGANISATION MODAL -->
+
+<div class="modal fade" id="editOrganisationModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" style="background-color:currentcolor">
+            <form method="post" style="margin:0px" action="{% url 'edit_other_details_form' %}">
+                <div class="modal-header bg-warning">
+                    <h5 class="modal-title" style="color:#000000; font-weight:bold;">Edit Other Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" value="{{contact_ins}}" name="ids">
+                    <input type="hidden" value="{{tax_ins}}" name="obj_ins">
+                    {% csrf_token %}
+                    <table class="table-responsive">
+                        <tbody style=" width: 100%; display: inline-table;">
+                            <tr>
+                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
+                                    Preferred Currency
+                                </td>
+                                <td style="border:0px;">
+                                    {{ other_details_form.preferred_currency }}
+                                </td>                                    
+                            </tr>
+                            <tr>
+                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
+                                    Opening Balance
+                                </td>
+                                <td style="border:0px;">
+                                    {{ other_details_form.opening_balance }}
+                                </td>                                    
+                            </tr>
+                            <tr>
+                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
+                                    Payment Method
+                                </td>
+                                <td style="border:0px;">
+                                    {{ other_details_form.preferred_payment_method }}
+                                </td>                                    
+                            </tr>
+                            <tr>
+                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
+                                    Preferred Delivery
+                                </td>
+                                <td style="border:0px;">
+                                    {{ other_details_form.preferred_delivery }}
+                                </td>                                    
+                            </tr>
+                            <tr>
+                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
+                                    Invoice Terms
+                                </td>
+                                <td style="border:0px;">
+                                    {{ other_details_form.invoice_terms }}
+                                </td>                                    
+                            </tr>
+                            <tr>
+                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
+                                    Billing Terms
+                                </td>
+                                <td style="border:0px;">
+                                    {{ other_details_form.bills_terms }}
+                                </td>                                    
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-sm btn-warning close" type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
+                    <button class="btn btn-sm btn-success" type="submit">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 
+<!-- EDIT SOCIAL MODAL -->
 
+<div class="modal fade" id="editSocialModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" style="background-color:currentcolor">
+            <form method="post" enctype="multipart/form-data" style="margin:0px" action="{% url 'edit_social_details_form' %}">
+                <div class="modal-header bg-warning">
+                    <h5 class="modal-title" style="color:#000000; font-weight:bold;">Edit Social Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" value="{{contact_ins}}" name="ids">
+                    <input type="hidden" value="{{tax_ins}}" name="obj_ins">
+                    {% csrf_token %}
+                    <table class="table-responsive">
+                        <tbody style=" width: 100%; display: inline-table;">
+                            <tr>
+                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
+                                    Website
+                                </td>
+                                <td style="border:0px;">
+                                    {{ social_form.website }}
+                                </td>                                    
+                            </tr>
+                            <tr>
+                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
+                                    Facebook
+                                </td>
+                                <td style="border:0px;">
+                                    {{ social_form.facebook }}
+                                </td>                                    
+                            </tr>
+                            <tr>
+                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
+                                    Twitter
+                                </td>
+                                <td style="border:0px;">
+                                    {{ social_form.twitter }}
+                                </td>                                    
+                            </tr>
+                            <tr>
+                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
+                                    Notes
+                                </td>
+                                <td style="border:0px;">
+                                    {{ social_form.notes }}
+                                </td>                                    
+                            </tr>
+                            <tr>
+                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
+                                    Attachements
+                                </td>
+                                <td style="border:0px;">
+                                    {{ social_form.attachements }}
+                                </td>                                    
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-sm btn-warning close" type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
+                    <button class="btn btn-sm btn-success" type="submit">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <script>
 

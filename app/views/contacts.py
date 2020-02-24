@@ -77,7 +77,9 @@ def add_contacts(request, slug = None, ins = None):
 
     # Initialize Forms
     data["contact_form"] = ContactsForm()
+    data["social_form"] = ContactsExtraForm()
     data["tax_form"] = TaxForm()
+    data["other_details_form"] = OtherDetailsForm()
     data["contact_address_form_1"] = ContactsAddressForm(prefix = 'form1')
     data["contact_address_form_2"] = ContactsAddressForm(prefix = 'form2')
     data["contact_account_details_form"] = ContactAccountDetailsForm()
@@ -87,7 +89,7 @@ def add_contacts(request, slug = None, ins = None):
     #
     if request.POST:
         contact_form = ContactsForm(request.POST)
-        tax_form = TaxForm(request.POST)
+        tax_form = TaxForm(request.POST)        
         contact_address_form_1 = ContactsAddressForm(request.POST, prefix = 'form1')
         contact_address_form_2 = ContactsAddressForm(request.POST, prefix = 'form2')
         contact_account_details_form = ContactAccountDetailsForm(request.POST)
@@ -107,15 +109,23 @@ def add_contacts(request, slug = None, ins = None):
                 
                 contact_form_ins.imported_user = imp_user
             
+            social_form = ContactsExtraForm(request.POST, request.FILES, instance = contact_form_ins)
+            if social_form.is_valid():
+                social_form.save()
+
             contact_form_ins.save() 
 
         if ins is not None:
             #
             # tax form save
             if tax_form.is_valid(): 
-                obj_tax = tax_form.save()
+                obj_tax = tax_form.save(commit = False)
                 obj_tax.contact = ins
-                obj_tax.save()
+
+                other_details_form = OtherDetailsForm(request.POST, instance = obj_tax)
+                if other_details_form.is_valid():
+                    other_details_form.save()
+                obj_tax.save()    
             else:
                 pass
 
@@ -131,7 +141,7 @@ def add_contacts(request, slug = None, ins = None):
             #
             # address form save
             if contact_address_form_1.is_valid():
-                obj_add1 = contact_address_form_1.save()
+                obj_add1 = contact_address_form_1.save(commit = False)
                 obj_add1.contact = ins
                 obj_add1.save() 
             else:
@@ -142,7 +152,7 @@ def add_contacts(request, slug = None, ins = None):
             if contact_address_form_2.is_valid():
                 x = request.POST.get("more_address_table_enabled", None)
                 if x == '1' and x is not None:
-                    obj_add2 = contact_address_form_2.save()
+                    obj_add2 = contact_address_form_2.save(commit = False)
                     obj_add2.contact = ins
                     obj_add2.save() 
             else:
@@ -186,6 +196,7 @@ def edit_contact(request, ins = None):
                 return redirect('/unauthorized/', permanent=False)
 
             data["contact_form"] = ContactsForm(instance = contact)
+            data["social_form"] = ContactsExtraForm(instance = contact)
 
             #
 
@@ -204,6 +215,7 @@ def edit_contact(request, ins = None):
                 pass
 
             data["tax_form"] = TaxForm(instance = tax_form)
+            data["other_details_form"] = OtherDetailsForm(instance = tax_form)
 
             #
             # Addresses
@@ -218,7 +230,7 @@ def edit_contact(request, ins = None):
                 data["contact_address_{}".format(i+1)] = contact_address_form[i].id
 
             #
-            # Accoounts
+            # Accounts
             try:
                 accounts = Contact_Account_Details.objects.get(contact = contact)
                 data["accounts"] = accounts.id
@@ -248,7 +260,7 @@ def edit_contact_details_form(request):
     return redirect('/contacts/edit/{}/'.format(request.POST["ids"]), permanent = False)
 
 #=======================================================================================
-#   EDIT TAX DETAILS
+#   EDIT TAX & OTHER DETAILS
 #=======================================================================================
 #
 def edit_tax_details_form(request):
@@ -262,6 +274,20 @@ def edit_tax_details_form(request):
         if tax_form.is_valid():
             tax_form.save()         
     return redirect('/contacts/edit/{}/'.format(request.POST["ids"]), permanent = False)
+
+
+def edit_other_details_form(request):
+    if request.POST:
+        try:
+            obj_ins = User_Tax_Details.objects.get(pk = int(request.POST["obj_ins"]))   
+        except:
+            return redirect('/unauthorized/', permanent = False)
+
+        tax_form = OtherDetailsForm(request.POST, instance = obj_ins)
+        if tax_form.is_valid():
+            tax_form.save()         
+    return redirect('/contacts/edit/{}/'.format(request.POST["ids"]), permanent = False)
+
 
 #=======================================================================================
 #   EDIT ADDRESS DETAILS
@@ -305,118 +331,18 @@ def edit_accounts_details_form(request):
 
     return redirect('/contacts/edit/{}/'.format(request.POST["ids"]), permanent = False)
 
-#=======================================================================================
-#   DELETE CONTACTS
-#=======================================================================================
-#
-def delete_contacts(request, slug = None, ins = None, obj = None):
-
-    if slug is not None and ins is not None and obj is not None:
-        try: 
-            contact = Contacts.objects.get(pk = ins, user = request.user)
-        except:
-            return redirect('/unauthorized/', permanent = True)
-
-        slug = int(slug.replace('step',''))
-
-        #***************************************************************
-        # DELETE CONTACTS EMAIL
-        #***************************************************************
-
-        if slug == 2:
-            try:
-                CE = Contacts_Email.objects.get(pk = obj, contact = contact)
-                Contacts_Email.objects.get(pk = obj).delete()
-                return redirect('/contacts/add/step2/{}'.format(ins), permanent=True)
-            except CE.DoesNotExists:
-                return redirect('/unauthorized/', permanent = True)
-
-        #***************************************************************
-        # DELETE CONTACTS ADDRESS
-        #***************************************************************
-
-        if slug == 3:
-            try:
-                CE = Contact_Addresses.objects.get(pk = obj, contact = contact)
-                Contact_Addresses.objects.get(pk = obj).delete()
-                return redirect('/contacts/add/step3/{}'.format(ins), permanent=True)
-            except CE.DoesNotExists:
-                return redirect('/unauthorized/', permanent = True)
-    
-        #***************************************************************
-        # DELETE CONTACTS ACCOUNT DETAILS
-        #***************************************************************
-
-        if slug == 4:
-            try:
-                CE = Contact_Account_Details.objects.get(pk = obj, contact = contact)
-                Contact_Account_Details.objects.get(pk = obj).delete()
-                return redirect('/contacts/add/step4/{}'.format(ins), permanent=True)
-            except CE.DoesNotExists:
-                return redirect('/unauthorized/', permanent = True)
-        
-    return redirect('/unauthorized/', permanent = True)
-
-#================================================================================
-# EDIT CONTACT FORMS 
-#================================================================================
-
-def edit_contact_forms(request):
+def edit_social_details_form(request):
     if request.POST:
-        slug = request.POST.get('slug', None)
-        obj_ins = request.POST.get('id', None)
-        form_ins = request.POST.get('form_ins', None)
+        try:
+            contact = Contacts.objects.get(pk = int(request.POST["ids"]))
+        except:
+            return redirect('/unauthorized/', permanent=False)
+        
+        social_form = ContactsExtraForm(request.POST, request.FILES, instance = contact)
+        if social_form.is_valid():
+            social_form.save()
 
-        if slug is not None and obj_ins is not None:
-
-            redirect_url = False
-
-            #***************************************************************
-            # EDIT EMAIL
-            #***************************************************************
-
-            if slug == "step2":
-                obj = Contacts_Email.objects.get(pk = int(obj_ins))
-                email_form = ContactsEmailForm(request.POST, instance = obj)
-                
-                if email_form.is_valid():
-                    email_form.save()
-                    redirect_url = True
-            
-            #***************************************************************
-            # EDIT ADDRESS DETAILS
-            #***************************************************************
-
-            if slug == "step3":
-                obj = Contact_Addresses.objects.get(pk = int(obj_ins))
-                address_form = ContactsAddressForm(request.POST, instance = obj)
-
-                if address_form.is_valid():
-                    address_form.save()
-                    redirect_url = True
-
-            #***************************************************************
-            # EDIT ACCOUNT DETAILS
-            #***************************************************************
-
-            if slug == "step4":
-                obj = Contact_Account_Details.objects.get(pk = int(obj_ins))
-                accounts_form = ContactAccountDetailsForm(request.POST, instance = obj)
-
-                if accounts_form.is_valid():
-                    accounts_form.save()
-                    redirect_url = True
-
-            #***************************************************************
-            # REDIRECTION ON SUCCESS OR FAILURE
-            #***************************************************************
-
-            if redirect_url:                
-                return redirect('/contacts/add/{}/{}'.format(slug, form_ins), permanent=True)
-            return redirect('/unauthorized/', permanent = True)
-        return redirect('/unauthorized/', permanent = True)
-    return redirect('/unauthorized/', permanent = True)
-
+    return redirect('/contacts/edit/{}/'.format(request.POST["ids"]), permanent = False)    
 
 #================================================================================
 # CHECK APPLICATION ID
