@@ -1,20 +1,5 @@
 $("#app_id_input_2").removeClass("show-row").addClass("hide-row");
 
-$("#edit_contact").click(function(){
-    $(this).hide();
-    $("#cancel_edit_contact").show();
-    $("#save_edit_contact").show();
-    $(".disabled_form_elements input, .disabled_form_elements select, .disabled_form_elements checkbox").prop("disabled", false);
-});
-
-
-$("#cancel_edit_contact").click(function(){
-    $(this).hide();
-    $("#edit_contact").show();
-    $("#save_edit_contact").hide();
-    $(".disabled_form_elements input, .disabled_form_elements select, .disabled_form_elements checkbox").prop("disabled", true);
-});
-
 $("#more_address_table").find("input").attr('disabled', "true");
 $("#more_address_table").find("select").attr('disabled', "true");
 
@@ -114,37 +99,12 @@ $("#id_is_imported_user").on("click", function(){
 });
 
 
-//************************************************************* */
-// LOAD CONTACT FORMS FOR EDIT
-//************************************************************* */
-function edit_form_button(form_type, obj){
-    var CSRFtoken = $('input[name=csrfmiddlewaretoken]').val();
-
-    $.post('/contacts/fetch_extra_edit_forms/', {csrfmiddlewaretoken: CSRFtoken, form_type: form_type, ins:obj}, function(data){
-        data = $.parseJSON(data);
-        htm = '';
-
-        $.each(data, function(i,v){
-            htm += '<div class="d-table-row" style="padding:10px 0px;">';
-            htm += '<div class="d-table-cell" style="padding:0px 10px;">';
-            htm += '<label style="'+v.label_style+'">'+v.label+'</label></div>';
-            htm += '<div class="d-table-cell" style="padding:5px 10px;">'+v.field+'</div>';
-            htm += '</div>';
-        });
-
-        $("#extra_form_layout").empty().append(htm);
-        $("#editModal").modal("show");
-    });
-}
-
 
 /****************************************************************/
 //
 /****************************************************************/
 
 $("#add_more_addresses").on("click",function(){
-
-    console.log($(this).attr("params"));
 
     if($(this).attr("params") == 1){
         $("#more_address_table").find("input").removeAttr('disabled');
@@ -171,8 +131,4 @@ $(".edit_tax_details_form").find("select").attr("disabled","true")
 
 $(".contact_address_form_1").find("input").attr("disabled","true")
 $(".contact_address_form_1").find("select").attr("disabled","true")
-
-//
-//{% url 'edit_contact_details_form' %}
-
 

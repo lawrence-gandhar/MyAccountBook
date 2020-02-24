@@ -533,7 +533,7 @@ table{
 <div class="modal fade" id="editContactModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content" style="background-color:currentcolor">
-            <form method="post" style="margin:0px">
+            <form method="post" style="margin:0px" action="{% url 'edit_contact_details_form' %}">
                 <div class="modal-header bg-warning">
                     <h5 class="modal-title" style="color:#000000; font-weight:bold;">Edit Contact Details</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -542,6 +542,7 @@ table{
                 </div>
                 <div class="modal-body">
                     {% csrf_token %}
+                    <input type="hidden" value="{{contact_ins}}" name="ids">
                     <table class="table-responsive">
                         <tbody style=" width: 100%; display: inline-table;">
                             <tr>
@@ -641,7 +642,7 @@ table{
 <div class="modal fade" id="editTaxModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content" style="background-color:currentcolor">
-            <form method="post" style="margin:0px">
+            <form method="post" style="margin:0px" action="{% url 'edit_tax_details_form' %}">
                 <div class="modal-header bg-warning">
                     <h5 class="modal-title" style="color:#000000; font-weight:bold;">Edit Tax Details</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -650,6 +651,8 @@ table{
                 </div>
                 <div class="modal-body">
                     {% csrf_token %}
+                    <input type="text" value="{{contact_ins}}" name="ids">
+                    <input type="text" value="{{tax_ins}}" name="obj_ins">
                     <table class="table-responsive">
                         <tbody style=" width: 100%; display: inline-table;">
                             <tr>
@@ -940,7 +943,7 @@ table{
                         <tbody style=" width: 100%; display: inline-table;">
                             <tr>
                                 <td style=" width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
-                                    Account Holder
+                                    Account Holder 
                                 </td>
                                 <td style="border:0px;">
                                     {{ contact_account_details_form.account_holder_name }}

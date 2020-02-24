@@ -32,12 +32,16 @@ urlpatterns += [
     path('contacts/edit/<int:ins>/', never_cache(login_required(contacts.edit_contact)), name = 'edit-contact'),
     path('contacts/edit_contact_details_form/', never_cache(login_required(contacts.edit_contact_details_form)), name = 'edit_contact_details_form'),
     path('contacts/delete_contacts/<slug:slug>/<int:ins>/<int:obj>/', never_cache(login_required(contacts.delete_contacts)), name = 'delete-contacts'),
-    path('contacts/edit_contact_forms/', never_cache(login_required(contacts.edit_contact_forms)), name = 'edit-contact-forms'),
+    
     path('contacts/check_appid/', never_cache(login_required(contacts.check_app_id)), name='check-appid'),
     path('contacts/user_exists_in_list/', never_cache(login_required(contacts.user_exists_in_list)), name='check-appid-user-exist'),
     path('contacts/upload/', never_cache(login_required(contacts.ContactsFileUploadView.as_view())), name='contacts-upload'),
     path('contacts/status_change/<slug:slug>/<int:ins>/', never_cache(login_required(contacts.status_change)), name='contact-status-change'),
     path('contacts/delete/<int:ins>/', never_cache(login_required(contacts.delete_contact)), name='contact-delete'),
+
+    path('contacts/edit_contact_details_form/', never_cache(login_required(contacts.edit_contact_details_form)), name = 'edit_contact_details_form'),
+    path('contacts/edit_tax_details_form/', never_cache(login_required(contacts.edit_tax_details_form)), name = 'edit_tax_details_form'),
+
 ]
 
 # Invoice

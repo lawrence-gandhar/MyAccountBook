@@ -188,12 +188,19 @@ def edit_contact(request, ins = None):
 
             data["contact_form"] = ContactsForm(instance = contact)
 
-            data["contact_ins"] = contact.id
+            #
 
+            data["contact_ins"] = contact.id
+            data["tax_ins"] = ""
+            data["contact_address_1"] = ""
+            data["contact_address_2"] = ""
+            data["accounts"] = ""
+            
             #
             # Tax Details
             try:
                 tax_form = User_Tax_Details.objects.get(is_user = False, contact = contact)
+                data["tax_ins"] = tax_form.id  
             except:
                 pass
 
@@ -206,11 +213,13 @@ def edit_contact(request, ins = None):
 
             for i in range(c_count):
                 data["contact_address_form_{}".format(i+1)] = ContactsAddressForm(instance = contact_address_form[i], prefix='form{}'.format(i+1))
+                data["contact_address_{}".format(i+1)] = contact_address_form[i].id
 
             #
             # Accoounts
             try:
-                accounts = Contact_Addresses.objects.get(contact = contact)
+                accounts = Contact_Account_Details.objects.get(contact = contact)
+                data["accounts"] = accounts.id
             except:
                 pass
 
@@ -223,16 +232,44 @@ def edit_contact(request, ins = None):
 
 
 #=======================================================================================
-#   EDIT CONTACT DETAILS FORMS
+#   EDIT CONTACT DETAILS
 #=======================================================================================
 #
 def edit_contact_details_form(request):
-    
-    if request.is_ajax():
-        if request.POST:
-            pass
-        return HttpResponse('0')
-    return HttpResponse('0')
+    if request.POST:
+        try:
+            contact_ins = Contacts.objects.get(pk = int(request.POST["ids"]))
+        except:
+            return redirect('/unauthorized/', permanent = False)
+
+        contact_form = ContactsForm(request.POST, instance=contact_ins)
+        if contact_form.is_valid():    
+            contact_form.save() 
+    return redirect('/contacts/edit/{}/'.format(request.POST["ids"]), permanent = False)
+
+#=======================================================================================
+#   EDIT TAX DETAILS
+#=======================================================================================
+#
+def edit_tax_details_form(request):
+    if request.POST:
+        try:
+            obj_ins = User_Tax_Details.objects.get(pk = int(request.POST["obj_ins"]))   
+        except:
+            return redirect('/unauthorized/', permanent = False)
+
+        tax_form = TaxForm(request.POST, instance = obj_ins)
+        if tax_form.is_valid():
+            tax_form.save() 
+        return redirect('/contacts/edit/{}/'.format(request.POST["ids"]), permanent = False)
+    return redirect('/contacts/edit/{}/'.format(request.POST["ids"]), permanent = False)
+
+#=======================================================================================
+#   EDIT ADDRESS DETAILS
+#=======================================================================================
+#
+def edit_address_details_form(request):
+    pass
 
 
 #=======================================================================================
