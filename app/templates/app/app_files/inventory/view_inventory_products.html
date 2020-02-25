@@ -1,11 +1,18 @@
 {% load common_components %}
 {% loader_component %}
 
-
 <style>
-select.form-control{padding:0px 10px;}
+select.form-control, input.form-control, textarea.form-control{
+    padding:0px 10px;
+}
 select.form-control option{color : #000000; }
+
+table{
+    font-size:14px;
+    color:#a7a4a4;
+}
 </style>
+
 
 <div class="row">
     <div class="col-lg-12">
@@ -47,7 +54,7 @@ select.form-control option{color : #000000; }
                                         {% endif %}
                                     </td>
                                     <td class="text-center" style="width:80px;">
-                                        <a title="Edit Entry" href="" class="btn btn-primary btn-sm" style="padding:5px 5px;">
+                                        <a title="Edit Entry" data-toggle="modal" data-target="#EditInventoryProductModal" href="" class="btn btn-primary btn-sm" style="padding:5px 5px;" >
                                             <i class="material-icons">create</i>
                                         </a>
                                         <a title="Delete Entry" href="{% url 'delete_inventory_product' product.id %}" class="btn btn-danger btn-sm" style="padding:5px 5px;">
@@ -71,7 +78,7 @@ select.form-control option{color : #000000; }
         <div class="modal-content" style="background-color:currentcolor">
             <form method="post" style="margin:0px">
                 <div class="modal-header bg-warning">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Product To Inventory</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" style="color:#000000; font-weight:bold;">Add Product To Inventory</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -126,12 +133,12 @@ select.form-control option{color : #000000; }
 
 <!-- EDIT INVENTORY PRODUCT MODAL -->
 
-<div class="modal fade" id="addInventoryProductModal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="EditInventoryProductModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content" style="background-color:currentcolor">
             <form method="post" style="margin:0px">
                 <div class="modal-header bg-warning">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Product To Inventory</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" style="color:#000000; font-weight:bold;">Edit Product To Inventory</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
