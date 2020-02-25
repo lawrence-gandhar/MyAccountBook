@@ -159,3 +159,13 @@ def delete_inventory_product(request, ins = None):
 #   DELETE INVENTORY PRODUCTS
 #========================================================================================
 #
+def get_edit_inventory_product_form(request):
+    if request.is_ajax():
+        if request.POST:
+            product_inv = InventoryProduct.object.get(pk = int(request.POST["ids"]))
+
+            product_form = InventoryProductForm(instance = product_inv)
+            
+            return HttpResponse(product_form)
+        return HttpResponse('')
+    return HttpResponse('')
