@@ -113,3 +113,29 @@ class InventoryProductForm(ModelForm):
             'threshold_notify_trigger' : Select(attrs = {'class':'form-control input-sm'}, choices = items_constant.PRODUCT_STOCK_NOTIFICATION_TRIGGERS),
             'min_hold_notify_trigger' : Select(attrs = {'class':'form-control input-sm'}, choices = items_constant.PRODUCT_STOCK_NOTIFICATION_TRIGGERS),
         }
+
+
+#==================================================================================
+# INVENTORY PRODUCT FORM
+#==================================================================================
+#
+
+class InventoryProductEditForm(ModelForm):
+    class Meta:
+        model = InventoryProduct
+
+        fields = (
+            'quantity', 'unit', 'threshold', 'stop_at_min_hold', 'notify_on_threshold',
+            'notify_on_min_hold', 'min_hold_notify_trigger', 'threshold_notify_trigger'
+        )
+        
+        widgets = {
+            'quantity' : NumberInput(attrs = {'class':'form-control input-sm'}),
+            'unit' : Select(attrs = {'class':'form-control input-sm'}, choices = items_constant.UNITS),
+            'threshold' : NumberInput(attrs = {'class':'form-control input-sm'}),
+            'stop_at_min_hold' : NumberInput(attrs = {'class':'form-control input-sm'}),
+            'notify_on_threshold' : Select(attrs = {'class':'form-control input-sm'}, choices = user_constants.IS_TRUE),
+            'notify_on_min_hold' : Select(attrs = {'class':'form-control input-sm'}, choices = user_constants.IS_TRUE),
+            'threshold_notify_trigger' : Select(attrs = {'class':'form-control input-sm'}, choices = items_constant.PRODUCT_STOCK_NOTIFICATION_TRIGGERS),
+            'min_hold_notify_trigger' : Select(attrs = {'class':'form-control input-sm'}, choices = items_constant.PRODUCT_STOCK_NOTIFICATION_TRIGGERS),
+        }

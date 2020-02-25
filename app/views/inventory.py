@@ -5,6 +5,7 @@ from collections import OrderedDict, defaultdict
 from django.db.models import *
 from app.models import *
 from app.forms.items_form import * 
+from app.helpers import form_creator
 
 import json
 
@@ -92,7 +93,7 @@ class InventoryProducts(View):
 
     # Custom CSS/JS Files For Inclusion into template
     data["css_files"] = []
-    data["js_files"] = []
+    data["js_files"] = ['custom_files/js/inventory_product.js']
     data["active_link"] = 'Inventory'
     data["breadcrumb_title"] = 'INVENTORY'
 
@@ -103,16 +104,18 @@ class InventoryProducts(View):
     #
     def get(self, request, *args, **kwargs):
 
-        if 'ins' in kwargs and 'ins' is not None:
+        if 'ins' in kwargs:
             
             try:
                 inv = Inventory.objects.get(pk = int(kwargs["ins"]))
                 self.data["inventory_name"] = inv.inventory_name
             except:
-                return
+                return redirect('/unauthorized/', permanent = False)
 
             self.data["inventory_products"] = InventoryProduct.objects.filter(inventory = int(kwargs["ins"]))
             self.data["inventory_product_form"] = InventoryProductForm(request.user, kwargs["ins"])
+            self.data["ins"] = kwargs["ins"]
+
             return render(request, self.template_name, self.data)
         else:
             return redirect('/inventory/add/', permanent = False)
@@ -162,10 +165,21 @@ def delete_inventory_product(request, ins = None):
 def get_edit_inventory_product_form(request):
     if request.is_ajax():
         if request.POST:
-            product_inv = InventoryProduct.object.get(pk = int(request.POST["ids"]))
-
-            product_form = InventoryProductForm(instance = product_inv)
-            
-            return HttpResponse(product_form)
+            product_inv = InventoryProduct.objects.get(pk = int(request.POST["ids"]))
+            product_form = InventoryProductEditForm(instance = product_inv)
+            return HttpResponse(form_creator.get_form_data(product_form))
+           
         return HttpResponse('')
     return HttpResponse('')
+
+#
+#
+#
+def edit_inventory_product(request):
+    if request.POST:
+        product_inv = InventoryProduct.objects.get(pk = int(request.POST["obj_ins"]))
+        product_form = InventoryProductEditForm(request.POST, instance = product_inv)
+
+        if product_form.is_valid():
+            product_form.save()
+    return redirect('/inventory/products/{}/'.format(request.POST["ins"]), permanent = False)

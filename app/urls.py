@@ -85,6 +85,8 @@ urlpatterns += [
     path('inventory/add/', never_cache(login_required(inventory.AddInventory.as_view())), name = 'add_inventory'),
     path('inventory/products/<int:ins>/', never_cache(login_required(inventory.InventoryProducts.as_view())), name = 'view_inventory_products'),
     path('inventory/products/delete/<int:ins>/', never_cache(login_required(inventory.delete_inventory_product)), name = 'delete_inventory_product'),
+    path('inventory/get_edit_inventory_product_form/', never_cache(login_required(inventory.get_edit_inventory_product_form)), name = 'get_edit_inventory_product_form'),
+    path('inventory/edit_inventory_product/', never_cache(login_required(inventory.edit_inventory_product)), name = 'edit_inventory_product'),
 ]
 
 

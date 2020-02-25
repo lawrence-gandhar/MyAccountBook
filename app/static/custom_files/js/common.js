@@ -27,3 +27,17 @@ $(document).ready(function(){
 function close_modal(elem){
     $("#wait_Modal").hide();
 }
+
+
+//
+//
+//
+function edit_forms_creator(data){
+    data = $.parseJSON(data);
+    
+    $.each(data, function(idx,value){
+        $("td#form_element-"+idx).empty().append(value);
+    });
+    
+}
+
