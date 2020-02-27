@@ -40,7 +40,7 @@
                                         {% endfor %}
                                     </td>               
                                     <td>
-                                        <a title="Edit Product" href="" class="btn btn-primary btn-sm" style="padding:5px 5px;">
+                                        <a title="Edit Product" href="{% url 'edit_product' product.id %}" class="btn btn-primary btn-sm" style="padding:5px 5px;">
                                             <i class="material-icons">create</i>
                                         </a>
                                         {% if product.is_active %}
@@ -65,3 +65,4 @@
         </div>
     </div>
 </div>
+

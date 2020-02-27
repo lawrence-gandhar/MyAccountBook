@@ -16,169 +16,163 @@ select.form-control option{color : #000000; }
                 </div>  
                 <div class="card-body">
                     {% csrf_token %}
-                    <div class="table" style="padding:10px 0px;">                        
-                        <div class="d-table-row" style="padding:10px 0px;">
-                            <div class="d-table-cell" style="padding:5px 10px;">
-                                <label>Product Type</label>
-                            </div>
-                            <div class="d-table-cell" style="padding:5px 13px;">
-                                {{add_product_form.product_type}}
-                            </div>                        
-                        </div>
-                        <div class="d-table-row" style="padding:10px 0px;">
-                            <div class="d-table-cell" style="padding:5px 10px;">
-                                <label>SKU/Item/Product ID</label>
-                            </div>
-                            <div class="d-table-cell" style="padding:5px 13px;">
-                                {{add_product_form.sku}}
-                            </div>                        
-                        </div>
-                        <div class="d-table-row" style="padding:10px 0px;">
-                            <div class="d-table-cell" style="padding:5px 10px;">
-                                <label>Product Name</label>
-                            </div>
-                            <div class="d-table-cell" style="padding:5px 13px;">
-                                {{add_product_form.product_name}}
-                            </div>                        
-                        </div>
-                        <div class="d-table-row" style="padding:10px 0px;">
-                            <div class="d-table-cell" style="padding:5px 10px;">
-                                <label>Product Description</label>
-                            </div>
-                            <div class="d-table-cell" style="padding:5px 13px;">
-                                {{add_product_form.product_description}}
-                            </div>                        
-                        </div>
-                        <div class="d-table-row" style="padding:10px 0px;">
-                            <div class="d-table-cell" style="padding:5px 10px;">
-                                <label>Product Images</label>
-                            </div>
-                            <div class="d-table-cell" style="padding:5px 13px;">
-                                {{add_product_images_form.product_image}}
-                            </div>                        
-                        </div>
-                        <div class="d-table-row" style="padding:10px 0px;">
-                            <div class="d-table-cell" style="padding:5px 10px;">
-                                <label>Product Dimensions</label>
-                            </div>
-                            <div class="d-table-cell" style="padding:5px 13px;">
-                                {{add_product_form.product_dimension}}
-                            </div>                        
-                        </div>
-                        <div class="d-table-row" style="padding:10px 0px;">
-                            <div class="d-table-cell" style="padding:5px 10px;">
-                                <label>Units</label>
-                            </div>
-                            <div class="d-table-cell" style="padding:5px 13px;">
-                                {{add_product_form.unit}}
-                            </div>                        
-                        </div>
-                        <div class="d-table-row" style="padding:10px 0px;">
-                            <div class="d-table-cell" style="padding:5px 10px;">
-                                <label>Tax</label>
-                            </div>
-                            <div class="d-table-cell" style="padding:5px 13px;">
-                                {{add_product_form.tax}}
-                            </div>                        
-                        </div>
-                        <div class="d-table-row" style="padding:10px 0px;">
-                            <div class="d-table-cell" style="padding:5px 10px;">
-                                <label>GST</label>
-                            </div>
-                            <div class="d-table-cell" style="padding:5px 13px;">
-                                {{add_product_form.gst}}
-                            </div>                        
-                        </div>
-                        <div class="d-table-row" style="padding:10px 0px;">
-                            <div class="d-table-cell" style="padding:5px 10px;">
-                                <label>HSN/SAC Code</label>
-                            </div>
-                            <div class="d-table-cell" style="padding:5px 13px;">
-                                {{add_product_form.hsn_code}}
-                            </div>                        
-                        </div>
-                        <div class="d-table-row" style="padding:10px 0px;">
-                            <div class="d-table-cell" style="padding:5px 10px;">
-                                <label>Abatement</label>
-                            </div>
-                            <div class="d-table-cell" style="padding:5px 13px;">
-                                {{add_product_form.abatement}}
-                            </div>                        
-                        </div>
-                        <div class="d-table-row" style="padding:10px 0px;">
-                            <div class="d-table-cell" style="padding:5px 13px; background-color:#000000; color:#FFFFFF;">
-                                SALES INFORMATION
-                            </div>
-                            <div class="d-table-cell form-check" style="padding:5px 13px; background-color:#000000; color:#FFFFFF;">    
-                                <label class="form-check-label">
-                                    {{add_product_form.is_sales}}
-                                    <span class="form-check-sign">
-                                        <span class="check"></span>
-                                    </span>
-                                </label>
-                            </div>                        
-                        </div>
-                        <div class="d-table-row" style="padding:10px 0px;">
-                            <div class="d-table-cell" style="padding:5px 10px;">
-                                <label>Marked Price</label>
-                            </div>
-                            <div class="d-table-cell" style="padding:5px 13px;">
-                                {{add_product_form.marked_price}}
-                            </div>                        
-                        </div>
-                        <div class="d-table-row" style="padding:10px 0px;">
-                            <div class="d-table-cell" style="padding:5px 10px;">
-                                <label>Selling Price</label>
-                            </div>
-                            <div class="d-table-cell" style="padding:5px 13px;">
-                                {{add_product_form.selling_price}}
-                            </div>                        
-                        </div>
-                        <div class="d-table-row" style="padding:10px 0px;">
-                            <div class="d-table-cell" style="padding:5px 10px;">
-                                <label>Discount</label>
-                            </div>
-                            <div class="d-table-cell" style="padding:5px 13px;">
-                                {{add_product_form.discount}}
-                            </div>                        
-                        </div>
-                        <div class="d-table-row" style="padding:10px 0px;">
-                            <div class="d-table-cell" style="padding:5px 10px;">
-                                <label>Accounts</label>
-                            </div>
-                            <div class="d-table-cell" style="padding:5px 13px;">
-                                {{add_product_form.sales_account}}
-                            </div>                        
-                        </div>
-                        <div class="d-table-row" style="padding:10px 0px;">
-                            <div class="d-table-cell" style="padding:5px 13px; background-color:#000000; color:#FFFFFF;">
-                                PURCHASE INFORMATION
-                            </div>
-                            <div class="d-table-cell form-check" style="padding:5px 13px; background-color:#000000; color:#FFFFFF;">
-                                <label class="form-check-label">
-                                    {{add_product_form.is_purchase}}
-                                    <span class="form-check-sign">
-                                        <span class="check"></span>
-                                    </span>
-                                </label>
-                            </div>                        
-                        </div>
-                        <div class="d-table-row" style="padding:10px 0px;">
-                            <div class="d-table-cell" style="padding:5px 10px;">
-                                <label>Cost Price</label>
-                            </div>
-                            <div class="d-table-cell" style="padding:5px 13px;">
-                                {{add_product_form.cost_price}}
-                            </div>                        
-                        </div>                        
-                        <div class="d-table-row" style="padding:10px 0px;">
-                            <div class="d-table-cell" style="padding:5px 10px;">
-                                <label>Accounts</label>
-                            </div>
-                            <div class="d-table-cell" style="padding:5px 13px;">
-                                {{add_product_form.purchase_account}}
-                            </div>                        
-                        </div>
+                    <div class="table" style="padding:10px 0px; color:#FFFFFF; width:100%">
+                        <table class="table-responsive">
+                            <tbody style=" width: 100%; display: inline-table;">
+                                <tr>
+                                    <td style="border:0px; width:150px; vertical-align:bottom">
+                                        Product Type
+                                    </td>
+                                    <td style="border:0px;">
+                                        {{add_product_form.product_type}}
+                                    </td>                        
+                                </tr>
+                                <tr>
+                                    <td style="border:0px; width:150px; vertical-align:bottom">
+                                        SKU/Item/Product ID</label>
+                                    </td>
+                                    <td style="border:0px;">
+                                        {{add_product_form.sku}}
+                                    </td>                        
+                                </tr>
+                                <tr>
+                                    <td style="border:0px; width:150px; vertical-align:bottom">
+                                        Product Name
+                                    </td>
+                                    <td style="border:0px;">
+                                        {{add_product_form.product_name}}
+                                    </td>                        
+                                </tr>
+                                <tr>
+                                    <td style="border:0px; width:150px; vertical-align:bottom">
+                                        Product Description
+                                    </td>
+                                    <td style="border:0px;">
+                                        {{add_product_form.product_description}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border:0px; width:150px; vertical-align:bottom">
+                                        Product Images
+                                    </td>
+                                    <td style="border:0px;">
+                                        {{add_product_images_form.product_image}}
+                                    </td>                        
+                                </tr>
+                                <tr>
+                                    <td style="border:0px; width:150px; vertical-align:bottom">
+                                        Product Dimensions
+                                    </td>
+                                    <td style="border:0px;">
+                                        {{add_product_form.product_dimension}}
+                                    </td>                        
+                                </tr>
+                                <tr>
+                                    <td style="border:0px; width:150px; vertical-align:bottom">
+                                        Units
+                                    </td>
+                                    <td style="border:0px;">
+                                        {{add_product_form.unit}}
+                                    </td>                        
+                                </tr>
+                                <tr>
+                                    <td style="border:0px; width:150px; vertical-align:bottom">
+                                        Tax
+                                    </td>
+                                    <td style="border:0px;">
+                                        {{add_product_form.tax}}
+                                    </td>                        
+                                </tr>
+                                <tr>
+                                    <td style="border:0px; width:150px; vertical-align:bottom">
+                                        GST
+                                    </td>
+                                    <td style="border:0px;">
+                                        {{add_product_form.gst}}
+                                    </td>                        
+                                </tr>
+                                <tr>
+                                    <td style="border:0px; width:150px; vertical-align:bottom">
+                                        HSN/SAC Code
+                                    </td>
+                                    <td style="border:0px;">
+                                        {{add_product_form.hsn_code}}
+                                    </td>                        
+                                </tr>
+                                <tr>
+                                    <td style="border:0px; width:150px; vertical-align:bottom">
+                                        Abatement
+                                    </td>
+                                    <td style="border:0px;">
+                                        {{add_product_form.abatement}}
+                                    </td>                        
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="border:0px; vertical-align:bottom; background-color:#000000; color:#FFFFFF;">
+                                        SALES INFORMATION
+                                        <span style="margin-left:40px;">
+                                            {{add_product_form.is_sales}}
+                                        </span>
+                                    </td>                        
+                                </tr>
+                                <tr>
+                                    <td style="border:0px; width:150px; vertical-align:bottom">
+                                        Marked Price
+                                    </td>
+                                    <td style="border:0px;">
+                                        {{add_product_form.marked_price}}
+                                    </td>                        
+                                </tr>
+                                <tr>
+                                    <td style="border:0px; width:150px; vertical-align:bottom">
+                                        Selling Price
+                                    </td>
+                                    <td style="border:0px;">
+                                        {{add_product_form.selling_price}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border:0px; width:150px; vertical-align:bottom">
+                                        Discount
+                                    </td>
+                                    <td style="border:0px;">    
+                                        {{add_product_form.discount}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border:0px; width:150px; vertical-align:bottom">
+                                        Accounts
+                                    </td>
+                                    <td style="border:0px;">
+                                        {{add_product_form.sales_account}}
+                                    </td>                        
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="border:0px; vertical-align:bottom; background-color:#000000; color:#FFFFFF;">
+                                        PURCHASE INFORMATION
+                                        <span style="margin-left:40px;">
+                                            {{add_product_form.is_purchase}}
+                                        </span>
+                                    </td>                        
+                                </tr>
+                                <tr>
+                                    <td style="border:0px; width:150px; vertical-align:bottom">
+                                        Cost Price
+                                    </td>
+                                    <td style="border:0px;">
+                                        {{add_product_form.cost_price}}
+                                    </td>                        
+                                </tr>
+                                <tr>
+                                    <td style="border:0px; width:150px; vertical-align:bottom">
+                                        Accounts
+                                    </td>
+                                    <td style="border:0px;">
+                                        {{add_product_form.purchase_account}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>    
                     </div>
                 </div>
                 <div class="card-footer"  style="justify-content: center;">

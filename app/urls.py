@@ -75,6 +75,7 @@ urlpatterns += [
 urlpatterns += [
     path('products/', never_cache(login_required(products.view_products)), name = 'view_products'),
     path('products/add/', never_cache(login_required(products.AddProducts.as_view())), name = 'add_products'),
+    path('products/edit/<int:ins>/', never_cache(login_required(products.EditProducts.as_view())), name = 'edit_product'),
     path('products/delete/<int:ins>/', never_cache(login_required(products.delete_product)), name='product-delete'),
     path('products/status_change/<slug:slug>/<int:ins>/', never_cache(login_required(products.status_change)), name='product-status-change'),
 ]

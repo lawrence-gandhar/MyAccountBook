@@ -129,3 +129,65 @@ def status_change(request, slug = None, ins = None):
         return redirect('/products/', permanent=False)
 
     return redirect('/unauthorized/', permanent=False)
+
+
+#===================================================================================================
+# STATUS CHANGE
+#===================================================================================================
+#
+class EditProducts(View):
+
+    # Template 
+    template_name = 'app/app_files/products/index.html'
+
+    # Initialize 
+    data = defaultdict()
+    data["view"] = ""
+
+    # Custom CSS/JS Files For Inclusion into template
+    data["css_files"] = []
+    data["js_files"] = ['custom_files/js/product.js',]
+    data["active_link"] = 'Products'
+
+    data["included_template"] = 'app/app_files/products/add_products_form.html'
+
+    data["add_product_images_form"] = ProductPhotosForm()
+    #
+    #
+    #
+    def get(self, request, *args, **kwargs):
+
+        try:
+            product = ProductsModel.objects.get(pk = int(kwargs["ins"]))
+        except:
+            return redirect('/unauthorized/', permanent=False)
+
+        self.data["add_product_form"] = ProductForm(request.user, instance = product)
+        return render(request, self.template_name, self.data)
+
+    def post(self, request, *args, **kwargs):
+        try:
+            product = ProductsModel.objects.get(pk = int(kwargs["ins"]))
+        except:
+            return redirect('/unauthorized/', permanent=False)
+
+        add_product = ProductForm(request.user, request.POST or None, instance = product)
+        add_images = ProductPhotosForm(request.FILES or None)
+
+        ins = None
+
+        if add_product.is_valid():
+            ins = add_product.save()
+            ins.user = request.user
+            ins.save()
+        
+        if add_images.is_valid() and ins is not None:
+            for img in request.FILES.getlist('product_image'):
+                img_save = ProductPhotos(
+                    product_image = img,
+                    product = ins
+                )
+
+                img_save.save()
+        
+        return redirect('/products/', permanent = False)
