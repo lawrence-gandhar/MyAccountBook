@@ -618,7 +618,7 @@ def csv_2_contacts(user, file_path):
                         is_shipping_address = True
 
                     contact_address = Contact_Addresses(
-                        contact_name = contact_person, 
+                        contact_person = contact_person, 
                         flat_no = flat_no,
                         street = street,
                         city = city,
