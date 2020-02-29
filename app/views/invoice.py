@@ -12,6 +12,8 @@ from app.models.invoice_model import *
 from app.models.collects_model import *
 from app.forms.invoice_forms import *
 
+from django.forms import inlineformset_factory
+
 from app.other_constants import country_list
 
 import json
@@ -537,3 +539,39 @@ def get_pdf(request, ins = None):
             data["paid_amount"] = paid 
 
     return render(request, template_name, data)
+
+
+#
+#
+#
+#
+class CreateInvoice(View):
+
+    # Template 
+    template_name = 'app/app_files/invoice/index.html'
+
+    # Initialize 
+    data = defaultdict()
+    data["view"] = ""
+    data["active_link"] = 'Invoice'
+    data["included_template"] = 'app/app_files/invoice/add_invoice.html'
+
+    #
+    #
+    #
+    def get(self, request):
+        ProductFormSet = inlineformset_factory(InvoiceModel, InvoiceProducts, extra = 1, fields=('product', 'quantity'))
+        self.data["formset"] = ProductFormSet(queryset = ProductsModel.objects.filter(user = request.user))
+
+        print(self.data["formset"])
+
+
+        return render(request, self.template_name, self.data)
+
+    #
+    #
+    #
+    def post(self, request):
+        pass
+
+        return render(request, self.template_name, self.data)

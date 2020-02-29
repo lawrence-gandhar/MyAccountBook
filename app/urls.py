@@ -54,6 +54,7 @@ urlpatterns += [
     path('invoice/create_invoice/contacts/', never_cache(login_required(invoice.CreateInvoice.as_view())), name = 'create-invoice'),
     path('invoice/create_invoice/contacts/<int:ins>/', never_cache(login_required(invoice.CreateContactInvoice.as_view())), name = 'create-contact-invoice'),
     path('invoice/create_invoice/collections/<int:ins>/', never_cache(login_required(invoice.CreateCollectionInvoice.as_view())), name = 'create-collection-invoice'),
+    path('invoice/abcd/', never_cache(login_required(invoice.CreateInvoice.as_view())), name = 'abcd'),
 ]
 
 urlpatterns +=[

@@ -79,3 +79,18 @@ class InvoiceForm(ModelForm):
             'total_gst' : TextInput(attrs={'class':'form-control input-sm',}),            
         }
         
+class InvoiceProductForm(ModelForm):
+    
+    class Meta:
+        model = InvoiceProducts
+
+        fields = (
+                    'product', 'quantity', 
+                )
+
+        widgets = {
+            'product' : Select(attrs = {'class':'form-control input-sm'}),
+            'quantity' : NumberInput(attrs = {'class':'form-control input-sm'}) 
+        }
+
+        
