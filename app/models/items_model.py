@@ -272,7 +272,7 @@ class InventoryProduct(models.Model):
         db_index = True,
         null = True,
         blank = True,
-        on_delete = models.CASCADE,
+        on_delete = models.SET_NULL,
     )
 
     quantity = models.IntegerField(

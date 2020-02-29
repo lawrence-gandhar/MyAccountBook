@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from app.models.contacts_model import *
 from app.models.collects_model import *
 from app.models.users_model import *
+from app.models.items_model import *
 
 from uuid import uuid4
 import os
@@ -241,3 +242,43 @@ class InvoiceModel(models.Model):
 
     class Meta:
         verbose_name_plural = 'invoice_tbl'
+
+
+#======================================================================================
+# PRODUCTS LISTED IN INVOICE
+#======================================================================================
+#
+class InvoiceProducts(models.Model):
+
+    invoice = models.ForeignKey(
+        InvoiceModel,
+        db_index = True,
+        blank = True,
+        null = True,
+        on_delete = models.CASCADE,
+    )        
+
+    product = models.ForeignKey(
+        ProductsModel,
+        on_delete = models.SET_NULL,
+        db_index = True,
+        blank = True,
+        null = True,
+    )
+
+    inventory = models.ForeignKey(
+        InventoryProduct,
+        on_delete = models.SET_NULL,
+        db_index = True,
+        null = True,
+        blank = True,
+    )
+
+    quantity = models.IntegerField(
+        db_index = True,
+        null = True,
+        blank = True,
+    )
+
+    class Meta:
+        verbose_name_plural = 'invoice_product_tbl'
