@@ -1,3 +1,37 @@
-{{ formset.management_forms }}
 
-{}
+{% load common_components %}
+{% loader_component %}
+
+<style>
+select.form-control{padding:0px 10px;}
+select.form-control option{color : #000000; }
+</style>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-lg-12" style="padding:0px">
+            <div class="card">
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title ">Add Contact</h4>
+                </div> 
+                <div class="card-body">                    
+                    <div class="table" style="padding:10px 0px; color:#FFFFFF; width:100%">
+                        {{ formset.management_forms }}
+                        <table class="table-responsive">
+                            <tbody style=" width: 100%; display: inline-table;">
+                            {% for form in formset %}
+                                <tr>
+                                    <td style="border:0px; vertical-align: bottom">Product</td>
+                                    <td style="border:0px;">{{ form.product }}</td>
+                                    <td style="border:0px; vertical-align: bottom">Quantity</td>
+                                    <td style="border:0px;">{{ form.quantity }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -560,7 +560,7 @@ class CreateInvoice(View):
     #
     #
     def get(self, request):
-        ProductFormSet = inlineformset_factory(InvoiceModel, InvoiceProducts, extra = 1, fields=('product', 'quantity'))
+        ProductFormSet = inlineformset_factory(InvoiceModel, InvoiceProducts, extra = 10, fields=('product', 'quantity'))
         self.data["formset"] = ProductFormSet(queryset = ProductsModel.objects.filter(user = request.user))
 
         print(self.data["formset"])
