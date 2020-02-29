@@ -282,3 +282,5 @@ class InvoiceProducts(models.Model):
 
     class Meta:
         verbose_name_plural = 'invoice_product_tbl'
+
+
