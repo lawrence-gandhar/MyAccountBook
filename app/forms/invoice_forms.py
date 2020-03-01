@@ -67,11 +67,11 @@ class InvoiceForm(ModelForm):
 
         widgets = {
             'service_recipient' : Select(attrs={'class':'form-control input-sm',}),            
-            'provider_state_code' : TextInput(attrs={'class':'form-control input-sm',}),
-            'recipient_state_code' : TextInput(attrs={'class':'form-control input-sm',}),
+            'provider_state_code' : TextInput(attrs={'class':'form-control input-sm', 'disabled' : 'true'}),
+            'recipient_state_code' : TextInput(attrs={'class':'form-control input-sm', 'disabled' : 'true'}),
             'shipping' : TextInput(attrs={'class':'form-control input-sm',}),
             'discount' : TextInput(attrs={'class':'form-control input-sm',}),
-            'sac_code' : TextInput(attrs={'class':'form-control input-sm',}),
+            'sac_code' : TextInput(attrs={'class':'form-control input-sm', 'disabled' : 'true'}),
             'service_description' : TextInput(attrs={'class':'form-control input-sm',}),
             'cgst' : TextInput(attrs={'class':'form-control input-sm',}),
             'igst' : TextInput(attrs={'class':'form-control input-sm',}),

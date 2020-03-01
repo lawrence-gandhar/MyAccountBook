@@ -20,6 +20,33 @@ select.form-control option{color : #000000; }
                         {{ formset.management_forms }}
                         <table class="table-responsive">
                             <tbody style=" width: 100%; display: inline-table;">
+                            <tr>
+                                <td style="border:0px; vertical-align: bottom">Contact</td>
+                                <td colspan="3">
+                                    {{ invoice_form.service_recipient }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:0px; vertical-align: bottom">Provider State Code</td>
+                                <td>
+                                    {{ invoice_form.provider_state_code }}
+                                </td>
+                                <td style="border:0px; vertical-align: bottom">Recipient State Code</td>
+                                <td>
+                                    {{ invoice_form.recipient_state_code }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:0px; vertical-align: bottom">SAC Code</td>
+                                <td>
+                                    {{ invoice_form.sac_code }}
+                                </td>
+                                <td style="border:0px; vertical-align: bottom">HSN Code</td>
+                                <td>
+                                    {{ invoice_form.sac_code }}
+                                </td>
+                            </tr>
+
                             {% for form in formset %}
                                 <tr>
                                     <td style="border:0px; vertical-align: bottom">Product</td>
