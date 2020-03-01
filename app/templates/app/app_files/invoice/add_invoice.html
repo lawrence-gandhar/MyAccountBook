@@ -49,21 +49,19 @@ select.form-control option{color : #000000; }
                             <tr>
                                 <td colspan="4" style="border:0px; font-weight:bold; vertical-align: bottom; padding:10px 10px; background-color:#000000;">
                                     PRODUCTS/ITEMS
-                                    <button class="btn btn-sm btn-warning">
-                                        <i class="material-icons"></i>
-                                    </button>
+                                    <i class="material-icons pull-right" style="cursor:pointer" title="Add Product" id="add_shopping_cart">add_shopping_cart</i>
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="4" style="border:0px; vertical-align: bottom">
-                                    <table class="table-responsive">
+                                    <table class="table-responsive" id="product_table">
                                         <tbody style=" width: 100%; display: inline-table;">
                                             {% for form in formset %}
-                                                <tr>
+                                                <tr id="tr-set-0">
                                                     <td style="border:0px; vertical-align: bottom">Product</td>
                                                     <td style="border:0px;">{{ form.product }}</td>
                                                     <td style="border:0px; vertical-align: bottom">Inventory</td>
-                                                    <td style="border:0px;">{{ form.product }}</td>
+                                                    <td style="border:0px;">{{ form.inventory }}</td>
                                                     <td style="border:0px; vertical-align: bottom">In Stock</td>
                                                     <td style="border:0px; width:100px"><input type="text" class="form-control input-sm" disabled></td>
                                                     <td style="border:0px; vertical-align: bottom">Quantity</td>
