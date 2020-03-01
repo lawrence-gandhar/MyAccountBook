@@ -57,6 +57,12 @@ class InvoiceDesignerForm(ModelForm):
 #   INVOICE FORM
 #=======================================================================
 class InvoiceForm(ModelForm):
+    
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super(InvoiceForm, self).__init__(*args, **kwargs)
+        self.fields['service_recipient'].queryset = Contacts.objects.filter(user = self.user,)
+
     class Meta:
 
         model = InvoiceModel
@@ -85,12 +91,13 @@ class InvoiceProductForm(ModelForm):
         model = InvoiceProducts
 
         fields = (
-                    'product', 'quantity', 
+                    'product', 'quantity', 'inventory', 
                 )
 
         widgets = {
-            'product' : Select(attrs = {'class':'form-control input-sm'}),
-            'quantity' : NumberInput(attrs = {'class':'form-control input-sm'}) 
+            'product' : Select(attrs = {'class':'form-control input-sm'},),
+            'inventory' : Select(attrs = {'class':'form-control input-sm'},),
+            'quantity' : NumberInput(attrs = {'class':'form-control input-sm'},),
         }
 
         

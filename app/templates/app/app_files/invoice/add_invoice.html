@@ -46,15 +46,34 @@ select.form-control option{color : #000000; }
                                     {{ invoice_form.sac_code }}
                                 </td>
                             </tr>
-
-                            {% for form in formset %}
-                                <tr>
-                                    <td style="border:0px; vertical-align: bottom">Product</td>
-                                    <td style="border:0px;">{{ form.product }}</td>
-                                    <td style="border:0px; vertical-align: bottom">Quantity</td>
-                                    <td style="border:0px;">{{ form.quantity }}</td>
-                                </tr>
-                            {% endfor %}
+                            <tr>
+                                <td colspan="4" style="border:0px; font-weight:bold; vertical-align: bottom; padding:10px 10px; background-color:#000000;">
+                                    PRODUCTS/ITEMS
+                                    <button class="btn btn-sm btn-warning">
+                                        <i class="material-icons"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" style="border:0px; vertical-align: bottom">
+                                    <table class="table-responsive">
+                                        <tbody style=" width: 100%; display: inline-table;">
+                                            {% for form in formset %}
+                                                <tr>
+                                                    <td style="border:0px; vertical-align: bottom">Product</td>
+                                                    <td style="border:0px;">{{ form.product }}</td>
+                                                    <td style="border:0px; vertical-align: bottom">Inventory</td>
+                                                    <td style="border:0px;">{{ form.product }}</td>
+                                                    <td style="border:0px; vertical-align: bottom">In Stock</td>
+                                                    <td style="border:0px; width:100px"><input type="text" class="form-control input-sm" disabled></td>
+                                                    <td style="border:0px; vertical-align: bottom">Quantity</td>
+                                                    <td style="border:0px; width:100px">{{ form.quantity }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>                            
                         </table>                        
                     </div>
                 </div>

@@ -560,13 +560,19 @@ class CreateInvoice(View):
     #
     #
     def get(self, request):
-        self.data["invoice_form"] = InvoiceForm()
+        self.data["invoice_form"] = InvoiceForm(request.user)
 
-        ProductFormSet = inlineformset_factory(InvoiceModel, InvoiceProducts, extra = 10, fields=('product', 'quantity'))
+        ProductFormSet = inlineformset_factory(
+            InvoiceModel, InvoiceProducts, extra = 1, 
+            fields=('product', 'quantity', 'inventory'),
+            widgets = {
+                'product' : Select(attrs = {'class':'form-control input-sm'},),
+                'inventory' : Select(attrs = {'class':'form-control input-sm'},),
+                'quantity' : NumberInput(attrs = {'class':'form-control input-sm'},),
+            }    
+        )
+
         self.data["formset"] = ProductFormSet(queryset = ProductsModel.objects.filter(user = request.user))
-
-        print(self.data["formset"])
-
 
         return render(request, self.template_name, self.data)
 
