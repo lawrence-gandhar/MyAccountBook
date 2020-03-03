@@ -1,4 +1,8 @@
-$(document).ready(function(){})
+$(document).ready(function(){
+
+    $("#tr-set-0").find("i").hide();
+
+})
 
 //********************************************************************************* */
 // ADD PRODUCT TO INVOICE
@@ -16,6 +20,17 @@ $("#add_shopping_cart").on("click", function(){
     $('#product_table tbody').append(new_html);
     $("#tr-set-"+rowCount).empty().append(tr_html);
 
-    //$("#tr-set-"+rowCount).find("input").attr("")
+    $("#tr-set-"+rowCount).find("i").show();
 
 });
+
+//
+//
+//
+function delete_product_from_invoice_form(elem){
+    var tr = $(elem).parents('tr');
+
+    if(tr.attr("id") != 'tr-set-0'){
+        $("#"+tr.attr("id")).remove();
+    }
+}

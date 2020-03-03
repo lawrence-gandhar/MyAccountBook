@@ -152,6 +152,7 @@ class EditProducts(View):
     data["included_template"] = 'app/app_files/products/add_products_form.html'
 
     data["add_product_images_form"] = ProductPhotosForm()
+    
     #
     #
     #
@@ -165,6 +166,9 @@ class EditProducts(View):
         self.data["add_product_form"] = ProductForm(request.user, instance = product)
         return render(request, self.template_name, self.data)
 
+    #
+    #
+    #
     def post(self, request, *args, **kwargs):
         try:
             product = ProductsModel.objects.get(pk = int(kwargs["ins"]))
