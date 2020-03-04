@@ -67,7 +67,7 @@ class AddProducts(View):
         self.data["add_product_form"] = ProductForm(request.user)
         return render(request, self.template_name, self.data)
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):                         
         
         add_product = ProductForm(request.user, request.POST or None)
         add_images = ProductPhotosForm(request.FILES or None)
@@ -75,7 +75,7 @@ class AddProducts(View):
         ins = None
 
         if add_product.is_valid():
-            ins = add_product.save()
+            ins = add_product.save()            
             ins.user = request.user
             ins.save()
         

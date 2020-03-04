@@ -11,6 +11,7 @@ from django.template.loader import get_template
 from app.models.invoice_model import *
 from app.models.collects_model import *
 from app.forms.invoice_forms import *
+from app.forms.items_form import *
 
 from django.forms import inlineformset_factory
 
@@ -563,8 +564,10 @@ class CreateInvoice(View):
     #
     #
     #
-    def get(self, request):
+    def get(self, request, *args, **kwargs):
         self.data["invoice_form"] = InvoiceForm(request.user)
+
+        self.data["add_product_form"] = ProductForm(request.user)
 
         ProductFormSet = inlineformset_factory(
             InvoiceModel, InvoiceProducts, extra = 1, 
