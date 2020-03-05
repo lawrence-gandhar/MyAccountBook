@@ -568,6 +568,7 @@ class CreateInvoice(View):
         self.data["invoice_form"] = InvoiceForm(request.user)
 
         self.data["add_product_form"] = ProductForm(request.user)
+        self.data["add_product_images_form"] = ProductPhotosForm()
 
         ProductFormSet = inlineformset_factory(
             InvoiceModel, InvoiceProducts, extra = 1, 
