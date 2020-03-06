@@ -30,8 +30,7 @@ table{
                     <h4 class="card-title ">Add Invoice</h4>
                 </div> 
                 <div class="card-body">                    
-                    <div class="table" style="padding:10px 0px; color:#FFFFFF; width:100%">
-                        {{ formset.management_forms }}
+                    <div class="table" style="padding:10px 0px; color:#FFFFFF; width:100%">                       
                         <table class="table-responsive">
                             <tbody style=" width: 100%; display: inline-table;">
                             <tr>
@@ -41,26 +40,6 @@ table{
                                     <a href="{% url 'add-contacts' %}" title="Add Contact">
                                         <i class="material-icons" style="color:#00ced1">account_circle</i>
                                     </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="border:0px; vertical-align: bottom">Provider State Code</td>
-                                <td style="border:0px;">
-                                    {{ invoice_form.provider_state_code }}
-                                </td>
-                                <td style="border:0px; vertical-align: bottom">Recipient State Code</td>
-                                <td style="border:0px;">
-                                    {{ invoice_form.recipient_state_code }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="border:0px; vertical-align: bottom;">SAC Code</td>
-                                <td style="border:0px;">
-                                    {{ invoice_form.sac_code }}
-                                </td>
-                                <td style="border:0px; vertical-align: bottom">HSN Code</td>
-                                <td style="border:0px;">
-                                    {{ invoice_form.sac_code }}
                                 </td>
                             </tr>
                             <tr>
@@ -74,6 +53,7 @@ table{
                                 <td colspan="4" style="border:0px; vertical-align: bottom">
                                     <table class="table-responsive" id="product_table">
                                         <tbody style=" width: 100%; display: inline-table;">
+                                            {{ formset.management_form }}
                                             {% for form in formset %}
                                                 <tr id="tr-set-0">
                                                     <td style="border:0px; vertical-align: bottom; text-align:center;">Product</td>
@@ -84,7 +64,7 @@ table{
                                                     <td style="border:0px; width:100px"><input type="text" class="form-control input-sm" disabled></td>
                                                     <td style="border:0px; vertical-align: bottom; text-align:center;">Quantity</td>
                                                     <td style="border:0px; width:100px">{{ form.quantity }}</td>
-                                                    <td style="border:0px; width:100px; color:#ff5e00;" class="text-center">
+                                                    <td style="border:0px; width:20px; color:#ff5e00;" class="text-center">
                                                         <i class="material-icons" title="Remove" style="cursor:pointer; position:relative; top:10px;" onclick="delete_product_from_invoice_form($(this))">delete_forever</i>
                                                     </td>
                                                 </tr>
@@ -95,6 +75,10 @@ table{
                             </tr>                            
                         </table>                        
                     </div>
+                </div>
+                <div class="card-footer text-center" style="justify-content: center;">
+                    <button class="btn btn-warning">Cancel</button>
+                    <button class="btn btn-success">Save</button>
                 </div>
             </div>
         </div>

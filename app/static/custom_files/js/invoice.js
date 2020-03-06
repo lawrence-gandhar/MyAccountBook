@@ -22,15 +22,21 @@ $("#add_shopping_cart").on("click", function(){
 
     $("#tr-set-"+rowCount).find("i").show();
 
+    $("#id_invoiceproducts_set-TOTAL_FORMS").val(rowCount+1);
+    console.log($("#id_invoiceproducts_set-TOTAL_FORMS").val());
+
 });
 
 //
 //
 //
 function delete_product_from_invoice_form(elem){
-    var tr = $(elem).parents('tr');
+    var tr = $(elem).parents('tr');    
 
     if(tr.attr("id") != 'tr-set-0'){
         $("#"+tr.attr("id")).remove();
+        var rowCount = $('#product_table tr').length;
+        $("#id_invoiceproducts_set-TOTAL_FORMS").val(rowCount);
+        console.log($("#id_invoiceproducts_set-TOTAL_FORMS").val());
     }
 }

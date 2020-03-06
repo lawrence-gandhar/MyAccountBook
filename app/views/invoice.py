@@ -391,7 +391,7 @@ class CreateCollectionInvoice(View):
 def get_pdf(request, ins = None):
     
     if ins is None:
-        return redirect('/unauthorized/', permanent = True)
+        return redirect('/unauthorized/', permanent = False)
 
     # Template 
     template_name = 'app/app_files/invoice/index.html'
@@ -561,16 +561,7 @@ class CreateInvoice(View):
     data["css_files"] = []
     data['js_files'] = ['custom_files/js/invoice.js']
     
-    #
-    #
-    #
-    def get(self, request, *args, **kwargs):
-        self.data["invoice_form"] = InvoiceForm(request.user)
-
-        self.data["add_product_form"] = ProductForm(request.user)
-        self.data["add_product_images_form"] = ProductPhotosForm()
-
-        ProductFormSet = inlineformset_factory(
+    ProductFormSet = inlineformset_factory(
             InvoiceModel, InvoiceProducts, extra = 1, 
             fields=('product', 'quantity', 'inventory'),
             widgets = {
@@ -580,7 +571,17 @@ class CreateInvoice(View):
             }    
         )
 
-        self.data["formset"] = ProductFormSet(queryset = ProductsModel.objects.filter(user = request.user))
+
+    #
+    #
+    #
+    def get(self, request, *args, **kwargs):
+        self.data["invoice_form"] = LessInvoiceForm(request.user)
+
+        self.data["add_product_form"] = ProductForm(request.user)
+        self.data["add_product_images_form"] = ProductPhotosForm()
+
+        self.data["formset"] = self.ProductFormSet(queryset = ProductsModel.objects.filter(user = request.user))
 
         return render(request, self.template_name, self.data)
 
@@ -588,6 +589,29 @@ class CreateInvoice(View):
     #
     #
     def post(self, request):
-        pass
 
-        return render(request, self.template_name, self.data)
+        invoice_form = LessInvoiceForm(request.user, request.POST)
+        if invoice_form.is_valid():
+            invoice = invoice_form.save()
+
+            formset = self.ProductFormSet(request.POST)
+            if formset.is_valid():
+
+                rownum = 0
+
+                for form in formset:
+                    if form.is_valid():
+                        if form.data["invoiceproducts_set-"+str(rownum)+"-product"]:
+                            obj = form.save(commit = False)
+                            obj.invoice = invoice
+                            obj.save()
+                        rownum +=1
+                        
+            return redirect('/invoice/', permanent = False)
+
+        else:
+            return render(request, self.template_name, self.data)
+
+        
+
+        

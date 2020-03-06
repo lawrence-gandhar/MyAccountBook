@@ -84,6 +84,27 @@ class InvoiceForm(ModelForm):
             'sgst' : TextInput(attrs={'class':'form-control input-sm',}),
             'total_gst' : TextInput(attrs={'class':'form-control input-sm',}),            
         }
+
+#=======================================================================
+#   LESS INVOICE FORM
+#=======================================================================
+class LessInvoiceForm(ModelForm):
+    
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super(LessInvoiceForm, self).__init__(*args, **kwargs)
+        self.fields['service_recipient'].queryset = Contacts.objects.filter(user = self.user,)
+
+    class Meta:
+
+        model = InvoiceModel
+        fields = (
+                    'service_recipient', 
+                )
+
+        widgets = {
+            'service_recipient' : Select(attrs={'class':'form-control input-sm',}),            
+        }        
         
 class InvoiceProductForm(ModelForm):
     
