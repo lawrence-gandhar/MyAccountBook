@@ -14,6 +14,11 @@ table{
     color:#a7a4a4;
 }
 
+#id_service_recipient{
+    width:95%;
+    display:inline;
+}
+
 </style>
 
 <form method="post">
@@ -22,7 +27,7 @@ table{
         <div class="col-lg-12" style="padding:0px">
             <div class="card">
                 <div class="card-header card-header-primary">
-                    <h4 class="card-title ">Add Contact</h4>
+                    <h4 class="card-title ">Add Invoice</h4>
                 </div> 
                 <div class="card-body">                    
                     <div class="table" style="padding:10px 0px; color:#FFFFFF; width:100%">
@@ -31,27 +36,30 @@ table{
                             <tbody style=" width: 100%; display: inline-table;">
                             <tr>
                                 <td style="border:0px; vertical-align: bottom">Contact</td>
-                                <td colspan="3">
+                                <td colspan="3" style="border:0px;">
                                     {{ invoice_form.service_recipient }}
+                                    <a href="{% url 'add-contacts' %}" title="Add Contact">
+                                        <i class="material-icons" style="color:#00ced1">account_circle</i>
+                                    </a>
                                 </td>
                             </tr>
                             <tr>
                                 <td style="border:0px; vertical-align: bottom">Provider State Code</td>
-                                <td>
+                                <td style="border:0px;">
                                     {{ invoice_form.provider_state_code }}
                                 </td>
                                 <td style="border:0px; vertical-align: bottom">Recipient State Code</td>
-                                <td>
+                                <td style="border:0px;">
                                     {{ invoice_form.recipient_state_code }}
                                 </td>
                             </tr>
                             <tr>
-                                <td style="border:0px; vertical-align: bottom">SAC Code</td>
-                                <td>
+                                <td style="border:0px; vertical-align: bottom;">SAC Code</td>
+                                <td style="border:0px;">
                                     {{ invoice_form.sac_code }}
                                 </td>
                                 <td style="border:0px; vertical-align: bottom">HSN Code</td>
-                                <td>
+                                <td style="border:0px;">
                                     {{ invoice_form.sac_code }}
                                 </td>
                             </tr>
@@ -68,13 +76,13 @@ table{
                                         <tbody style=" width: 100%; display: inline-table;">
                                             {% for form in formset %}
                                                 <tr id="tr-set-0">
-                                                    <td style="border:0px; vertical-align: bottom">Product</td>
+                                                    <td style="border:0px; vertical-align: bottom; text-align:center;">Product</td>
                                                     <td style="border:0px;">{{ form.product }}</td>
-                                                    <td style="border:0px; vertical-align: bottom">Inventory</td>
+                                                    <td style="border:0px; vertical-align: bottom; text-align:center;">Inventory</td>
                                                     <td style="border:0px;">{{ form.inventory }}</td>
-                                                    <td style="border:0px; vertical-align: bottom">In Stock</td>
+                                                    <td style="border:0px; vertical-align: bottom; text-align:center;">In Stock</td>
                                                     <td style="border:0px; width:100px"><input type="text" class="form-control input-sm" disabled></td>
-                                                    <td style="border:0px; vertical-align: bottom">Quantity</td>
+                                                    <td style="border:0px; vertical-align: bottom; text-align:center;">Quantity</td>
                                                     <td style="border:0px; width:100px">{{ form.quantity }}</td>
                                                     <td style="border:0px; width:100px; color:#ff5e00;" class="text-center">
                                                         <i class="material-icons" title="Remove" style="cursor:pointer; position:relative; top:10px;" onclick="delete_product_from_invoice_form($(this))">delete_forever</i>
