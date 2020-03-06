@@ -606,8 +606,8 @@ class CreateInvoice(View):
                             obj.invoice = invoice
                             obj.save()
                         rownum +=1
-                        
-            return redirect('/invoice/', permanent = False)
+
+            return redirect('/invoice/get_pdf_2/{}'.format(invoice), permanent = False)
 
         else:
             return render(request, self.template_name, self.data)
