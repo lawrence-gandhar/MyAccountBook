@@ -98,9 +98,7 @@ class LessInvoiceForm(ModelForm):
     class Meta:
 
         model = InvoiceModel
-        fields = (
-                    'service_recipient', 
-                )
+        fields = ('service_recipient', )
 
         widgets = {
             'service_recipient' : Select(attrs={'class':'form-control input-sm',}),            

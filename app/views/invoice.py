@@ -133,30 +133,6 @@ def manage_invoice_designs(request):
 
 
 #=====================================================================================
-#   BASE - CREATE INVOICE
-#=====================================================================================
-#
-class CreateInvoice(View):
-    
-    # Initialize 
-    data = defaultdict()
-    
-    # Template 
-    template_name = 'app/app_files/invoice/create_invoice.html'
-    data["included_template"] = 'app/app_files/invoice/template_design_form.html'
-
-    # Set link as active in menubar
-    data["active_link"] = 'Invoice'
-    data["breadcrumb_title"] = 'INVOICE'
-
-    # Custom CSS/JS Files For Inclusion into template
-    data["css_files"] = []
-    data['js_files'] = []
-
-    def get(self, request, *args, **kwargs):
-        return render(request, self.template_name, self.data)
-
-#=====================================================================================
 #   CONTACT - CREATE INVOICE
 #=====================================================================================
 #
@@ -607,11 +583,50 @@ class CreateInvoice(View):
                             obj.save()
                         rownum +=1
 
-            return redirect('/invoice/get_pdf_2/{}'.format(invoice), permanent = False)
+            return redirect('/invoice/view_invoice/{}/'.format(invoice.id), permanent = False)
 
         else:
             return render(request, self.template_name, self.data)
 
         
+#
+#
+#
+class ViewInvoice(View):
 
-        
+    # Template 
+    template_name = 'app/app_files/invoice/index.html'
+
+    # Initialize 
+    data = defaultdict()
+    data["view"] = ""
+    data["active_link"] = 'Invoice'
+    data["included_template"] = 'app/app_files/invoice/invoice_template.html'
+    
+    # Custom CSS/JS Files For Inclusion into template
+    data["css_files"] = []
+    data['js_files'] = ['custom_files/js/invoice.js']
+
+    #
+    #
+    #
+    def get(self, request, ins = None):
+
+        if ins is not None:
+
+            try:
+                invoice = InvoiceModel.objects.get(pk = int(ins))
+                self.data["invoice_details"] = invoice
+            except:
+                return redirect('/unauthorized/', permanent=False)
+
+            contact_address = Contact_Addresses.objects.filter(contact_id = invoice.service_recipient.id)
+
+            print(contact_address)
+
+
+            self.data["invoice_products"] = InvoiceProducts.objects.filter(invoice = invoice)
+
+            return render(request, self.template_name, self.data)
+        return redirect('/unauthorized/', permanent = False)
+
