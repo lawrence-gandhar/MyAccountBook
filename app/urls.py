@@ -8,7 +8,7 @@ from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from app.views import dashboard, contacts, base, invoice, collections, \
-    products, inventory
+    products, inventory, common_views
 
 
 # Authorization
@@ -55,7 +55,6 @@ urlpatterns += [
     path('invoice/view_invoice/<int:ins>/', never_cache(login_required(invoice.ViewInvoice.as_view())), name = 'view-invoice'),
     path('invoice/create_invoice/contacts/<int:ins>/', never_cache(login_required(invoice.CreateContactInvoice.as_view())), name = 'create-contact-invoice'),
     path('invoice/create_invoice/collections/<int:ins>/', never_cache(login_required(invoice.CreateCollectionInvoice.as_view())), name = 'create-collection-invoice'),
-    
 ]
 
 urlpatterns +=[
@@ -91,6 +90,13 @@ urlpatterns += [
     path('inventory/get_edit_inventory_product_form/', never_cache(login_required(inventory.get_edit_inventory_product_form)), name = 'get_edit_inventory_product_form'),
     path('inventory/edit_inventory_product/', never_cache(login_required(inventory.edit_inventory_product)), name = 'edit_inventory_product'),
 ]
+
+# AJAX
+urlpatterns += [
+    path('fetch_contact_addresses/<int:ins>/', never_cache(login_required(common_views.fetch_contact_addresses)), name='fetch_contact_addresses')
+]
+
+
 
 
 

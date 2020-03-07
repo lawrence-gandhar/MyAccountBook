@@ -40,3 +40,37 @@ function delete_product_from_invoice_form(elem){
         console.log($("#id_invoiceproducts_set-TOTAL_FORMS").val());
     }
 }
+
+//
+//
+//
+
+$("select#id_service_recipient").on("change", function(){
+    fetch_contact_addresses($(this).val());
+});
+
+
+function fetch_contact_addresses(ids){
+
+    var ids = $("select#id_service_recipient").val();
+
+    $.get('/fetch_contact_addresses/'+ids+'/', function(data){
+        data = $.parseJSON(data);
+
+        var htm = '';
+
+        $.each(data.addresses, function(i,v){
+            htm += '<p style="font-weight:bold; margin:0px">'+v.flat_no+', ';
+            htm += v.street+', ';
+            htm += v.city+', ';
+            htm += v.state+', ';
+            htm += +v.country+', ';
+            htm += v.pincode+'</p>';
+        });
+
+        $("td#contact_addresses").empty().append(htm);
+        $("td#organization_name").empty().text(data.organization_name);
+
+    });
+}
+
