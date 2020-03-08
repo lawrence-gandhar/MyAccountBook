@@ -230,6 +230,8 @@ class ProductsModel(models.Model):
         blank = True,
     )
 
+
+
     def __str__(self):
         return "{} - ({})".format(self.product_name.upper(), self.sku.upper())
 

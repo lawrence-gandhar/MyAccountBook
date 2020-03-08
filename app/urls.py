@@ -93,7 +93,8 @@ urlpatterns += [
 
 # AJAX
 urlpatterns += [
-    path('fetch_contact_addresses/<int:ins>/', never_cache(login_required(common_views.fetch_contact_addresses)), name='fetch_contact_addresses')
+    path('fetch_contact_addresses/<int:ins>/', never_cache(login_required(common_views.fetch_contact_addresses)), name='fetch_contact_addresses'),
+    path('fetch_product_details/<int:ins>/', never_cache(login_required(common_views.fetch_product_details)), name='fetch_product_details')
 ]
 
 

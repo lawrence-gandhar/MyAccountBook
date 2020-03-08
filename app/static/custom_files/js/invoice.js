@@ -13,23 +13,24 @@ $("#add_shopping_cart").on("click", function(){
     var tr_html = $("tr#tr-set-0").html();
     var rowCount = $('#product_table tr').length;
 
-    tr_html = tr_html.replace(/invoiceproducts_set-0/g, "invoiceproducts_set-"+rowCount);
-    tr_html = tr_html.replace(/id_invoiceproducts_set-0/g, "id_invoiceproducts_set-"+rowCount);
+    tr_html = tr_html.replace(/invoiceproducts_set-0/g, "invoiceproducts_set-"+(rowCount-1));
+    tr_html = tr_html.replace(/id_invoiceproducts_set-0/g, "id_invoiceproducts_set-"+(rowCount-1));
 
-    new_html = '<tr id="tr-set-'+rowCount+'"></tr>';
+    new_html = '<tr id="tr-set-'+(rowCount-1)+'"></tr>';
     $('#product_table tbody').append(new_html);
-    $("#tr-set-"+rowCount).empty().append(tr_html);
+    $("#tr-set-"+(rowCount-1)).empty().append(tr_html);
 
-    $("#tr-set-"+rowCount).find("i").show();
+    $("#tr-set-"+(rowCount-1)).find("i").show();
 
-    $("#id_invoiceproducts_set-TOTAL_FORMS").val(rowCount+1);
-    console.log($("#id_invoiceproducts_set-TOTAL_FORMS").val());
+    $("#id_invoiceproducts_set-TOTAL_FORMS").val(rowCount);
 
 });
 
+//**************************************************************************************** */
+// DELETE PRODUCT FORM
+//**************************************************************************************** */
 //
-//
-//
+
 function delete_product_from_invoice_form(elem){
     var tr = $(elem).parents('tr');    
 
@@ -41,18 +42,14 @@ function delete_product_from_invoice_form(elem){
     }
 }
 
-//
-//
+//**************************************************************************************** */
+// FETCH CONTACTS DETAILS
+//**************************************************************************************** */
 //
 
 $("select#id_service_recipient").on("change", function(){
-    fetch_contact_addresses($(this).val());
-});
 
-
-function fetch_contact_addresses(ids){
-
-    var ids = $("select#id_service_recipient").val();
+    var ids = $(this).val();
 
     $.get('/fetch_contact_addresses/'+ids+'/', function(data){
         data = $.parseJSON(data);
@@ -72,5 +69,52 @@ function fetch_contact_addresses(ids){
         $("td#organization_name").empty().text(data.organization_name);
 
     });
+});
+
+//**************************************************************************************** */
+// FETCH PRODUCT DETAILS
+//**************************************************************************************** */
+//
+
+function get_product_details(elem){
+
+    ids = $(elem).val();
+    atr = $(elem).attr("id");
+
+    atr = atr.replace("id_invoiceproducts_set-","")
+    atr = atr.replace("-product","")
+
+    $.get('/fetch_product_details/'+ids+'/', function(data){
+        data = $.parseJSON(data);
+
+        $("#id_invoiceproducts_set-"+atr+"-producttype").val(data.product_type);
+
+        quantity_in_stock_html = '';
+        for(i=0; i <= data.quantity_in_stock; i++){
+            quantity_in_stock_html += '<option>'+i+'</option>';
+        }
+
+        $("#id_invoiceproducts_set-"+atr+"-quantity").empty().append(quantity_in_stock_html);
+        $("#id_invoiceproducts_set-"+atr+"-price").val(data.details[0].selling_price);
+        $("#id_invoiceproducts_set-"+atr+"-discount").val(data.details[0].discount);
+        $("#id_invoiceproducts_set-"+atr+"-tax").val(data.details[0].gst+"%");        
+    });
 }
 
+//
+//
+//
+//
+
+function product_quantity(elem){
+    atr = $(elem).attr("id");
+
+    atr = atr.replace("id_invoiceproducts_set-","")
+    atr = atr.replace("-quantity","")  
+
+    subtotal = $(elem).val() * $("#id_invoiceproducts_set-"+atr+"-price").val()
+    $("#id_invoiceproducts_set-"+atr+"-subtotal").val(subtotal);
+  
+
+    $("#all_subtotal").text(sum);
+}

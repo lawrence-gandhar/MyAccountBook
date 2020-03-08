@@ -541,9 +541,8 @@ class CreateInvoice(View):
             InvoiceModel, InvoiceProducts, extra = 1, 
             fields=('product', 'quantity', 'inventory'),
             widgets = {
-                'product' : Select(attrs = {'class':'form-control input-sm'},),
-                'inventory' : Select(attrs = {'class':'form-control input-sm'},),
-                'quantity' : NumberInput(attrs = {'class':'form-control input-sm'},),
+                'product' : Select(attrs = {'class':'form-control input-sm product_dropdown_select', 'onchange':'get_product_details($(this))'},),
+                'quantity' : Select(attrs = {'class':'form-control input-sm', 'onchange': 'product_quantity($(this))'},),
             }    
         )
 
@@ -621,9 +620,6 @@ class ViewInvoice(View):
                 return redirect('/unauthorized/', permanent=False)
 
             contact_address = Contact_Addresses.objects.filter(contact_id = invoice.service_recipient.id)
-
-            print(contact_address)
-
 
             self.data["invoice_products"] = InvoiceProducts.objects.filter(invoice = invoice)
 

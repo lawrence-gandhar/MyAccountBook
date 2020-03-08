@@ -5,6 +5,8 @@ from django.contrib import messages
 
 from django.conf import settings
 
+from django.db.models import *
+
 from app.models.invoice_model import *
 from app.models.collects_model import *
 from app.models.items_model import *
@@ -16,8 +18,9 @@ from app.other_constants import country_list
 import json
 
 
-#
+#**********************************************************************************************
 # FETCH CONTACT BILLING/SHIPPING ADDRESSES 
+#**********************************************************************************************
 #
 
 def fetch_contact_addresses(request, ins=None):
@@ -38,6 +41,27 @@ def fetch_contact_addresses(request, ins=None):
         data['ret'] = 1
         data['organization_name'] = contact.organization_name
         data['addresses'] = list(contact_addresses)        
+
+        return HttpResponse(json.dumps(data))
+    return HttpResponse(json.dumps(data))
+
+
+#**********************************************************************************************
+# FETCH CONTACT BILLING/SHIPPING ADDRESSES 
+#**********************************************************************************************
+#
+
+def fetch_product_details(request, ins=None):
+    data = {'ret':0, 'details':{}, 'quantity_in_stock':0}
+
+    if ins is not None:
+        
+        product = ProductsModel.objects.filter(pk = int(ins)).values()
+        data['details'] = list(product)
+        
+        p_count = InventoryProduct.objects.filter(product = product[0]["id"]).aggregate(total = Sum('quantity'))
+        data['quantity_in_stock'] = p_count["total"]     
+        data['product_type'] = items_constant.PRODUCT_TYPE_DICT[product[0]["product_type"]]   
 
         return HttpResponse(json.dumps(data))
     return HttpResponse(json.dumps(data))

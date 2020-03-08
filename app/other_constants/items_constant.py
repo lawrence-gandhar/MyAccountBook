@@ -4,6 +4,14 @@ PRODUCT_TYPE = (
     (2, 'BUNDLE'),
 )
 
+PRODUCT_TYPE_DICT = {
+    0: 'GOODS',
+    1: 'SERVICES',
+    2: 'BUNDLE',
+}
+    
+
+
 UNITS = (
     (0, 'Kilogram'),
     (1, 'grams'),
