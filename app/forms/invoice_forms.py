@@ -93,15 +93,24 @@ class LessInvoiceForm(ModelForm):
     def __init__(self, user, *args, **kwargs):
         self.user = user
         super(LessInvoiceForm, self).__init__(*args, **kwargs)
-        self.fields['service_recipient'].queryset = Contacts.objects.filter(user = self.user,)
+        self.fields['service_recipient'].queryset = Contacts.objects.filter(user = self.user, customer_type__in = [1, 2, 4])
+        self.fields['sales_person'].queryset =  Contacts.objects.filter(user = self.user, customer_type = 3)
+    
 
     class Meta:
 
         model = InvoiceModel
-        fields = ('service_recipient', )
+        fields = ('service_recipient', 'invoice_no', 'sales_person', 'invoice_type', 'recipient_state_code', 
+                'due_date', 'terms_invoice')
 
         widgets = {
+            'invoice_no' : TextInput(attrs = {'class':'form-control input-sm', 'placeholder': 'Optional'}),
+            'terms_invoice' : TextInput(attrs = {'class':'form-control input-sm', 'placeholder': 'Optional'}),
+            'due_date' : TextInput(attrs = {'class':'form-control input-sm', 'placeholder': 'yyyy-mm-dd'}),
+            'recipient_state_code' : TextInput(attrs = {'class':'form-control input-sm',}),
             'service_recipient' : Select(attrs={'class':'form-control input-sm',}),            
+            'sales_person' : Select(attrs={'class':'form-control input-sm',}),            
+            'invoice_type' : Select(attrs={'class':'form-control input-sm',}, choices = ((False, 'One Time'), (True, 'Recurring'))),            
         }        
         
 class InvoiceProductForm(ModelForm):

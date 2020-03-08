@@ -171,6 +171,21 @@ class InvoiceModel(models.Model):
         blank = True,
     )
 
+    invoice_no = models.CharField(
+        max_length = 20,
+        db_index = True,
+        blank = True,
+        null = True,
+    )
+
+    invoice_type = models.BooleanField(
+        default = False,
+        db_index = True,
+        blank = True,
+        null = True,
+        choices = ((False, 'One Time'), (True, 'Recurring'))
+    )
+
     provider_state_code = models.CharField(
         max_length = 10,
         null = True,
@@ -233,6 +248,26 @@ class InvoiceModel(models.Model):
     discount = models.IntegerField(
         default = 0,
         db_index = True,
+    )
+
+    sales_person = models.ForeignKey(
+        Contacts,
+        on_delete = models.SET_NULL,
+        blank = True,
+        null = True,
+        related_name = 'sales_person'
+    )
+
+    due_date = models.DateField(
+        null = True,
+        blank = True,
+        db_index = True,
+    )
+
+    terms_invoice = models.CharField(
+        blank = True,
+        max_length = 50,
+        null = True,
     )
 
     created_on = models.DateTimeField(
