@@ -35,11 +35,11 @@ table{
                             <tbody style=" width: 100%; display: inline-table;">
                             <tr>
                                 <td style="border:0px; vertical-align: top; ">Invoice No</td> 
-                                <td style="border:0px; text-transform: capitalize; padding-left:10px;">
+                                <td colspan="3" style="border:0px; text-transform: capitalize; padding-left:10px;">
                                     {{ invoice_form.invoice_no }}
                                 </td>
                                 <td style="border:0px; vertical-align: bottom; width:160px; text-align:center">Invoice Type</td>
-                                <td colspan="3" style="border:0px; width:140px;">
+                                <td style="border:0px; width:140px;">
                                     {{ invoice_form.invoice_type }}
                                 </td>
                             </tr>
@@ -101,16 +101,25 @@ table{
                                 <td colspan="8" style="border:0px; vertical-align: bottom">
                                     <table class="table-responsive" id="product_table">
                                         <tbody style=" width: 100%; display: inline-table;">
+                                            <tr style="background:linear-gradient(60deg, #7b1fa2, #913f9e); color:#FFF; font-weight:bold; font-size:90%">
+                                                <td style="border:0px; vertical-align: inherit; text-align:center;">Product</td>
+                                                <td style="border:0px; vertical-align: inherit; text-align:center;">Type</td>
+                                                <td style="border:0px; vertical-align: inherit; text-align:center;">Quantity</td>
+                                                <td style="border:0px; vertical-align: inherit; text-align:center;">Price</td>
+                                                <td style="border:0px; vertical-align: inherit; text-align:center;">Discount</td>
+                                                <td style="border:0px; vertical-align: inherit; text-align:center;">Tax</td>
+                                                <td style="border:0px; vertical-align: inherit; text-align:center;">Sub Total <br/>(Excl. Tax)</td>
+                                                <td></td>
+                                            </tr>
                                             {{ formset.management_form }}
-                                            {% for form in formset %}
-                                                <tr id="tr-set-0">
-                                                    <td style="border:0px; vertical-align: bottom; text-align:center;">Product</td>
-                                                    <td style="border:0px;">{{ form.product }}</td>
-                                                    <td style="border:0px; vertical-align: bottom; text-align:center;">Inventory</td>
-                                                    <td style="border:0px;">{{ form.inventory }}</td>
-                                                    <td style="border:0px; vertical-align: bottom; text-align:center;">In Stock</td>
-                                                    <td style="border:0px; width:100px"><input type="text" class="form-control input-sm" disabled></td>
-                                                    <td style="border:0px; vertical-align: bottom; text-align:center;">Quantity</td>
+                                            {% for form in formset %}                                                
+                                                <tr id="tr-set-0">                                                    
+                                                    <td style="border:0px;">{{ form.product }}</td>                                                    
+                                                    <td style="border:0px;">{{ form.inventory }}</td>                                                    
+                                                    <td style="border:0px; width:100px">{{ form.quantity }}</td>                                                    
+                                                    <td style="border:0px; width:100px">{{ form.quantity }}</td>                                                    
+                                                    <td style="border:0px; width:100px">{{ form.quantity }}</td>                                                    
+                                                    <td style="border:0px; width:100px">{{ form.quantity }}</td>                                                    
                                                     <td style="border:0px; width:100px">{{ form.quantity }}</td>
                                                     <td style="border:0px; width:20px; color:#ff5e00;" class="text-center">
                                                         <i class="material-icons" title="Remove" style="cursor:pointer; position:relative; top:10px;" onclick="delete_product_from_invoice_form($(this))">delete_forever</i>
@@ -127,8 +136,43 @@ table{
                                 </td>
                             </tr>    
                             <tr>
-                                
-                            </tr>                                                     
+                                <td colspan="5" style="border:0px; text-align:right; font-weight:bold;">
+                                    Sub Total (Excl. Tax)
+                                </td>
+                                <td style="border:0px; border-left:1px solid #dc7fec; text-align:right">0.00</td>
+                            </tr>           
+                            <tr>
+                                <td colspan="5" style="border:0px; text-align:right; font-weight:bold;">
+                                    GST
+                                </td>
+                                <td style="border:0px; border-left:1px solid #dc7fec; text-align:right">
+                                    0.00
+                                </td>
+                            </tr> 
+                            <tr>
+                                <td colspan="5" style="border:0px; text-align:right; font-weight:bold;">
+                                    Shipping
+                                </td>
+                                <td style="border:0px; border-left:1px solid #dc7fec; text-align:right">
+                                    0.00
+                                </td>
+                            </tr>    
+                            <tr>
+                                <td colspan="5" style="border:0px; text-align:right; font-weight:bold;">
+                                    Adjustment
+                                </td>
+                                <td style="border:0px; border-left:1px solid #dc7fec; text-align:right">
+                                    0.00
+                                </td>
+                            </tr>    
+                            <tr>
+                                <td colspan="5" style="border:0px; text-align:right; border-top:1px solid #dc7fec; font-weight:bold;">
+                                    Total
+                                </td>
+                                <td style="border:0px; border-left:1px solid #dc7fec; border-top:1px solid #dc7fec; text-align:right">
+                                    0.00
+                                </td>
+                            </tr>                                   
                         </table>                        
                     </div>
                 </div>
