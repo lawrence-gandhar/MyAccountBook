@@ -19,6 +19,17 @@ def logo_rename(instance, filename):
     return  os.path.join(upload_path,'{}.{}'.format(uuid4().hex, ext))
 
 #==========================================================================
+#   CHANGE ATTACHMENT FILE NAMES
+#==========================================================================
+#
+def attachment_file_rename(instance, filename):
+
+    upload_path = 'invoice_attachments'
+    ext = filename.split('.')[-1]
+    return  os.path.join(upload_path,'{}.{}'.format(uuid4().hex, ext))
+
+
+#==========================================================================
 #   USER INVOICE DESIGN MODEL
 #==========================================================================
 #
@@ -268,6 +279,17 @@ class InvoiceModel(models.Model):
         blank = True,
         max_length = 50,
         null = True,
+    )
+
+    message = models.TextField(
+        null = True,
+        blank = True,
+    )
+
+    attachments = models.FileField(
+        null = True,
+        blank = True,
+        upload_to = attachments_rename,
     )
 
     created_on = models.DateTimeField(

@@ -101,16 +101,18 @@ class LessInvoiceForm(ModelForm):
 
         model = InvoiceModel
         fields = ('service_recipient', 'invoice_no', 'sales_person', 'invoice_type', 'recipient_state_code', 
-                'due_date', 'terms_invoice')
+                'due_date', 'terms_invoice', 'message', 'attachments')
 
         widgets = {
             'invoice_no' : TextInput(attrs = {'class':'form-control input-sm', 'placeholder': 'Optional'}),
-            'terms_invoice' : TextInput(attrs = {'class':'form-control input-sm', 'placeholder': 'Optional'}),
+            'terms_invoice' : TextInput(attrs = {'class':'form-control input-sm',}),
+            'message' : Textarea(attrs = {'class':'form-control input-sm',}),
             'due_date' : TextInput(attrs = {'class':'form-control input-sm', 'placeholder': 'yyyy-mm-dd'}),
             'recipient_state_code' : TextInput(attrs = {'class':'form-control input-sm',}),
             'service_recipient' : Select(attrs={'class':'form-control input-sm',}),            
             'sales_person' : Select(attrs={'class':'form-control input-sm',}),            
             'invoice_type' : Select(attrs={'class':'form-control input-sm',}, choices = ((False, 'One Time'), (True, 'Recurring'))),            
+            'attachments' : FileInput(attrs = {'class':'form-control input-sm',}),
         }        
         
 class InvoiceProductForm(ModelForm):
