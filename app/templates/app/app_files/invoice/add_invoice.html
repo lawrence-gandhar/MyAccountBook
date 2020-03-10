@@ -43,6 +43,20 @@ table{
                                     {{ invoice_form.invoice_type }}
                                 </td>
                             </tr>
+                            <tr class="hide" id="tr-recurring">                                
+                                <td style="border:0px; vertical-align: bottom; width:140px; ">Frequency</td>
+                                <td style="border:0px;">
+                                    {{ invoice_form.frequency }}
+                                </td>  
+                                <td style="border:0px; vertical-align: bottom; width:100px; text-align:center">Start Date</td>
+                                <td style="border:0px;">
+                                    {{ invoice_form.start_date }}
+                                </td>     
+                                <td style="border:0px; vertical-align: bottom; width:100px; text-align:center">Repeat For</td>
+                                <td style="border:0px;">
+                                    {{ invoice_form.repeat_for }}
+                                </td>                            
+                            </tr>    
                             <tr>                                
                                 <td style="border:0px; vertical-align: bottom; width:140px; ">Place Of Supply</td>
                                 <td style="border:0px;">
@@ -56,7 +70,7 @@ table{
                                 <td style="border:0px;">
                                     {{ invoice_form.terms_invoice }}
                                 </td>                            
-                            </tr>                                                       
+                            </tr>                                        
                             <tr>
                                 <td style="border:0px; vertical-align: bottom; width:160px;">Sales Person</td>
                                 <td colspan="7" style="border:0px;">
@@ -149,14 +163,16 @@ table{
                                 <td colspan="5" style="border:0px; text-align:right; font-weight:bold;">
                                     Sub Total (Excl. Tax)
                                 </td>
-                                <td style="border:0px; border-left:1px solid #dc7fec; text-align:right" id="all_subtotal">0.00</td>
+                                <td style="border:0px; border-left:1px solid #dc7fec; text-align:right">
+                                    {{invoice_form.subtotal}}
+                                </td>
                             </tr>           
                             <tr>
                                 <td colspan="5" style="border:0px; text-align:right; font-weight:bold;">
                                     GST
                                 </td>
                                 <td style="border:0px; border-left:1px solid #dc7fec; text-align:right">
-                                    0.00
+                                    {{invoice_form.gst}}
                                 </td>
                             </tr> 
                             <tr>
@@ -164,7 +180,7 @@ table{
                                     Shipping
                                 </td>
                                 <td style="border:0px; border-left:1px solid #dc7fec; text-align:right">
-                                    0.00
+                                    {{invoice_form.shipping}}
                                 </td>
                             </tr>    
                             <tr>
@@ -172,7 +188,7 @@ table{
                                     Adjustment
                                 </td>
                                 <td style="border:0px; border-left:1px solid #dc7fec; text-align:right">
-                                    0.00
+                                    {{invoice_form.adjustment}}
                                 </td>
                             </tr>    
                             <tr>
@@ -180,7 +196,7 @@ table{
                                     Total
                                 </td>
                                 <td style="border:0px; border-left:1px solid #dc7fec; border-top:1px solid #dc7fec; text-align:right" id="all_total">
-                                    0.00
+                                    {{invoice_form.total}}
                                 </td>
                             </tr>                                   
                         </table>                        

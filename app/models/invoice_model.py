@@ -194,7 +194,7 @@ class InvoiceModel(models.Model):
         db_index = True,
         blank = True,
         null = True,
-        choices = ((False, 'One Time'), (True, 'Recurring'))
+        choices = items_constant.INVOICE_TYPE
     )
 
     provider_state_code = models.CharField(
@@ -251,6 +251,11 @@ class InvoiceModel(models.Model):
         db_index = True,
     )
 
+    adjustment = models.IntegerField(
+        default = 0,
+        db_index = True,
+    )
+
     shipping = models.IntegerField(
         default = 0,
         db_index = True,
@@ -296,6 +301,35 @@ class InvoiceModel(models.Model):
         auto_now = True,
         db_index = True,
     )
+
+    start_date = models.DateField(
+        null = True,
+        blank = True,
+        db_index = True,
+    )
+
+    frequency = models.IntegerField(
+        null = True,
+        blank = True,
+        choices = items_constant.INVOICE_FREQUENCY
+    )
+
+    repeat_for = models.IntegerField(
+        null = True,
+        blank = True,
+        db_index = True,
+    )
+
+    subtotal = models.IntegerField(
+        default = 0,
+        db_index = True,
+    )
+
+    total = models.IntegerField(
+        default = 0,
+        db_index = True,
+    )
+
 
     class Meta:
         verbose_name_plural = 'invoice_tbl'

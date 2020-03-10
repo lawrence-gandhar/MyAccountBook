@@ -101,7 +101,8 @@ class LessInvoiceForm(ModelForm):
 
         model = InvoiceModel
         fields = ('service_recipient', 'invoice_no', 'sales_person', 'invoice_type', 'recipient_state_code', 
-                'due_date', 'terms_invoice', 'message', 'attachments')
+                'due_date', 'terms_invoice', 'message', 'attachments', 'start_date',
+                'frequency', 'repeat_for', 'shipping', 'adjustment', 'subtotal', 'total')
 
         widgets = {
             'invoice_no' : TextInput(attrs = {'class':'form-control input-sm', 'placeholder': 'Optional'}),
@@ -111,8 +112,15 @@ class LessInvoiceForm(ModelForm):
             'recipient_state_code' : TextInput(attrs = {'class':'form-control input-sm',}),
             'service_recipient' : Select(attrs={'class':'form-control input-sm',}),            
             'sales_person' : Select(attrs={'class':'form-control input-sm',}),            
-            'invoice_type' : Select(attrs={'class':'form-control input-sm',}, choices = ((False, 'One Time'), (True, 'Recurring'))),            
+            'invoice_type' : Select(attrs={'class':'form-control input-sm',}, choices = items_constant.INVOICE_TYPE),            
             'attachments' : FileInput(attrs = {'class':'form-control input-sm',}),
+            'start_date' : TextInput(attrs = {'class':'form-control input-sm', 'placeholder': 'yyyy-mm-dd'}),
+            'frequency' : Select(attrs = {'class':'form-control input-sm', }, choices = items_constant.INVOICE_FREQUENCY),
+            'shipping' : TextInput(attrs = {'class':'form-control input-sm', 'value':'0',}),
+            'repeat_for' : TextInput(attrs = {'class':'form-control input-sm',}),
+            'adjustment' : TextInput(attrs = {'class':'form-control input-sm', 'value':'0',}),
+            'subtotal' : TextInput(attrs = {'class':'form-control input-sm', 'value':'0', 'readonly':'true'}),
+            'total' : TextInput(attrs = {'class':'form-control input-sm', 'value':'0', 'readonly':'true'}),
         }        
         
 class InvoiceProductForm(ModelForm):

@@ -282,3 +282,8 @@ Background STYLES
 .wrong_input{
   background-color: #FF0000 !important; 
 }
+
+.form-control:disabled, .form-control[readonly] {
+  background-color: transparent;
+  cursor: not-allowed;
+}
