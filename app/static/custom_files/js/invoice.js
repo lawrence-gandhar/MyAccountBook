@@ -109,12 +109,19 @@ function get_product_details(elem){
 function product_quantity(elem){
     atr = $(elem).attr("id");
 
-    atr = atr.replace("id_invoiceproducts_set-","")
-    atr = atr.replace("-quantity","")  
+    atr = atr.replace("id_invoiceproducts_set-","");
+    atr = atr.replace("-quantity","");
 
-    subtotal = $(elem).val() * $("#id_invoiceproducts_set-"+atr+"-price").val()
+    subtotal = $(elem).val() * $("#id_invoiceproducts_set-"+atr+"-price").val();
     $("#id_invoiceproducts_set-"+atr+"-subtotal").val(subtotal);
   
+    //
+    var np_forms = $("#id_invoiceproducts_set-TOTAL_FORMS").val();
 
-    $("#all_subtotal").text(sum);
+    sum = 0;
+    for(i=0; i<np_forms; i++){
+        sum += parseInt($("#id_invoiceproducts_set-"+i+"-subtotal").val());
+    }
+
+    $("#all_subtotal").empty().text(sum);
 }
