@@ -143,6 +143,8 @@ $("#id_invoice_type").on("change", function(){
 //
 function ajax_add_product(){
     $.post("/ajax_add_product/", $("#addProductModal_form").serialize(), function(data){
-        console.log(data);
+        $.get("/fetch_products_dropdown/", function(data){
+            $(".product_dropdown_select").empty().append(data);
+        });
     });
 }
