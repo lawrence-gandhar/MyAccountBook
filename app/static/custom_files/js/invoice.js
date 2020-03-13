@@ -135,3 +135,14 @@ $("#id_invoice_type").on("change", function(){
     $("tr#tr-recurring").hide();
     if($(this).val()==1) $("tr#tr-recurring").show();
 });
+
+
+//**************************************************************************************** */
+//
+//**************************************************************************************** */
+//
+function ajax_add_product(){
+    $.post("/ajax_add_product/", $("#addProductModal_form").serialize(), function(data){
+        console.log(data);
+    });
+}

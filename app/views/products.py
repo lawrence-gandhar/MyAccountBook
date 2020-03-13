@@ -87,7 +87,7 @@ class AddProducts(View):
                 )
 
                 img_save.save()
-        
+
         return redirect('/products/', permanent = False)
 
 #=========================================================================================
@@ -195,3 +195,31 @@ class EditProducts(View):
                 img_save.save()
         
         return redirect('/products/', permanent = False)
+
+#
+#
+#
+def ajax_add_product(request):
+
+    if request.POST and request.is_ajax():                        
+        
+        add_product = ProductForm(request.user, request.POST or None)
+        add_images = ProductPhotosForm(request.FILES or None)
+
+        ins = None
+
+        if add_product.is_valid():
+            ins = add_product.save()            
+            ins.user = request.user
+            ins.save()
+        
+        if add_images.is_valid() and ins is not None:
+            for img in request.FILES.getlist('product_image'):
+                img_save = ProductPhotos(
+                    product_image = img,
+                    product = ins
+                )
+
+                img_save.save()
+        return HttpResponse(1)
+    return HttpResponse(0)

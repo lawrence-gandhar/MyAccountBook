@@ -215,7 +215,7 @@ table{
 <div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content" style="background-color:currentcolor">
-            <form method="post" style="margin:0px" enctype="multipart/form-data">
+            <form id="addProductModal_form" method="post" style="margin:0px" enctype="multipart/form-data">
                 <div class="modal-header bg-warning">
                     <h5 class="modal-title" style="color:#000000; font-weight:bold;">Edit Account Details</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -383,7 +383,7 @@ table{
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-warning close" type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
-                    <button class="btn btn-sm btn-success" type="submit">Save</button>
+                    <button class="btn btn-sm btn-success" type="button" onclick="ajax_add_product()">Save</button>
                 </div>
             </form>
         </div>
