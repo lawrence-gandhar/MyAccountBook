@@ -51,6 +51,25 @@ def fetch_contact_addresses(request, ins=None):
 #**********************************************************************************************
 #
 
+def fetch_products(request):
+    products = ProductsModel.objects.filter(user = request.user).values()
+    return HttpResponse(json.dumps(products))
+
+def fetch_products_dropdown(request):
+    products = ProductsModel.objects.filter(user = request.user).values('id', 'product_name')
+    
+    html = ['<option></option>']
+
+    for row in products:
+        html.append('<option id="{}">{}</option>'.format(row["id"], row["product_name"]))
+
+    return HttpResponse(''.join(html))
+
+#**********************************************************************************************
+# FETCH CONTACT BILLING/SHIPPING ADDRESSES 
+#**********************************************************************************************
+#
+
 def fetch_product_details(request, ins=None):
     data = {'ret':0, 'details':{}, 'quantity_in_stock':0}
 

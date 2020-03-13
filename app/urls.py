@@ -96,6 +96,7 @@ urlpatterns += [
     path('fetch_contact_addresses/<int:ins>/', never_cache(login_required(common_views.fetch_contact_addresses)), name='fetch_contact_addresses'),
     path('fetch_product_details/<int:ins>/', never_cache(login_required(common_views.fetch_product_details)), name='fetch_product_details'),
     path('ajax_add_product/', never_cache(login_required(products.ajax_add_product)), name='ajax_add_product'),
+    path('fetch_products_dropdown/', never_cache(login_required(common_views.fetch_products_dropdown)), name='fetch_products_dropdown'),
 ]
 
 
