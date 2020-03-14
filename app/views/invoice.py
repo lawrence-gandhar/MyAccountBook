@@ -12,6 +12,8 @@ from app.models.invoice_model import *
 from app.models.collects_model import *
 from app.forms.invoice_forms import *
 from app.forms.items_form import *
+from app.forms.contact_forms import *
+from app.forms.tax_form import *
 
 from django.forms import inlineformset_factory
 
@@ -535,7 +537,7 @@ class CreateInvoice(View):
     
     # Custom CSS/JS Files For Inclusion into template
     data["css_files"] = []
-    data['js_files'] = ['custom_files/js/invoice.js']
+    data['js_files'] = ['custom_files/js/invoice.js', 'custom_files/js/contacts.js']
     
     ProductFormSet = inlineformset_factory(
             InvoiceModel, InvoiceProducts, extra = 1, 
@@ -557,6 +559,15 @@ class CreateInvoice(View):
         self.data["add_product_images_form"] = ProductPhotosForm()
 
         self.data["formset"] = self.ProductFormSet(queryset = ProductsModel.objects.filter(user = request.user))
+
+
+        self.data["contact_form"] = ContactsForm()
+        self.data["social_form"] = ContactsExtraForm()
+        self.data["tax_form"] = TaxForm()
+        self.data["other_details_form"] = OtherDetailsForm()
+        self.data["contact_address_form_1"] = ContactsAddressForm(prefix = 'form1')
+        self.data["contact_address_form_2"] = ContactsAddressForm(prefix = 'form2')
+        self.data["contact_account_details_form"] = ContactAccountDetailsForm()
 
         return render(request, self.template_name, self.data)
 
