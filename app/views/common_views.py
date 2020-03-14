@@ -13,6 +13,11 @@ from app.models.items_model import *
 from app.models.users_model import *
 from app.models.contacts_model import *
 
+from app.forms.invoice_forms import *
+from app.forms.items_form import *
+from app.forms.contact_forms import *
+from app.forms.tax_form import *
+
 from app.other_constants import country_list
 
 import json
@@ -65,6 +70,7 @@ def fetch_products_dropdown(request):
 
     return HttpResponse(''.join(html))
 
+
 #**********************************************************************************************
 # FETCH CONTACT BILLING/SHIPPING ADDRESSES 
 #**********************************************************************************************
@@ -84,3 +90,21 @@ def fetch_product_details(request, ins=None):
 
         return HttpResponse(json.dumps(data))
     return HttpResponse(json.dumps(data))
+
+
+#**********************************************************************************************
+# FETCH CONTACT BILLING/SHIPPING ADDRESSES 
+#**********************************************************************************************
+#
+
+def add_contact_or_employee(request):
+    if request.POST:
+        contact_form = ContactsForm(request.POST)
+        tax_form = TaxForm(request.POST)        
+        contact_address_form_1 = ContactsAddressForm(request.POST, prefix = 'form1')
+        contact_address_form_2 = ContactsAddressForm(request.POST, prefix = 'form2')
+        contact_account_details_form = ContactAccountDetailsForm(request.POST)
+
+        
+
+
