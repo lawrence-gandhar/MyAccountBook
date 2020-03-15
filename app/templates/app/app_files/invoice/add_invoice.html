@@ -395,7 +395,7 @@ table{
 <div class="modal fade" id="addContactModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content" style="background-color:currentcolor">
-            <form action="{% url 'add_contact_or_employee' %}" id="addProductModal_form" method="post" style="margin:0px" enctype="multipart/form-data">
+            <form id="addProductModal_form" method="post" style="margin:0px" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="modal-header bg-warning">
                     <h5 class="modal-title" style="color:#000000; font-weight:bold;">Add Contact Details</h5>
@@ -875,7 +875,7 @@ table{
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-warning close" type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
-                    <button class="btn btn-sm btn-success">Save</button>
+                    <button class="btn btn-sm btn-success" onclick="ajax_add_contact()" type="button">Save</button>
                 </div>
             </form>
         </div>

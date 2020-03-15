@@ -101,7 +101,7 @@ def fetch_product_details(request, ins=None):
 
 def add_contact_or_employee(request):
 
-    if request.POST:
+    if request.POST or request.is_ajax():
         contact_form = ContactsForm(request.POST)
         tax_form = TaxForm(request.POST)        
         contact_address_form_1 = ContactsAddressForm(request.POST, prefix = 'form1')
@@ -119,7 +119,7 @@ def add_contact_or_employee(request):
                     profile = Profile.objects.get(app_id__iexact = contact_form_ins.app_id)
                     imp_user = User.objects.get(pk = profile.user_id)
                 except:
-                    return redirect('/unauthorized/', permanent = False)
+                    return HttpResponse(0)
                 
                 contact_form_ins.imported_user = imp_user
             
@@ -172,6 +172,7 @@ def add_contact_or_employee(request):
             else:
                 pass
 
-        return redirect(request.META.get('HTTP_REFERER'), permanent = False)
-    return redirect('/unauthorized/', permanent = False)
+            return HttpResponse(1)
+        return HttpResponse(0)
+    return HttpResponse(0)
     
