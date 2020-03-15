@@ -3,6 +3,8 @@ from django.views import View
 from collections import OrderedDict, defaultdict
 from django.contrib import messages
 
+from django.shortcuts import redirect, render
+
 from django.conf import settings
 
 from django.db.models import *
@@ -98,6 +100,7 @@ def fetch_product_details(request, ins=None):
 #
 
 def add_contact_or_employee(request):
+
     if request.POST:
         contact_form = ContactsForm(request.POST)
         tax_form = TaxForm(request.POST)        
@@ -105,6 +108,70 @@ def add_contact_or_employee(request):
         contact_address_form_2 = ContactsAddressForm(request.POST, prefix = 'form2')
         contact_account_details_form = ContactAccountDetailsForm(request.POST)
 
-        
+        ins = None
 
+        if contact_form.is_valid():
+            ins = contact_form_ins = contact_form.save(commit = False)
+            contact_form_ins.user = request.user
 
+            if contact_form_ins.is_imported_user:
+                try:
+                    profile = Profile.objects.get(app_id__iexact = contact_form_ins.app_id)
+                    imp_user = User.objects.get(pk = profile.user_id)
+                except:
+                    return redirect('/unauthorized/', permanent = False)
+                
+                contact_form_ins.imported_user = imp_user
+            
+            social_form = ContactsExtraForm(request.POST, request.FILES, instance = contact_form_ins)
+            if social_form.is_valid():
+                social_form.save()
+
+            contact_form_ins.save() 
+
+        if ins is not None:
+            #
+            # tax form save
+            if tax_form.is_valid(): 
+                obj_tax = tax_form.save(commit = False)
+                obj_tax.contact = ins
+
+                other_details_form = OtherDetailsForm(request.POST, instance = obj_tax)
+                if other_details_form.is_valid():
+                    other_details_form.save()
+                obj_tax.save()    
+            else:
+                pass
+
+            #
+            # contact_account_details_form save
+            if contact_account_details_form.is_valid():
+                obj_acc = contact_account_details_form.save(commit = False)
+                obj_acc.contact = ins
+                obj_acc.save() 
+            else:
+                pass
+            
+            #
+            # address form save
+            if contact_address_form_1.is_valid():
+                obj_add1 = contact_address_form_1.save(commit = False)
+                obj_add1.contact = ins
+                obj_add1.save() 
+            else:
+                pass
+
+            #
+            # address 2 form save
+            if contact_address_form_2.is_valid():
+                x = request.POST.get("more_address_table_enabled", None)
+                if x == '1' and x is not None:
+                    obj_add2 = contact_address_form_2.save(commit = False)
+                    obj_add2.contact = ins
+                    obj_add2.save() 
+            else:
+                pass
+
+        return redirect(request.META.get('HTTP_REFERER'), permanent = False)
+    return redirect('/unauthorized/', permanent = False)
+    
