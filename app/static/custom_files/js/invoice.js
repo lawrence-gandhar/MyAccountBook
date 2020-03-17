@@ -156,7 +156,7 @@ function ajax_add_product(){
 function ajax_add_contact(){
     
     if($("#id_contact_name").val()!=""){
-        $.post("/add_contact_or_employee/", $("#addProductModal_form").serialize(), function(data){
+        $.post("/add_contact_or_employee/", $("#addContactModal_form").serialize(), function(data){
             alert(data)
         });
     }else{
