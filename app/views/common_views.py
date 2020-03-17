@@ -54,7 +54,7 @@ def fetch_contact_addresses(request, ins=None):
 
 
 #**********************************************************************************************
-# FETCH CONTACT BILLING/SHIPPING ADDRESSES 
+# FETCH PRODUCTS  
 #**********************************************************************************************
 #
 
@@ -74,7 +74,7 @@ def fetch_products_dropdown(request):
 
 
 #**********************************************************************************************
-# FETCH CONTACT BILLING/SHIPPING ADDRESSES 
+# FETCH PRODUCT DETAILS
 #**********************************************************************************************
 #
 
@@ -95,13 +95,13 @@ def fetch_product_details(request, ins=None):
 
 
 #**********************************************************************************************
-# FETCH CONTACT BILLING/SHIPPING ADDRESSES 
+# ADD CONTACT 
 #**********************************************************************************************
 #
 
 def add_contact_or_employee(request):
 
-    if request.POST or request.is_ajax():
+    if request.POST:
         contact_form = ContactsForm(request.POST)
         tax_form = TaxForm(request.POST)        
         contact_address_form_1 = ContactsAddressForm(request.POST, prefix = 'form1')
@@ -177,3 +177,18 @@ def add_contact_or_employee(request):
         return HttpResponse(0)
     return HttpResponse(0)
     
+#**********************************************************************************************
+# FETCH CONTACTS IN A DROPDOWN 
+#**********************************************************************************************
+#
+
+def get_contacts_dropdown(request):
+
+    contacts = Contacts.objects.filter(user = request.user).values()
+
+    html = ['<option></option>']
+
+    for row in contacts:
+        html.append('<option value="{}">{}</option>'.format(row["id"], row["contact_name"]))
+
+    return HttpResponse(''.join(html))

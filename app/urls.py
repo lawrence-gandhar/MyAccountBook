@@ -98,6 +98,7 @@ urlpatterns += [
     path('ajax_add_product/', never_cache(login_required(products.ajax_add_product)), name='ajax_add_product'),
     path('fetch_products_dropdown/', never_cache(login_required(common_views.fetch_products_dropdown)), name='fetch_products_dropdown'),
     path('add_contact_or_employee/', never_cache(login_required(common_views.add_contact_or_employee)), name='add_contact_or_employee'),
+    path('get_contacts_dropdown/', never_cache(login_required(common_views.get_contacts_dropdown)), name='get_contacts_dropdown'),
 ]
 
 

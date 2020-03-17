@@ -157,7 +157,10 @@ function ajax_add_contact(){
     
     if($("#id_contact_name").val()!=""){
         $.post("/add_contact_or_employee/", $("#addContactModal_form").serialize(), function(data){
-            alert(data)
+            $.get("/get_contacts_dropdown/",function(data){
+                $("#id_service_recipient").empty().append(data);
+                $("#addContactModal").modal('hide');
+            });
         });
     }else{
         $("#id_contact_name").focus();
