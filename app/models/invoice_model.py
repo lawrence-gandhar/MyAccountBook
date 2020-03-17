@@ -182,6 +182,13 @@ class InvoiceModel(models.Model):
         blank = True,
     )
 
+    service_recipient_address = models.IntegerField(
+        null = True,
+        blank = True,
+        db_index = True,
+    )
+
+
     invoice_no = models.CharField(
         max_length = 20,
         db_index = True,

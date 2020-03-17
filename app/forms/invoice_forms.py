@@ -100,7 +100,7 @@ class LessInvoiceForm(ModelForm):
     class Meta:
 
         model = InvoiceModel
-        fields = ('service_recipient', 'invoice_no', 'sales_person', 'invoice_type', 'recipient_state_code', 
+        fields = ('service_recipient', 'service_recipient_address', 'invoice_no', 'sales_person', 'invoice_type', 'recipient_state_code', 
                 'due_date', 'terms_invoice', 'message', 'attachments', 'start_date',
                 'frequency', 'repeat_for', 'shipping', 'adjustment', 'subtotal', 'total')
 
@@ -111,6 +111,7 @@ class LessInvoiceForm(ModelForm):
             'due_date' : TextInput(attrs = {'class':'form-control input-sm', 'placeholder': 'yyyy-mm-dd'}),
             'recipient_state_code' : TextInput(attrs = {'class':'form-control input-sm',}),
             'service_recipient' : Select(attrs={'class':'form-control input-sm',}),            
+            'service_recipient_address' : Select(attrs={'class':'form-control input-sm',}),            
             'sales_person' : Select(attrs={'class':'form-control input-sm',}),            
             'invoice_type' : Select(attrs={'class':'form-control input-sm',}, choices = items_constant.INVOICE_TYPE),            
             'attachments' : FileInput(attrs = {'class':'form-control input-sm',}),

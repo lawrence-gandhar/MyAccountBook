@@ -14,10 +14,11 @@ table{
     color:#a7a4a4;
 }
 
-#id_service_recipient{
-    width:95%;
+#id_service_recipient, #id_service_recipient_address{
+    width:90%;
     display:inline;
 }
+
 
 </style>
 
@@ -86,7 +87,11 @@ table{
                             </tr>                            
                             <tr>
                                 <td style="border:0px; vertical-align: top; padding-top: 10px;">Contact Addresses</td> 
-                                <td colspan="7" style="border:0px; text-transform: capitalize; padding-top: 10px; padding-left:10px;" id="contact_addresses"></td>
+                                <td colspan="7" style="border:0px;" id="contact_addresses">
+                                    {{invoice_form.service_recipient_address}}
+                                    <i title="Edit Address" class="material-icons" style="color:#d1cb00; cursor:pointer; display:none;" data-toggle="modal" data-target="#addressModal">create</i>
+                                    <i title="Add Address" class="material-icons" style="color:#ec7610; cursor:pointer; padding-left:10px; display:none;" data-toggle="modal" data-target="#addressModal">add_circle</i>
+                                </td>
                             </tr>
                             <tr>
                                 <td style="border:0px; vertical-align: top; ">Organization</td> 
@@ -869,6 +874,106 @@ table{
                                         </div>
                                     </div>
                                 </td> 
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-sm btn-warning close" type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
+                    <button class="btn btn-sm btn-success" onclick="ajax_add_contact()" type="button">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- -->
+
+<div class="modal fade" id="addressModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" style="background-color:currentcolor">
+            <form id="addressModal_form" method="post" style="margin:0px" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="modal-header bg-warning">
+                    <h5 class="modal-title" style="color:#000000; font-weight:bold;">Contact Address</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table-responsive">
+                        <tbody style=" width: 100%; display: inline-table;">
+                            <tr>
+                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
+                                    Contact Person
+                                </td>
+                                <td style="border:0px;">
+                                    {{ contact_address_form_1.contact_person}}
+                                </td>                                    
+                            </tr>
+                            <tr>
+                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
+                                    Flat/Office/Door No.
+                                </td>
+                                <td style="border:0px;">
+                                    {{ contact_address_form_1.flat_no }}
+                                </td>                                    
+                            </tr>
+                            <tr>
+                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
+                                    Street
+                                </td>
+                                <td style="border:0px;">
+                                    {{ contact_address_form_1.street }}
+                                </td>                                    
+                            </tr>
+                            <tr>
+                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
+                                    City
+                                </td>
+                                <td style="border:0px;">
+                                    {{ contact_address_form_1.city }}
+                                </td>                                    
+                            </tr>
+                            <tr>
+                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
+                                    Zipcode/Pincode
+                                </td>
+                                <td style="border:0px;">
+                                    {{ contact_address_form_1.pincode }}
+                                </td>                                    
+                            </tr>
+                            <tr>
+                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
+                                    State
+                                </td>
+                                <td style="border:0px;">
+                                    {{ contact_address_form_1.state }}
+                                </td>                                    
+                            </tr>
+                            <tr>
+                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
+                                    Country
+                                </td>
+                                <td style="border:0px;">
+                                    {{ contact_address_form_1.country }}
+                                </td>                                    
+                            </tr>
+                            <tr>
+                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
+                                    Is Shipping Address
+                                </td>
+                                <td style="border:0px;">
+                                    {{ contact_address_form_1.is_shipping_address }}
+                                </td>                                    
+                            </tr>
+                            <tr>
+                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
+                                    Is Billing Address
+                                </td>
+                                <td style="border:0px;">
+                                    {{ contact_address_form_1.is_billing_address }}
+                                </td>                                    
                             </tr>
                         </tbody>
                     </table>

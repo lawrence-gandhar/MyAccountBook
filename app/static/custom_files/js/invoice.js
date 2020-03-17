@@ -51,24 +51,31 @@ $("select#id_service_recipient").on("change", function(){
 
     var ids = $(this).val();
 
-    $.get('/fetch_contact_addresses/'+ids+'/', function(data){
-        data = $.parseJSON(data);
-
-        var htm = '';
-
-        $.each(data.addresses, function(i,v){
-            htm += '<p style="font-weight:bold; margin:0px">'+v.flat_no+', ';
-            htm += v.street+', ';
-            htm += v.city+', ';
-            htm += v.state+', ';
-            htm += +v.country+', ';
-            htm += v.pincode+'</p>';
+    if(ids){
+        $.get('/fetch_contact_addresses/'+ids+'/', function(data){
+            data = $.parseJSON(data);
+    
+            var htm = '';
+    
+            $.each(data.addresses, function(i,v){
+                htm += '<option value="'+v.id+'">'+v.flat_no+', ';
+                htm += v.street+', ';
+                htm += v.city+', ';
+                htm += v.state+', ';
+                htm += +v.country+', ';
+                htm += v.pincode+'</option>';
+            });
+    
+            $("#contact_addresses").find("i").show();
+    
+            $("#id_service_recipient_address").empty().append(htm);
+            $("td#organization_name").empty().text(data.organization_name);
+    
         });
-
-        $("td#contact_addresses").empty().append(htm);
-        $("td#organization_name").empty().text(data.organization_name);
-
-    });
+    }else{
+        $("#contact_addresses").find("i").hide();
+        $("#id_service_recipient_address").empty();
+    }    
 });
 
 //**************************************************************************************** */
@@ -144,6 +151,7 @@ $("#id_invoice_type").on("change", function(){
 function ajax_add_product(){
     $.post("/ajax_add_product/", $("#addProductModal_form").serialize(), function(data){
         $.get("/fetch_products_dropdown/", function(data){
+            $("#addProductModal_form").reset();
             $(".product_dropdown_select").empty().append(data);
         });
     });
@@ -159,7 +167,8 @@ function ajax_add_contact(){
         $.post("/add_contact_or_employee/", $("#addContactModal_form").serialize(), function(data){
             $.get("/get_contacts_dropdown/",function(data){
                 $("#id_service_recipient").empty().append(data);
-                $("#addContactModal").modal('hide');
+                $("#addContactModal_form").reset();
+                $("#addContactModal").modal('hide');                
             });
         });
     }else{
