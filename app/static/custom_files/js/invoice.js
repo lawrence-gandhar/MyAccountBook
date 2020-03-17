@@ -2,7 +2,15 @@ $(document).ready(function(){
 
     $("#tr-set-0").find("i").hide();
 
-})
+});
+
+//********************************************************************************* */
+// GLOBAL VARIABLES
+//********************************************************************************** */
+//
+
+address_list = []
+
 
 //********************************************************************************* */
 // ADD PRODUCT TO INVOICE
@@ -48,23 +56,28 @@ function delete_product_from_invoice_form(elem){
 //
 
 $("select#id_service_recipient").on("change", function(){
+    var ids = $(this).val();  
+    address_list = []
+    fetch_addresses(ids);
+});
 
-    var ids = $(this).val();
 
+function fetch_addresses(ids){
     if(ids){
         $.get('/fetch_contact_addresses/'+ids+'/', function(data){
-            data = $.parseJSON(data);
+            address_list = data = $.parseJSON(data);
     
             var htm = '';
     
             $.each(data.addresses, function(i,v){
 
                 if(v.id != null){
-                    htm += '<option value="'+v.id+'">'+v.flat_no+', ';
-                    htm += v.street+', ';
+                    htm += '<option value="'+v.id+'">'+v.contact_person+', ';
+                    htm += v.flat_no+', '; 
+                    htm += v.street+', '; 
                     htm += v.city+', ';
                     htm += v.state+', ';
-                    htm += +v.country+', ';
+                    htm += v.country+', ';
                     htm += v.pincode+'</option>';
                 }                
             });
@@ -78,8 +91,10 @@ $("select#id_service_recipient").on("change", function(){
     }else{
         $("#contact_addresses").find("i").hide();
         $("#id_service_recipient_address").empty();
-    }    
-});
+    }  
+}
+
+
 
 //**************************************************************************************** */
 // FETCH PRODUCT DETAILS
@@ -184,8 +199,37 @@ function ajax_add_contact(){
 //**************************************************************************************** */
 //
 
-function open_address_modal(ids = 1){
+function open_address_modal(ids){
+
+    document.getElementById("addressModal_form").reset();
+    
     $("#edit_or_add").val(ids);
+
+    if(ids == 0){
+        
+        $.each(address_list.addresses, function(i,v){
+
+            if(v.id == $("#id_service_recipient_address").val()){
+                $("#id_form3-contact_person").val(v.contact_person);
+                $("#id_form3-flat_no").val(v.flat_no);
+                $("#id_form3-street").val(v.street);
+                $("#id_form3-city").val(v.city);
+                $("#id_form3-pincode").val(v.pincode);
+                $("#id_form3-state").val(v.state);
+                $("#id_form3-country").val(v.country);
+
+                if(v.is_shipping_address) is_shipping_address = "True";
+                else is_shipping_address = "False";
+
+                if(v.is_billing_address) is_billing_address = "True";
+                else is_billing_address = "False";
+
+                $("#id_form3-is_shipping_address").val(is_shipping_address);
+                $("#id_form3-is_billing_address").val(is_billing_address);
+            }
+        });
+    }
+
     $("#addressModal").modal('show');
 }
 
@@ -198,14 +242,16 @@ function ajax_add_address(){
     url = "/add_edit_address/"+ids+"/";
 
     if(obj == 0){
-        url = "/add_edit_address/"+ids+"/"+$("#id_service_recipient_address").val()+"/";
+        var x_obj = $("#id_service_recipient_address").val();
+        if(x_obj!=null) url = "/add_edit_address/"+ids+"/"+x_obj+"/";
     } 
 
+    address_list = []
 
     $.post(url, $("#addressModal_form").serialize(), function(data){
-
-        console.log(data);
-
+        if(data == 1) fetch_addresses(ids);        
     });
+
+    $("#addressModal").modal('hide');
 
 }

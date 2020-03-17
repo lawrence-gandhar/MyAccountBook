@@ -894,7 +894,7 @@ table{
         <div class="modal-content" style="background-color:currentcolor">
             <form id="addressModal_form" method="post" style="margin:0px" enctype="multipart/form-data">
                 {% csrf_token %}
-                <input type="text" name="edit_or_add" id="edit_or_add" value="1">
+                <input type="hidden" name="edit_or_add" id="edit_or_add" value="1">
                 <div class="modal-header bg-warning">
                     <h5 class="modal-title" style="color:#000000; font-weight:bold;">Contact Address</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -909,7 +909,7 @@ table{
                                     Contact Person
                                 </td>
                                 <td style="border:0px;">
-                                    {{ contact_address_form_1.contact_person}}
+                                    {{ contact_address_form_3.contact_person}}
                                 </td>                                    
                             </tr>
                             <tr>
@@ -917,7 +917,7 @@ table{
                                     Flat/Office/Door No.
                                 </td>
                                 <td style="border:0px;">
-                                    {{ contact_address_form_1.flat_no }}
+                                    {{ contact_address_form_3.flat_no }}
                                 </td>                                    
                             </tr>
                             <tr>
@@ -925,7 +925,7 @@ table{
                                     Street
                                 </td>
                                 <td style="border:0px;">
-                                    {{ contact_address_form_1.street }}
+                                    {{ contact_address_form_3.street }}
                                 </td>                                    
                             </tr>
                             <tr>
@@ -933,7 +933,7 @@ table{
                                     City
                                 </td>
                                 <td style="border:0px;">
-                                    {{ contact_address_form_1.city }}
+                                    {{ contact_address_form_3.city }}
                                 </td>                                    
                             </tr>
                             <tr>
@@ -941,7 +941,7 @@ table{
                                     Zipcode/Pincode
                                 </td>
                                 <td style="border:0px;">
-                                    {{ contact_address_form_1.pincode }}
+                                    {{ contact_address_form_3.pincode }}
                                 </td>                                    
                             </tr>
                             <tr>
@@ -949,7 +949,7 @@ table{
                                     State
                                 </td>
                                 <td style="border:0px;">
-                                    {{ contact_address_form_1.state }}
+                                    {{ contact_address_form_3.state }}
                                 </td>                                    
                             </tr>
                             <tr>
@@ -957,7 +957,7 @@ table{
                                     Country
                                 </td>
                                 <td style="border:0px;">
-                                    {{ contact_address_form_1.country }}
+                                    {{ contact_address_form_3.country }}
                                 </td>                                    
                             </tr>
                             <tr>
@@ -965,7 +965,7 @@ table{
                                     Is Shipping Address
                                 </td>
                                 <td style="border:0px;">
-                                    {{ contact_address_form_1.is_shipping_address }}
+                                    {{ contact_address_form_3.is_shipping_address }}
                                 </td>                                    
                             </tr>
                             <tr>
@@ -973,7 +973,7 @@ table{
                                     Is Billing Address
                                 </td>
                                 <td style="border:0px;">
-                                    {{ contact_address_form_1.is_billing_address }}
+                                    {{ contact_address_form_3.is_billing_address }}
                                 </td>                                    
                             </tr>
                         </tbody>

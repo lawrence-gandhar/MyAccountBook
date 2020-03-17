@@ -567,6 +567,7 @@ class CreateInvoice(View):
         self.data["other_details_form"] = OtherDetailsForm()
         self.data["contact_address_form_1"] = ContactsAddressForm(prefix = 'form1')
         self.data["contact_address_form_2"] = ContactsAddressForm(prefix = 'form2')
+        self.data["contact_address_form_3"] = ContactsAddressForm(prefix = 'form3')
         self.data["contact_account_details_form"] = ContactAccountDetailsForm()
 
         return render(request, self.template_name, self.data)

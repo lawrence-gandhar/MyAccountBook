@@ -41,7 +41,7 @@ def fetch_contact_addresses(request, ins=None):
         except:
             return HttpResponse(json.dumps(data))
 
-        contact_addresses = Contact_Addresses.objects.filter(contact = contact).values('contact_person', 
+        contact_addresses = Contact_Addresses.objects.filter(contact = contact).values('id','contact_person', 
             'flat_no', 'street', 'city', 'state', 'country', 'pincode', 'is_billing_address', 
             'is_shipping_address')
         
@@ -202,10 +202,32 @@ def get_contacts_dropdown(request):
 def add_edit_address(request, ins = None, obj = None):
 
     if ins is not None:
-        
+        try:
+            contact = Contacts.objects.get(pk = int(ins))
+        except:
+            return HttpResponse(0)
+
         if obj is not None:
-            print(request)
+            try:
+                address = Contact_Addresses.objects.get(pk = int(obj))
+            except:
+                return HttpResponse(0)            
+
+            address_form = ContactsAddressForm( request.POST, instance = address, prefix = 'form3')
+
+            if address_form.is_valid():
+                address_form.save()
+                return HttpResponse(1)        
+        else:
+            address_form = ContactsAddressForm(request.POST, prefix = 'form3')
+
+            if address_form.is_valid():
+                add_f = address_form.save(commit = False)
+                add_f.contact = contact
+                add_f.save()
+                return HttpResponse(1)
+
             return HttpResponse(2)    
-        return HttpResponse(1)
+        return HttpResponse(4)
     
     return HttpResponse(0)
