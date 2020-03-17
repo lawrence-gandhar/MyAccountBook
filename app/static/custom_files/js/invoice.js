@@ -58,12 +58,15 @@ $("select#id_service_recipient").on("change", function(){
             var htm = '';
     
             $.each(data.addresses, function(i,v){
-                htm += '<option value="'+v.id+'">'+v.flat_no+', ';
-                htm += v.street+', ';
-                htm += v.city+', ';
-                htm += v.state+', ';
-                htm += +v.country+', ';
-                htm += v.pincode+'</option>';
+
+                if(v.id != null){
+                    htm += '<option value="'+v.id+'">'+v.flat_no+', ';
+                    htm += v.street+', ';
+                    htm += v.city+', ';
+                    htm += v.state+', ';
+                    htm += +v.country+', ';
+                    htm += v.pincode+'</option>';
+                }                
             });
     
             $("#contact_addresses").find("i").show();
@@ -181,11 +184,23 @@ function ajax_add_contact(){
 //**************************************************************************************** */
 //
 
+function open_address_modal(ids = 1){
+    $("#edit_or_add").val(ids);
+    $("#addressModal").modal('show');
+}
+
+
 function ajax_add_address(){
 
     ids = $("#id_service_recipient").val();
+    obj = $("#edit_or_add").val();
 
     url = "/add_edit_address/"+ids+"/";
+
+    if(obj == 0){
+        url = "/add_edit_address/"+ids+"/"+$("#id_service_recipient_address").val()+"/";
+    } 
+
 
     $.post(url, $("#addressModal_form").serialize(), function(data){
 

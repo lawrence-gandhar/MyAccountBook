@@ -89,8 +89,8 @@ table{
                                 <td style="border:0px; vertical-align: top; padding-top: 10px;">Contact Addresses</td> 
                                 <td colspan="7" style="border:0px;" id="contact_addresses">
                                     {{invoice_form.service_recipient_address}}
-                                    <i title="Edit Address" class="material-icons" style="color:#d1cb00; cursor:pointer; display:none;" data-toggle="modal" data-target="#addressModal">create</i>
-                                    <i title="Add Address" class="material-icons" style="color:#ec7610; cursor:pointer; padding-left:10px; display:none;" data-toggle="modal" data-target="#addressModal">add_circle</i>
+                                    <i title="Edit Address" class="material-icons" style="color:#d1cb00; cursor:pointer; display:none;" onclick="open_address_modal(0)">create</i>
+                                    <i title="Add Address" class="material-icons" style="color:#ec7610; cursor:pointer; padding-left:10px; display:none;" onclick="open_address_modal(1)">add_circle</i>
                                 </td>
                             </tr>
                             <tr>
@@ -894,6 +894,7 @@ table{
         <div class="modal-content" style="background-color:currentcolor">
             <form id="addressModal_form" method="post" style="margin:0px" enctype="multipart/form-data">
                 {% csrf_token %}
+                <input type="text" name="edit_or_add" id="edit_or_add" value="1">
                 <div class="modal-header bg-warning">
                     <h5 class="modal-title" style="color:#000000; font-weight:bold;">Contact Address</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">

@@ -204,6 +204,7 @@ def add_edit_address(request, ins = None, obj = None):
     if ins is not None:
         
         if obj is not None:
+            print(request)
             return HttpResponse(2)    
         return HttpResponse(1)
     
