@@ -154,7 +154,12 @@ function ajax_add_product(){
 //**************************************************************************************** */
 //
 function ajax_add_contact(){
-    $.post("/add_contact_or_employee/", $("#addProductModal_form").serialize(), function(data){
-        alert(data);
-    });
+    
+    if($("#id_contact_name").val()!=""){
+        $.post("/add_contact_or_employee/", $("#addProductModal_form").serialize(), function(data){
+            alert(data)
+        });
+    }else{
+        $("#id_contact_name").focus();
+    }
 }

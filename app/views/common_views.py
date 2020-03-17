@@ -110,7 +110,10 @@ def add_contact_or_employee(request):
 
         ins = None
 
+        print(contact_form.errors)
+
         if contact_form.is_valid():
+
             ins = contact_form_ins = contact_form.save(commit = False)
             contact_form_ins.user = request.user
 
@@ -173,6 +176,6 @@ def add_contact_or_employee(request):
                 pass
 
             return HttpResponse(1)
-        return HttpResponse(0)
-    return HttpResponse(0)
+        return HttpResponse(4)
+    return HttpResponse(3)
     
