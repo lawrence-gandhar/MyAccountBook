@@ -99,6 +99,8 @@ urlpatterns += [
     path('fetch_products_dropdown/', never_cache(login_required(common_views.fetch_products_dropdown)), name='fetch_products_dropdown'),
     path('add_contact_or_employee/', never_cache(login_required(common_views.add_contact_or_employee)), name='add_contact_or_employee'),
     path('get_contacts_dropdown/', never_cache(login_required(common_views.get_contacts_dropdown)), name='get_contacts_dropdown'),
+    path('add_edit_address/<int:ins>/', never_cache(login_required(common_views.add_edit_address)), name='add_edit_address'),
+    path('add_edit_address/<int:ins>/<int:obj>/', never_cache(login_required(common_views.add_edit_address)), name='add_edit_address'),
 ]
 
 

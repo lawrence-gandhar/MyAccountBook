@@ -192,3 +192,19 @@ def get_contacts_dropdown(request):
         html.append('<option value="{}">{}</option>'.format(row["id"], row["contact_name"]))
 
     return HttpResponse(''.join(html))
+
+
+#**********************************************************************************************
+# ADD/EDIT ADDRESS FOR A CONTACT 
+#**********************************************************************************************
+#
+
+def add_edit_address(request, ins = None, obj = None):
+
+    if ins is not None:
+        
+        if obj is not None:
+            return HttpResponse(2)    
+        return HttpResponse(1)
+    
+    return HttpResponse(0)
