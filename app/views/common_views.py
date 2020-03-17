@@ -68,7 +68,7 @@ def fetch_products_dropdown(request):
     html = ['<option></option>']
 
     for row in products:
-        html.append('<option id="{}">{}</option>'.format(row["id"], row["product_name"]))
+        html.append('<option value="{}">{}</option>'.format(row["id"], row["product_name"]))
 
     return HttpResponse(''.join(html))
 
