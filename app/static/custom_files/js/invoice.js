@@ -142,7 +142,7 @@ function get_product_details(elem){
         $("#id_invoiceproducts_set-"+atr+"-quantity").val(0);
         $("#id_invoiceproducts_set-"+atr+"-price").val(data.details[0].selling_price);
         $("#id_invoiceproducts_set-"+atr+"-discount").val(data.details[0].discount);
-        $("#id_invoiceproducts_set-"+atr+"-tax").val(data.details[0].gst);        
+        $("#id_invoiceproducts_set-"+atr+"-tax").val(parseInt(data.details[0].gst));        
     });
 }
 
@@ -158,8 +158,12 @@ function product_quantity(elem){
     atr = atr.replace("-quantity","");
 
     subtotal = $(elem).val() * $("#id_invoiceproducts_set-"+atr+"-price").val();
-    subtotal_inc_tax = subtotal + (subtotal * (parseInt($("#id_invoiceproducts_set-"+atr+"-tax").val())/100));
-
+    subtotal_inc_tax = 0;
+    
+    if($("#id_invoiceproducts_set-"+atr+"-tax").val()>0){
+        subtotal_inc_tax = subtotal + (subtotal * (parseInt($("#id_invoiceproducts_set-"+atr+"-tax").val())/100));
+    }
+    
     $("#id_invoiceproducts_set-"+atr+"-subtotal").val(subtotal);
     $("#id_invoiceproducts_set-"+atr+"-subtotal_inc_tax").val(subtotal_inc_tax);
   
