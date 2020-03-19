@@ -491,7 +491,7 @@ COUNTRIES_LIST_DICT = {
     "ZW": "Zimbabwe",
 }
 
-STATE_LIST_DICT = {
+STATE_LIST_DICT = [
     {
         "code": "AN", 
         "name": "Andaman and Nicobar Islands", 
@@ -677,7 +677,8 @@ STATE_LIST_DICT = {
         "name": "West Bengal", 
         "tin" : "19"
     }
-}
+]
+
 
 STATE_LIST_CHOICES = (
     ("AN", "Andaman and Nicobar Islands"),

@@ -109,7 +109,7 @@ class LessInvoiceForm(ModelForm):
             'terms_invoice' : TextInput(attrs = {'class':'form-control input-sm',}),
             'message' : Textarea(attrs = {'class':'form-control input-sm',}),
             'due_date' : TextInput(attrs = {'class':'form-control input-sm', 'placeholder': 'yyyy-mm-dd'}),
-            'recipient_state_code' : TextInput(attrs = {'class':'form-control input-sm',}, choices = country_list.STATE_LIST_CHOICES),
+            'recipient_state_code' : Select(attrs = {'class':'form-control input-sm',}, choices = country_list.STATE_LIST_CHOICES),
             'service_recipient' : Select(attrs={'class':'form-control input-sm',}),            
             'service_recipient_address' : Select(attrs={'class':'form-control input-sm',}),            
             'sales_person' : Select(attrs={'class':'form-control input-sm',}),            
