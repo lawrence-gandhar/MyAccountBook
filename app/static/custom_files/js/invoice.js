@@ -21,9 +21,7 @@ $("#id_recipient_state_code").on("change",function(){
     if(usc!="None" && $(this).val() === usc && $(this).val()!=""){
         $(".tbody-cgst, .thead-cgst").show();
         $("#thead-igst, .tbody-igst").css('display', 'none');
-        alert("found");
     }else{
-        alert("failed");
         $("#thead-igst, .tbody-igst").show();
         $(".tbody-cgst").hide();
         $(".thead-cgst").hide();
@@ -65,7 +63,6 @@ function delete_product_from_invoice_form(elem){
         $("#"+tr.attr("id")).remove();
         var rowCount = $('#product_table tr').length;
         $("#id_invoiceproducts_set-TOTAL_FORMS").val(rowCount);
-        console.log($("#id_invoiceproducts_set-TOTAL_FORMS").val());
     }
 }
 
