@@ -197,6 +197,7 @@ class User_Address_Details(models.Model):
         blank = True,
         null = True,
         db_index = True,
+        choices = country_list.STATE_LIST_CHOICES,
     )
 
     country = models.CharField(
