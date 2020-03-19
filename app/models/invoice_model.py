@@ -332,6 +332,11 @@ class InvoiceModel(models.Model):
         db_index = True,
     )
 
+    subtotal_inc_tax = models.IntegerField(
+        default = 0,
+        db_index = True,
+    )
+
     total = models.IntegerField(
         default = 0,
         db_index = True,

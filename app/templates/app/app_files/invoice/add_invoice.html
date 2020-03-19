@@ -62,7 +62,7 @@ table{
                             <tr>                                
                                 <td style="border:0px; vertical-align: bottom; width:140px; ">Place Of Supply</td>
                                 <td style="border:0px;">
-                                    <input type="text" value="{{ request.user.id|get_user_state_code }}">
+                                    <input type="text" id="user_state_code" value="{{ request.user.id|get_user_state_code }}" hidden>
                                     {{ invoice_form.recipient_state_code }}
                                 </td>  
                                 <td style="border:0px; vertical-align: bottom; width:100px; text-align:center">Due Date</td>
@@ -127,9 +127,10 @@ table{
                                                 <td style="border:0px; vertical-align: inherit; text-align:center;">Price</td>
                                                 <td style="border:0px; vertical-align: inherit; text-align:center;">Discount</td>
                                                 <td style="border:0px; vertical-align: inherit; text-align:center;" id="thead-igst">IGST</td>
-                                                <td style="border:0px; vertical-align: inherit; text-align:center; display:none;" id="thead-cgst">CGST</td>
-                                                <td style="border:0px; vertical-align: inherit; text-align:center; display:none" id="thead-sgst">SGST</td>                                                
+                                                <td style="border:0px; vertical-align: inherit; text-align:center; display:none;" class="thead-cgst">CGST</td>
+                                                <td style="border:0px; vertical-align: inherit; text-align:center; display:none" class="thead-cgst">SGST</td>                                                
                                                 <td style="border:0px; vertical-align: inherit; text-align:center;">Sub Total <br/>(Excl. Tax)</td>
+                                                <td style="border:0px; vertical-align: inherit; text-align:center;">Sub Total <br/>(Incl. Tax)</td>
                                                 <td style="border:0px; vertical-align: inherit; text-align:center;"></td>
                                             </tr>
                                             {{ formset.management_form }}
@@ -146,17 +147,20 @@ table{
                                                     <td style="border:0px; width:100px">
                                                         <input type="text" class="form-control input-sm" disabled id="id_invoiceproducts_set-0-discount" value="0">
                                                     </td>                                                    
-                                                    <td style="border:0px; width:100px">
+                                                    <td style="border:0px; width:100px" class="tbody-igst">
                                                         <input type="text" class="form-control input-sm" disabled id="id_invoiceproducts_set-0-tax" value="0">
                                                     </td> 
                                                     <td style="border:0px; width:100px; display:none;" class="tbody-cgst">
                                                         <input type="text" class="form-control input-sm" disabled id="id_invoiceproducts_set-0-ctax" value="0">
                                                     </td>
-                                                    <td style="border:0px; width:100px; display:none;" class="tbody-sgst">
+                                                    <td style="border:0px; width:100px; display:none;" class="tbody-cgst">
                                                         <input type="text" class="form-control input-sm" disabled id="id_invoiceproducts_set-0-stax" value="0">
                                                     </td>                                                                                                       
                                                     <td style="border:0px; width:100px" class="product_subtotal">
                                                         <input type="text" class="form-control input-sm" disabled id="id_invoiceproducts_set-0-subtotal" value="0">
+                                                    </td>
+                                                    <td style="border:0px; width:100px" class="product_subtotal_inc_tax">
+                                                        <input type="text" class="form-control input-sm" disabled id="id_invoiceproducts_set-0-subtotal_inc_tax" value="0">
                                                     </td>
                                                     <td style="border:0px; width:20px; color:#ff5e00;" class="text-center">
                                                         <i class="material-icons" title="Remove" style="cursor:pointer; position:relative; top:10px;" onclick="delete_product_from_invoice_form($(this))">delete_forever</i>
@@ -182,10 +186,10 @@ table{
                             </tr>           
                             <tr>
                                 <td colspan="5" style="border:0px; text-align:right; font-weight:bold;">
-                                    GST
+                                    Tax
                                 </td>
                                 <td style="border:0px; border-left:1px solid #dc7fec; text-align:right">
-                                    {{invoice_form.gst}}
+                                    {{invoice_form.subtotal_inc_tax}}
                                 </td>
                             </tr> 
                             <tr>

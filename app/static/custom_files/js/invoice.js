@@ -11,6 +11,25 @@ $(document).ready(function(){
 
 address_list = []
 
+//
+//
+//
+//
+$("#id_recipient_state_code").on("change",function(){
+    var usc = $("#user_state_code").val();
+
+    if(usc!="None" && $(this).val() === usc && $(this).val()!=""){
+        $(".tbody-cgst, .thead-cgst").show();
+        $("#thead-igst, .tbody-igst").css('display', 'none');
+        alert("found");
+    }else{
+        alert("failed");
+        $("#thead-igst, .tbody-igst").show();
+        $(".tbody-cgst").hide();
+        $(".thead-cgst").hide();
+    }
+
+});
 
 //********************************************************************************* */
 // ADD PRODUCT TO INVOICE
@@ -114,15 +133,19 @@ function get_product_details(elem){
 
         $("#id_invoiceproducts_set-"+atr+"-producttype").val(data.product_type);
 
+        /*
         quantity_in_stock_html = '';
         for(i=0; i <= data.quantity_in_stock; i++){
             quantity_in_stock_html += '<option>'+i+'</option>';
         }
 
         $("#id_invoiceproducts_set-"+atr+"-quantity").empty().append(quantity_in_stock_html);
+        */
+
+        $("#id_invoiceproducts_set-"+atr+"-quantity").val(0);
         $("#id_invoiceproducts_set-"+atr+"-price").val(data.details[0].selling_price);
         $("#id_invoiceproducts_set-"+atr+"-discount").val(data.details[0].discount);
-        $("#id_invoiceproducts_set-"+atr+"-tax").val(data.details[0].gst+"%");        
+        $("#id_invoiceproducts_set-"+atr+"-tax").val(data.details[0].gst);        
     });
 }
 
@@ -138,18 +161,24 @@ function product_quantity(elem){
     atr = atr.replace("-quantity","");
 
     subtotal = $(elem).val() * $("#id_invoiceproducts_set-"+atr+"-price").val();
+    subtotal_inc_tax = subtotal + (subtotal * (parseInt($("#id_invoiceproducts_set-"+atr+"-tax").val())/100));
+
     $("#id_invoiceproducts_set-"+atr+"-subtotal").val(subtotal);
+    $("#id_invoiceproducts_set-"+atr+"-subtotal_inc_tax").val(subtotal_inc_tax);
   
     //
     var np_forms = $("#id_invoiceproducts_set-TOTAL_FORMS").val();
 
     sum = 0;
+    total_tax = 0;
     for(i=0; i<np_forms; i++){
         sum += parseInt($("#id_invoiceproducts_set-"+i+"-subtotal").val());
+        total_tax += subtotal * (parseInt($("#id_invoiceproducts_set-"+atr+"-tax").val())/100);
     }
 
     $("#id_subtotal").val(sum);
-    $("#id_total").val(sum);
+    $("#id_subtotal_inc_tax").val(total_tax);
+    $("#id_total").val(sum+total_tax);
 }
 
 //**************************************************************************************** */
@@ -169,7 +198,7 @@ $("#id_invoice_type").on("change", function(){
 function ajax_add_product(){
     $.post("/ajax_add_product/", $("#addProductModal_form").serialize(), function(data){
         $.get("/fetch_products_dropdown/", function(data){
-            $("#addProductModal_form").reset();
+            document.getElementById("addProductModal_form").reset();
             $(".product_dropdown_select").empty().append(data);
         });
     });
@@ -234,6 +263,10 @@ function open_address_modal(ids){
 }
 
 
+//**************************************************************************************** */
+//
+//**************************************************************************************** */
+//
 function ajax_add_address(){
 
     ids = $("#id_service_recipient").val();

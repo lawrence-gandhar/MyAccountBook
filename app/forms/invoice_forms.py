@@ -101,7 +101,7 @@ class LessInvoiceForm(ModelForm):
 
         model = InvoiceModel
         fields = ('service_recipient', 'service_recipient_address', 'invoice_no', 'sales_person', 'invoice_type', 'recipient_state_code', 
-                'due_date', 'terms_invoice', 'message', 'attachments', 'start_date',
+                'due_date', 'terms_invoice', 'message', 'attachments', 'start_date', 'subtotal_inc_tax',
                 'frequency', 'repeat_for', 'shipping', 'adjustment', 'subtotal', 'total')
 
         widgets = {
@@ -121,6 +121,7 @@ class LessInvoiceForm(ModelForm):
             'repeat_for' : TextInput(attrs = {'class':'form-control input-sm',}),
             'adjustment' : TextInput(attrs = {'class':'form-control input-sm', 'value':'0',}),
             'subtotal' : TextInput(attrs = {'class':'form-control input-sm', 'value':'0', 'readonly':'true'}),
+            'subtotal_inc_tax' : TextInput(attrs = {'class':'form-control input-sm', 'value':'0', 'readonly':'true'}),
             'total' : TextInput(attrs = {'class':'form-control input-sm', 'value':'0', 'readonly':'true'}),
         }        
         

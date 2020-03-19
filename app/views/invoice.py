@@ -544,7 +544,7 @@ class CreateInvoice(View):
             fields=('product', 'quantity', 'inventory'),
             widgets = {
                 'product' : Select(attrs = {'class':'form-control input-sm product_dropdown_select', 'onchange':'get_product_details($(this))'},),
-                'quantity' : Select(attrs = {'class':'form-control input-sm', 'onchange': 'product_quantity($(this))'},),
+                'quantity' : NumberInput(attrs = {'class':'form-control input-sm', 'onchange': 'product_quantity($(this))'},),
             }    
         )
 
