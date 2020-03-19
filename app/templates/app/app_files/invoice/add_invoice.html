@@ -124,9 +124,11 @@ table{
                                                 <td style="border:0px; vertical-align: inherit; text-align:center;">Quantity</td>
                                                 <td style="border:0px; vertical-align: inherit; text-align:center;">Price</td>
                                                 <td style="border:0px; vertical-align: inherit; text-align:center;">Discount</td>
-                                                <td style="border:0px; vertical-align: inherit; text-align:center;">Tax</td>
+                                                <td style="border:0px; vertical-align: inherit; text-align:center;" id="thead-igst">IGST</td>
+                                                <td style="border:0px; vertical-align: inherit; text-align:center; display:none;" id="thead-cgst">CGST</td>
+                                                <td style="border:0px; vertical-align: inherit; text-align:center; display:none" id="thead-sgst">SGST</td>                                                
                                                 <td style="border:0px; vertical-align: inherit; text-align:center;">Sub Total <br/>(Excl. Tax)</td>
-                                                <td></td>
+                                                <td style="border:0px; vertical-align: inherit; text-align:center;"></td>
                                             </tr>
                                             {{ formset.management_form }}
                                             {% for form in formset %}                                                
@@ -144,7 +146,13 @@ table{
                                                     </td>                                                    
                                                     <td style="border:0px; width:100px">
                                                         <input type="text" class="form-control input-sm" disabled id="id_invoiceproducts_set-0-tax" value="0">
-                                                    </td>                                                    
+                                                    </td> 
+                                                    <td style="border:0px; width:100px; display:none;" class="tbody-cgst">
+                                                        <input type="text" class="form-control input-sm" disabled id="id_invoiceproducts_set-0-ctax" value="0">
+                                                    </td>
+                                                    <td style="border:0px; width:100px; display:none;" class="tbody-sgst">
+                                                        <input type="text" class="form-control input-sm" disabled id="id_invoiceproducts_set-0-stax" value="0">
+                                                    </td>                                                                                                       
                                                     <td style="border:0px; width:100px" class="product_subtotal">
                                                         <input type="text" class="form-control input-sm" disabled id="id_invoiceproducts_set-0-subtotal" value="0">
                                                     </td>
