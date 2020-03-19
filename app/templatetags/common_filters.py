@@ -117,3 +117,17 @@ def tick_mark(value):
         html = '<span class="mdi mdi-close" style="color:#000000"></span>'
 
     return safestring.mark_safe(html)
+
+
+@register.filter
+def get_user_state_code(value):
+
+    try:
+        user = users_model.User_Address_Details.objects.get(is_billing_address = True, user_id = value)
+        return user.state
+    except:
+        try:
+            user = users_model.User_Address_Details.objects.get(is_shipping_address = True, user_id = value)
+            return user.state
+        except:
+            return None

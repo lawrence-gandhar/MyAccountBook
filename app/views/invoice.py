@@ -534,7 +534,7 @@ class CreateInvoice(View):
     data["view"] = ""
     data["active_link"] = 'Invoice'
     data["included_template"] = 'app/app_files/invoice/add_invoice.html'
-    
+     
     # Custom CSS/JS Files For Inclusion into template
     data["css_files"] = []
     data['js_files'] = ['custom_files/js/invoice.js', 'custom_files/js/contacts.js']
@@ -553,6 +553,7 @@ class CreateInvoice(View):
     #
     #
     def get(self, request, *args, **kwargs):
+
         self.data["invoice_form"] = LessInvoiceForm(request.user)
 
         self.data["add_product_form"] = ProductForm(request.user)

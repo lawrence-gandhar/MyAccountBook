@@ -491,193 +491,157 @@ COUNTRIES_LIST_DICT = {
     "ZW": "Zimbabwe",
 }
 
-STATE_LIST_DICT = [
-    {
-        "code": "AN", 
+STATE_LIST_DICT = {
+    "AN" : {
         "name": "Andaman and Nicobar Islands", 
         "tin" : "35",
     },
-    {
-        "code": "AP", 
+    "AP" : {
+         
         "name": "Andhra Pradesh", 
         "tin" : "37",
     },
-    {
-        "code": "AR", 
+    "AR" : { 
         "name": "Arunachal Pradesh", 
         "tin" : "12",
     },
-    {
-        "code": "AS", 
+    "AS" : { 
         "name": "Assam", 
         "tin" : "18",
     },
-    {
-        "code": "BR", 
+    "BR" : { 
         "name": "Bihar", 
         "tin" : "10",
     },
-    {
-        "code": "CG", 
+    "CG" : { 
         "name": "Chandigarh", 
         "tin" : "04",
     },
-    {
-        "code": "CH", 
+    "CH" : { 
         "name": "Chhattisgarh", 
         "tin" : "22",
     },
-    {
-        "code": "DH", 
+    "DH" : {     
         "name": "Dadra and Nagar Haveli", 
         "tin" : "26",
     },
-    {
-        "code": "DD", 
+    "DD" : {   
         "name": "Daman and Diu", 
         "tin" : "25",
     },
-    {
-        "code": "DL", 
+    "DL" : { 
         "name": "Delhi", 
         "tin" : "07",
     },
-    {
-        "code": "GA", 
+    "GA" : {   
         "name": "Goa", 
         "tin" : "30",
     },
-    {
-        "code": "GJ", 
+    "GJ" : { 
         "name": "Gujarat", 
         "tin" : "24",
     },
-    {
-        "code": "HR", 
+    "HR" : { 
         "name": "Haryana", 
         "tin" : "06",
     },
-    {
-        "code": "HP", 
+    "HP" : { 
         "name": "Himachal Pradesh", 
         "tin" : "02",
     },
-    {
-        "code": "JK", 
+    "JK" : { 
         "name": "Jammu and Kashmir", 
         "tin" : "01",
     },
-    {
-        "code": "JH", 
+    "JH" : { 
         "name": "Jharkhand", 
         "tin" : "20",
     },
-    {
-        "code": "KA", 
+    "KA" : { 
         "name": "Karnataka", 
         "tin" : "29",
     },
-    {
-        "code": "KL", 
+    "KL" : { 
         "name": "Kerala", 
         "tin" : "32",
     },
-    {
-        "code": "LD", 
+    "LD" : { 
         "name": "Lakshadweep", 
         "tin" : "31",
     },
-    {
-        "code": "LA", 
+    "LA" : { 
         "name": "Ladakh", 
         "tin" : "38",
     },
-    {
-        "code": "MP", 
+    "MP" : { 
         "name": "Madhya Pradesh", 
         "tin" : "23",
     },
-    {
-        "code": "MH", 
+    "MH" : { 
         "name": "Maharashtra", 
         "tin" : "27",
     },
-    {
-        "code": "MN", 
+    "MN" : { 
         "name": "Manipur", 
         "tin" : "14",
     },
-    {
-        "code": "ML", 
+    "ML" : { 
         "name": "Meghalaya", 
         "tin" : "17",
     },
-    {
-        "code": "MZ", 
+    "MZ" : { 
         "name": "Mizoram", 
         "tin" : "15",
     },
-    {
-        "code": "NL", 
+    "NL" : { 
         "name": "Nagaland", 
         "tin" : "13",
     },
-    {
-        "code": "OR", 
+    "OR" : { 
         "name": "Odisha", 
         "tin" : "21",
     },
-    {
-        "code": "PY", 
+    "PY" : { 
         "name": "Puducherry", 
         "tin" : "34",
     },
-    {
-        "code": "PB", 
+    "PB" : { 
         "name": "Punjab", 
         "tin" : "03",
     },
-    {
-        "code": "RJ", 
+    "RJ" : { 
         "name": "Rajasthan", 
         "tin" : "08",
     },
-    {
-        "code": "SK", 
+    "SK" : { 
         "name": "Sikkim", 
         "tin" : "11",
     },
-    {
-        "code": "TN", 
+    "TN" : { 
         "name": "Tamil Nadu", 
         "tin" : "33",
     },
-    {
-        "code": "TS", 
+    "TS" : { 
         "name": "Telangana", 
         "tin" : "36", 
     },
-    {
-        "code": "TR", 
+    "TR" : { 
         "name": "Tripura", 
         "tin" : "16", 
     },
-    {
-        "code": "UK", 
+    "UK" : { 
         "name": "Uttarakhand", 
         "tin" : "05", 
     },
-    {
-        "code": "UP", 
+    "UP" : { 
         "name": "Uttar Pradesh", 
         "tin" : "09"
     },
-    {
-        "code": "WB", 
+    "WB" : { 
         "name": "West Bengal", 
         "tin" : "19"
     }
-]
+}
 
 
 STATE_LIST_CHOICES = (
