@@ -41,7 +41,7 @@ class ContactsForm(ModelForm):
             'organization_name' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'200'}),
             'notes': Textarea(attrs = {'class':'form-control'})
         }
-
+""""
 class ContactsExtraForm(ModelForm):
     class Meta:
 
@@ -102,3 +102,5 @@ class ContactAccountDetailsForm(ModelForm):
             'bank_name' : TextInput(attrs={'class':'form-control input-sm',}),
             'bank_branch_name' : TextInput(attrs={'class':'form-control input-sm',}),
         }
+
+"""

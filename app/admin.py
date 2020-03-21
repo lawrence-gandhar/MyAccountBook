@@ -23,18 +23,6 @@ class User_Account_Details(admin.ModelAdmin):
 class User_Address_Details(admin.ModelAdmin):
     model = User_Address_Details 
 
-@admin.register(Contacts_Email)
-class Contacts_Email(admin.ModelAdmin):
-    model = Contacts_Email
-
-@admin.register(Contact_Addresses)
-class Contact_Addresses(admin.ModelAdmin):
-    model = Contact_Addresses
-
-@admin.register(Contact_Account_Details)
-class Contact_Account_Details(admin.ModelAdmin):
-    model = Contact_Account_Details
-
 @admin.register(InvoiceModel)
 class Invoice(admin.ModelAdmin):
     model = InvoiceModel

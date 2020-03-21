@@ -24,21 +24,13 @@ class Profile(models.Model):
         db_index = True,
         default = 0,
         choices = user_constants.SALUTATIONS,
-    )
-
-    is_customer = models.BooleanField(
-        db_index = True,
-        choices = user_constants.IS_TRUE,
-        default = False,
-        null = True,
         blank = True,
     )
 
-    is_vendor = models.BooleanField(
+    customer_type = models.IntegerField(
         db_index = True,
-        choices = user_constants.IS_TRUE,
-        default = False,
-        null = True,
+        choices = user_constants.CUSTOMER_TYPE,
+        default = 1,
         blank = True,
     )
 
@@ -56,18 +48,11 @@ class Profile(models.Model):
         null = True,
     )
 
-    official_email = models.CharField(
-        max_length = 250,
-        db_index = True,
-        blank = True,
-        null = True,
-    )
-
     display_name = models.CharField(
         max_length = 250,
         blank = False,
-        null = False,
         db_index = True,
+        null = True,
     )
 
     organization_type = models.IntegerField(
@@ -100,50 +85,68 @@ class Profile(models.Model):
 #   USER'S ACCOUNT DETAILS
 #**************************************************************************
 class User_Account_Details(models.Model):
+
+    is_user = models.BooleanField(
+        default = False,
+        db_index = True,
+        choices = user_constants.IS_TRUE,
+    )
+
     user = models.ForeignKey(
-        User, 
+        User,
+        blank = True,
+        null = True, 
         on_delete = models.CASCADE,
         db_index = True,
     )
 
-    account_number = models.CharField(
-        max_length = 30,
+    contact = models.ForeignKey(
+        Contacts,
+        db_index = True,
         null = True,
         blank = True,
+        on_delete = models.CASCADE
+    )
+
+    account_number = models.CharField(
+        max_length = 30,
+        blank = True,
         db_index = True,
+        null = True,
     )
 
     account_holder_name = models.CharField(
         max_length = 250,
         blank = True,
-        null = True,
         db_index = True,
+        null = True,
     )
 
     ifsc_code = models.CharField(
         max_length = 20,
-        null = True,
         blank = True,
         db_index = True,
+        null = True,
     )
 
     bank_name = models.CharField(
         max_length = 250,
         db_index = True,
-        null = True,
         blank = True,
+        null = True,
     )
 
     bank_branch_name = models.CharField(
         max_length = 250,
         db_index = True,
-        null = True,
         blank = True,
+        null = True,
     )
 
     created_on = models.DateTimeField(
         auto_now = True,
         db_index = True,
+        null = True,
     )
 
     updated_on = models.DateTimeField(
@@ -157,18 +160,110 @@ class User_Account_Details(models.Model):
 
 
 #**************************************************************************
+#   EMAIL ADDRESSES OF CONTACTS
+#   A CONTACT/USER CAN HAVE MULTIPLE MAIL ADDRESSES
+#**************************************************************************
+class User_Email_Details(models.Model):
+
+    is_user = models.BooleanField(
+        default = False,
+        db_index = True,
+        choices = user_constants.IS_TRUE,
+    )
+
+    user = models.ForeignKey(
+        User,
+        blank = True,
+        null = True, 
+        on_delete = models.CASCADE,
+        db_index = True,
+    )
+
+    contact = models.ForeignKey(
+        Contacts,
+        db_index = True,
+        null = True,
+        blank = True,
+        on_delete = models.CASCADE
+    )
+    
+    email = models.EmailField(
+        blank = False, 
+        null = True, 
+        db_index = True,
+    )
+
+    is_official = models.BooleanField(
+        db_index = True,
+        choices = user_constants.IS_TRUE,
+        default = True,
+    )
+
+    is_personal = models.BooleanField(
+        db_index = True,
+        choices = user_constants.IS_TRUE,
+        default = True,
+    )
+
+    created_on = models.DateTimeField(
+        auto_now = True,
+        db_index = True,
+        null = True,
+    )
+
+    updated_on = models.DateTimeField(
+        auto_now = False,
+        db_index = True,
+        null = True,
+    )
+
+    def is_official_full(self):
+        if self.is_official:
+            return "YES"
+        return "NO" 
+
+    def is_personal_full(self):
+        if self.is_personal:
+            return "YES"
+        return "NO" 
+
+    class Meta:
+        verbose_name_plural = 'user_email_tbl'
+
+
+#**************************************************************************
 #   ADDRESSES OF USERs
 #   A User CAN HAVE MULTIPLE ADDRESSES
 #**************************************************************************
 
 class User_Address_Details(models.Model):
 
-    ADDRESS_CHOICES = ((True, 'Yes'),(False, 'No'))
+    is_user = models.BooleanField(
+        db_index = True,
+        default = False,
+        choices = user_constants.IS_TRUE,
+    )
 
     user = models.ForeignKey(
-        User, 
-        on_delete = models.CASCADE, 
-        db_index = True
+        User,
+        db_index = True,
+        on_delete = models.CASCADE,
+        null = True,
+        blank = True,
+    )
+
+    contact = models.ForeignKey(
+        Contacts,
+        db_index = True,
+        on_delete = models.CASCADE,
+        null = True,
+        blank = True,
+    )
+
+    contact_person = models.CharField(
+        blank = True,
+        null = True,
+        max_length = 250,
     )
 
     flat_no = models.CharField(
@@ -202,10 +297,11 @@ class User_Address_Details(models.Model):
 
     country = models.CharField(
         max_length = 5,
-        null = True,
         blank = True,
+        null = True,
         db_index = True,
-        choices = country_list.COUNTRIES_LIST_CHOICES
+        choices = country_list.COUNTRIES_LIST_CHOICES,
+        default = 'IN',
     )
 
     pincode = models.CharField(
@@ -217,19 +313,20 @@ class User_Address_Details(models.Model):
 
     is_billing_address = models.BooleanField(
         db_index = True,
-        choices = ADDRESS_CHOICES,
+        choices = user_constants.IS_TRUE,
         default = False,
     ) 
 
     is_shipping_address = models.BooleanField(
         db_index = True,
-        choices = ADDRESS_CHOICES,
-        default = False,
+        choices = user_constants.IS_TRUE,
+        default = True,
     )
 
     created_on = models.DateTimeField(
         auto_now = True,
         db_index = True,
+        null = True,
     )
 
     updated_on = models.DateTimeField(
@@ -295,15 +392,15 @@ class User_Tax_Details(models.Model):
     pan = models.CharField(
         max_length = 10,
         db_index = True,
-        null = True,
         blank = True,
+        null = True,
     )
 
     gstin = models.CharField(
         max_length = 100,
         db_index = True,
-        null = True,
         blank = True,
+        null = True,
     )
 
     gst_reg_type = models.IntegerField(
@@ -323,8 +420,8 @@ class User_Tax_Details(models.Model):
 
     tax_reg_no = models.CharField(
         max_length = 15,
-        null = True,
         blank = True,
+        null = True,
         db_index = True,
     )
 
@@ -347,8 +444,8 @@ class User_Tax_Details(models.Model):
         max_length = 5,
         db_index = True,
         choices = currency_list.CURRENCY_CHOICES,
-        null = True,
         blank = True,
+        null = True,
     )
 
     opening_balance = models.IntegerField(
@@ -361,6 +458,7 @@ class User_Tax_Details(models.Model):
     as_of = models.DateTimeField(
         auto_now = True,
         db_index = True,
+        null = True,
     )
 
     preferred_payment_method = models.IntegerField(

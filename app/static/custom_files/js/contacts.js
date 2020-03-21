@@ -101,27 +101,39 @@ $("#id_is_imported_user").on("click", function(){
 
 
 /****************************************************************/
-//
+// Add Address Block
 /****************************************************************/
 
 $("#add_more_addresses").on("click",function(){
 
-    if($(this).attr("params") == 1){
-        $("#more_address_table").find("input").removeAttr('disabled');
-        $("#more_address_table").find("select").removeAttr('disabled');
-        $("#more_address_table").removeClass("hide");
-        $(this).attr("params","2");
-        $("#more_address_table_enabled").val(1);
-        $(this).text("Remove Another Address");
-    }else{
-        $("#more_address_table_enabled").val(0);
-        $("#more_address_table").find("input").attr('disabled', "true");
-        $("#more_address_table").find("select").attr('disabled', "true");
-        $("#more_address_table").addClass("hide");
-        $(this).attr("params","1");
-        $(this).text("Add Another");
-    }
+    inc = $("#id_user_address_details_set-TOTAL_FORMS").val();
+
+    htm_all = '';
+
+    $(".tr-id_user_address_details_set-0").each(function(index, data){
+        htm = '<tr class="tr-id_user_address_details_set-0">'+$(this).html()+"</tr>";
+        htm_all += htm.replace("tr-id_user_address_details_set-0", "tr-id_user_address_details_set-"+inc);
+    });
+
+    $("#address_table").find("tbody").append(htm_all);
+
+    $("#id_user_address_details_set-TOTAL_FORMS").val(parseInt(inc) + 1);
+
 });
+
+
+
+/****************************************************************/
+// Remove Address Block
+/****************************************************************/
+
+function delete_address_block(elem){
+    
+    var elem_id = $(elem).closest('tr').attr("class");
+    $("tr."+elem_id).remove();
+    $("#id_user_address_details_set-TOTAL_FORMS").val(parseInt(inc) -1);
+}
+
 
 $(".disabled-tr").find("input").attr("disabled","true");
 $(".disabled-tr").find("select").attr("disabled","true");
