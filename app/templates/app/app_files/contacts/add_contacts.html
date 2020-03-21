@@ -254,13 +254,13 @@ select.form-control option{color : #000000; }
                                                 </table>
                                             </div>
                                             <div class="tab-pane fade" id="address-form" role="tabpanel" aria-labelledby="address-tab" style="padding:10px 0px;">
-                                                <button class="btn btn-sm btn-warning pull-right" style="margin-bottom:15px; float:right" id="add_more_addresses" params="1" type="button">Add Another</button>
+                                                <button class="btn btn-sm btn-warning pull-right" style="margin-bottom:15px; float:right" id="add_more_addresses" params="1" type="button">Add Another Address</button>
                                                 <table class="table-responsive" id="address_table">
                                                     <tbody style=" width: 100%; display: inline-table;">
                                                         {{ address_formset.management_form }}
 
                                                         {% for form in address_formset %}                                                            
-                                                            <tr class="tr-id_user_address_details_set-0">
+                                                            <tr class="tr-id_user_address_details_set-0" style="display:none;">
                                                                 <td style="padding-top:10px; color:#FF0000; border:0px; border-bottom:3px solid #ccc;" colspan="2">
                                                                     <i class="material-icons pull-right" style="cursor:pointer;" onclick="delete_address_block($(this))">delete_forever</i>
                                                                 </td>                                 
