@@ -255,172 +255,96 @@ select.form-control option{color : #000000; }
                                             </div>
                                             <div class="tab-pane fade" id="address-form" role="tabpanel" aria-labelledby="address-tab" style="padding:10px 0px;">
                                                 <button class="btn btn-sm btn-warning pull-right" style="margin-bottom:15px; float:right" id="add_more_addresses" params="1" type="button">Add Another Address</button>
-                                                <table class="table-responsive" id="address_table">
-                                                    <tbody style=" width: 100%; display: inline-table;">
-                                                        {{ address_formset.management_form }}
+                                                
+                                                {{ address_formset.management_form }}
+                                                <table class="table table-bodered" style="background:transparent;" id="address_table">                                                    
+                                                    <tr id="tr-id_user_address_details_set-tr-0">
+                                                        {% for form in address_formset %}   
+                                                        <td class="text-center">
+                                                            <table class="table-responsive">
+                                                                <tbody style=" width: 100%; display: inline-table;">    
+                                                                    <tr>
+                                                                        <td style="text-align:left; padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: inherit">
+                                                                            Is Shipping Address
+                                                                        </td>
+                                                                        <td style="border:0px; padding:0px">                                                                    
+                                                                            <label class="switch">
+                                                                                {{ form.is_shipping_address }}
+                                                                                <span class="slider round"></span>
+                                                                            </label>
 
-                                                        {% for form in address_formset %}                                                            
-                                                            <tr class="tr-id_user_address_details_set-0" style="display:none;">
-                                                                <td style="padding-top:10px; color:#FF0000; border:0px; border-bottom:3px solid #ccc;" colspan="2">
-                                                                    <i class="material-icons pull-right" style="cursor:pointer;" onclick="delete_address_block($(this))">delete_forever</i>
-                                                                </td>                                 
-                                                            </tr>
-                                                            <tr class="tr-id_user_address_details_set-0">
-                                                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: inherit">
-                                                                    Is Shipping Address
-                                                                </td>
-                                                                <td style="border:0px; padding:0px">                                                                    
-                                                                    <label class="switch">
-                                                                        {{ form.is_shipping_address }}
-                                                                        <span class="slider round"></span>
-                                                                    </label>
+                                                                            <span style="margin-left: 40px; position: relative; top: -7px;">
+                                                                                Is Same As Billing Address
+                                                                            </span>
 
-                                                                    <span style="margin-left: 40px; position: relative; top: -7px;">
-                                                                        Is Same As Billing Address
-                                                                    </span>
-
-                                                                    <label class="switch" style="margin-left: 20px;">
-                                                                        {{ form.is_billing_address }}
-                                                                        <span class="slider round"></span>
-                                                                    </label>
-                                                                </td>                                    
-                                                            </tr>
-                                                            <tr class="tr-id_user_address_details_set-0">
-                                                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                                    Contact Person
-                                                                </td>
-                                                                <td style="border:0px;">
-                                                                    {{ form.contact_person}}
-                                                                </td>                                    
-                                                            </tr>
-                                                            <tr class="tr-id_user_address_details_set-0">
-                                                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                                    Flat/Office/Door No.
-                                                                </td>
-                                                                <td style="border:0px;">
-                                                                    {{ form.flat_no }}
-                                                                </td>                                    
-                                                            </tr>
-                                                            <tr class="tr-id_user_address_details_set-0">
-                                                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                                    Street
-                                                                </td>
-                                                                <td style="border:0px;">
-                                                                    {{ form.street }}
-                                                                </td>                                    
-                                                            </tr>
-                                                            <tr class="tr-id_user_address_details_set-0">
-                                                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                                    City
-                                                                </td>
-                                                                <td style="border:0px;">
-                                                                    {{ form.city }}
-                                                                </td>                                    
-                                                            </tr>
-                                                            <tr class="tr-id_user_address_details_set-0">
-                                                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                                    Zipcode/Pincode
-                                                                </td>
-                                                                <td style="border:0px;">
-                                                                    {{ form.pincode }}
-                                                                </td>                                    
-                                                            </tr>
-                                                            <tr class="tr-id_user_address_details_set-0">
-                                                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                                    State
-                                                                </td>
-                                                                <td style="border:0px;">
-                                                                    {{ form.state }}
-                                                                </td>                                    
-                                                            </tr>
-                                                            <tr class="tr-id_user_address_details_set-0">
-                                                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                                    Country
-                                                                </td>
-                                                                <td style="border:0px;">
-                                                                    {{ form.country }}
-                                                                </td>                                    
-                                                            </tr> 
+                                                                            <label class="switch" style="margin-left: 20px;">
+                                                                                {{ form.is_billing_address }}
+                                                                                <span class="slider round"></span>
+                                                                            </label>
+                                                                        </td>                                  
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="text-align:left; padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
+                                                                            Contact Person
+                                                                        </td>
+                                                                        <td style="border:0px;">
+                                                                            {{ form.contact_person}}
+                                                                        </td>                                    
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="text-align:left; padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
+                                                                            Flat/Office/Door No.
+                                                                        </td>
+                                                                        <td style="border:0px;">
+                                                                            {{ form.flat_no }}
+                                                                        </td>                                    
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="text-align:left; padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
+                                                                            Street
+                                                                        </td>
+                                                                        <td style="border:0px;">
+                                                                            {{ form.street }}
+                                                                        </td>                                    
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="text-align:left; padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
+                                                                            City
+                                                                        </td>
+                                                                        <td style="border:0px;">
+                                                                            {{ form.city }}
+                                                                        </td>                                    
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="text-align:left; padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
+                                                                            Zipcode/Pincode
+                                                                        </td>
+                                                                        <td style="border:0px;">
+                                                                            {{ form.pincode }}
+                                                                        </td>                                    
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="text-align:left; padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
+                                                                            State
+                                                                        </td>
+                                                                        <td style="border:0px;">
+                                                                            {{ form.state }}
+                                                                        </td>                                    
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="text-align:left; padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
+                                                                            Country
+                                                                        </td>
+                                                                        <td style="border:0px;">
+                                                                            {{ form.country }}
+                                                                        </td>                                    
+                                                                    </tr> 
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
                                                         {% endfor %}
-                                                    </tbody>
-                                                </table>
-                                                <table id="more_address_table" class="table-responsive hide" style="background-color:#31374e; margin:10px 0px;">
-                                                    <input type="hidden" id="more_address_table_enabled" value="0" name="more_address_table_enabled">
-                                                    <tbody style=" width: 100%; display: inline-table;">
-                                                        <tr>
-                                                            <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                                Contact Person
-                                                            </td>
-                                                            <td style="border:0px;">
-                                                                {{ contact_address_form_2.contact_person}}
-                                                            </td>                                    
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                                Flat/Office/Door No.
-                                                            </td>
-                                                            <td style="border:0px;">
-                                                                {{ contact_address_form_2.flat_no }}
-                                                            </td>                                    
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                                Street
-                                                            </td>
-                                                            <td style="border:0px;">
-                                                                {{ contact_address_form_2.street }}
-                                                            </td>                                    
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                                City
-                                                            </td>
-                                                            <td style="border:0px;">
-                                                                {{ contact_address_form_2.city }}
-                                                            </td>                                    
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                                Zipcode/Pincode
-                                                            </td>
-                                                            <td style="border:0px;">
-                                                                {{ contact_address_form_2.pincode }}
-                                                            </td>                                    
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                                State
-                                                            </td>
-                                                            <td style="border:0px;">
-                                                                {{ contact_address_form_2.state }}
-                                                            </td>                                    
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                                Country
-                                                            </td>
-                                                            <td style="border:0px;">
-                                                                {{ contact_address_form_2.country }}
-                                                            </td>                                    
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                                Is Shipping Address
-                                                            </td>
-                                                            <td style="border:0px;">
-                                                                {{ contact_address_form_2.is_shipping_address }}
-                                                            </td>                                    
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                                Is Billing Address
-                                                            </td>
-                                                            <td style="border:0px;">
-                                                                {{ contact_address_form_2.is_billing_address }}
-                                                            </td>                                    
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                                    </tr>
+                                                </table>                                                
                                             </div>
                                             <div class="tab-pane fade" id="accounts-form" role="tabpanel" aria-labelledby="accounts-tab" style="padding:10px 20px;">
                                                 <table class="table-responsive">

@@ -110,14 +110,22 @@ $("#add_more_addresses").on("click",function(){
 
     htm_all = '';
 
-    $(".tr-id_user_address_details_set-0").each(function(index, data){
-        htm = '<tr class="tr-id_user_address_details_set-0">'+$(this).html()+"</tr>";
-        htm_all += htm.replace("tr-id_user_address_details_set-0", "tr-id_user_address_details_set-"+inc);
-    });
+    htm = $("tr#tr-id_user_address_details_set-tr-0").html();
 
-    $("#address_table").find("tbody").append(htm_all);
+    htm_all = '<tr>';
+    htm_all += '<td style="padding-top:10px; color:#FF0000; border:0px; border-bottom:3px solid #ccc;" colspan="2">';
+    htm_all += '<i class="material-icons pull-right" style="cursor:pointer;" onclick="delete_address_block($(this),'+(parseInt(inc)-1)+')">delete_forever</i></td></tr>';
+    htm_all += '<tr id="tr-id_user_address_details_set-tr-'+(parseInt(inc)-1)+'">'+htm+'</tr>';
 
-    $("#id_user_address_details_set-TOTAL_FORMS").val(parseInt(inc) + 1);
+    ids = parseInt(inc) + 1;
+    row_num = 0;
+    
+    htm_all = htm_all.replace(/user_address_details_set-0/g, "user_address_details_set-"+ids);
+    htm_all = htm_all.replace(/user_address_details_set-1/g, "user_address_details_set-"+parseInt(ids + 1));
+    
+    $("#address_table > tbody").append(htm_all);
+
+    $("#id_user_address_details_set-TOTAL_FORMS").val(parseInt(inc) + 2);
 
 });
 
@@ -127,11 +135,11 @@ $("#add_more_addresses").on("click",function(){
 // Remove Address Block
 /****************************************************************/
 
-function delete_address_block(elem){
-    
-    var elem_id = $(elem).closest('tr').attr("class");
-    $("tr."+elem_id).remove();
-    $("#id_user_address_details_set-TOTAL_FORMS").val(parseInt(inc) -1);
+function delete_address_block(elem, ids){
+    inc = $("#id_user_address_details_set-TOTAL_FORMS").val();
+    $(elem).closest('tr').remove();
+    $("#tr-id_user_address_details_set-tr-"+ids).remove();
+    $("#id_user_address_details_set-TOTAL_FORMS").val(parseInt(inc) -2);
 }
 
 

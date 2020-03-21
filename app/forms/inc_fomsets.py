@@ -8,7 +8,7 @@ from django.forms import *
 #
 # ADDRESS FORMSET
 #
-AddressFormset = inlineformset_factory(contacts_model.Contacts, users_model.User_Address_Details, extra = 1,
+AddressFormset = inlineformset_factory(contacts_model.Contacts, users_model.User_Address_Details, extra = 2,
     fields = ('contact_person', 'flat_no', 'street', 'city', 'state', 'country', 'pincode', 'is_billing_address', 'is_shipping_address'),
     widgets = {
         'contact_person' : TextInput(attrs={'class':'form-control input-sm',}),
