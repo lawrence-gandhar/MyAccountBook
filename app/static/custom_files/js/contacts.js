@@ -3,6 +3,8 @@ $("#app_id_input_2").removeClass("show-row").addClass("hide-row");
 $("#more_address_table").find("input").attr('disabled', "true");
 $("#more_address_table").find("select").attr('disabled', "true");
 
+$("#tr-id_user_address_details_set-tr-0 td:nth-child(2)").find("table > tbody tr:nth-child(1)").hide();
+
 
 /************************************************************ */
 //
@@ -125,6 +127,8 @@ $("#add_more_addresses").on("click",function(){
     
     $("#address_table > tbody").append(htm_all);
 
+    $("#tr-id_user_address_details_set-tr-"+(parseInt(inc)-1)+" td:nth-child(2)").find("table > tbody tr:nth-child(1)").hide();
+
     $("#id_user_address_details_set-TOTAL_FORMS").val(parseInt(inc) + 2);
 
 });
@@ -150,3 +154,23 @@ $(".set_required").find("input").attr("required", "true");
 $(".set_required").find("select").attr("required", "true");
 
 $("#editAccountsModal").find("input").attr("required", "true");
+
+
+/********************************************************************/
+// Billing Clicked
+/********************************************************************/
+
+function billing_clicked(elem){
+
+    var ids = $(elem).attr("id");
+    
+    console.log(ids);
+
+
+    if($(elem).prop("checked") == true){
+        alert("its true");
+    }else{
+        alert("its false");
+    }
+    
+}
