@@ -311,6 +311,12 @@ class User_Address_Details(models.Model):
         db_index = True,
     )
 
+    is_billing_address_diff = models.BooleanField(
+        db_index = True,
+        choices = user_constants.IS_TRUE,
+        default = False,
+    ) 
+
     is_billing_address = models.BooleanField(
         db_index = True,
         choices = user_constants.IS_TRUE,

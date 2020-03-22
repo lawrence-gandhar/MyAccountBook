@@ -170,7 +170,7 @@ function billing_clicked(elem){
 
     var ids = $(elem).attr("id");
 
-    ids = ids.replace("id_user_address_details_set-", "").replace("-is_billing_address", "");
+    ids = ids.replace("id_user_address_details_set-", "").replace("-is_billing_address_diff", "");
 
     if(ids == 0){
         elem_htm = $("tr#tr-id_user_address_details_set-tr-0 > td:nth-child(2)");
