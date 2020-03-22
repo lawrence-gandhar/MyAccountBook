@@ -19,7 +19,26 @@ AddressFormset = inlineformset_factory(contacts_model.Contacts, users_model.User
         'country' : Select(attrs={'class':'form-control input-sm',}, choices = country_list.COUNTRIES_LIST_CHOICES),
         'pincode' : TextInput(attrs={'class':'form-control input-sm',}),
         'is_billing_address_diff' : CheckboxInput(attrs={'class':'form-control input-sm', 'onclick':'billing_clicked($(this))',}),
-        'is_shipping_address' : CheckboxInput(attrs={'class':'form-control input-sm', 'onclick':'shippling_clicked($(this))',}),
+        'is_shipping_address' : CheckboxInput(attrs={'class':'form-control input-sm',}),
     }
 )
+
+#
+# ACCOUNTS FORMSET
+#
+
+class AccountDetailsForm(ModelForm):
+    class Meta:
+        model = users_model.User_Account_Details
+        fields = ('account_number', 'account_holder_name', 'ifsc_code', 'bank_name', 'bank_branch_name')
+
+        widgets = {
+            'account_number' : TextInput(attrs={'class':'form-control input-sm',}),
+            'account_holder_name' : TextInput(attrs={'class':'form-control input-sm',}),
+            'ifsc_code' : TextInput(attrs={'class':'form-control input-sm',}),
+            'bank_name' : TextInput(attrs={'class':'form-control input-sm',}),
+            'bank_branch_name' : TextInput(attrs={'class':'form-control input-sm',}),
+        }
+
+AccountsFormset = formset_factory(AccountDetailsForm, extra = 1)
 

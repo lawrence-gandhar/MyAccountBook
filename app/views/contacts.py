@@ -78,12 +78,89 @@ def add_contacts(request, slug = None, ins = None):
 
     # Initialize Forms
     data["contact_form"] = ContactsForm()
-    data["contact_form"] = TaxForm()
+    data["tax_form"] = TaxForm()
+    data["other_details_form"] = OtherDetailsForm()
 
     #
     # FORMSETS    
     data["address_formset"] = AddressFormset
+    data["accounts_formset"] = AccountsFormset
 
+    #
+    # POST REQUEST - FORM SUBMISSION
+    #
+    if request.POST:
+        contact_form = ContactsForm(request.POST)
+        tax_form = TaxForm(request.POST)   
+
+        ins = None
+
+        if contact_form.is_valid():
+            ins = contact_form_ins = contact_form.save(commit = False)
+            contact_form_ins.user = request.user
+
+            if contact_form_ins.is_imported_user:
+                try:
+                    profile = Profile.objects.get(app_id__iexact = contact_form_ins.app_id)
+                    imp_user = User.objects.get(pk = profile.user_id)
+                except:
+                    return redirect('/unauthorized/', permanent = False)
+                
+                contact_form_ins.imported_user = imp_user
+            
+            contact_form_ins.save() 
+
+        #
+        #
+        if ins is not None:
+
+            #
+            # tax form/ other details form -- save
+            #
+            if tax_form.is_valid(): 
+                obj_tax = tax_form.save(commit = False)
+                obj_tax.contact = ins
+
+                other_details_form = OtherDetailsForm(request.POST, instance = obj_tax)
+                if other_details_form.is_valid():
+                    other_details_form.save()
+                obj_tax.save()    
+            else:
+                pass
+
+            #
+            # Address Formset -- save
+            #
+            address_formset = AddressFormset(request.POST)
+            if formset.is_valid():
+
+                rownum = 0
+
+                for form in address_formset:
+                    if form.is_valid():
+                        if form.data["user_address_details_set-"+row_num+"-flat_no"]:
+                            obj = form.save(commit = False)
+                            obj.is_user = False
+                            obj.contact = ins
+                            obj.save()
+                        rownum +=1
+            
+            #
+            # Accounts Formset -- save
+            #
+            accounts_formset = AccountsFormset(request.POST)
+            if formset.is_valid():
+
+                rownum = 0
+
+                for form in accounts_formset:
+                    if form.is_valid():
+                        if form.data["form-"+row_num+"-account_holder_name"]:
+                            obj = form.save(commit = False)
+                            obj.is_user = False
+                            obj.contact = ins
+                            obj.save()
+                        rownum +=1
         
     return render(request, template_name, data)
 

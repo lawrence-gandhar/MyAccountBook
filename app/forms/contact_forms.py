@@ -90,7 +90,7 @@ class ContactsAddressForm(ModelForm):
             'is_shipping_address' : Select(attrs={'class':'form-control input-sm',}, choices = ADDRESS_CHOICES, ),
         }
 
-class ContactAccountDetailsForm(ModelForm):
+class AccountDetailsForm(ModelForm):
     class Meta:
         model = Contact_Account_Details
         fields = ('account_number', 'account_holder_name', 'ifsc_code', 'bank_name', 'bank_branch_name')

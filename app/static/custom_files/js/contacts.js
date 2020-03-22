@@ -106,6 +106,28 @@ $("#id_is_imported_user").on("click", function(){
     }
 });
 
+/****************************************************************/
+//
+/****************************************************************/
+
+$("#add_more_accounts").on("click", function(){
+    inc = $("#id_form-TOTAL_FORMS").val();
+
+    htm_all = '<tr class="tr-set-'+inc+'">';
+    htm_all += '<td style="padding-top:10px; color:#FF0000; border:0px; border-bottom:3px solid #ccc;" colspan="2">';
+    htm_all += '<i class="material-icons pull-right" style="cursor:pointer;" onclick="delete_account_block($(this),'+(parseInt(inc)-1)+')">delete_forever</i></td></tr>';
+
+    $("#accounts-form tr.accounts_formset ").each(function(index, tr){
+        htm = '<tr class="tr-set-'+inc+'">'+$(tr).html()+'</tr>';
+        htm_all += htm;
+    });
+
+    $("#id_form-TOTAL_FORMS").val(parseInt(inc)+1);
+
+    $("#accounts-form > table > tbody").append(htm_all);
+
+});
+
 
 
 /****************************************************************/
@@ -150,6 +172,19 @@ function delete_address_block(elem, ids){
     $(elem).closest('tr').remove();
     $("#tr-id_user_address_details_set-tr-"+ids).remove();
     $("#id_user_address_details_set-TOTAL_FORMS").val(parseInt(inc) -2);
+}
+
+/****************************************************************/
+// Remove Address Block
+/****************************************************************/
+
+function delete_account_block(elem, ids){
+    inc = $("#id_user_address_details_set-TOTAL_FORMS").val();
+    
+    elem = $(elem).closest("tr").attr("class");
+
+    $("tr."+elem).remove();
+    $("#id_user_address_details_set-TOTAL_FORMS").val(parseInt(inc)-1);
 }
 
 

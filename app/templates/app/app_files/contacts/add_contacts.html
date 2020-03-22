@@ -347,48 +347,52 @@ select.form-control option{color : #000000; }
                                                 </table>                                                
                                             </div>
                                             <div class="tab-pane fade" id="accounts-form" role="tabpanel" aria-labelledby="accounts-tab" style="padding:10px 20px;">
+                                                <button class="btn btn-sm btn-warning pull-right" style="margin-bottom:15px; float:right" id="add_more_accounts" params="1" type="button">Add Another Account</button>
+                                                {{ accounts_formset.management_form }}
                                                 <table class="table-responsive">
-                                                    <tbody style=" width: 100%; display: inline-table;">
-                                                        <tr>
+                                                    <tbody style=" width: 100%; display: inline-table;">                                                        
+                                                        {% for formset in accounts_formset %}
+                                                        <tr class="accounts_formset">
                                                             <td style=" width:150px; border:0px; vertical-align: bottom">
                                                                 Account Holder
                                                             </td>
                                                             <td style="border:0px;">
-                                                                {{ contact_account_details_form.account_holder_name }}
+                                                                {{ formset.account_holder_name }}
                                                             </td>                                    
                                                         </tr>
-                                                        <tr>
+                                                        <tr class="accounts_formset">
                                                             <td style=" width:150px; border:0px; vertical-align: bottom">
                                                                 Account Number
                                                             </td>
                                                             <td style="border:0px;">
-                                                                {{ contact_account_details_form.account_number }}
+                                                                {{ formset.account_number }}
                                                             </td>                                    
                                                         </tr>                                                        
-                                                        <tr>
+                                                        <tr class="accounts_formset">
                                                             <td style=" width:150px; border:0px; vertical-align: bottom">
                                                                 IFSC Code
                                                             </td>
                                                             <td style="border:0px;">
-                                                                {{ contact_account_details_form.ifsc_code }}
+                                                                {{ formset.ifsc_code }}
                                                             </td>                                    
                                                         </tr>
-                                                        <tr>
+                                                        <tr class="accounts_formset">
                                                             <td style=" width:150px; border:0px; vertical-align: bottom">
                                                                 Bank Name
                                                             </td>
                                                             <td style="border:0px;">
-                                                                {{ contact_account_details_form.bank_name }}
+                                                                {{ formset.bank_name }}
                                                             </td>                                    
                                                         </tr>
-                                                        <tr>
+                                                        <tr class="accounts_formset">
                                                             <td style=" width:150px; border:0px; vertical-align: bottom">
                                                                 Branch Name
                                                             </td>
                                                             <td style="border:0px;">
-                                                                {{ contact_account_details_form.bank_branch_name }}
+                                                                {{ formset.bank_branch_name }}
                                                             </td>                                    
                                                         </tr>
+                                                        {% endfor %}
                                                     </tbody>
                                                 </table>
                                             </div>
