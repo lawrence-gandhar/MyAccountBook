@@ -132,13 +132,13 @@ def add_contacts(request, slug = None, ins = None):
             # Address Formset -- save
             #
             address_formset = AddressFormset(request.POST)
-            if formset.is_valid():
+            if address_formset.is_valid():
 
                 rownum = 0
 
                 for form in address_formset:
                     if form.is_valid():
-                        if form.data["user_address_details_set-"+row_num+"-flat_no"]:
+                        if form.data["user_address_details_set-"+str(rownum)+"-flat_no"]:
                             obj = form.save(commit = False)
                             obj.is_user = False
                             obj.contact = ins
@@ -149,19 +149,20 @@ def add_contacts(request, slug = None, ins = None):
             # Accounts Formset -- save
             #
             accounts_formset = AccountsFormset(request.POST)
-            if formset.is_valid():
+            if accounts_formset.is_valid():
 
                 rownum = 0
 
                 for form in accounts_formset:
                     if form.is_valid():
-                        if form.data["form-"+row_num+"-account_holder_name"]:
+                        if form.data["form-"+str(rownum)+"-account_holder_name"]:
                             obj = form.save(commit = False)
                             obj.is_user = False
                             obj.contact = ins
                             obj.save()
                         rownum +=1
-        
+
+        return redirect('/contacts/', data)
     return render(request, template_name, data)
 
 
