@@ -78,7 +78,7 @@ def add_contacts(request, slug = None, ins = None):
 
     # Initialize Forms
     data["contact_form"] = ContactsForm()
-    data["contact_form"] = ContactsForm()
+    data["contact_form"] = TaxForm()
 
     #
     # FORMSETS    
