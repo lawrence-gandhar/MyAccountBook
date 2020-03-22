@@ -163,8 +163,12 @@ $("#editAccountsModal").find("input").attr("required", "true");
 function billing_clicked(elem){
 
     var ids = $(elem).attr("id");
-    
-    console.log(ids);
+
+    ids = ids.replace("id_user_address_details_set-", "").replace("-is_billing_address", "");
+
+    if(ids == 0){
+        
+    }
 
 
     if($(elem).prop("checked") == true){
