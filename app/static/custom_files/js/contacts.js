@@ -5,6 +5,12 @@ $("#more_address_table").find("select").attr('disabled', "true");
 
 $("#tr-id_user_address_details_set-tr-0 td:nth-child(2)").find("table > tbody tr:nth-child(1)").hide();
 
+$("#tr-id_user_address_details_set-tr-0 td:nth-child(2)").find("table > tbody tr:nth-child(1)").after(
+    '<tr><td colspan="2" style="display:block; height:34px;"></td></tr>'
+);
+
+$("tr#tr-id_user_address_details_set-tr-0 > td:nth-child(2)").hide()
+
 
 /************************************************************ */
 //
@@ -167,14 +173,16 @@ function billing_clicked(elem){
     ids = ids.replace("id_user_address_details_set-", "").replace("-is_billing_address", "");
 
     if(ids == 0){
-        
+        elem_htm = $("tr#tr-id_user_address_details_set-tr-0 > td:nth-child(2)");
+    }else{
+        ids = parseInt(ids)-2;
+        elem_htm = $("tr#tr-id_user_address_details_set-tr-"+ids+" > td:nth-child(2)");
     }
 
-
     if($(elem).prop("checked") == true){
-        alert("its true");
+        $(elem_htm).show();
     }else{
-        alert("its false");
+        $(elem_htm).hide();
     }
     
 }
