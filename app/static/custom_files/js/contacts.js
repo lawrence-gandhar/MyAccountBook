@@ -184,5 +184,4 @@ function billing_clicked(elem){
     }else{
         $(elem_htm).hide();
     }
-    
 }
