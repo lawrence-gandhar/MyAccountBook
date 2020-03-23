@@ -206,9 +206,6 @@ def edit_contact(request, ins = None):
 
             data["contact_ins"] = contact.id
             data["tax_ins"] = ""
-            data["contact_address_1"] = ""
-            data["contact_address_2"] = ""
-            data["accounts"] = ""
             
             #
             # Tax Details
@@ -229,8 +226,6 @@ def edit_contact(request, ins = None):
             data["c_count"] = [i for i in range(c_count)]
             
             data["contact_address_form"] = []
-            data["ins_address"] = dict()
-
             for i in range(c_count):
                 data["contact_address_form"].append(EditAddressForm(instance = contact_address_form[i], prefix = 'form_{}'.format(contact_address_form[i].id)))
 
