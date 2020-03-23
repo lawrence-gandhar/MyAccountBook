@@ -252,4 +252,13 @@ function delete_address(ids){
 /********************************************************************/
 // 
 /********************************************************************/
-
+function delete_accounts(ids){
+    ids = $("#table-"+ids).find(".account_holder_name").find("input").attr("id");
+    id = ids.replace("id_form_","").replace("-account_holder_name","");
+    
+    
+    $.get("/contacts/delete_accounts/"+id+"/", function(data){
+        if(data == '1') location.reload();
+        else alert("Unauthorized Access");
+    });
+} 

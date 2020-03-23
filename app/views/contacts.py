@@ -269,7 +269,7 @@ def add_address_details_form(request):
             ins.is_user = False
             ins.save()
 
-            return redirect('/contacts/edit/{}/'.format(request.POST["ids"]), permanent = False)
+    return redirect('/contacts/edit/{}/'.format(request.POST["ids"]), permanent = False)
 
 
 #=======================================================================================
@@ -293,7 +293,7 @@ def add_accounts_details_form(request):
             ins.is_user = False
             ins.save()
 
-            return redirect('/contacts/edit/{}/'.format(request.POST["ids"]), permanent = False)
+    return redirect('/contacts/edit/{}/'.format(request.POST["ids"]), permanent = False)
 
 
 
@@ -820,3 +820,17 @@ def delete_contact_address(request, ins = None):
         return HttpResponse(1)
     return HttpResponse(1)
         
+#===================================================================================================
+# DELETE ADDRESS
+#===================================================================================================
+#
+
+def delete_accounts_details(request, ins = None):     
+    if ins is not None:
+        try:
+            users_model.User_Account_Details.objects.get(pk = int(ins)).delete()
+        except:
+            return HttpResponse(0)
+        
+        return HttpResponse(1)
+    return HttpResponse(1)

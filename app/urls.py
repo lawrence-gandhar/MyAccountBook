@@ -47,6 +47,7 @@ urlpatterns += [
     path('contacts/edit_social_details_form/', never_cache(login_required(contacts.edit_social_details_form)), name = 'edit_social_details_form'),
 
     path('contacts/delete_address/<int:ins>/', never_cache(login_required(contacts.delete_contact_address)), name = 'delete_contact_address'),
+    path('contacts/delete_accounts/<int:ins>/', never_cache(login_required(contacts.delete_accounts_details)), name = 'delete_accounts_details'),
 
 ]
 

@@ -357,11 +357,11 @@ table{
                                             </button>
 
                                             {% for i in contact_accounts_form %}
-                                                <table class="table-responsive">
+                                                <table class="table-responsive" id="table-{{forloop.counter}}">
                                                     <tbody style=" width: 100%; display: inline-table;">
                                                         <tr class="disabled-tr">
                                                             <td colspan="2">
-                                                                <button class="btn btn-sm btn-danger pull-right" style="margin-bottom:15px; float:right; margin-left:10px;" type="button">
+                                                                <button class="btn btn-sm btn-danger pull-right" style="margin-bottom:15px; float:right; margin-left:10px;" type="button" onclick="delete_accounts({{forloop.counter}})">
                                                                     <i class="material-icons">delete_forever</i> Delete
                                                                 </button>
                                                                 <button class="btn btn-sm btn-success pull-right" style="margin-bottom:15px; float:right" type="button" onclick="openAccountsModal({{forloop.counter}})">
@@ -373,7 +373,7 @@ table{
                                                             <td style=" width:150px; border:0px; vertical-align: bottom">
                                                                 Account Holder
                                                             </td>
-                                                            <td style="border:0px;">
+                                                            <td style="border:0px;" class="account_holder_name">
                                                                 {{ i.account_holder_name }}
                                                             </td>                                    
                                                         </tr>
