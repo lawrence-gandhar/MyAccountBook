@@ -1,10 +1,10 @@
 from django.forms import *
-from app.models.contacts_model import *
+from app.models import *
 from app.other_constants import *
 
 class UploadContactsForm(ModelForm):
     class Meta:
-        model = ContactsFileUpload
+        model = contacts_model.ContactsFileUpload
         fields = ('csv_file',)
 
         widgets = {
@@ -14,7 +14,7 @@ class UploadContactsForm(ModelForm):
 class ContactsForm(ModelForm):
     class Meta:
 
-        model = Contacts
+        model = contacts_model.Contacts
         fields = (
                     'customer_type', 'is_imported_user', 'imported_user', 'contact_name', 
                     'display_name', 'organization_name', 'organization_type', 'salutation',
@@ -41,6 +41,31 @@ class ContactsForm(ModelForm):
             'organization_name' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'200'}),
             'notes': Textarea(attrs = {'class':'form-control'})
         }
+
+#
+# ADDRESS FORM
+#
+class AddressForm(ModelForm):
+
+    class Meta:
+        model = users_model.User_Address_Details
+        
+        fields = ('contact_person', 'flat_no', 'street', 'city', 'state', 'country', 'pincode', 'is_billing_address_diff', 'is_shipping_address')
+        
+        widgets = {
+            'contact_person' : TextInput(attrs={'class':'form-control input-sm',}),
+            'flat_no' : TextInput(attrs={'class':'form-control input-sm',}),
+            'street' : TextInput(attrs={'class':'form-control input-sm',}),
+            'city' : TextInput(attrs={'class':'form-control input-sm',}),
+            'state' : Select(attrs={'class':'form-control input-sm',}, choices = country_list.STATE_LIST_CHOICES),
+            'country' : Select(attrs={'class':'form-control input-sm',}, choices = country_list.COUNTRIES_LIST_CHOICES),
+            'pincode' : TextInput(attrs={'class':'form-control input-sm',}),
+            'is_billing_address_diff' : CheckboxInput(attrs={'class':'form-control input-sm',}),
+            'is_shipping_address' : CheckboxInput(attrs={'class':'form-control input-sm',}),
+        }
+
+
+
 """"
 class ContactsExtraForm(ModelForm):
     class Meta:

@@ -229,9 +229,12 @@ def edit_contact(request, ins = None):
             data["c_count"] = [i for i in range(c_count)]
             
             data["contact_address_form"] = []
-            for i in range(c_count):
-                data["contact_address_form"].append(AddressForm(instance = contact_address_form[i], prefix = 'form{}'.format(i)))
+            data["ins_address"] = dict()
 
+            for i in range(c_count):
+                data["contact_address_form"].append(AddressForm(instance = contact_address_form[i], prefix = 'form_{}'.format(i)))
+                data["ins_address"][i] = contact_address_form[i].id
+        
             #
             # Accounts
             contact_accounts_form = User_Account_Details.objects.filter(contact = contact, is_user = False)
