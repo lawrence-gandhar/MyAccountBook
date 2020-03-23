@@ -352,6 +352,10 @@ table{
                                         </div>
                                         <div class="tab-pane fade" id="accounts-form" role="tabpanel" aria-labelledby="accounts-tab" style="padding:10px 20px;">
                                             
+                                            <button data-toggle="modal" data-target="#newAccountsModal" class="btn btn-sm btn-primary pull-right" style="margin-bottom:15px; float:right; margin-left:10px;" type="button">
+                                                <i class="material-icons">add_box</i> Add New
+                                            </button>
+
                                             {% for i in contact_accounts_form %}
                                                 <table class="table-responsive">
                                                     <tbody style=" width: 100%; display: inline-table;">
