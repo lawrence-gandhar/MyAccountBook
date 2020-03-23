@@ -274,11 +274,11 @@ table{
                                                                 </label>
 
                                                                 <span style="margin-left: 40px; position: relative; top: -7px;">
-                                                                    Billing Address Is Different
+                                                                    Is Billing Address
                                                                 </span>
 
                                                                 <label class="switch" style="margin-left: 20px;">
-                                                                    {{ i.is_billing_address_diff }}
+                                                                    {{ i.is_billing_address }}
                                                                     <span class="slider round"></span>
                                                                 </label>
                                                             </td>                                  
@@ -417,6 +417,8 @@ table{
 
 
 <!-- EDIT CONTACT DETAILS MODAL -->
+
+
 
 <div class="modal fade" id="editContactModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -605,12 +607,14 @@ table{
 
 <!-- EDIT ADDRESS 1 MODAL -->
 
-<div class="modal fade" id="editAddressModal" tabindex="-1" role="dialog" aria-hidden="true">
+{% for i in contact_address_form %}
+
+<div class="modal fade" id="editAddressModal-{{forloop.counter}}" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content" style="background-color:currentcolor">
             <form method="post" style="margin:0px" action="{% url 'edit_address_details_form' %}">
                 <div class="modal-header bg-warning">
-                    <h5 class="modal-title" style="color:#000000; font-weight:bold;">Edit Address 1 Details</h5>
+                    <h5 class="modal-title" style="color:#000000; font-weight:bold;">Edit Address Details</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -618,16 +622,34 @@ table{
                 <div class="modal-body">
                     {% csrf_token %}
                     <input type="hidden" value="{{contact_ins}}" name="ids">
-                    <input type="hidden" value="1" name="prefix">
-                    <input type="hidden" value="{{contact_address_1}}" name="obj_ins">
                     <table class="table-responsive">
                         <tbody style=" width: 100%; display: inline-table;">
+                            <tr>
+                                <td style="text-align:left; padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: inherit">
+                                    Is Shipping Address
+                                </td>
+                                <td style="border:0px; padding:0px">                                                                    
+                                    <label class="switch">
+                                        {{ i.is_shipping_address  }}
+                                        <span class="slider round"></span>
+                                    </label>
+
+                                    <span style="margin-left: 40px; position: relative; top: -7px;">
+                                        Is Billing Address
+                                    </span>
+
+                                    <label class="switch" style="margin-left: 20px;">
+                                        {{ i.is_billing_address }}
+                                        <span class="slider round"></span>
+                                    </label>
+                                </td>  
+                            </tr>
                             <tr>
                                 <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
                                     Contact Person
                                 </td>
                                 <td style="border:0px;" class="set_required">
-                                    {{ contact_address_form_1.contact_person}}
+                                    {{ i.contact_person}}
                                 </td>                                    
                             </tr>
                             <tr>
@@ -635,7 +657,7 @@ table{
                                     Flat/Office/Door No.
                                 </td>
                                 <td style="border:0px;">
-                                    {{ contact_address_form_1.flat_no }}
+                                    {{ i.flat_no }}
                                 </td>                                    
                             </tr>
                             <tr>
@@ -643,7 +665,7 @@ table{
                                     Street
                                 </td>
                                 <td style="border:0px;">
-                                    {{ contact_address_form_1.street }}
+                                    {{ i.street }}
                                 </td>                                    
                             </tr>
                             <tr>
@@ -651,7 +673,7 @@ table{
                                     City
                                 </td>
                                 <td style="border:0px;">
-                                    {{ contact_address_form_1.city }}
+                                    {{ i.city }}
                                 </td>                                    
                             </tr>
                             <tr>
@@ -659,7 +681,7 @@ table{
                                     Zipcode/Pincode
                                 </td>
                                 <td style="border:0px;">
-                                    {{ contact_address_form_1.pincode }}
+                                    {{ i.pincode }}
                                 </td>                                    
                             </tr>
                             <tr>
@@ -667,7 +689,7 @@ table{
                                     State
                                 </td>
                                 <td style="border:0px;">
-                                    {{ contact_address_form_1.state }}
+                                    {{ i.state }}
                                 </td>                                    
                             </tr>
                             <tr>
@@ -675,23 +697,7 @@ table{
                                     Country
                                 </td>
                                 <td style="border:0px;">
-                                    {{ contact_address_form_1.country }}
-                                </td>                                    
-                            </tr>
-                            <tr>
-                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
-                                    Is Shipping Address
-                                </td>
-                                <td style="border:0px;">
-                                    {{ contact_address_form_1.is_shipping_address }}
-                                </td>                                    
-                            </tr>
-                            <tr>
-                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
-                                    Is Billing Address
-                                </td>
-                                <td style="border:0px;">
-                                    {{ contact_address_form_1.is_billing_address }}
+                                    {{ i.country }}
                                 </td>                                    
                             </tr>
                         </tbody>
@@ -699,13 +705,14 @@ table{
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-warning close" type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
-                    <button class="btn btn-sm btn-success" type="submit">Save</button>
+                    <button class="btn btn-sm btn-success" onclick="submit()">Save</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
 
+{% endfor %}
 
 <!-- EDIT ACCOUNTS MODAL -->
 
@@ -928,9 +935,5 @@ table{
 <script>
 
     var contact_ins = '{{contact_ins}}';
-
-    var ins_address = '{{ins_address}}';
-
-    console.log(ins_address);
 
 </script>

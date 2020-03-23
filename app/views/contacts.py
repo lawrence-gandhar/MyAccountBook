@@ -232,8 +232,8 @@ def edit_contact(request, ins = None):
             data["ins_address"] = dict()
 
             for i in range(c_count):
-                data["contact_address_form"].append(AddressForm(instance = contact_address_form[i], prefix = 'form_{}'.format(i)))
-                data["ins_address"][i] = contact_address_form[i].id
+                data["contact_address_form"].append(EditAddressForm(instance = contact_address_form[i], prefix = 'form_{}'.format(contact_address_form[i].id)))
+
         
             #
             # Accounts
@@ -256,7 +256,9 @@ def edit_contact(request, ins = None):
 #=======================================================================================
 #
 def edit_contact_details_form(request):
+
     if request.POST:
+
         try:
             contact_ins = Contacts.objects.get(pk = int(request.POST["ids"]))
         except:
@@ -303,9 +305,14 @@ def edit_other_details_form(request):
 #
 def edit_address_details_form(request):
     if request.POST:
+
+        keys = [i for i in request.POST.keys() if "is_shipping_address" in i]
+
+        prefix = keys[0].replace("-is_shipping_address", "").replace("form_", "")
+
         try:
-            obj = Contact_Addresses.objects.get(pk = int(request.POST["obj_ins"]))
-            address_form = ContactsAddressForm(request.POST, prefix='form'+request.POST["prefix"], instance = obj)
+            obj = users_model.User_Address_Details.objects.get(pk = int(prefix))
+            address_form = EditAddressForm(request.POST, prefix='form_'+prefix, instance = obj)
             if address_form.is_valid():
                 address_form.save()
         except:
@@ -314,13 +321,13 @@ def edit_address_details_form(request):
             except:
                 return redirect('/unauthorized/', permanent=False)
 
-            address_form = ContactsAddressForm(request.POST, prefix='form'+request.POST["prefix"])
+            address_form = EditAddressForm(request.POST, prefix='form_'+prefix)
             if address_form.is_valid():
                 obj_add = address_form.save()
                 obj_add.contact = contact
                 obj_add.save() 
-
-    return redirect('/contacts/edit/{}/'.format(request.POST["ids"]), permanent = False)
+        
+        return redirect('/contacts/edit/{}/'.format(request.POST["ids"]), permanent = False)
 
 #=======================================================================================
 #   EDIT ACCOUNTS DETAILS

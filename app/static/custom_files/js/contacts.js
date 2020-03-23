@@ -229,11 +229,5 @@ function billing_clicked(elem){
 //
 //
 function openAddressModal(ids){
-    htm = '<table class="table-responsive" id="address-modal-table">'+$("table#table-"+ids).html()+'</table>';
-    $("#editAddressModal .modal-body").empty().append(htm);
-
-    $("#address-modal-table").find("tr.buttons-tr").remove();
-    $("#address-modal-table").find("tr").removeClass("disabled-tr");
-
-    $("#editAddressModal").modal('show');
+    $("#editAddressModal-"+ids).modal('show');
 }
