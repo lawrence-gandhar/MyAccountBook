@@ -231,3 +231,17 @@ function billing_clicked(elem){
 function openAddressModal(ids){
     $("#editAddressModal-"+ids).modal('show');
 }
+
+//
+//
+//
+function delete_address(ids){
+    ids = $("#table-"+ids).find("label.address_label_1").find("input").attr("id");
+    id = ids.replace("id_form_","").replace("-is_shipping_address","");
+    
+    $.get("/contacts/delete_address/"+id+"/", function(data){
+        if(data == '1') location.reload();
+        else alert("Unauthorized Access");
+    });
+
+} 

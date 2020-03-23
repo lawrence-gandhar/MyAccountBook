@@ -229,6 +229,9 @@ def edit_contact(request, ins = None):
             for i in range(c_count):
                 data["contact_address_form"].append(EditAddressForm(instance = contact_address_form[i], prefix = 'form_{}'.format(contact_address_form[i].id)))
 
+
+            data["new_address_form"] = EditAddressForm()
+
             #
             # Accounts
             contact_accounts_form = User_Account_Details.objects.filter(contact = contact, is_user = False)
@@ -243,6 +246,30 @@ def edit_contact(request, ins = None):
         else:    
             return redirect('/unauthorized/', permanent = False)
         return render(request, template_name, data)
+
+#=======================================================================================
+#   ADD ADDRESS DETAILS FORM
+#=======================================================================================
+#
+def add_address_details_form(request):
+
+    if request.POST:
+
+        try:
+            contact_ins = Contacts.objects.get(pk = int(request.POST["ids"]))
+        except:
+            return redirect('/unauthorized/', permanent = False)
+
+        address_form = EditAddressForm(request.POST)
+
+        if address_form.is_valid():
+            ins = address_form.save(commit = False)
+            ins.contact = contact_ins
+            ins.is_user = False
+            ins.save()
+
+            return redirect('/contacts/edit/{}/'.format(request.POST["ids"]), permanent = False)
+
 
 
 #=======================================================================================
@@ -340,6 +367,19 @@ def edit_accounts_details_form(request):
 
     return redirect('/contacts/edit/{}/'.format(request.POST["ids"]), permanent = False)
 
+
+def edit_social_details_form(request):
+    if request.POST:
+        try:
+            contact = Contacts.objects.get(pk = int(request.POST["ids"]))
+        except:
+            return redirect('/unauthorized/', permanent=False)
+        
+        social_form = ContactsExtraForm(request.POST, request.FILES, instance = contact)
+        if social_form.is_valid():
+            social_form.save()
+
+    return redirect('/contacts/edit/{}/'.format(request.POST["ids"]), permanent = False)    
 
 #================================================================================
 # CHECK APPLICATION ID
@@ -723,11 +763,10 @@ def status_change(request, slug = None, ins = None):
 def delete_contact(request, ins = None):
     if ins is not None:
         try:
-            contact = Contacts.objects.get(pk = int(ins))
+            Contacts.objects.get(pk = int(ins)).delete()
         except:
             return redirect('/unauthorized/', permanent=False)
 
-        contact.delete()
         return redirect('/contacts/', permanent=False)
     return redirect('/unauthorized/', permanent=False)
 
@@ -737,5 +776,13 @@ def delete_contact(request, ins = None):
 #===================================================================================================
 #
 
-def delete_contact_address(request):
-    print('')
+def delete_contact_address(request, ins = None):
+    if ins is not None:
+        try:
+            users_model.User_Address_Details.objects.get(pk = int(ins)).delete()
+        except:
+            return HttpResponse(0)
+        
+        return HttpResponse(1)
+    return HttpResponse(1)
+        

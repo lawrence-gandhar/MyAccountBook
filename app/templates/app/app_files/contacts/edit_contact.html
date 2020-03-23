@@ -249,13 +249,18 @@ table{
                                             </table>
                                         </div>
                                         <div class="tab-pane fade" id="address-form" role="tabpanel" aria-labelledby="address-tab" style="padding:10px 0px;">
+                                            
+                                            <button data-toggle="modal" data-target="#newAddressModal" class="btn btn-sm btn-primary pull-right" style="margin-bottom:15px; float:right; margin-left:10px;" type="button">
+                                                <i class="material-icons">add_box</i> Add New
+                                            </button>
+                                            
                                             {% for i in contact_address_form %}
 
                                                 <table class="table-responsive" id="table-{{forloop.counter}}">
                                                     <tbody style="width: 100%; display: inline-table;">
                                                         <tr class="buttons-tr">
                                                             <td colspan="2">
-                                                                <button class="btn btn-sm btn-danger pull-right" style="margin-bottom:15px; float:right; margin-left:10px;" type="button">
+                                                                <button class="btn btn-sm btn-danger pull-right" style="margin-bottom:15px; float:right; margin-left:10px;" type="button" onclick="delete_address({{forloop.counter}})">
                                                                     <i class="material-icons">delete_forever</i> Delete
                                                                 </button>
                                                                 <button class="btn btn-sm btn-success pull-right" style="margin-bottom:15px; float:right" type="button" onclick="openAddressModal({{forloop.counter}})">
@@ -268,7 +273,7 @@ table{
                                                                 Is Shipping Address
                                                             </td>
                                                             <td style="border:0px; padding:0px">                                                                    
-                                                                <label class="switch">
+                                                                <label class="switch address_label_1">
                                                                     {{ i.is_shipping_address  }}
                                                                     <span class="slider round"></span>
                                                                 </label>
@@ -605,7 +610,7 @@ table{
     </div>
 </div>
 
-<!-- EDIT ADDRESS 1 MODAL -->
+<!-- EDIT ADDRESS MODAL -->
 
 {% for i in contact_address_form %}
 
@@ -713,6 +718,111 @@ table{
 </div>
 
 {% endfor %}
+
+<!-- NEW ADDRESS MODAL -->
+
+<div class="modal fade" id="newAddressModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" style="background-color:currentcolor">
+            <form method="post" style="margin:0px" action="{% url 'add_address_details_form' %}">
+                <div class="modal-header bg-warning">
+                    <h5 class="modal-title" style="color:#000000; font-weight:bold;">Add Address Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{contact_ins}}" name="ids">
+                    <table class="table-responsive">
+                        <tbody style=" width: 100%; display: inline-table;">
+                            <tr>
+                                <td style="text-align:left; padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: inherit">
+                                    Is Shipping Address
+                                </td>
+                                <td style="border:0px; padding:0px">                                                                    
+                                    <label class="switch">
+                                        {{ new_address_form.is_shipping_address  }}
+                                        <span class="slider round"></span>
+                                    </label>
+
+                                    <span style="margin-left: 40px; position: relative; top: -7px;">
+                                        Is Billing Address
+                                    </span>
+
+                                    <label class="switch" style="margin-left: 20px;">
+                                        {{ new_address_form.is_billing_address }}
+                                        <span class="slider round"></span>
+                                    </label>
+                                </td>  
+                            </tr>
+                            <tr>
+                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
+                                    Contact Person
+                                </td>
+                                <td style="border:0px;" class="set_required">
+                                    {{ new_address_form.contact_person}}
+                                </td>                                    
+                            </tr>
+                            <tr>
+                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
+                                    Flat/Office/Door No.
+                                </td>
+                                <td style="border:0px;">
+                                    {{ new_address_form.flat_no }}
+                                </td>                                    
+                            </tr>
+                            <tr>
+                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
+                                    Street
+                                </td>
+                                <td style="border:0px;">
+                                    {{ new_address_form.street }}
+                                </td>                                    
+                            </tr>
+                            <tr>
+                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
+                                    City
+                                </td>
+                                <td style="border:0px;">
+                                    {{ new_address_form.city }}
+                                </td>                                    
+                            </tr>
+                            <tr>
+                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
+                                    Zipcode/Pincode
+                                </td>
+                                <td style="border:0px;">
+                                    {{ new_address_form.pincode }}
+                                </td>                                    
+                            </tr>
+                            <tr>
+                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
+                                    State
+                                </td>
+                                <td style="border:0px;">
+                                    {{ new_address_form.state }}
+                                </td>                                    
+                            </tr>
+                            <tr>
+                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
+                                    Country
+                                </td>
+                                <td style="border:0px;">
+                                    {{ new_address_form.country }}
+                                </td>                                    
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-sm btn-warning close" type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
+                    <button class="btn btn-sm btn-success" onclick="submit()">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <!-- EDIT ACCOUNTS MODAL -->
 

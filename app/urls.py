@@ -29,6 +29,7 @@ urlpatterns += [
 urlpatterns += [
     path('contacts/', never_cache(login_required(contacts.ContactsView.as_view())), name = 'contacts'),
     path('contacts/add/', never_cache(login_required(contacts.add_contacts)), name = 'add-contacts'),
+    path('contacts/add_address/', never_cache(login_required(contacts.add_address_details_form)), name = 'add_address_details_form'),
     path('contacts/edit/<int:ins>/', never_cache(login_required(contacts.edit_contact)), name = 'edit-contact'),
     
     path('contacts/check_appid/', never_cache(login_required(contacts.check_app_id)), name='check-appid'),
@@ -43,6 +44,8 @@ urlpatterns += [
     path('contacts/edit_address_details_form/', never_cache(login_required(contacts.edit_address_details_form)), name = 'edit_address_details_form'),
     path('contacts/edit_accounts_details_form/', never_cache(login_required(contacts.edit_accounts_details_form)), name = 'edit_accounts_details_form'),
     path('contacts/edit_social_details_form/', never_cache(login_required(contacts.edit_social_details_form)), name = 'edit_social_details_form'),
+
+    path('contacts/delete_address/<int:ins>/', never_cache(login_required(contacts.delete_contact_address)), name = 'delete_contact_address'),
 
 ]
 
