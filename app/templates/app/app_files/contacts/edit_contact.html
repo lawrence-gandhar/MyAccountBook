@@ -127,11 +127,7 @@ table{
                                         <li class="nav-item">
                                             <a class="nav-link" id="organisation-tab" data-toggle="tab" href="#organisation-form" role="tab" aria-controls="organisation"
                                             aria-selected="false">Other Details</a>
-                                        </li> 
-                                        <li class="nav-item">
-                                            <a class="nav-link" id="social-tab" data-toggle="tab" href="#social-form" role="tab" aria-controls="social"
-                                            aria-selected="false">Social Connect & Notes</a>
-                                        </li>                                         
+                                        </li>                                        
                                     </ul>
                                     <div class="tab-content" id="myTabContent">
                                         <div class="tab-pane fade show active" id="tax-form" role="tabpanel" aria-labelledby="tax-tab" style="padding:10px 0px;">
@@ -252,274 +248,162 @@ table{
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <div class="tab-pane fade" id="social-form" role="tabpanel" aria-labelledby="social-tab" style="padding:10px 0px;">
-                                            <table class="table-responsive">
-                                                <tbody style=" width: 100%; display: inline-table;">
-                                                    <tr>
-                                                        <td colspan="2">
-                                                            <button class="btn btn-sm btn-warning pull-right" style="margin-bottom:15px; float:right" type="button" data-toggle="modal" data-target="#editSocialModal">Edit Social Details</button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class="disabled-tr">
-                                                        <td style=" width:150px; border:0px; vertical-align: bottom">
-                                                            Website
-                                                        </td>
-                                                        <td style="border:0px;">
-                                                            {{ social_form.website }}
-                                                        </td>                                    
-                                                    </tr>
-                                                    <tr class="disabled-tr">
-                                                        <td style=" width:150px; border:0px; vertical-align: bottom">
-                                                            Facebook
-                                                        </td>
-                                                        <td style="border:0px;">
-                                                            {{ social_form.facebook }}
-                                                        </td>                                    
-                                                    </tr>
-                                                    <tr class="disabled-tr">
-                                                        <td style=" width:150px; border:0px; vertical-align: bottom">
-                                                            Twitter
-                                                        </td>
-                                                        <td style="border:0px;">
-                                                            {{ social_form.twitter }}
-                                                        </td>                                    
-                                                    </tr>
-                                                    <tr class="disabled-tr">
-                                                        <td style=" width:150px; border:0px; vertical-align: bottom">
-                                                            Notes
-                                                        </td>
-                                                        <td style="border:0px;">
-                                                            {{ social_form.notes }}
-                                                        </td>                                    
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
                                         <div class="tab-pane fade" id="address-form" role="tabpanel" aria-labelledby="address-tab" style="padding:10px 0px;">
                                             
-                                            {% if c_count <= 1 %}
-                                                <button class="btn btn-sm btn-warning pull-right" style="margin-bottom:15px; float:right" type="button" data-toggle="modal" data-target="#editAddress2Modal">Add Another</button>
-                                            {% endif %}
+                                            {% for i in contact_address_form %}
 
-                                            <table class="table-responsive" style="background-color:#31374e;">
-                                                <tbody style=" width: 100%; display: inline-table;">
-                                                    <tr>
-                                                        <td colspan="2">
-                                                            <button class="btn btn-sm btn-warning pull-right" style="margin-bottom:15px; float:right" type="button" data-toggle="modal" data-target="#editAddress1Modal">Edit Address 1 Details</button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class="disabled-tr">
-                                                        <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                            Contact Person
-                                                        </td>
-                                                        <td style="border:0px;">
-                                                            {{ contact_address_form_1.contact_person}}
-                                                        </td>                                    
-                                                    </tr>
-                                                    <tr class="disabled-tr">
-                                                        <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                            Flat/Office/Door No.
-                                                        </td>
-                                                        <td style="border:0px;">
-                                                            {{ contact_address_form_1.flat_no }}
-                                                        </td>                                    
-                                                    </tr>
-                                                    <tr class="disabled-tr">
-                                                        <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                            Street
-                                                        </td>
-                                                        <td style="border:0px;">
-                                                            {{ contact_address_form_1.street }}
-                                                        </td>                                    
-                                                    </tr>
-                                                    <tr class="disabled-tr">
-                                                        <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                            City
-                                                        </td>
-                                                        <td style="border:0px;">
-                                                            {{ contact_address_form_1.city }}
-                                                        </td>                                    
-                                                    </tr>
-                                                    <tr class="disabled-tr">
-                                                        <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                            Zipcode/Pincode
-                                                        </td>
-                                                        <td style="border:0px;">
-                                                            {{ contact_address_form_1.pincode }}
-                                                        </td>                                    
-                                                    </tr>
-                                                    <tr class="disabled-tr">
-                                                        <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                            State
-                                                        </td>
-                                                        <td style="border:0px;">
-                                                            {{ contact_address_form_1.state }}
-                                                        </td>                                    
-                                                    </tr>
-                                                    <tr class="disabled-tr">
-                                                        <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                            Country
-                                                        </td>
-                                                        <td style="border:0px;">
-                                                            {{ contact_address_form_1.country }}
-                                                        </td>                                    
-                                                    </tr>
-                                                    <tr class="disabled-tr">
-                                                        <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                            Is Shipping Address
-                                                        </td>
-                                                        <td style="border:0px;">
-                                                            {{ contact_address_form_1.is_shipping_address }}
-                                                        </td>                                    
-                                                    </tr>
-                                                    <tr class="disabled-tr">
-                                                        <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                            Is Billing Address
-                                                        </td>
-                                                        <td style="border:0px;">
-                                                            {{ contact_address_form_1.is_billing_address }}
-                                                        </td>                                    
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                            
-                                            {% if c_count > 1 %}
-                                            
-                                            <table class="table-responsive" style="background-color:#31374e; margin:10px 0px;">
-                                                <tbody style=" width: 100%; display: inline-table;">
-                                                    <tr>
-                                                        <td colspan="2">
-                                                            <button class="btn btn-sm btn-warning pull-right" style="margin-bottom:15px; float:right" type="button" data-toggle="modal" data-target="#editAddress2Modal">Edit Address 2 Details</button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class="disabled-tr">
-                                                        <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                            Contact Person
-                                                        </td>
-                                                        <td style="border:0px;">
-                                                            {{ contact_address_form_2.contact_person}}
-                                                        </td>                                    
-                                                    </tr>
-                                                    <tr class="disabled-tr">
-                                                        <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                            Flat/Office/Door No.
-                                                        </td>
-                                                        <td style="border:0px;">
-                                                            {{ contact_address_form_2.flat_no }}
-                                                        </td>                                    
-                                                    </tr>
-                                                    <tr class="disabled-tr">
-                                                        <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                            Street
-                                                        </td>
-                                                        <td style="border:0px;">
-                                                            {{ contact_address_form_2.street }}
-                                                        </td>                                    
-                                                    </tr>
-                                                    <tr class="disabled-tr">
-                                                        <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                            City
-                                                        </td>
-                                                        <td style="border:0px;">
-                                                            {{ contact_address_form_2.city }}
-                                                        </td>                                    
-                                                    </tr>
-                                                    <tr class="disabled-tr">
-                                                        <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                            Zipcode/Pincode
-                                                        </td>
-                                                        <td style="border:0px;">
-                                                            {{ contact_address_form_2.pincode }}
-                                                        </td>                                    
-                                                    </tr>
-                                                    <tr class="disabled-tr">
-                                                        <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                            State
-                                                        </td>
-                                                        <td style="border:0px;">
-                                                            {{ contact_address_form_2.state }}
-                                                        </td>                                    
-                                                    </tr>
-                                                    <tr class="disabled-tr">
-                                                        <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                            Country
-                                                        </td>
-                                                        <td style="border:0px;">
-                                                            {{ contact_address_form_2.country }}
-                                                        </td>                                    
-                                                    </tr>
-                                                    <tr class="disabled-tr">
-                                                        <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                            Is Shipping Address
-                                                        </td>
-                                                        <td style="border:0px;">
-                                                            {{ contact_address_form_2.is_shipping_address }}
-                                                        </td>                                    
-                                                    </tr>
-                                                    <tr class="disabled-tr">
-                                                        <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                            Is Billing Address
-                                                        </td>
-                                                        <td style="border:0px;">
-                                                            {{ contact_address_form_2.is_billing_address }}
-                                                        </td>                                    
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                                <table class="table-responsive">
+                                                    <tbody style=" width: 100%; display: inline-table;">
+                                                        <tr>
+                                                            <td colspan="2">
+                                                                <button class="btn btn-sm btn-danger pull-right" style="margin-bottom:15px; float:right; margin-left:10px;" type="button">
+                                                                    <i class="material-icons">delete_forever</i> Delete
+                                                                </button>
+                                                                <button class="btn btn-sm btn-success pull-right" style="margin-bottom:15px; float:right" type="button" data-toggle="modal" data-target="#editAddress1Modal">
+                                                                    <i class="material-icons">create</i> Edit
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="disabled-tr">
+                                                            <td style="text-align:left; padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: inherit">
+                                                                Is Shipping Address
+                                                            </td>
+                                                            <td style="border:0px; padding:0px">                                                                    
+                                                                <label class="switch">
+                                                                    {{ i.is_shipping_address  }}
+                                                                    <span class="slider round"></span>
+                                                                </label>
 
-                                            {% endif %}
+                                                                <span style="margin-left: 40px; position: relative; top: -7px;">
+                                                                    Billing Address Is Different
+                                                                </span>
+
+                                                                <label class="switch" style="margin-left: 20px;">
+                                                                    {{ i.is_billing_address_diff }}
+                                                                    <span class="slider round"></span>
+                                                                </label>
+                                                            </td>                                  
+                                                        </tr>
+                                                        <tr class="disabled-tr">
+                                                            <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
+                                                                Contact Person
+                                                            </td>
+                                                            <td style="border:0px;">
+                                                                {{ i.contact_person}}
+                                                            </td>                                    
+                                                        </tr>
+                                                        <tr class="disabled-tr">
+                                                            <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
+                                                                Flat/Office/Door No.
+                                                            </td>
+                                                            <td style="border:0px;">
+                                                                {{ i.flat_no }}
+                                                            </td>                                    
+                                                        </tr>
+                                                        <tr class="disabled-tr">
+                                                            <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
+                                                                Street
+                                                            </td>
+                                                            <td style="border:0px;">
+                                                                {{ i.street }}
+                                                            </td>                                    
+                                                        </tr>
+                                                        <tr class="disabled-tr">
+                                                            <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
+                                                                City
+                                                            </td>
+                                                            <td style="border:0px;">
+                                                                {{ i.city }}
+                                                            </td>                                    
+                                                        </tr>
+                                                        <tr class="disabled-tr">
+                                                            <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
+                                                                Zipcode/Pincode
+                                                            </td>
+                                                            <td style="border:0px;">
+                                                                {{ i.pincode }}
+                                                            </td>                                    
+                                                        </tr>
+                                                        <tr class="disabled-tr">
+                                                            <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
+                                                                State
+                                                            </td>
+                                                            <td style="border:0px;">
+                                                                {{ i.state }}
+                                                            </td>                                    
+                                                        </tr>
+                                                        <tr class="disabled-tr">
+                                                            <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
+                                                                Country
+                                                            </td>
+                                                            <td style="border:0px;">
+                                                                {{ i.country }}
+                                                            </td>                                    
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            
+                                            {% endfor %}
 
                                         </div>
                                         <div class="tab-pane fade" id="accounts-form" role="tabpanel" aria-labelledby="accounts-tab" style="padding:10px 20px;">
-                                            <table class="table-responsive">
-                                                <tbody style=" width: 100%; display: inline-table;">
-                                                    <tr class="disabled-tr">
-                                                        <td colspan="2">
-                                                            <button class="btn btn-sm btn-warning pull-right" style="margin-bottom:15px; float:right" type="button" data-toggle="modal" data-target="#editAccountsModal">Edit Accounts Details</button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class="disabled-tr">
-                                                        <td style=" width:150px; border:0px; vertical-align: bottom">
-                                                            Account Holder
-                                                        </td>
-                                                        <td style="border:0px;">
-                                                            {{ contact_account_details_form.account_holder_name }}
-                                                        </td>                                    
-                                                    </tr>
-                                                    <tr class="disabled-tr">
-                                                        <td style=" width:150px; border:0px; vertical-align: bottom">
-                                                            Account Number
-                                                        </td>
-                                                        <td style="border:0px;">
-                                                            {{ contact_account_details_form.account_number }}
-                                                        </td>                                    
-                                                    </tr>                                                        
-                                                    <tr class="disabled-tr">
-                                                        <td style=" width:150px; border:0px; vertical-align: bottom">
-                                                            IFSC Code
-                                                        </td>
-                                                        <td style="border:0px;">
-                                                            {{ contact_account_details_form.ifsc_code }}
-                                                        </td>                                    
-                                                    </tr>
-                                                    <tr class="disabled-tr">
-                                                        <td style=" width:150px; border:0px; vertical-align: bottom">
-                                                            Bank Name
-                                                        </td>
-                                                        <td style="border:0px;">
-                                                            {{ contact_account_details_form.bank_name }}
-                                                        </td>                                    
-                                                    </tr>
-                                                    <tr class="disabled-tr">
-                                                        <td style=" width:150px; border:0px; vertical-align: bottom">
-                                                            Branch Name
-                                                        </td>
-                                                        <td style="border:0px;">
-                                                            {{ contact_account_details_form.bank_branch_name }}
-                                                        </td>                                    
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                            
+                                            {% for i in contact_accounts_form %}
+                                                <table class="table-responsive">
+                                                    <tbody style=" width: 100%; display: inline-table;">
+                                                        <tr class="disabled-tr">
+                                                            <td colspan="2">
+                                                                <button class="btn btn-sm btn-danger pull-right" style="margin-bottom:15px; float:right; margin-left:10px;" type="button">
+                                                                    <i class="material-icons">delete_forever</i> Delete
+                                                                </button>
+                                                                <button class="btn btn-sm btn-success pull-right" style="margin-bottom:15px; float:right" type="button" data-toggle="modal" data-target="#editAccountsModal">
+                                                                    <i class="material-icons">create</i> Edit 
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="disabled-tr">
+                                                            <td style=" width:150px; border:0px; vertical-align: bottom">
+                                                                Account Holder
+                                                            </td>
+                                                            <td style="border:0px;">
+                                                                {{ i.account_holder_name }}
+                                                            </td>                                    
+                                                        </tr>
+                                                        <tr class="disabled-tr">
+                                                            <td style=" width:150px; border:0px; vertical-align: bottom">
+                                                                Account Number
+                                                            </td>
+                                                            <td style="border:0px;">
+                                                                {{ i.account_number }}
+                                                            </td>                                    
+                                                        </tr>                                                        
+                                                        <tr class="disabled-tr">
+                                                            <td style=" width:150px; border:0px; vertical-align: bottom">
+                                                                IFSC Code
+                                                            </td>
+                                                            <td style="border:0px;">
+                                                                {{ i.ifsc_code }}
+                                                            </td>                                    
+                                                        </tr>
+                                                        <tr class="disabled-tr">
+                                                            <td style=" width:150px; border:0px; vertical-align: bottom">
+                                                                Bank Name
+                                                            </td>
+                                                            <td style="border:0px;">
+                                                                {{ i.bank_name }}
+                                                            </td>                                    
+                                                        </tr>
+                                                        <tr class="disabled-tr">
+                                                            <td style=" width:150px; border:0px; vertical-align: bottom">
+                                                                Branch Name
+                                                            </td>
+                                                            <td style="border:0px;">
+                                                                {{ i.bank_branch_name }}
+                                                            </td>                                    
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            {% endfor %}
                                         </div>
                                     </div>
                                 </td> 
@@ -823,108 +707,6 @@ table{
     </div>
 </div>
 
-<!-- EDIT ADDRESS 2 MODAL -->
-
-<div class="modal fade" id="editAddress2Modal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content" style="background-color:currentcolor">
-            <form method="post" style="margin:0px" action="{% url 'edit_address_details_form' %}">
-                <div class="modal-header bg-warning">
-                    <h5 class="modal-title" style="color:#000000; font-weight:bold;">Edit Address 2 Details</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <input type="hidden" value="{{contact_ins}}" name="ids">
-                    <input type="hidden" value="2" name="prefix">
-                    <input type="hidden" value="{{contact_address_2}}" name="obj_ins">
-                    {% csrf_token %}
-                    <table class="table-responsive">
-                        <tbody style=" width: 100%; display: inline-table;">
-                            <tr>
-                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
-                                    Contact Person
-                                </td>
-                                <td style="border:0px;">
-                                    {{ contact_address_form_2.contact_person}}
-                                </td>                                    
-                            </tr>
-                            <tr>
-                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
-                                    Flat/Office/Door No.
-                                </td>
-                                <td style="border:0px;">
-                                    {{ contact_address_form_2.flat_no }}
-                                </td>                                    
-                            </tr>
-                            <tr>
-                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
-                                    Street
-                                </td>
-                                <td style="border:0px;">
-                                    {{ contact_address_form_2.street }}
-                                </td>                                    
-                            </tr>
-                            <tr>
-                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
-                                    City
-                                </td>
-                                <td style="border:0px;">
-                                    {{ contact_address_form_2.city }}
-                                </td>                                    
-                            </tr>
-                            <tr>
-                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
-                                    Zipcode/Pincode
-                                </td>
-                                <td style="border:0px;">
-                                    {{ contact_address_form_2.pincode }}
-                                </td>                                    
-                            </tr>
-                            <tr>
-                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
-                                    State
-                                </td>
-                                <td style="border:0px;">
-                                    {{ contact_address_form_2.state }}
-                                </td>                                    
-                            </tr>
-                            <tr>
-                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
-                                    Country
-                                </td>
-                                <td style="border:0px;">
-                                    {{ contact_address_form_2.country }}
-                                </td>                                    
-                            </tr>
-                            <tr>
-                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
-                                    Is Shipping Address
-                                </td>
-                                <td style="border:0px;">
-                                    {{ contact_address_form_2.is_shipping_address }}
-                                </td>                                    
-                            </tr>
-                            <tr>
-                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
-                                    Is Billing Address
-                                </td>
-                                <td style="border:0px;">
-                                    {{ contact_address_form_2.is_billing_address }}
-                                </td>                                    
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-sm btn-warning close" type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
-                    <button class="btn btn-sm btn-success" type="submit">Save</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 
 <!-- EDIT ACCOUNTS MODAL -->
 

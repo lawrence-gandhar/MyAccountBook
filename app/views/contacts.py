@@ -44,7 +44,7 @@ class ContactsView(View):
 
         view_type = request.GET.get('view',False)
 
-        contacts = Contacts.objects.filter(user = request.user)
+        contacts = contacts_model.Contacts.objects.filter(user = request.user)
         self.data["contacts"] = contacts
 
         if view_type:
@@ -201,7 +201,6 @@ def edit_contact(request, ins = None):
                 return redirect('/unauthorized/', permanent=False)
 
             data["contact_form"] = ContactsForm(instance = contact)
-            data["social_form"] = ContactsExtraForm(instance = contact)
 
             #
 
@@ -224,25 +223,26 @@ def edit_contact(request, ins = None):
 
             #
             # Addresses
-            contact_address_form = Contact_Addresses.objects.filter(contact = contact)
-            data["c_count"] = c_count = len(contact_address_form)
-            
-            data["contact_address_form_1"] = ContactsAddressForm(prefix = 'form1')
-            data["contact_address_form_2"] = ContactsAddressForm(prefix = 'form2')
+            contact_address_form = User_Address_Details.objects.filter(contact = contact, is_user = False)
+            c_count = len(contact_address_form)
 
+            data["c_count"] = [i for i in range(c_count)]
+            
+            data["contact_address_form"] = []
             for i in range(c_count):
-                data["contact_address_form_{}".format(i+1)] = ContactsAddressForm(instance = contact_address_form[i], prefix='form{}'.format(i+1))
-                data["contact_address_{}".format(i+1)] = contact_address_form[i].id
+                data["contact_address_form"].append(AddressForm(instance = contact_address_form[i], prefix = 'form{}'.format(i)))
 
             #
             # Accounts
-            try:
-                accounts = Contact_Account_Details.objects.get(contact = contact)
-                data["accounts"] = accounts.id
-            except:
-                pass
+            contact_accounts_form = User_Account_Details.objects.filter(contact = contact, is_user = False)
+            a_c_count = len(contact_accounts_form)
 
-            data["contact_account_details_form"] = ContactAccountDetailsForm(instance = accounts)
+            data["a_c_count"] = [i for i in range(a_c_count)]
+
+            data["contact_accounts_form"] = []
+            for i in range(a_c_count):
+                data["contact_accounts_form"].append(AccountDetailsForm(instance = contact_accounts_form[i], prefix = 'form_{}'.format(i)))
+
         else:    
             return redirect('/unauthorized/', permanent = False)
         return render(request, template_name, data)
