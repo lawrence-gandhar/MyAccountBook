@@ -49,9 +49,9 @@ function validate_Phone(elem){
 
    var format = /^\d{10}$/;
 
-   if (!value.match(format)) {
-        if (value.length == 0) return Array(false,"");
-        else return Array(false,"INVALID NUMBER*");
+    if(value.length != 0){
+        if (!value.match(format)) return Array(false,"INVALID NUMBER*");
+        else return Array(true,"");
     } 
     else {
         return Array(true,"");
@@ -67,9 +67,9 @@ function validate_PAN(elem){
 
     var format = /[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
 
-    if (!value.match(format)) {
-        if (value.length == 0) return Array(false,"");
-        else return Array(false,"INVALID PAN NUMBER*");
+    if(value.length != 0){
+        if (!value.match(format)) return Array(false,"INVALID PAN NUMBER*");
+        else return Array(true,"");
     } 
     else {
         return Array(true,"");
@@ -85,9 +85,9 @@ function validate_GST(elem){
 
     var format = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/;
 
-    if (!value.match(format)) {
-        if (value.length == 0) return Array(false,"");
-        else return Array(false,"INVALID GST*");
+    if(value.length != 0){
+        if (!value.match(format)) return Array(false, "INVALID GST*");
+        else return Array(true,"");
     } 
     else {
         return Array(true,"");
@@ -103,9 +103,9 @@ function validate_IFSC(elem){
 
     var format = /^[A-Za-z]{4}[a-zA-Z0-9]{7}$/;
 
-    if (!value.match(format)) {
-        if (value.length == 0) return Array(false,"");
-        else return Array(false,"INVALID IFCS CODE*");
+    if(value.length != 0){
+        if (!value.match(format)) return Array(false,"INVALID IFCS CODE*");
+        else return Array(true,"");
     } 
     else {
         return Array(true,"");
@@ -121,10 +121,10 @@ function validate_URL(elem){
 
     var format = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/;
 
-    if (!value.match(format)) {
-        if (value.length == 0) return Array(false,"");
-        else return Array(false,"INVALID URL*");
-    } 
+    if(value.length != 0){
+        if (!value.match(format)) return Array(false,"INVALID URL*");
+        else return Array(true,"");
+    }    
     else {
         return Array(true,"");
     }    
