@@ -114,6 +114,7 @@ select.form-control option{color : #000000; }
                                     </td>
                                     <td style="border:0px;">
                                         {{ contact_form.email }}
+                                        <p id="email_error" style="color: red;margin-bottom: 0px;"></p>
                                     </td>                                    
                                 </tr>
                                 <tr>
@@ -122,6 +123,7 @@ select.form-control option{color : #000000; }
                                     </td>
                                     <td style="border:0px;">
                                         {{ contact_form.phone }}
+                                        <p id="phone_error" style="color: red;margin-bottom: 0px;"></p>                                        
                                     </td>                                    
                                 </tr>                            
                                 <tr>
@@ -154,6 +156,7 @@ select.form-control option{color : #000000; }
                                                             </td>
                                                             <td style="border:0px;">
                                                                 {{ tax_form.pan }}
+                                                                <p id="pan_error" style="color: red;margin-bottom: 0px;"></p>   
                                                             </td>                                    
                                                         </tr>
                                                         <tr>
@@ -162,6 +165,7 @@ select.form-control option{color : #000000; }
                                                             </td>
                                                             <td style="border:0px;">
                                                                 {{ tax_form.gstin }}
+                                                                <p id="gst_error" style="color: red;margin-bottom: 0px;"></p> 
                                                             </td>                                    
                                                         </tr>
                                                         <tr>

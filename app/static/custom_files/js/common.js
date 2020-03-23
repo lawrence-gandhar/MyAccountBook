@@ -130,3 +130,21 @@ function validate_URL(elem){
     }    
 }
 
+//***********************************************************/
+// Email Validation
+//***********************************************************/
+
+function validate_Email(elem){
+    value = $(elem).val();
+
+    var format = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/
+
+    if(value.length != 0){
+        if (!value.match(format)) return Array(false,"INVALID Email*");
+        else return Array(true,"");
+    }
+    else {
+        return Array(true,"");
+    }  
+}
+

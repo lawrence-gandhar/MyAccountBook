@@ -12,6 +12,60 @@ $("#tr-id_user_address_details_set-tr-0 td:nth-child(2)").find("table > tbody tr
 $("tr#tr-id_user_address_details_set-tr-0 > td:nth-child(2)").hide()
 
 
+/**************************************************************/
+// Email Validation
+/**************************************************************/
+
+$("#id_email").on("blur",function(){
+    ret = validate_Email($(this));
+    if(!ret[0]){
+        $("p#email_error").text(ret[1]);
+        $(this).focus();
+    }else{
+        $("p#email_error").text(ret[1]);
+    } 
+});
+
+
+/**************************************************************/
+// Phone/Mobile Validation
+/**************************************************************/
+
+$("#id_phone").on("blur",function(){
+    ret = validate_Phone($(this));
+    if(!ret[0]){
+        $("p#phone_error").text(ret[1]);
+        $(this).focus();
+    } 
+});
+
+
+/**************************************************************/
+// PAN Validation
+/**************************************************************/
+
+$("#id_pan").on("blur",function(){
+    ret = validate_PAN($(this));
+    if(!ret[0]){
+        $("p#pan_error").text(ret[1]);
+        $(this).focus();
+    } 
+});
+
+
+/**************************************************************/
+// GST Validation
+/**************************************************************/
+
+$("#id_gstin").on("blur",function(){
+    ret = validate_GST($(this));
+    if(!ret[0]){
+        $("p#gst_error").text(ret[1]);
+        $(this).focus();
+    } 
+});
+
+
 /************************************************************ */
 //
 /************************************************************ */
@@ -261,4 +315,7 @@ function delete_accounts(ids){
         if(data == '1') location.reload();
         else alert("Unauthorized Access");
     });
-} 
+}
+
+
+
