@@ -229,7 +229,6 @@ def edit_contact(request, ins = None):
             for i in range(c_count):
                 data["contact_address_form"].append(EditAddressForm(instance = contact_address_form[i], prefix = 'form_{}'.format(contact_address_form[i].id)))
 
-        
             #
             # Accounts
             contact_accounts_form = User_Account_Details.objects.filter(contact = contact, is_user = False)
@@ -331,7 +330,7 @@ def edit_address_details_form(request):
 def edit_accounts_details_form(request):
     if request.POST:
         try:
-            account = Contact_Account_Details.objects.get(pk = int(request.POST["obj_ins"]))
+            account = users_model.User_Account_Details.objects.get(pk = int(request.POST["obj_ins"]))
         except:
             return redirect('/unauthorized/', permanent=False)
 
@@ -341,19 +340,6 @@ def edit_accounts_details_form(request):
 
     return redirect('/contacts/edit/{}/'.format(request.POST["ids"]), permanent = False)
 
-
-def edit_social_details_form(request):
-    if request.POST:
-        try:
-            contact = Contacts.objects.get(pk = int(request.POST["ids"]))
-        except:
-            return redirect('/unauthorized/', permanent=False)
-        
-        social_form = ContactsExtraForm(request.POST, request.FILES, instance = contact)
-        if social_form.is_valid():
-            social_form.save()
-
-    return redirect('/contacts/edit/{}/'.format(request.POST["ids"]), permanent = False)    
 
 #================================================================================
 # CHECK APPLICATION ID
