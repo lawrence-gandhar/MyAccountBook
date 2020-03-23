@@ -341,6 +341,7 @@ def edit_accounts_details_form(request):
 
     return redirect('/contacts/edit/{}/'.format(request.POST["ids"]), permanent = False)
 
+
 def edit_social_details_form(request):
     if request.POST:
         try:
@@ -627,7 +628,8 @@ def csv_2_contacts(user, file_path):
                     if "is_shipping_address" in fields and row["is_shipping_address"] == "True":
                         is_shipping_address = True
 
-                    contact_address = Contact_Addresses(
+                    contact_address = users_model.User_Address_Details(
+                        is_user = False,
                         contact_person = contact_person, 
                         flat_no = flat_no,
                         street = street,
@@ -647,7 +649,8 @@ def csv_2_contacts(user, file_path):
 
                 if "is_contact_account_details" in fields and row["is_contact_account_details"] == "TRUE":
                     
-                    contact_account_details = Contact_Account_Details(
+                    contact_account_details = users_model.User_Account_Details(
+                        is_user = False,
                         contact = contact_ins,
                         account_number = account_number,
                         account_holder_name = account_holder_name,
@@ -743,4 +746,10 @@ def delete_contact(request, ins = None):
     return redirect('/unauthorized/', permanent=False)
 
         
+#===================================================================================================
+# DELETE ADDRESS
+#===================================================================================================
+#
 
+def delete_contact_address(request):
+    print('')
