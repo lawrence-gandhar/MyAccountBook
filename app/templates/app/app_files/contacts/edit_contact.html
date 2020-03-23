@@ -897,6 +897,79 @@ table{
     </div>
 </div>
 {% endfor %}
+
+<!-- -->
+
+<div class="modal fade" id="newAccountsModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" style="background-color:currentcolor">
+            <form method="post" style="margin:0px" action="{% url 'add_accounts_details_form' %}">
+                <div class="modal-header bg-warning">
+                    <h5 class="modal-title" style="color:#000000; font-weight:bold;">Add Accounts Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" value="{{contact_ins}}" name="ids">
+                    {% csrf_token %}
+                    <table class="table-responsive">
+                        <tbody style=" width: 100%; display: inline-table;">
+                            <tr>
+                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
+                                    Account Holder
+                                </td>
+                                <td style="border:0px;">
+                                    {{ new_accounts_form.account_holder_name }}
+                                </td>                                    
+                            </tr>
+                            <tr>
+                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
+                                    Account Number
+                                </td>
+                                <td style="border:0px;">
+                                    {{ new_accounts_form.account_number }}
+                                </td>                                    
+                            </tr>
+                            <tr>
+                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
+                                    IFSC Code
+                                </td>
+                                <td style="border:0px;">
+                                    {{ i.ifsc_code }}
+                                </td>                                    
+                            </tr>
+                            <tr>
+                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
+                                    Bank Name
+                                </td>
+                                <td style="border:0px;">
+                                    {{ new_accounts_form.bank_name }}
+                                </td>                                    
+                            </tr>
+                            <tr>
+                                <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom; color:#a7a4a4">
+                                    Branch Name
+                                </td>
+                                <td style="border:0px;">
+                                    {{ new_accounts_form.bank_branch_name }}
+                                </td>                                    
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-sm btn-warning close" type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
+                    <button class="btn btn-sm btn-success" type="submit">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
 <!-- EDIT ORGANISATION MODAL -->
 
 <div class="modal fade" id="editOrganisationModal" tabindex="-1" role="dialog" aria-hidden="true">

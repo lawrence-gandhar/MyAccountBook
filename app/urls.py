@@ -30,6 +30,7 @@ urlpatterns += [
     path('contacts/', never_cache(login_required(contacts.ContactsView.as_view())), name = 'contacts'),
     path('contacts/add/', never_cache(login_required(contacts.add_contacts)), name = 'add-contacts'),
     path('contacts/add_address/', never_cache(login_required(contacts.add_address_details_form)), name = 'add_address_details_form'),
+    path('contacts/add_accounts/', never_cache(login_required(contacts.add_accounts_details_form)), name = 'add_accounts_details_form'),
     path('contacts/edit/<int:ins>/', never_cache(login_required(contacts.edit_contact)), name = 'edit-contact'),
     
     path('contacts/check_appid/', never_cache(login_required(contacts.check_app_id)), name='check-appid'),

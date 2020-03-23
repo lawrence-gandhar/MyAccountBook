@@ -231,6 +231,7 @@ def edit_contact(request, ins = None):
 
 
             data["new_address_form"] = EditAddressForm()
+            data["new_accounts_form"] = AccountDetailsForm()
 
             #
             # Accounts
@@ -269,6 +270,31 @@ def add_address_details_form(request):
             ins.save()
 
             return redirect('/contacts/edit/{}/'.format(request.POST["ids"]), permanent = False)
+
+
+#=======================================================================================
+#   ADD ACCOUNTS DETAILS
+#=======================================================================================
+#
+def add_accounts_details_form(request):
+
+    if request.POST:
+
+        try:
+            contact_ins = Contacts.objects.get(pk = int(request.POST["ids"]))
+        except:
+            return redirect('/unauthorized/', permanent = False)
+
+        accounts_form = AccountDetailsForm(request.POST)
+
+        if accounts_form.is_valid():
+            ins = accounts_form.save(commit = False)
+            ins.contact = contact_ins
+            ins.is_user = False
+            ins.save()
+
+            return redirect('/contacts/edit/{}/'.format(request.POST["ids"]), permanent = False)
+
 
 
 
@@ -366,13 +392,16 @@ def edit_accounts_details_form(request):
         except:
             return redirect('/unauthorized/', permanent=False)
 
-        account_form = AccountDetailsForm(request.POST, instance = account)
+        account_form = AccountDetailsForm(request.POST, prefix='form_'+prefix, instance = account)
         if account_form.is_valid():
             account_form.save()
 
     return redirect('/contacts/edit/{}/'.format(request.POST["ids"]), permanent = False)
 
-
+#=======================================================================================
+#   EDIT SOCIAL DETAILS
+#=======================================================================================
+#
 def edit_social_details_form(request):
     if request.POST:
         try:
