@@ -21,10 +21,10 @@ $("#id_email, #editContactModal > #id_email").on("blur",function(){
     if(!ret[0]){
         $("p#email_error").text(ret[1]);
         $(this).focus();
-        $("button#save_button").prop("disabled",true);
+        $("button.save_button").prop("disabled",true);
     }else{
         $("p#email_error").text(ret[1]);
-        $("button#save_button").prop("disabled",false);
+        $("button.save_button").prop("disabled",false);
     } 
 });
 
@@ -38,10 +38,10 @@ $("#id_phone, #editContactModal > #id_phone").on("blur",function(){
     if(!ret[0]){
         $("p#phone_error").text(ret[1]);
         $(this).focus();
-        $("button#save_button").prop("disabled",true);
+        $("button.save_button").prop("disabled",true);
     }else{
         $("p#phone_error").text(ret[1]);
-        $("button#save_button").prop("disabled",false);
+        $("button.save_button").prop("disabled",false);
     } 
 });
 
@@ -55,10 +55,10 @@ $("#id_pan, #editTaxModal > #id_pan").on("blur",function(){
     if(!ret[0]){
         $("p#pan_error").text(ret[1]);
         $(this).focus();
-        $("button#save_button").prop("disabled",true);
+        $("button.save_button").prop("disabled",true);
     }else{
         $("p#pan_error").text(ret[1]);
-        $("button#save_button").prop("disabled",false);
+        $("button.save_button").prop("disabled",false);
     } 
 });
 
@@ -72,10 +72,10 @@ $("#id_gstin, #editTaxModal > #id_gstin").on("blur",function(){
     if(!ret[0]){
         $("p#gst_error").text(ret[1]);
         $(this).focus();
-        $("button#save_button").prop("disabled",true);
+        $("button.save_button").prop("disabled",true);
     }else{
         $("p#gst_error").text(ret[1]);
-        $("button#save_button").prop("disabled",false);
+        $("button.save_button").prop("disabled",false);
     }  
 });
 
