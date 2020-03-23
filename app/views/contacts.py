@@ -241,7 +241,7 @@ def edit_contact(request, ins = None):
 
             data["contact_accounts_form"] = []
             for i in range(a_c_count):
-                data["contact_accounts_form"].append(AccountDetailsForm(instance = contact_accounts_form[i], prefix = 'form_{}'.format(i)))
+                data["contact_accounts_form"].append(AccountDetailsForm(instance = contact_accounts_form[i], prefix = 'form_{}'.format(contact_accounts_form[i].id)))
 
         else:    
             return redirect('/unauthorized/', permanent = False)
