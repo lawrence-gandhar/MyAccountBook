@@ -36,6 +36,8 @@ $("#id_phone").on("blur",function(){
     if(!ret[0]){
         $("p#phone_error").text(ret[1]);
         $(this).focus();
+    }else{
+        $("p#phone_error").text(ret[1]);
     } 
 });
 
@@ -49,6 +51,8 @@ $("#id_pan").on("blur",function(){
     if(!ret[0]){
         $("p#pan_error").text(ret[1]);
         $(this).focus();
+    }else{
+        $("p#pan_error").text(ret[1]);
     } 
 });
 
@@ -62,7 +66,9 @@ $("#id_gstin").on("blur",function(){
     if(!ret[0]){
         $("p#gst_error").text(ret[1]);
         $(this).focus();
-    } 
+    }else{
+        $("p#gst_error").text(ret[1]);
+    }  
 });
 
 
