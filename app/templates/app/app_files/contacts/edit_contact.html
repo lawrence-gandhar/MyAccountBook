@@ -842,7 +842,6 @@ table{
                 </div>
                 <div class="modal-body">
                     <input type="hidden" value="{{contact_ins}}" name="ids">
-                    <input type="hidden" value="{{accounts}}" name="obj_ins">
                     {% csrf_token %}
                     <table class="table-responsive">
                         <tbody style=" width: 100%; display: inline-table;">
@@ -851,7 +850,7 @@ table{
                                     Account Holder
                                 </td>
                                 <td style="border:0px;">
-                                    {{ contact_account_details_form.account_holder_name }}
+                                    {{ i.account_holder_name }}
                                 </td>                                    
                             </tr>
                             <tr>
@@ -859,7 +858,7 @@ table{
                                     Account Number
                                 </td>
                                 <td style="border:0px;">
-                                    {{ contact_account_details_form.account_number }}
+                                    {{ i.account_number }}
                                 </td>                                    
                             </tr>
                             <tr>
@@ -867,7 +866,7 @@ table{
                                     IFSC Code
                                 </td>
                                 <td style="border:0px;">
-                                    {{ contact_account_details_form.ifsc_code }}
+                                    {{ i.ifsc_code }}
                                 </td>                                    
                             </tr>
                             <tr>
@@ -875,7 +874,7 @@ table{
                                     Bank Name
                                 </td>
                                 <td style="border:0px;">
-                                    {{ contact_account_details_form.bank_name }}
+                                    {{ i.bank_name }}
                                 </td>                                    
                             </tr>
                             <tr>
@@ -883,7 +882,7 @@ table{
                                     Branch Name
                                 </td>
                                 <td style="border:0px;">
-                                    {{ contact_account_details_form.bank_branch_name }}
+                                    {{ i.bank_branch_name }}
                                 </td>                                    
                             </tr>
                         </tbody>

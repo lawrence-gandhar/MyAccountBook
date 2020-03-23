@@ -232,6 +232,10 @@ function openAddressModal(ids){
     $("#editAddressModal-"+ids).modal('show');
 }
 
+function openAccountsModal(ids){
+    $("#editAccountsModal-"+ids).modal('show');
+}
+
 /********************************************************************/
 //
 /********************************************************************/

@@ -356,12 +356,17 @@ def edit_address_details_form(request):
 #
 def edit_accounts_details_form(request):
     if request.POST:
+
+        keys = [i for i in request.POST.keys() if "account_number" in i]
+
+        prefix = keys[0].replace("-account_number", "").replace("form_", "")
+
         try:
-            account = users_model.User_Account_Details.objects.get(pk = int(request.POST["obj_ins"]))
+            account = users_model.User_Account_Details.objects.get(pk = int(prefix))
         except:
             return redirect('/unauthorized/', permanent=False)
 
-        account_form = ContactAccountDetailsForm(request.POST, instance = account)
+        account_form = AccountDetailsForm(request.POST, instance = account)
         if account_form.is_valid():
             account_form.save()
 
