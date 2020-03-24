@@ -13,6 +13,8 @@ from app.forms.inc_fomsets import *
 from django.conf import *
 
 from django.db import *
+from django.db.models import Q
+
 
 import json, os, csv
 
@@ -42,16 +44,19 @@ class ContactsView(View):
     #
     def get(self, request):        
 
-        view_type = request.GET.get('view',False)
+        search = request.GET.get('search',False)
 
         contacts = contacts_model.Contacts.objects.filter(user = request.user)
+
+        if search:
+            contacts = contacts.filter(
+                Q(contact_name__contains = search) | 
+                Q(display_name__contains = search) |
+                Q(organization_name__contains = search)
+            )
+
         self.data["contacts"] = contacts
-
-        if view_type:
-            self.data["view"] = "grid"
-        else:
-            self.data["view"] = ""
-
+        
         return render(request, self.template_name, self.data)
 
 
