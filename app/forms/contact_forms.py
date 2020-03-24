@@ -102,14 +102,12 @@ class AccountDetailsForm(ModelForm):
             'bank_branch_name' : TextInput(attrs={'class':'form-control input-sm',}),
         }
 
-""""
+
 class ContactsExtraForm(ModelForm):
     class Meta:
 
-        model = Contacts
-        fields = (
-                    'website', 'facebook', 'twitter', 'attachements', 'notes',
-                )
+        model = contacts_model.Contacts
+        fields = ('website', 'facebook', 'twitter', 'attachements', 'notes',)
 
         widgets = {
             'attachements' : FileInput(attrs = {'class':'form-control input-sm',}),
@@ -119,6 +117,7 @@ class ContactsExtraForm(ModelForm):
             'notes': Textarea(attrs = {'class':'form-control'})
         }         
 
+""""
 class ContactsEmailForm(ModelForm):
     class Meta:
         EMAIL_CHOICES = ((True, 'Yes'),(False, 'No'))

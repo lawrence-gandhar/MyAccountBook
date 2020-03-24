@@ -144,7 +144,10 @@ select.form-control option{color : #000000; }
                                             <li class="nav-item">
                                                 <a class="nav-link" id="organisation-tab" data-toggle="tab" href="#organisation-form" role="tab" aria-controls="organisation"
                                                 aria-selected="false">Other Details</a>
-                                            </li>                                        
+                                            </li>    
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="social-tab" data-toggle="tab" href="#social-form" role="tab" aria-controls="social" aria-selected="false">Social Connect & Notes</a>
+                                            </li>                                    
                                         </ul>
                                         <div class="tab-content" id="myTabContent">
                                             <div class="tab-pane fade show active" id="tax-form" role="tabpanel" aria-labelledby="tax-tab" style="padding:10px 0px;">
@@ -399,6 +402,55 @@ select.form-control option{color : #000000; }
                                                             </td>                                    
                                                         </tr>
                                                         {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="tab-pane fade" id="social-form" role="tabpanel" aria-labelledby="social-tab" style="padding:10px 0px;">
+                                                <table class="table-responsive">
+                                                    <tbody style=" width: 99%; display: inline-table;">
+                                                        <tr>
+                                                            <td style=" width:150px; border:0px; vertical-align: bottom">
+                                                                Website
+                                                            </td>
+                                                            <td style="border:0px;">
+                                                                {{ social_form.website }}
+                                                                <p id="website_error" style="color: red;margin-bottom: 0px;"></p> 
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style=" width:150px; border:0px; vertical-align: bottom">
+                                                                Facebook
+                                                            </td>
+                                                            <td style="border:0px;">
+                                                                {{ social_form.facebook }}
+                                                                <p id="facebook_error" style="color: red;margin-bottom: 0px;"></p> 
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style=" width:150px; border:0px; vertical-align: bottom">
+                                                                Twitter
+                                                            </td>
+                                                            <td style="border:0px;">
+                                                                {{ social_form.twitter }}
+                                                                <p id="twitter_error" style="color: red;margin-bottom: 0px;"></p> 
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style=" width:150px; border:0px; vertical-align: bottom">
+                                                                Notes
+                                                            </td>
+                                                            <td style="border:0px;">
+                                                                {{ social_form.notes }}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style=" width:150px; border:0px; vertical-align: bottom">
+                                                                Attachments
+                                                            </td>
+                                                            <td style="border:0px;">
+                                                                {{ social_form.attachements }}
+                                                            </td>
+                                                        </tr>
                                                     </tbody>
                                                 </table>
                                             </div>

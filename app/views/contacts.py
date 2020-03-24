@@ -80,6 +80,7 @@ def add_contacts(request, slug = None, ins = None):
     data["contact_form"] = ContactsForm()
     data["tax_form"] = TaxForm()
     data["other_details_form"] = OtherDetailsForm()
+    data["social_form"] = ContactsExtraForm()
 
     #
     # FORMSETS    
@@ -108,6 +109,14 @@ def add_contacts(request, slug = None, ins = None):
                 
                 contact_form_ins.imported_user = imp_user
             
+            #
+            # Social form -- save
+            #
+
+            social_form = ContactsExtraForm(request.POST, request.FILES, instance = contact_form_ins)
+            if social_form.is_valid():
+                social_form.save()
+
             contact_form_ins.save() 
 
         #
@@ -201,6 +210,7 @@ def edit_contact(request, ins = None):
                 return redirect('/unauthorized/', permanent=False)
 
             data["contact_form"] = ContactsForm(instance = contact)
+            data["social_form"] = ContactsExtraForm(instance = contact)
 
             #
 
