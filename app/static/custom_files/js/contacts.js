@@ -26,7 +26,7 @@ function valid_Email(elem){
         $(elem).css({"background-color":"transparent"});
         $("#save_button, #editContactModal > #save_button").prop("disabled",false);
     } 
-});
+}
 
 
 /**************************************************************/
