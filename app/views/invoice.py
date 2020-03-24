@@ -8,12 +8,13 @@ from django.conf import settings
 
 from django.template.loader import get_template
 
-from app.models.invoice_model import *
-from app.models.collects_model import *
+from app.models import * 
+
 from app.forms.invoice_forms import *
 from app.forms.items_form import *
 from app.forms.contact_forms import *
 from app.forms.tax_form import *
+from app.forms.inc_fomsets import *
 
 from django.forms import inlineformset_factory
 
@@ -42,7 +43,7 @@ class Invoice(View):
     data["js_files"] = []
 
     def get(self, request, *args, **kwargs):
-        self.data["invoice_list"] = InvoiceModel.objects.filter(service_provider = request.user)
+        self.data["invoice_list"] = invoice_model.InvoiceModel.objects.filter(service_provider = request.user)
         return render(request, self.template_name, self.data)
 
 #=====================================================================================
@@ -69,7 +70,7 @@ class InvoiceDesigner(View):
         #
         #   USER PHONE LIST
         #
-        records = Profile.objects.filter(user = request.user)
+        records = users_model.Profile.objects.filter(user = request.user)
             
         phone_records = records.values('official_phone', 'personal_phone',)    
         PHONE_NUMBERS = []
@@ -129,7 +130,7 @@ def manage_invoice_designs(request):
     data["css_files"] = []
     data["js_files"] = []
 
-    data["designs"] = Invoice_Templates.objects.filter(user = request.user)
+    data["designs"] = invoice_model.Invoice_Templates.objects.filter(user = request.user)
 
     return render(request, template_name, data)
 
@@ -200,19 +201,19 @@ class CreateCollectionInvoice(View):
         ins = int(self.kwargs['ins'])
 
         try:
-            collect = Collections.objects.get(pk = ins)
+            collect = collects_model.Collections.objects.get(pk = ins)
         except:
             return redirect('/unauthorized/', permanent = True)
 
-        try:
-            self.data["contact_details"] = Contacts.objects.get(pk = collect.contact.id)
+        try: 
+            self.data["contact_details"] = contacts_model.Contacts.objects.get(pk = collect.contact.id)
         except:
             return redirect('/unauthorized/', permanent = True)
 
         #
         #   INVOICE TEMPLATE DETAILS
         #
-        inv = Invoice_Templates.objects.filter(user = request.user)
+        inv = invoice_model.Invoice_Templates.objects.filter(user = request.user)
         inv_details = inv.values()[0]
 
         self.data["template_logo"] = inv_details["logo"]
@@ -221,7 +222,7 @@ class CreateCollectionInvoice(View):
         # Profile & Address Details
         #
 
-        profile = Profile.objects.get(user = request.user)
+        profile = users_model.Profile.objects.get(user = request.user)
 
         #
         # USER - FIRSTNAME & LASTNAME
@@ -273,7 +274,7 @@ class CreateCollectionInvoice(View):
         if inv_details["billing_address_id"] is not None:
             
             try:
-                billing_address = User_Address_Details.objects.get(user = request.user, pk = inv_details["billing_address_id"])
+                billing_address = users_model.User_Address_Details.objects.get(user = request.user, pk = inv_details["billing_address_id"])
                 self.data["user_billing_address"].append(billing_address.flat_no)
                 self.data["user_billing_address"].append(billing_address.street)
                 self.data["user_billing_address"].append(billing_address.city+" - "+billing_address.pincode)
@@ -290,14 +291,14 @@ class CreateCollectionInvoice(View):
         self.data["contact_shipping_address"] = []
 
         try:
-            contact_shipping_address = Contact_Addresses.objects.get(contact = self.data["contact_details"], is_shipping_address = True)
+            contact_shipping_address = users_model.User_Address_Details.objects.get(contact = self.data["contact_details"], is_shipping_address = True)
              
-            self.data["contact_shipping_address"].append(contact_billing_address.contact_name)
-            self.data["contact_shipping_address"].append(contact_billing_address.flat_no)
-            self.data["contact_shipping_address"].append(contact_billing_address.street)
-            self.data["contact_shipping_address"].append(contact_billing_address.city+" - "+contact_billing_address.pincode)
-            self.data["contact_shipping_address"].append(contact_billing_address.state)
-            self.data["contact_shipping_address"].append(country_list.COUNTRIES_LIST_DICT[contact_billing_address.country])
+            self.data["contact_shipping_address"].append(contact_shipping_address.contact_name)
+            self.data["contact_shipping_address"].append(contact_shipping_address.flat_no)
+            self.data["contact_shipping_address"].append(contact_shipping_address.street)
+            self.data["contact_shipping_address"].append(contact_shipping_address.city+" - "+contact_shipping_address.pincode)
+            self.data["contact_shipping_address"].append(contact_shipping_address.state)
+            self.data["contact_shipping_address"].append(country_list.COUNTRIES_LIST_DICT[contact_shipping_address.country])
         except:
             pass
 
@@ -307,7 +308,7 @@ class CreateCollectionInvoice(View):
         # COLLECTION DETAILS
         #
         self.data["collections"] = collect
-        self.data["partial_collections"] = CollectPartial.objects.filter(collect_part = collect)
+        self.data["partial_collections"] = collects_model.CollectPartial.objects.filter(collect_part = collect)
         
         #
         # AMOUNTS CALCULATIONS
@@ -342,12 +343,12 @@ class CreateCollectionInvoice(View):
         self.data["invoice_form"] = InvoiceForm()
 
         try:
-            collect = Collections.objects.get(pk = ins)
+            collect = collects_model.Collections.objects.get(pk = ins)
         except:
             return redirect('/unauthorized/', permanent = True)
 
         try:
-            contact_details = Contacts.objects.get(pk = collect.contact.id)
+            contact_details = contacts_model.Contacts.objects.get(pk = collect.contact.id)
         except:
             return redirect('/unauthorized/', permanent = True)
 
@@ -395,22 +396,22 @@ def get_pdf(request, ins = None):
     data["shipping"] = 0.00
     data["total_amount"] = 0.00
 
-    data["invoice"] = InvoiceModel.objects.get(pk = ins)
+    data["invoice"] = invoice_model.InvoiceModel.objects.get(pk = ins)
 
-    collect = Collections.objects.get(pk = data["invoice"].collect.id)
-    data["contact_details"] = Contacts.objects.get(pk = data["invoice"].service_recipient.id)
+    collect = collects_model.Collections.objects.get(pk = data["invoice"].collect.id)
+    data["contact_details"] = contacts_model.Contacts.objects.get(pk = data["invoice"].service_recipient.id)
     
     #
     #   INVOICE TEMPLATE DETAILS
     #
-    inv = Invoice_Templates.objects.filter(user = request.user)
+    inv = invoice_model.Invoice_Templates.objects.filter(user = request.user)
     inv_details = inv.values()[0]
 
     #
     # Profile & Address Details
     #
 
-    profile = Profile.objects.get(user = request.user)
+    profile = users_model.Profile.objects.get(user = request.user)
 
     #
     # USER - FIRSTNAME & LASTNAME
@@ -462,7 +463,7 @@ def get_pdf(request, ins = None):
     if inv_details["billing_address_id"] is not None:
         
         try:
-            billing_address = User_Address_Details.objects.get(user = request.user, pk = inv_details["billing_address_id"])
+            billing_address = users_model.User_Address_Details.objects.get(user = request.user, pk = inv_details["billing_address_id"])
             data["user_billing_address"].append(billing_address.flat_no)
             data["user_billing_address"].append(billing_address.street)
             data["user_billing_address"].append(billing_address.city+" - "+billing_address.pincode)
@@ -479,14 +480,14 @@ def get_pdf(request, ins = None):
     data["contact_shipping_address"] = []
 
     try:
-        contact_shipping_address = Contact_Addresses.objects.get(contact = data["contact_details"], is_shipping_address = True)
+        contact_shipping_address = users_model.User_Address_Details.objects.get(contact = data["contact_details"], is_shipping_address = True)
             
-        data["contact_shipping_address"].append(contact_billing_address.contact_name)
-        data["contact_shipping_address"].append(contact_billing_address.flat_no)
-        data["contact_shipping_address"].append(contact_billing_address.street)
-        data["contact_shipping_address"].append(contact_billing_address.city+" - "+contact_billing_address.pincode)
-        data["contact_shipping_address"].append(contact_billing_address.state)
-        data["contact_shipping_address"].append(country_list.COUNTRIES_LIST_DICT[contact_billing_address.country])
+        data["contact_shipping_address"].append(contact_shipping_address.contact_name)
+        data["contact_shipping_address"].append(contact_shipping_address.flat_no)
+        data["contact_shipping_address"].append(contact_shipping_address.street)
+        data["contact_shipping_address"].append(contact_shipping_address.city+" - "+contact_shipping_address.pincode)
+        data["contact_shipping_address"].append(contact_shipping_address.state)
+        data["contact_shipping_address"].append(country_list.COUNTRIES_LIST_DICT[contact_shipping_address.country])
     except:
         pass
 
@@ -496,7 +497,7 @@ def get_pdf(request, ins = None):
     # COLLECTION DETAILS
     #
     data["collections"] = collect
-    data["partial_collections"] = CollectPartial.objects.filter(collect_part = collect)
+    data["partial_collections"] = collects_model.CollectPartial.objects.filter(collect_part = collect)
     
     #
     # AMOUNTS CALCULATIONS
@@ -561,15 +562,16 @@ class CreateInvoice(View):
 
         self.data["formset"] = self.ProductFormSet(queryset = ProductsModel.objects.filter(user = request.user))
 
-
+        # Initialize Forms
         self.data["contact_form"] = ContactsForm()
-        self.data["social_form"] = ContactsExtraForm()
         self.data["tax_form"] = TaxForm()
         self.data["other_details_form"] = OtherDetailsForm()
-        self.data["contact_address_form_1"] = ContactsAddressForm(prefix = 'form1')
-        self.data["contact_address_form_2"] = ContactsAddressForm(prefix = 'form2')
-        self.data["contact_address_form_3"] = ContactsAddressForm(prefix = 'form3')
-        self.data["contact_account_details_form"] = ContactAccountDetailsForm()
+        self.data["social_form"] = ContactsExtraForm()
+
+        #
+        # FORMSETS    
+        self.data["address_formset"] = AddressFormset
+        self.data["accounts_formset"] = AccountsFormset
 
         return render(request, self.template_name, self.data)
 
