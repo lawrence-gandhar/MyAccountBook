@@ -10,12 +10,17 @@
                 <h4 class="card-title ">View Contacts</h4>                
             </div>
             <div class="card-body">
-                <div class="input-group pull-right" style="width:400px; margin-bottom:10px;">
-                    <input type="text" class="form-control" placeholder="Search" style="height: 35px !important">
+                <form method="get">
+                    <div class="input-group pull-right" style="width:400px; margin-bottom:10px;">
+                
+                    <input name="search" type="text" class="form-control" placeholder="Search" style="height: 41px !important">
                     <div class="input-group-append">
-                        <button class="btn btn-sm btn-success" type="submit">Go</button>
+                        <button class="btn btn-sm btn-success" type="submit()" style="border-radius:0px;">
+                            <i class="material-icons">search</i> <span style="font-size:14px;">Search</span>
+                        </button>
                     </div>
-                </div>
+                    </div>
+                </form>
                 <div class="table">
                     <table class="table-responsive table-bordered" width="100%" cellspacing="0">
                         <thead  style="background-color: #EEEEEE; color:#000000; font-size:11px">
