@@ -431,7 +431,7 @@ table{
 
 
 
-<div class="modal fade" id="editContactModal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="editContactModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content" style="background-color:currentcolor">
             <form method="post" style="margin:0px" action="{% url 'edit_contact_details_form' %}">
@@ -533,7 +533,7 @@ table{
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-warning close" type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
-                    <button class="btn btn-sm btn-success" type="submit" class="save_button">Save</button>
+                    <button class="btn btn-sm btn-success" class="save_button">Save</button>
                 </div>
             </form>
         </div>
@@ -542,7 +542,7 @@ table{
 
 <!-- EDIT TAX DETAILS MODAL -->
 
-<div class="modal fade" id="editTaxModal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="editTaxModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content" style="background-color:currentcolor">
             <form method="post" style="margin:0px" action="{% url 'edit_tax_details_form' %}">
@@ -626,7 +626,7 @@ table{
 
 {% for i in contact_address_form %}
 
-<div class="modal fade" id="editAddressModal-{{forloop.counter}}" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="editAddressModal-{{forloop.counter}}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content" style="background-color:currentcolor">
             <form method="post" style="margin:0px" action="{% url 'edit_address_details_form' %}">
@@ -733,7 +733,7 @@ table{
 
 <!-- NEW ADDRESS MODAL -->
 
-<div class="modal fade" id="newAddressModal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="newAddressModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content" style="background-color:currentcolor">
             <form method="post" style="margin:0px" action="{% url 'add_address_details_form' %}">
@@ -838,7 +838,7 @@ table{
 
 <!-- EDIT ACCOUNTS MODAL -->
 {% for i in contact_accounts_form %}
-<div class="modal fade" id="editAccountsModal-{{forloop.counter}}" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="editAccountsModal-{{forloop.counter}}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content" style="background-color:currentcolor">
             <form method="post" style="margin:0px" action="{% url 'edit_accounts_details_form' %}">
@@ -908,7 +908,7 @@ table{
 
 <!-- -->
 
-<div class="modal fade" id="newAccountsModal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="newAccountsModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content" style="background-color:currentcolor">
             <form method="post" style="margin:0px" action="{% url 'add_accounts_details_form' %}">
@@ -980,7 +980,7 @@ table{
 
 <!-- EDIT ORGANISATION MODAL -->
 
-<div class="modal fade" id="editOrganisationModal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="editOrganisationModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content" style="background-color:currentcolor">
             <form method="post" style="margin:0px" action="{% url 'edit_other_details_form' %}">
@@ -1059,7 +1059,7 @@ table{
 
 <!-- EDIT ACCOUNTS MODAL -->
 
-<div class="modal fade" id="editAccountsModal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="editAccountsModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content" style="background-color:currentcolor">
             <form method="post" style="margin:0px">

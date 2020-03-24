@@ -147,3 +147,8 @@ function validate_Email(elem){
         return Array(true,"");
     }  
 }
+
+
+$('.modal').on('shown.bs.modal', function () {
+    document.getElementsByTagName("form").reset();
+});

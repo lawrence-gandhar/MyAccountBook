@@ -16,15 +16,15 @@ $("tr#tr-id_user_address_details_set-tr-0 > td:nth-child(2)").hide()
 // Email Validation
 /**************************************************************/
 
-$("#id_email, #editContactModal > #id_email").on("blur",function(){
+$("#id_email, #editContactModal > #id_email").on("keyup",function(){
     ret = validate_Email($(this));
     if(!ret[0]){
         $("p#email_error").text(ret[1]);
         $(this).focus();
-        $("button.save_button").prop("disabled",true);
+        $("#save_button, #editContactModal > #save_button").prop("disabled",true);
     }else{
         $("p#email_error").text(ret[1]);
-        $("button.save_button").prop("disabled",false);
+        $("#save_button, #editContactModal > #save_button").prop("disabled",false);
     } 
 });
 
@@ -38,10 +38,10 @@ $("#id_phone, #editContactModal > #id_phone").on("blur",function(){
     if(!ret[0]){
         $("p#phone_error").text(ret[1]);
         $(this).focus();
-        $("button.save_button").prop("disabled",true);
+        $("#save_button, #editContactModal > #save_button").prop("disabled",true);
     }else{
         $("p#phone_error").text(ret[1]);
-        $("button.save_button").prop("disabled",false);
+        $("#save_button, #editContactModal > #save_button").prop("disabled",false);
     } 
 });
 
@@ -55,10 +55,10 @@ $("#id_pan, #editTaxModal > #id_pan").on("blur",function(){
     if(!ret[0]){
         $("p#pan_error").text(ret[1]);
         $(this).focus();
-        $("button.save_button").prop("disabled",true);
+        $("#save_button, #editContactModal > #save_button").prop("disabled",true);
     }else{
         $("p#pan_error").text(ret[1]);
-        $("button.save_button").prop("disabled",false);
+        $("#save_button, #editContactModal > #save_button").prop("disabled",false);
     } 
 });
 
@@ -72,10 +72,10 @@ $("#id_gstin, #editTaxModal > #id_gstin").on("blur",function(){
     if(!ret[0]){
         $("p#gst_error").text(ret[1]);
         $(this).focus();
-        $("button.save_button").prop("disabled",true);
+        $("#save_button, #editContactModal > #save_button").prop("disabled",true);
     }else{
         $("p#gst_error").text(ret[1]);
-        $("button.save_button").prop("disabled",false);
+        $("#save_button, #editContactModal > #save_button").prop("disabled",false);
     }  
 });
 
