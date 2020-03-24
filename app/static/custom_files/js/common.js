@@ -148,3 +148,11 @@ function validate_Email(elem){
     }  
 }
 
+
+//***********************************************************/
+// Reset Modal Forms
+//***********************************************************/
+
+$('.modal').on('hidden.bs.modal', function () {
+    $(this).find('form').trigger('reset');
+})
