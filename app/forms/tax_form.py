@@ -6,19 +6,12 @@ from app.models.users_model import *
 class TaxForm(ModelForm):
     class Meta:
         model = User_Tax_Details
-        fields = (
-            'pan', 'gstin', 'gst_reg_type', 'business_reg_no', 'tax_reg_no',
-            'cst_reg_no', 'tds'
-        )
+        fields = ('pan', 'gstin', 'gst_reg_type')
 
         widgets = {
-            'pan' : TextInput(attrs = {'class':'form-control input-sm'}), 
-            'gstin' : TextInput(attrs = {'class':'form-control input-sm'}), 
+            'pan' : TextInput(attrs = {'class':'form-control input-sm', 'onkeyup':'valid_PAN($(this))'}), 
+            'gstin' : TextInput(attrs = {'class':'form-control input-sm', 'onkeyup':'valid_GST($(this))'}), 
             'gst_reg_type' : Select(attrs = {'class':'form-control input-sm'}, choices = user_constants.GST_REG_TYPE), 
-            'business_reg_no' : TextInput(attrs = {'class':'form-control input-sm'}), 
-            'tax_reg_no' : TextInput(attrs = {'class':'form-control input-sm'}),
-            'cst_reg_no' : TextInput(attrs = {'class':'form-control input-sm'}), 
-            'tds' : TextInput(attrs = {'class':'form-control input-sm', 'type':'interger'}), 
         }
 
 

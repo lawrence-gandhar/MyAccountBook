@@ -16,11 +16,11 @@ $("tr#tr-id_user_address_details_set-tr-0 > td:nth-child(2)").hide()
 // Email Validation
 /**************************************************************/
 
-$("#id_email, #editContactModal > #id_email").on("keyup",function(){
-    ret = validate_Email($(this));
+function valid_Email(elem){
+    ret = validate_Email($(elem));
     if(!ret[0]){
         $(elem).css({"background-color":"#FF0000"});
-        $(this).focus();
+        $(elem).focus();
         $("#save_button, #editContactModal > #save_button").prop("disabled",true);
     }else{
         $(elem).css({"background-color":"transparent"});
@@ -33,8 +33,8 @@ $("#id_email, #editContactModal > #id_email").on("keyup",function(){
 // Phone/Mobile Validation
 /**************************************************************/
 
-$("#id_phone, #editContactModal > #id_phone").on("keyup",function(){
-    ret = validate_Phone($(this));
+function valid_Phone(elem){
+    ret = validate_Phone($(elem));
     if(!ret[0]){
         $(elem).css({"background-color":"#FF0000"});
         $(this).focus();
@@ -50,8 +50,8 @@ $("#id_phone, #editContactModal > #id_phone").on("keyup",function(){
 // PAN Validation
 /**************************************************************/
 
-$("#id_pan, #editTaxModal > #id_pan").on("keyup",function(){
-    ret = validate_PAN($(this));
+function valid_PAN(elem){
+    ret = validate_PAN($(elem));
     if(!ret[0]){
         $(elem).css({"background-color":"#FF0000"});
         $(this).focus();
@@ -60,64 +60,41 @@ $("#id_pan, #editTaxModal > #id_pan").on("keyup",function(){
         $(elem).css({"background-color":"transparent"});
         $("#save_button, #editContactModal > #save_button").prop("disabled",false);
     } 
-});
+}
 
 
 /**************************************************************/
 // GST Validation
 /**************************************************************/
 
-$("#id_gstin, #editTaxModal > #id_gstin").on("keyup",function(){
-    ret = validate_GST($(this));
+function valid_GST(elem){
+    ret = validate_GST($(elem));
     if(!ret[0]){
         $(elem).css({"background-color":"#FF0000"});
-        $(this).focus();
+        $(elem).focus();
         $("#save_button, #editContactModal > #save_button").prop("disabled",true);
     }else{
         $(elem).css({"background-color":"transparent"});
         $("#save_button, #editContactModal > #save_button").prop("disabled",false);
     }  
-});
+}
 
 /**************************************************************/
 // WEBSITE Validation
 /**************************************************************/
 
-$("#id_website,  #editSocialModal > #id_website").on("keyup",function(){
-    ret = validate_URL($(this));
+function valid_URL(elem){
+    ret = validate_URL($(elem));
     if(!ret[0]){
         $(elem).css({"background-color":"#FF0000"});
-        $(this).focus();
+        $(elem).focus();
         $("#save_button, #editContactModal > #save_button").prop("disabled",true);
     }else{
         $(elem).css({"background-color":"transparent"});
         $("#save_button, #editContactModal > #save_button").prop("disabled",false);
     }  
-});
+}
 
-$("#id_facebook,  #editSocialModal > #id_facebook").on("keyup",function(){
-    ret = validate_URL($(this));
-    if(!ret[0]){
-        $(elem).css({"background-color":"#FF0000"});
-        $(this).focus();
-        $("#save_button, #editContactModal > #save_button").prop("disabled",true);
-    }else{
-        $(elem).css({"background-color":"transparent"});
-        $("#save_button, #editContactModal > #save_button").prop("disabled",false);
-    }  
-});
-
-$("#id_twitter,  #editSocialModal > #id_twitter").on("keyup",function(){
-    ret = validate_URL($(this));
-    if(!ret[0]){
-        $(elem).css({"background-color":"#FF0000"});
-        $(this).focus();
-        $("#save_button, #editContactModal > #save_button").prop("disabled",true);
-    }else{
-        $(elem).css({"background-color":"transparent"});
-        $("#save_button, #editContactModal > #save_button").prop("disabled",false);
-    }  
-});
 
 
 /************************************************************ */
