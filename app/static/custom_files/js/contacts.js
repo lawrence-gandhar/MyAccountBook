@@ -42,7 +42,7 @@ function valid_Phone(elem){
     ret = validate_Phone($(elem));
     if(!ret[0]){
         $(elem).css({"background-color":"#FF0000"});
-        $(this).focus();
+        $(elem).focus();
         $("#save_button, #editContactModal > #save_button").prop("disabled",true);
     }else{
         $(elem).css({"background-color":"transparent"});
@@ -59,7 +59,7 @@ function valid_PAN(elem){
     ret = validate_PAN($(elem));
     if(!ret[0]){
         $(elem).css({"background-color":"#FF0000"});
-        $(this).focus();
+        $(elem).focus();
         $("#save_button, #editContactModal > #save_button").prop("disabled",true);
     }else{
         $(elem).css({"background-color":"transparent"});
