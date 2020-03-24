@@ -36,7 +36,7 @@ class AccountDetailsForm(ModelForm):
         widgets = {
             'account_number' : TextInput(attrs={'class':'form-control input-sm',}),
             'account_holder_name' : TextInput(attrs={'class':'form-control input-sm',}),
-            'ifsc_code' : TextInput(attrs={'class':'form-control input-sm',}),
+            'ifsc_code' : TextInput(attrs={'class':'form-control input-sm', 'onkeyup':'valid_IFSC($(this))'}),
             'bank_name' : TextInput(attrs={'class':'form-control input-sm',}),
             'bank_branch_name' : TextInput(attrs={'class':'form-control input-sm',}),
         }

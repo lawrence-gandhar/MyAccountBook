@@ -79,6 +79,66 @@ $("#id_gstin, #editTaxModal > #id_gstin").on("keyup",function(){
     }  
 });
 
+/**************************************************************/
+// WEBSITE Validation
+/**************************************************************/
+
+$("#id_website,  #editSocialModal > #id_website").on("keyup",function(){
+    ret = validate_URL($(this));
+    if(!ret[0]){
+        $("p#website_error").text(ret[1]);
+        $(this).focus();
+        $("#save_button, #editContactModal > #save_button").prop("disabled",true);
+    }else{
+        $("p#website_error").text(ret[1]);
+        $("#save_button, #editContactModal > #save_button").prop("disabled",false);
+    }  
+});
+
+$("#id_facebook,  #editSocialModal > #id_facebook").on("keyup",function(){
+    ret = validate_URL($(this));
+    if(!ret[0]){
+        $("p#facebook_error").text(ret[1]);
+        $(this).focus();
+        $("#save_button, #editContactModal > #save_button").prop("disabled",true);
+    }else{
+        $("p#facebook_error").text(ret[1]);
+        $("#save_button, #editContactModal > #save_button").prop("disabled",false);
+    }  
+});
+
+$("#id_twitter,  #editSocialModal > #id_twitter").on("keyup",function(){
+    ret = validate_URL($(this));
+    if(!ret[0]){
+        $("p#twitter_error").text(ret[1]);
+        $(this).focus();
+        $("#save_button, #editContactModal > #save_button").prop("disabled",true);
+    }else{
+        $("p#twitter_error").text(ret[1]);
+        $("#save_button, #editContactModal > #save_button").prop("disabled",false);
+    }  
+});
+
+
+/************************************************************ */
+// IFSC Validations
+/************************************************************ */
+
+function valid_IFSC(elem){
+    ret = validate_IFSC($(elem));
+    console.log(ret);
+
+    if(!ret[0]){
+        $(elem).css({"background-color":"#FF0000"});
+        $(elem).focus();
+        $("#save_button, #editContactModal > #save_button").prop("disabled",true);
+    }else{
+        $(elem).css({"background-color":"transparent"});        
+        $("#save_button, #editContactModal > #save_button").prop("disabled",false);
+    }  
+}
+
+
 
 /************************************************************ */
 //
