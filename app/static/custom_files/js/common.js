@@ -158,7 +158,7 @@ $('.modal').on('hidden.bs.modal', function () {
     elem = $(this).find('form');
 
     $(elem).each(function(){
-        $("input, textarea, select").css("background-color","transparent");
+        $("input[type='text']").css("background-color","transparent");
     });
 
     $(this).find('form').trigger('reset');
