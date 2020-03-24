@@ -33,7 +33,7 @@ $("#id_email, #editContactModal > #id_email").on("keyup",function(){
 // Phone/Mobile Validation
 /**************************************************************/
 
-$("#id_phone, #editContactModal > #id_phone").on("blur",function(){
+$("#id_phone, #editContactModal > #id_phone").on("keyup",function(){
     ret = validate_Phone($(this));
     if(!ret[0]){
         $("p#phone_error").text(ret[1]);
@@ -50,7 +50,7 @@ $("#id_phone, #editContactModal > #id_phone").on("blur",function(){
 // PAN Validation
 /**************************************************************/
 
-$("#id_pan, #editTaxModal > #id_pan").on("blur",function(){
+$("#id_pan, #editTaxModal > #id_pan").on("keyup",function(){
     ret = validate_PAN($(this));
     if(!ret[0]){
         $("p#pan_error").text(ret[1]);
@@ -67,7 +67,7 @@ $("#id_pan, #editTaxModal > #id_pan").on("blur",function(){
 // GST Validation
 /**************************************************************/
 
-$("#id_gstin, #editTaxModal > #id_gstin").on("blur",function(){
+$("#id_gstin, #editTaxModal > #id_gstin").on("keyup",function(){
     ret = validate_GST($(this));
     if(!ret[0]){
         $("p#gst_error").text(ret[1]);
