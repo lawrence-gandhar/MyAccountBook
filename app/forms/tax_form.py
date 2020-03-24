@@ -9,8 +9,8 @@ class TaxForm(ModelForm):
         fields = ('pan', 'gstin', 'gst_reg_type')
 
         widgets = {
-            'pan' : TextInput(attrs = {'class':'form-control input-sm', 'onkeyup':'valid_PAN($(this))'}), 
-            'gstin' : TextInput(attrs = {'class':'form-control input-sm', 'onkeyup':'valid_GST($(this))'}), 
+            'pan' : TextInput(attrs = {'class':'form-control input-sm', 'onkeyup':'valid_PAN($(this))', 'onfocusout':'valid_PAN($(this))'}), 
+            'gstin' : TextInput(attrs = {'class':'form-control input-sm', 'onkeyup':'valid_GST($(this))', 'onfocusout':'valid_GST($(this))'}), 
             'gst_reg_type' : Select(attrs = {'class':'form-control input-sm'}, choices = user_constants.GST_REG_TYPE), 
         }
 

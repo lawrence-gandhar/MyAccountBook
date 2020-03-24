@@ -29,14 +29,14 @@ class ContactsForm(ModelForm):
             'is_msme_reg': Select(attrs={'class':'form-control input-sm'}, choices = user_constants.IS_TRUE),
             'is_imported_user': CheckboxInput(attrs={'class':'form-check-input','value':'1', 'style':'margin:5px; height:15px; width:15px;'}),
             'imported_user': TextInput(attrs={'class':'form-control input-sm', 'type':'hidden'}),
-            'email': TextInput(attrs={'class':'form-control input-sm', 'onkeyup':'valid_Email($(this))' }),
-            'phone': TextInput(attrs={'class':'form-control input-sm', 'onkeyup':'valid_Phone($(this))'}),
-            'website': TextInput(attrs={'class':'form-control input-sm', 'onkeyup':'valid_URL($(this))'}),
+            'email': TextInput(attrs={'class':'form-control input-sm', 'onkeyup':'valid_Email($(this))', 'onfocusout':'valid_Email($(this))' }),
+            'phone': TextInput(attrs={'class':'form-control input-sm', 'onkeyup':'valid_Phone($(this))', 'onfocusout':'valid_Phone($(this))'}),
+            'website': TextInput(attrs={'class':'form-control input-sm', 'onkeyup':'valid_URL($(this))', 'onfocusout':'valid_URL($(this))'}),
             'salutation' : Select(attrs={'class':'form-control input-sm',}, choices = user_constants.SALUTATIONS),
             'contact_name' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'200'}),
             'display_name' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'200'}),
-            'facebook' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'200', 'onkeyup':'valid_URL($(this))'}),
-            'twitter' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'200', 'onkeyup':'valid_URL($(this))'}),
+            'facebook' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'200', 'onkeyup':'valid_URL($(this))', 'onfocusout':'valid_URL($(this))'}),
+            'twitter' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'200', 'onkeyup':'valid_URL($(this))', 'onfocusout':'valid_URL($(this))'}),
             'organization_type' : Select(attrs={'class':'form-control input-sm',}, choices = user_constants.ORGANIZATION_TYPE, ),
             'organization_name' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'200'}),
             'notes': Textarea(attrs = {'class':'form-control'})
@@ -97,7 +97,7 @@ class AccountDetailsForm(ModelForm):
         widgets = {
             'account_number' : TextInput(attrs={'class':'form-control input-sm',}),
             'account_holder_name' : TextInput(attrs={'class':'form-control input-sm',}),
-            'ifsc_code' : TextInput(attrs={'class':'form-control input-sm', 'onkeyup':'valid_IFSC($(this))'}),
+            'ifsc_code' : TextInput(attrs={'class':'form-control input-sm', 'onkeyup':'valid_IFSC($(this))', 'onfocusout':'valid_IFSC($(this))'}),
             'bank_name' : TextInput(attrs={'class':'form-control input-sm',}),
             'bank_branch_name' : TextInput(attrs={'class':'form-control input-sm',}),
         }
@@ -111,9 +111,9 @@ class ContactsExtraForm(ModelForm):
 
         widgets = {
             'attachements' : FileInput(attrs = {'class':'form-control input-sm',}),
-            'website': TextInput(attrs={'class':'form-control input-sm', 'onkeyup':'valid_URL($(this))'}),
-            'facebook' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'200', 'onkeyup':'valid_URL($(this))'}),
-            'twitter' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'200', 'onkeyup':'valid_URL($(this))'}),
+            'website': TextInput(attrs={'class':'form-control input-sm', 'onkeyup':'valid_URL($(this))', 'onfocusout':'valid_URL($(this))'}),
+            'facebook' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'200', 'onkeyup':'valid_URL($(this))', 'onfocusout':'valid_URL($(this))'}),
+            'twitter' : TextInput(attrs={'class':'form-control input-sm', 'max_length':'200', 'onkeyup':'valid_URL($(this))', 'onfocusout':'valid_URL($(this))'}),
             'notes': Textarea(attrs = {'class':'form-control'})
         }         
 

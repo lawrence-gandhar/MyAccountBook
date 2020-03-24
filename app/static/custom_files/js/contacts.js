@@ -18,6 +18,11 @@ $("tr#tr-id_user_address_details_set-tr-0 > td:nth-child(2)").hide()
 
 function valid_Email(elem){
     ret = validate_Email($(elem));
+
+    console.log(elem);
+
+    console.log(ret);
+
     if(!ret[0]){
         $(elem).css({"background-color":"#FF0000"});
         $(elem).focus();
