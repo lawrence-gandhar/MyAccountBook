@@ -43,7 +43,7 @@ function valid_Phone(elem){
         $(elem).css({"background-color":"transparent"});
         $("#save_button, #editContactModal > #save_button").prop("disabled",false);
     } 
-});
+}
 
 
 /**************************************************************/
