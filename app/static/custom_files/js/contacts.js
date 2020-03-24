@@ -19,11 +19,11 @@ $("tr#tr-id_user_address_details_set-tr-0 > td:nth-child(2)").hide()
 $("#id_email, #editContactModal > #id_email").on("keyup",function(){
     ret = validate_Email($(this));
     if(!ret[0]){
-        $("p#email_error").text(ret[1]);
+        $(elem).css({"background-color":"#FF0000"});
         $(this).focus();
         $("#save_button, #editContactModal > #save_button").prop("disabled",true);
     }else{
-        $("p#email_error").text(ret[1]);
+        $(elem).css({"background-color":"transparent"});
         $("#save_button, #editContactModal > #save_button").prop("disabled",false);
     } 
 });
@@ -36,11 +36,11 @@ $("#id_email, #editContactModal > #id_email").on("keyup",function(){
 $("#id_phone, #editContactModal > #id_phone").on("keyup",function(){
     ret = validate_Phone($(this));
     if(!ret[0]){
-        $("p#phone_error").text(ret[1]);
+        $(elem).css({"background-color":"#FF0000"});
         $(this).focus();
         $("#save_button, #editContactModal > #save_button").prop("disabled",true);
     }else{
-        $("p#phone_error").text(ret[1]);
+        $(elem).css({"background-color":"transparent"});
         $("#save_button, #editContactModal > #save_button").prop("disabled",false);
     } 
 });
@@ -53,11 +53,11 @@ $("#id_phone, #editContactModal > #id_phone").on("keyup",function(){
 $("#id_pan, #editTaxModal > #id_pan").on("keyup",function(){
     ret = validate_PAN($(this));
     if(!ret[0]){
-        $("p#pan_error").text(ret[1]);
+        $(elem).css({"background-color":"#FF0000"});
         $(this).focus();
         $("#save_button, #editContactModal > #save_button").prop("disabled",true);
     }else{
-        $("p#pan_error").text(ret[1]);
+        $(elem).css({"background-color":"transparent"});
         $("#save_button, #editContactModal > #save_button").prop("disabled",false);
     } 
 });
@@ -70,11 +70,11 @@ $("#id_pan, #editTaxModal > #id_pan").on("keyup",function(){
 $("#id_gstin, #editTaxModal > #id_gstin").on("keyup",function(){
     ret = validate_GST($(this));
     if(!ret[0]){
-        $("p#gst_error").text(ret[1]);
+        $(elem).css({"background-color":"#FF0000"});
         $(this).focus();
         $("#save_button, #editContactModal > #save_button").prop("disabled",true);
     }else{
-        $("p#gst_error").text(ret[1]);
+        $(elem).css({"background-color":"transparent"});
         $("#save_button, #editContactModal > #save_button").prop("disabled",false);
     }  
 });
@@ -86,11 +86,11 @@ $("#id_gstin, #editTaxModal > #id_gstin").on("keyup",function(){
 $("#id_website,  #editSocialModal > #id_website").on("keyup",function(){
     ret = validate_URL($(this));
     if(!ret[0]){
-        $("p#website_error").text(ret[1]);
+        $(elem).css({"background-color":"#FF0000"});
         $(this).focus();
         $("#save_button, #editContactModal > #save_button").prop("disabled",true);
     }else{
-        $("p#website_error").text(ret[1]);
+        $(elem).css({"background-color":"transparent"});
         $("#save_button, #editContactModal > #save_button").prop("disabled",false);
     }  
 });
@@ -98,11 +98,11 @@ $("#id_website,  #editSocialModal > #id_website").on("keyup",function(){
 $("#id_facebook,  #editSocialModal > #id_facebook").on("keyup",function(){
     ret = validate_URL($(this));
     if(!ret[0]){
-        $("p#facebook_error").text(ret[1]);
+        $(elem).css({"background-color":"#FF0000"});
         $(this).focus();
         $("#save_button, #editContactModal > #save_button").prop("disabled",true);
     }else{
-        $("p#facebook_error").text(ret[1]);
+        $(elem).css({"background-color":"transparent"});
         $("#save_button, #editContactModal > #save_button").prop("disabled",false);
     }  
 });
@@ -110,11 +110,11 @@ $("#id_facebook,  #editSocialModal > #id_facebook").on("keyup",function(){
 $("#id_twitter,  #editSocialModal > #id_twitter").on("keyup",function(){
     ret = validate_URL($(this));
     if(!ret[0]){
-        $("p#twitter_error").text(ret[1]);
+        $(elem).css({"background-color":"#FF0000"});
         $(this).focus();
         $("#save_button, #editContactModal > #save_button").prop("disabled",true);
     }else{
-        $("p#twitter_error").text(ret[1]);
+        $(elem).css({"background-color":"transparent"});
         $("#save_button, #editContactModal > #save_button").prop("disabled",false);
     }  
 });
