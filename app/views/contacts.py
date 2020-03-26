@@ -107,7 +107,7 @@ def add_contacts(request, slug = None, ins = None):
 
             if contact_form_ins.is_imported_user:
                 try:
-                    profile = Profile.objects.get(app_id__iexact = contact_form_ins.app_id)
+                    profile = users_model.Profile.objects.get(app_id__iexact = contact_form_ins.app_id)
                     imp_user = User.objects.get(pk = profile.user_id)
                 except:
                     return redirect('/unauthorized/', permanent = False)
@@ -210,7 +210,7 @@ def edit_contact(request, ins = None):
             #
             # Contact Details
             try:
-                contact = Contacts.objects.get(pk = int(ins))
+                contact = contacts_model.Contacts.objects.get(pk = int(ins))
             except:
                 return redirect('/unauthorized/', permanent=False)
 
@@ -225,7 +225,7 @@ def edit_contact(request, ins = None):
             #
             # Tax Details
             try:
-                tax_form = User_Tax_Details.objects.get(is_user = False, contact = contact)
+                tax_form = users_model.User_Tax_Details.objects.get(is_user = False, contact = contact)
                 data["tax_ins"] = tax_form.id  
             except:
                 pass
@@ -235,7 +235,7 @@ def edit_contact(request, ins = None):
 
             #
             # Addresses
-            contact_address_form = User_Address_Details.objects.filter(contact = contact, is_user = False)
+            contact_address_form = users_model.User_Address_Details.objects.filter(contact = contact, is_user = False)
             c_count = len(contact_address_form)
 
             data["c_count"] = [i for i in range(c_count)]
@@ -250,7 +250,7 @@ def edit_contact(request, ins = None):
 
             #
             # Accounts
-            contact_accounts_form = User_Account_Details.objects.filter(contact = contact, is_user = False)
+            contact_accounts_form = users_model.User_Account_Details.objects.filter(contact = contact, is_user = False)
             a_c_count = len(contact_accounts_form)
 
             data["a_c_count"] = [i for i in range(a_c_count)]
@@ -272,7 +272,7 @@ def add_address_details_form(request):
     if request.POST:
 
         try:
-            contact_ins = Contacts.objects.get(pk = int(request.POST["ids"]))
+            contact_ins = contacts_model.Contacts.objects.get(pk = int(request.POST["ids"]))
         except:
             return redirect('/unauthorized/', permanent = False)
 
@@ -296,7 +296,7 @@ def add_accounts_details_form(request):
     if request.POST:
 
         try:
-            contact_ins = Contacts.objects.get(pk = int(request.POST["ids"]))
+            contact_ins = contacts_model.Contacts.objects.get(pk = int(request.POST["ids"]))
         except:
             return redirect('/unauthorized/', permanent = False)
 
@@ -322,7 +322,7 @@ def edit_contact_details_form(request):
     if request.POST:
 
         try:
-            contact_ins = Contacts.objects.get(pk = int(request.POST["ids"]))
+            contact_ins = contacts_model.Contacts.objects.get(pk = int(request.POST["ids"]))
         except:
             return redirect('/unauthorized/', permanent = False)
 
@@ -338,26 +338,47 @@ def edit_contact_details_form(request):
 def edit_tax_details_form(request):
     if request.POST:
         try:
-            obj_ins = User_Tax_Details.objects.get(pk = int(request.POST["obj_ins"]))   
-        except:
-            return redirect('/unauthorized/', permanent = False)
+            obj_ins = users_model.User_Tax_Details.objects.get(pk = int(request.POST["obj_ins"]))   
+            tax_form = TaxForm(request.POST, instance = obj_ins)
 
-        tax_form = TaxForm(request.POST, instance = obj_ins)
-        if tax_form.is_valid():
-            tax_form.save()         
+            if tax_form.is_valid():
+                tax_form.save()  
+        except:
+            try:
+                contact_ins = contacts_model.Contacts.objects.get(pk = int(request.POST["ids"]))
+            except:
+                return redirect('/unauthorized/', permanent=False)
+
+            tax_form = TaxForm(request.POST)
+
+            if tax_form.is_valid():
+                tax_form.save(commit  = False)
+                tax_form.contact = contact_ins
+                tax_form.save()  
+
     return redirect('/contacts/edit/{}/'.format(request.POST["ids"]), permanent = False)
 
 
 def edit_other_details_form(request):
     if request.POST:
         try:
-            obj_ins = User_Tax_Details.objects.get(pk = int(request.POST["obj_ins"]))   
-        except:
-            return redirect('/unauthorized/', permanent = False)
+            obj_ins = users_model.User_Tax_Details.objects.get(pk = int(request.POST["obj_ins"]))   
+            tax_form = OtherDetailsForm(request.POST, instance = obj_ins)
 
-        tax_form = OtherDetailsForm(request.POST, instance = obj_ins)
-        if tax_form.is_valid():
-            tax_form.save()         
+            if tax_form.is_valid():
+                tax_form.save()  
+        except:
+            try:
+                contact_ins = contacts_model.Contacts.objects.get(pk = int(request.POST["ids"]))
+            except:
+                return redirect('/unauthorized/', permanent=False)
+
+            tax_form = OtherDetailsForm(request.POST)
+
+            if tax_form.is_valid():
+                tax_form.save(commit  = False)
+                tax_form.contact = contact_ins
+                tax_form.save()         
     return redirect('/contacts/edit/{}/'.format(request.POST["ids"]), permanent = False)
 
 
