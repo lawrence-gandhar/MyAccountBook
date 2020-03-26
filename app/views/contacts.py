@@ -370,7 +370,7 @@ def edit_address_details_form(request):
 
         keys = [i for i in request.POST.keys() if "is_shipping_address" in i]
 
-        prefix = keys[0].replace("-is_shipping_address", "").replace("form_", "")
+        prefix = keys[0].replace("-contact_person", "").replace("form_", "")
 
         try:
             obj = users_model.User_Address_Details.objects.get(pk = int(prefix))

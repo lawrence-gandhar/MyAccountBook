@@ -106,6 +106,22 @@ def delete_product(request, ins = None):
     return redirect('/unauthorized/', permanent=False)
 
 
+#=========================================================================================
+# PRODUCT CLONE
+#=========================================================================================
+#
+def clone_product(request, ins = None):
+    if ins is not None:
+        try:
+            product = ProductsModel.objects.get(pk = int(ins))
+        except:
+            return redirect('/unauthorized/', permanent=False)
+
+        product.pk = None
+        product.save()
+        return redirect('/products/', permanent=False)
+    return redirect('/unauthorized/', permanent=False)
+
 #===================================================================================================
 # STATUS CHANGE
 #===================================================================================================
@@ -223,3 +239,12 @@ def ajax_add_product(request):
                 img_save.save()
         return HttpResponse(1)
     return HttpResponse(0)
+
+#
+#
+#
+
+class BundlePacks(View):
+
+    def get(self, request, *args, **kwargs):
+        return HttpResponse('')

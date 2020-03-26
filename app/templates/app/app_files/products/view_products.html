@@ -55,6 +55,9 @@
                                         <a title="Delete Product" href="{% url 'product-delete' product.id %}" class="btn btn-danger btn-sm" style="padding:5px 5px;">
                                             <i class="material-icons">delete_forever</i>
                                         </a>
+                                        <a title="Clone Product" href="{% url 'product-clone' product.id %}" class="btn btn-warning btn-sm" style="padding:5px 5px;">
+                                            <i class="material-icons">file_copy</i>
+                                        </a>
                                     </td>
                                 </tr>
                             {% endfor %}
