@@ -184,6 +184,7 @@ def add_contacts(request, slug = None, ins = None):
 #   EDIT CONTACTS
 #=====================================================================================
 #
+
 def edit_contact(request, ins = None):
         
         # Initialize 
@@ -214,6 +215,8 @@ def edit_contact(request, ins = None):
             except:
                 return redirect('/unauthorized/', permanent=False)
 
+            data["contact_details"] = contact
+
             data["contact_form"] = ContactsForm(instance = contact)
             data["social_form"] = ContactsExtraForm(instance = contact)
 
@@ -225,11 +228,11 @@ def edit_contact(request, ins = None):
             #
             # Tax Details
             try:
-                tax_form = users_model.User_Tax_Details.objects.get(is_user = False, contact = contact)
-                data["tax_ins"] = tax_form.id  
+                tax_form = users_model.User_Tax_Details.objects.get(is_user = False, contact = contact) 
             except:
                 pass
 
+            data["tax_form_details"] = tax_form
             data["tax_form"] = TaxForm(instance = tax_form)
             data["other_details_form"] = OtherDetailsForm(instance = tax_form)
 
