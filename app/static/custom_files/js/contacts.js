@@ -21,10 +21,10 @@ function valid_Email(elem){
     if(!ret[0]){
         $(elem).css({"background-color":"#FF0000"});
         $(elem).focus();
-        $("#save_button, #editContactModal > #save_button").prop("disabled",true);
+        $(".save_button, #editContactModal > .save_button").prop("disabled",true);
     }else{
         $(elem).css({"background-color":"transparent"});
-        $("#save_button, #editContactModal > #save_button").prop("disabled",false);
+        $(".save_button, #editContactModal > .save_button").prop("disabled",false);
     } 
 }
 
@@ -38,10 +38,10 @@ function valid_Phone(elem){
     if(!ret[0]){
         $(elem).css({"background-color":"#FF0000"});
         $(elem).focus();
-        $("#save_button, #editContactModal > #save_button").prop("disabled",true);
+        $(".save_button, #editContactModal > .save_button").prop("disabled",true);
     }else{
         $(elem).css({"background-color":"transparent"});
-        $("#save_button, #editContactModal > #save_button").prop("disabled",false);
+        $(".save_button, #editContactModal > .save_button").prop("disabled",false);
     } 
 }
 
@@ -55,10 +55,10 @@ function valid_PAN(elem){
     if(!ret[0]){
         $(elem).css({"background-color":"#FF0000"});
         $(elem).focus();
-        $("#save_button, #editContactModal > #save_button").prop("disabled",true);
+        $(".save_button, #editContactModal > .save_button").prop("disabled",true);
     }else{
         $(elem).css({"background-color":"transparent"});
-        $("#save_button, #editContactModal > #save_button").prop("disabled",false);
+        $(".save_button, #editContactModal > .save_button").prop("disabled",false);
     } 
 }
 
@@ -72,10 +72,10 @@ function valid_GST(elem){
     if(!ret[0]){
         $(elem).css({"background-color":"#FF0000"});
         $(elem).focus();
-        $("#save_button, #editContactModal > #save_button").prop("disabled",true);
+        $(".save_button, #editContactModal > .save_button").prop("disabled",true);
     }else{
         $(elem).css({"background-color":"transparent"});
-        $("#save_button, #editContactModal > #save_button").prop("disabled",false);
+        $(".save_button, #editContactModal > .save_button").prop("disabled",false);
     }  
 }
 
@@ -88,10 +88,10 @@ function valid_URL(elem){
     if(!ret[0]){
         $(elem).css({"background-color":"#FF0000"});
         $(elem).focus();
-        $("#save_button, #editContactModal > #save_button").prop("disabled",true);
+        $(".save_button, #editContactModal > .save_button").prop("disabled",true);
     }else{
         $(elem).css({"background-color":"transparent"});
-        $("#save_button, #editContactModal > #save_button").prop("disabled",false);
+        $(".save_button, #editContactModal > .save_button").prop("disabled",false);
     }  
 }
 
@@ -106,10 +106,10 @@ function valid_IFSC(elem){
     if(!ret[0]){
         $(elem).css({"background-color":"#FF0000"});
         $(elem).focus();
-        $("#save_button, #editContactModal > #save_button").prop("disabled",true);
+        $(".save_button, #editContactModal > .save_button").prop("disabled",true);
     }else{
         $(elem).css({"background-color":"transparent"});        
-        $("#save_button, #editContactModal > #save_button").prop("disabled",false);
+        $(".save_button, #editContactModal > .save_button").prop("disabled",false);
     }  
 }
 

@@ -241,6 +241,8 @@ def edit_contact(request, ins = None):
             contact_address_form = users_model.User_Address_Details.objects.filter(contact = contact, is_user = False)
             c_count = len(contact_address_form)
 
+            data["contact_addresses"] = contact_address_form
+            
             data["c_count"] = [i for i in range(c_count)]
             
             data["contact_address_form"] = []
@@ -255,6 +257,8 @@ def edit_contact(request, ins = None):
             # Accounts
             contact_accounts_form = users_model.User_Account_Details.objects.filter(contact = contact, is_user = False)
             a_c_count = len(contact_accounts_form)
+
+            data["contact_accounts"] = contact_accounts_form
 
             data["a_c_count"] = [i for i in range(a_c_count)]
 
@@ -312,9 +316,6 @@ def add_accounts_details_form(request):
             ins.save()
 
     return redirect('/contacts/edit/{}/'.format(request.POST["ids"]), permanent = False)
-
-
-
 
 #=======================================================================================
 #   EDIT CONTACT DETAILS

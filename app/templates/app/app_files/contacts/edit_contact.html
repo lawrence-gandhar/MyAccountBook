@@ -259,7 +259,7 @@ table{
                                                 <i class="material-icons">add_box</i> Add New
                                             </button>
                                             
-                                            {% for i in contact_address_form %}
+                                            {% for i in contact_addresses %}
 
                                                 <table class="table-responsive" id="table-{{forloop.counter}}">
                                                     <tbody style="width: 100%; display: inline-table;">
@@ -283,7 +283,7 @@ table{
                                                                     <span class="slider round"></span>
                                                                 </label>
 
-                                                                <span style="margin-left: 40px; position: relative; top: -7px;">
+                                                                <span style="margin-left: 40px; position: relative; top: 6px;">
                                                                     Is Billing Address
                                                                 </span>
 
@@ -297,7 +297,7 @@ table{
                                                             <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
                                                                 Contact Person
                                                             </td>
-                                                            <td style="border:0px;">
+                                                            <td style="border:0px; vertical-align: bottom">
                                                                 {{ i.contact_person}}
                                                             </td>                                    
                                                         </tr>
@@ -305,7 +305,7 @@ table{
                                                             <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
                                                                 Flat/Office/Door No.
                                                             </td>
-                                                            <td style="border:0px;">
+                                                            <td style="border:0px; vertical-align: bottom">
                                                                 {{ i.flat_no }}
                                                             </td>                                    
                                                         </tr>
@@ -313,7 +313,7 @@ table{
                                                             <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
                                                                 Street
                                                             </td>
-                                                            <td style="border:0px;">
+                                                            <td style="border:0px; vertical-align: bottom">
                                                                 {{ i.street }}
                                                             </td>                                    
                                                         </tr>
@@ -321,7 +321,7 @@ table{
                                                             <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
                                                                 City
                                                             </td>
-                                                            <td style="border:0px;">
+                                                            <td style="border:0px; vertical-align: bottom">
                                                                 {{ i.city }}
                                                             </td>                                    
                                                         </tr>
@@ -329,7 +329,7 @@ table{
                                                             <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
                                                                 Zipcode/Pincode
                                                             </td>
-                                                            <td style="border:0px;">
+                                                            <td style="border:0px; vertical-align: bottom">
                                                                 {{ i.pincode }}
                                                             </td>                                    
                                                         </tr>
@@ -337,7 +337,7 @@ table{
                                                             <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
                                                                 State
                                                             </td>
-                                                            <td style="border:0px;">
+                                                            <td style="border:0px; vertical-align: bottom">
                                                                 {{ i.state }}
                                                             </td>                                    
                                                         </tr>
@@ -345,7 +345,7 @@ table{
                                                             <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
                                                                 Country
                                                             </td>
-                                                            <td style="border:0px;">
+                                                            <td style="border:0px; vertical-align: bottom">
                                                                 {{ i.country }}
                                                             </td>                                    
                                                         </tr>
@@ -361,7 +361,7 @@ table{
                                                 <i class="material-icons">add_box</i> Add New
                                             </button>
 
-                                            {% for i in contact_accounts_form %}
+                                            {% for i in contact_accounts %}
                                                 <table class="table-responsive" id="table-{{forloop.counter}}">
                                                     <tbody style=" width: 100%; display: inline-table;">
                                                         <tr class="disabled-tr">
@@ -580,7 +580,7 @@ table{
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-warning close" type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
-                    <button class="btn btn-sm btn-success" onclick="submit()" id="save_button">Save</button>
+                    <button class="btn btn-sm btn-success" onclick="submit()">Save</button>
                 </div>
             </form>
         </div>
@@ -662,7 +662,7 @@ table{
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-warning close" type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
-                    <button class="btn btn-sm btn-success" onclick="submit()" id="save_button">Save</button>
+                    <button class="btn btn-sm btn-success save_button" onclick="submit()">Save</button>
                 </div>
             </form>
         </div>
@@ -769,7 +769,7 @@ table{
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-warning close" type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
-                    <button class="btn btn-sm btn-success" onclick="submit()" id="save_button">Save</button>
+                    <button class="btn btn-sm btn-success save_button" onclick="submit()">Save</button>
                 </div>
             </form>
         </div>
@@ -876,7 +876,7 @@ table{
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-warning close" type="reset" data-dismiss="modal" aria-label="Close">Cancel</button>
-                    <button class="btn btn-sm btn-success" onclick="submit()" id="save_button">Save</button>
+                    <button class="btn btn-sm btn-success save_button" onclick="submit()">Save</button>
                 </div>
             </form>
         </div>
@@ -945,7 +945,7 @@ table{
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-warning close" type="reset" data-dismiss="modal" aria-label="Close">Cancel</button>
-                    <button class="btn btn-sm btn-success" onclick="submit()" id="save_button">Save</button>
+                    <button class="btn btn-sm btn-success save_button" onclick="submit()">Save</button>
                 </div>
             </form>
         </div>
@@ -1015,7 +1015,7 @@ table{
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-warning close" type="reset" data-dismiss="modal" aria-label="Close">Cancel</button>
-                    <button class="btn btn-sm btn-success" onclick="submit()" id="save_button">Save</button>
+                    <button class="btn btn-sm btn-success save_button" onclick="submit()">Save</button>
                 </div>
             </form>
         </div>
@@ -1094,7 +1094,7 @@ table{
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-warning close" type="reset" data-dismiss="modal" aria-label="Close">Cancel</button>
-                    <button class="btn btn-sm btn-success" onclick="submit()" id="save_button">Save</button>
+                    <button class="btn btn-sm btn-success save_button" onclick="submit()">Save</button>
                 </div>
             </form>
         </div>
@@ -1167,7 +1167,7 @@ table{
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-warning close" type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
-                    <button class="btn btn-sm btn-success" onclick="submit()" id="save_button">Save</button>
+                    <button class="btn btn-sm btn-success save_button" onclick="submit()">Save</button>
                 </div>
             </form>
         </div>
