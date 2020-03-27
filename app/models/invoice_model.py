@@ -258,17 +258,17 @@ class InvoiceModel(models.Model):
         db_index = True,
     )
 
-    adjustment = models.IntegerField(
+    adjustment = models.FloatField(
         default = 0,
         db_index = True,
     )
 
-    shipping = models.IntegerField(
+    shipping = models.FloatField(
         default = 0,
         db_index = True,
     )
 
-    discount = models.IntegerField(
+    discount = models.FloatField(
         default = 0,
         db_index = True,
     )
@@ -327,17 +327,17 @@ class InvoiceModel(models.Model):
         db_index = True,
     )
 
-    subtotal = models.IntegerField(
+    subtotal = models.FloatField(
         default = 0,
         db_index = True,
     )
 
-    subtotal_inc_tax = models.IntegerField(
+    subtotal_inc_tax = models.FloatField(
         default = 0,
         db_index = True,
     )
 
-    total = models.IntegerField(
+    total = models.FloatField(
         default = 0,
         db_index = True,
     )

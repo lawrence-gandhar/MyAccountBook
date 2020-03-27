@@ -75,14 +75,14 @@ class InvoiceForm(ModelForm):
             'service_recipient' : Select(attrs={'class':'form-control input-sm',}),            
             'provider_state_code' : TextInput(attrs={'class':'form-control input-sm', 'disabled' : 'true'}),
             'recipient_state_code' : TextInput(attrs={'class':'form-control input-sm', 'disabled' : 'true'}),
-            'shipping' : TextInput(attrs={'class':'form-control input-sm',}),
-            'discount' : TextInput(attrs={'class':'form-control input-sm',}),
+            'shipping' : NumberInput(attrs={'class':'form-control input-sm',}),
+            'discount' : NumberInput(attrs={'class':'form-control input-sm',}),
             'sac_code' : TextInput(attrs={'class':'form-control input-sm', 'disabled' : 'true'}),
             'service_description' : TextInput(attrs={'class':'form-control input-sm',}),
-            'cgst' : TextInput(attrs={'class':'form-control input-sm',}),
-            'igst' : TextInput(attrs={'class':'form-control input-sm',}),
-            'sgst' : TextInput(attrs={'class':'form-control input-sm',}),
-            'total_gst' : TextInput(attrs={'class':'form-control input-sm',}),            
+            'cgst' : NumberInput(attrs={'class':'form-control input-sm',}),
+            'igst' : NumberInput(attrs={'class':'form-control input-sm',}),
+            'sgst' : NumberInput(attrs={'class':'form-control input-sm',}),
+            'total_gst' : NumberInput(attrs={'class':'form-control input-sm',}),            
         }
 
 #=======================================================================
@@ -117,12 +117,12 @@ class LessInvoiceForm(ModelForm):
             'attachments' : FileInput(attrs = {'class':'form-control input-sm',}),
             'start_date' : TextInput(attrs = {'class':'form-control input-sm', 'placeholder': 'yyyy-mm-dd'}),
             'frequency' : Select(attrs = {'class':'form-control input-sm', }, choices = items_constant.INVOICE_FREQUENCY),
-            'shipping' : TextInput(attrs = {'class':'form-control input-sm', 'value':'0',}),
+            'shipping' : NumberInput(attrs = {'class':'form-control input-sm', 'value':'0',}),
             'repeat_for' : TextInput(attrs = {'class':'form-control input-sm',}),
-            'adjustment' : TextInput(attrs = {'class':'form-control input-sm', 'value':'0',}),
-            'subtotal' : TextInput(attrs = {'class':'form-control input-sm', 'value':'0', 'readonly':'true'}),
-            'subtotal_inc_tax' : TextInput(attrs = {'class':'form-control input-sm', 'value':'0', 'readonly':'true'}),
-            'total' : TextInput(attrs = {'class':'form-control input-sm', 'value':'0', 'readonly':'true'}),
+            'adjustment' : NumberInput(attrs = {'class':'form-control input-sm', 'value':'0',}),
+            'subtotal' : NumberInput(attrs = {'class':'form-control input-sm', 'value':'0', 'readonly':'true'}),
+            'subtotal_inc_tax' : NumberInput(attrs = {'class':'form-control input-sm', 'value':'0', 'readonly':'true'}),
+            'total' : NumberInput(attrs = {'class':'form-control input-sm', 'value':'0', 'readonly':'true'}),
         }        
         
 class InvoiceProductForm(ModelForm):

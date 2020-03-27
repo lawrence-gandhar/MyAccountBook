@@ -108,7 +108,7 @@ class User_Account_Details(models.Model):
         on_delete = models.CASCADE
     )
 
-    account_number = models.CharField(
+    account_number = models.IntegerField(
         max_length = 30,
         blank = True,
         db_index = True,
@@ -454,7 +454,7 @@ class User_Tax_Details(models.Model):
         null = True,
     )
 
-    opening_balance = models.IntegerField(
+    opening_balance = models.FloatField(
         blank = True,
         null = True,
         db_index = True,

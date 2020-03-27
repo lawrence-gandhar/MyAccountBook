@@ -148,32 +148,32 @@ class ProductsModel(models.Model):
         null = True,
     )
 
-    cost_price = models.IntegerField(
+    cost_price = models.FloatField(
         default = 0,
         db_index = True,
     )
 
-    marked_price = models.IntegerField(
+    marked_price = models.FloatField(
         default = 0,
         db_index = True,
     )
 
-    selling_price = models.IntegerField(
+    selling_price = models.FloatField(
         db_index = True,
         default = 0,
     )
 
-    discount = models.IntegerField(
+    discount = models.FloatField(
         db_index = True,
         default = 0,
     )
 
-    tax = models.IntegerField(
+    tax = models.FloatField(
         default = 0,
         db_index = True,
     )
 
-    gst = models.IntegerField(
+    gst = models.FloatField(
         default = 0,
         db_index = True,
     )
@@ -185,7 +185,7 @@ class ProductsModel(models.Model):
         null = True,
     )
 
-    abatement = models.IntegerField(
+    abatement = models.FloatField(
         default = 0,
         db_index = True,
     )
@@ -277,7 +277,7 @@ class InventoryProduct(models.Model):
         on_delete = models.SET_NULL,
     )
 
-    quantity = models.IntegerField(
+    quantity = models.FloatField(
         db_index = True,
         default = 0,
     )
@@ -289,12 +289,12 @@ class InventoryProduct(models.Model):
         choices = items_constant.UNITS,
     )
 
-    threshold = models.IntegerField(
+    threshold = models.FloatField(
         default = 0,
         db_index = True,
     )
 
-    stop_at_min_hold = models.IntegerField(
+    stop_at_min_hold = models.FloatField(
         db_index = True,
         default = 0,
     )
@@ -323,7 +323,7 @@ class InventoryProduct(models.Model):
         blank = True,
     )
 
-    min_hold_notify_trigger = models.IntegerField(
+    min_hold_notify_trigger = models.FloatField(
         db_index = True,
         null = True,
         blank = True,
