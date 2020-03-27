@@ -109,7 +109,6 @@ class User_Account_Details(models.Model):
     )
 
     account_number = models.IntegerField(
-        max_length = 30,
         blank = True,
         db_index = True,
         null = True,

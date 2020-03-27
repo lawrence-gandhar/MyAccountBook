@@ -382,3 +382,92 @@ class InventoryNotificationRemiander(models.Model):
 def image_delete(sender, instance, **kwargs):
     instance.product_image.delete(False)
 
+
+#=========================================================================================
+# BUNDLE/PACKS
+#=========================================================================================
+#
+class BundleModel(models.Model):
+
+    bundle_name = models.CharField(
+        blank = False,
+        null = False,
+        max_length = 250,
+    )
+
+    bundle_selling_price = models.FloatField(
+        default = 0,
+        null = True,
+        db_index = True,
+    )
+
+    bundle_cost_price = models.FloatField(
+        default = 0,
+        null = True,
+        db_index = True,
+    )
+
+    bundle_marked_price = models.FloatField(
+        default = 0,
+        null = True,
+        db_index = True,
+    )
+
+    bundle_discount = models.FloatField(
+        default = 0,
+        null = True,
+        db_index = True,
+    )
+
+    bundle_gst = models.FloatField(
+        default = 0,
+        null = True,
+        db_index = True,
+    )
+
+    bundle_qty = models.IntegerField(
+        default = 0,
+        null = True,
+        db_index = True,
+    )
+
+    bundle_description = models.TextField(
+        null = True,
+        blank = True,
+    )
+
+    is_active = models.BooleanField(
+        db_index = True,
+        default = True,
+        choices = user_constants.IS_TRUE,
+    )
+
+    def __str__(self):
+        return self.bundle_name
+
+
+#=========================================================================================
+# BUNDLE/PACKS-PRODUCTS
+#=========================================================================================
+#
+
+class BundleProductsModel(models.Model):
+
+    bundle = models.ForeignKey(
+        BundleModel,
+        on_delete = models.CASCADE,
+        db_index = True,
+    )
+
+    product = models.ForeignKey(
+        ProductsModel,
+        on_delete = models.SET_NULL,
+        db_index = True,
+        null = True,
+    )
+
+    is_active = models.BooleanField(
+        db_index = True,
+        default = True,
+        choices = user_constants.IS_TRUE,
+    )
