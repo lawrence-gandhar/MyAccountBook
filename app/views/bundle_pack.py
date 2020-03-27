@@ -4,7 +4,7 @@ from django.views import View
 from collections import OrderedDict, defaultdict
 from django.db.models import *
 from app.models import *
-from app.forms.items_form import * 
+from app.forms import * 
 
 import json
 
@@ -23,8 +23,9 @@ class ProductBundelView(View):
     data["css_files"] = []
     data["js_files"] = []
     data["active_link"] = 'Products'
+    data["breadcrumb_title"] = 'PRODUCTS'
 
-    data["included_template"] =  'app/app_files/products/add_products_form.html'
+    data["included_template"] =  'app/app_files/product_bundle/view_product_bundles.html'
 
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name, self.data)

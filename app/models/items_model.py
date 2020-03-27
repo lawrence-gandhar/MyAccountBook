@@ -389,9 +389,15 @@ def image_delete(sender, instance, **kwargs):
 #
 class BundleModel(models.Model):
 
+    bundle_sku = models.CharField(
+        blank = True,
+        null = True,
+        max_length = 250,
+    )
+
     bundle_name = models.CharField(
-        blank = False,
-        null = False,
+        blank = True,
+        null = True,
         max_length = 250,
     )
 

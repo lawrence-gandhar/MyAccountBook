@@ -146,20 +146,20 @@ class InventoryProductEditForm(ModelForm):
 #
 
 class BundleForm(ModelForm):
+    class Meta:
+        model = BundleModel
 
-    models = BundleModel
+        fields = ('bundle_name', 'bundle_selling_price', 'bundle_cost_price', 'bundle_marked_price', 
+                    'bundle_discount', 'bundle_gst', 'bundle_qty', 'bundle_description')
 
-    fields = ('bundle_name', 'bundle_selling_price', 'bundle_cost_price', 'bundle_marked_price', 
-                'bundle_discount', 'bundle_gst', 'bundle_qty', 'bundle_description')
-
-    widgets = {
-        'bundle_name' : TextInput(attrs = {'class':'form-control input-sm'}), 
-        'bundle_selling_price' : NumberInput(attrs = {'class':'form-control input-sm'}), 
-        'bundle_cost_price' : NumberInput(attrs = {'class':'form-control input-sm'}), 
-        'bundle_marked_price' : NumberInput(attrs = {'class':'form-control input-sm'}), 
-        'bundle_discount' : NumberInput(attrs = {'class':'form-control input-sm'}), 
-        'bundle_gst' : NumberInput(attrs = {'class':'form-control input-sm'}), 
-        'bundle_qty' : NumberInput(attrs = {'class':'form-control input-sm'}), 
-        'bundle_description' : Textarea(attrs = {'class':'form-control input-sm'})
-    }
+        widgets = {
+            'bundle_name' : TextInput(attrs = {'class':'form-control input-sm'}), 
+            'bundle_selling_price' : NumberInput(attrs = {'class':'form-control input-sm'}), 
+            'bundle_cost_price' : NumberInput(attrs = {'class':'form-control input-sm'}), 
+            'bundle_marked_price' : NumberInput(attrs = {'class':'form-control input-sm'}), 
+            'bundle_discount' : NumberInput(attrs = {'class':'form-control input-sm'}), 
+            'bundle_gst' : NumberInput(attrs = {'class':'form-control input-sm'}), 
+            'bundle_qty' : NumberInput(attrs = {'class':'form-control input-sm'}), 
+            'bundle_description' : Textarea(attrs = {'class':'form-control input-sm'})
+        }
 

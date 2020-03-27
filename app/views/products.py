@@ -56,6 +56,7 @@ class AddProducts(View):
     data["css_files"] = []
     data["js_files"] = ['custom_files/js/product.js',]
     data["active_link"] = 'Products'
+    data["breadcrumb_title"] = 'PRODUCTS'
 
     data["included_template"] = 'app/app_files/products/add_products_form.html'
 
@@ -163,6 +164,7 @@ class EditProducts(View):
     data["css_files"] = []
     data["js_files"] = ['custom_files/js/product.js',]
     data["active_link"] = 'Products'
+    data["breadcrumb_title"] = 'PRODUCTS'
 
     data["included_template"] = 'app/app_files/products/add_products_form.html'
 
