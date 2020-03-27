@@ -158,7 +158,6 @@ class EditProducts(View):
 
     # Initialize 
     data = defaultdict()
-    data["view"] = ""
 
     # Custom CSS/JS Files For Inclusion into template
     data["css_files"] = []
@@ -239,12 +238,3 @@ def ajax_add_product(request):
                 img_save.save()
         return HttpResponse(1)
     return HttpResponse(0)
-
-#
-#
-#
-
-class BundlePacks(View):
-
-    def get(self, request, *args, **kwargs):
-        return HttpResponse('')

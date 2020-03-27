@@ -139,3 +139,27 @@ class InventoryProductEditForm(ModelForm):
             'threshold_notify_trigger' : Select(attrs = {'class':'form-control input-sm'}, choices = items_constant.PRODUCT_STOCK_NOTIFICATION_TRIGGERS),
             'min_hold_notify_trigger' : Select(attrs = {'class':'form-control input-sm'}, choices = items_constant.PRODUCT_STOCK_NOTIFICATION_TRIGGERS),
         }
+
+#==================================================================================
+# BUNDLE FORM
+#==================================================================================
+#
+
+class BundleForm(ModelForm):
+
+    models = BundleModel
+
+    fields = ('bundle_name', 'bundle_selling_price', 'bundle_cost_price', 'bundle_marked_price', 
+                'bundle_discount', 'bundle_gst', 'bundle_qty', 'bundle_description')
+
+    widgets = {
+        'bundle_name' : TextInput(attrs = {'class':'form-control input-sm'}), 
+        'bundle_selling_price' : NumberInput(attrs = {'class':'form-control input-sm'}), 
+        'bundle_cost_price' : NumberInput(attrs = {'class':'form-control input-sm'}), 
+        'bundle_marked_price' : NumberInput(attrs = {'class':'form-control input-sm'}), 
+        'bundle_discount' : NumberInput(attrs = {'class':'form-control input-sm'}), 
+        'bundle_gst' : NumberInput(attrs = {'class':'form-control input-sm'}), 
+        'bundle_qty' : NumberInput(attrs = {'class':'form-control input-sm'}), 
+        'bundle_description' : Textarea(attrs = {'class':'form-control input-sm'})
+    }
+
