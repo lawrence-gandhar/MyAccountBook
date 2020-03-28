@@ -164,33 +164,7 @@ table{
                                                         <td style="border:0px;">
                                                             {{ tax_form_details.gst_reg_type }}
                                                         </td>                                    
-                                                    </tr>
-                                                    <!--
-                                                    <tr class="disabled-tr">
-                                                        <td style=" width:150px; border:0px; vertical-align: bottom">
-                                                            Business Reg. No.
-                                                        </td>
-                                                        <td style="border:0px;">
-                                                            {{ tax_form_details.business_reg_no }}
-                                                        </td>                                    
-                                                    </tr>
-                                                    <tr class="disabled-tr">
-                                                        <td style=" width:150px; border:0px; vertical-align: bottom">
-                                                            Tax Reg. No.
-                                                        </td>
-                                                        <td style="border:0px;">
-                                                            {{ tax_form_details.tax_reg_no }}
-                                                        </td>                                    
-                                                    </tr>
-                                                    <tr class="disabled-tr">
-                                                        <td style=" width:150px; border:0px; vertical-align: bottom">
-                                                            CGST Reg. No.
-                                                        </td>
-                                                        <td style="border:0px;">
-                                                            {{ tax_form_details.cst_reg_no }}
-                                                        </td>                                    
-                                                    </tr>   
-                                                    -->                                                     
+                                                    </tr>                                                                                                   
                                                 </tbody>
                                             </table>
                                         </div>
@@ -257,103 +231,66 @@ table{
                                             
                                             <button data-toggle="modal" data-target="#newAddressModal" class="btn btn-sm btn-primary pull-right" style="margin-bottom:15px; float:right; margin-left:10px;" type="button">
                                                 <i class="material-icons">add_box</i> Add New
-                                            </button>
-                                            
-                                            {% for i in contact_addresses %}
-
-                                                <table class="table-responsive" id="table-{{forloop.counter}}">
-                                                    <tbody style="width: 100%; display: inline-table;">
-                                                        <tr class="buttons-tr">
-                                                            <td colspan="2">
-                                                                <button class="btn btn-sm btn-danger pull-right" style="margin-bottom:15px; float:right; margin-left:10px;" type="button" onclick="delete_address({{forloop.counter}})">
-                                                                    <i class="material-icons">delete_forever</i> Delete
-                                                                </button>
-                                                                <button class="btn btn-sm btn-success pull-right" style="margin-bottom:15px; float:right" type="button" onclick="openAddressModal({{forloop.counter}})">
-                                                                    <i class="material-icons">create</i> Edit
-                                                                </button>
+                                            </button>  
+                                            <table class="table-responsive table-bordered">
+                                                <tbody style="width:100%; display:inline-table;">
+                                                    <tr style="width:100%; background-color: #EEEEEE; color:#000000; font-size:11px; font-weight:bold;">
+                                                        <td class="text-center">SL. No.</td>
+                                                        <td class="text-center">UID</td>
+                                                        <td class="text-center">Is Shipping Address</td>
+                                                        <td class="text-center">Is Billing Address</td>
+                                                        <td class="text-center">Contact Person</td>
+                                                        <td class="text-center">Flat/Office/Door No.</td>
+                                                        <td class="text-center">Street</td>
+                                                        <td class="text-center">City</td>
+                                                        <td class="text-center">Zipcode/Pincode</td>               
+                                                        <td class="text-center">State</td>               
+                                                        <td class="text-center">Country</td>               
+                                                        <td class="text-center">Action</td>                
+                                                    </tr>                                                
+                                                    {% for i in contact_addresses %}
+                                                        <tr id="table-{{forloop.counter}}" style="font-size:12px">
+                                                            <td style="vertical-align: bottom">                                                                    
+                                                                {{ forloop.counter  }}
                                                             </td>
-                                                        </tr>
-                                                        <tr class="disabled-tr">
-                                                            <td style="text-align:left; padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: inherit">
-                                                                Is Shipping Address
+                                                            <td style="vertical-align: bottom">                                                                    
+                                                                C-0000{{ i.id  }}
                                                             </td>
-                                                            <td style="border:0px; padding:0px">                                                                    
-                                                                <label class="switch address_label_1">
-                                                                    {{ i.is_shipping_address  }}
-                                                                    <span class="slider round"></span>
-                                                                </label>
-
-                                                                <span style="margin-left: 40px; position: relative; top: 6px;">
-                                                                    Is Billing Address
-                                                                </span>
-
-                                                                <label class="switch" style="margin-left: 20px;">
-                                                                    {{ i.is_billing_address }}
-                                                                    <span class="slider round"></span>
-                                                                </label>
-                                                            </td>                                  
-                                                        </tr>
-                                                        <tr class="disabled-tr">
-                                                            <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                                Contact Person
+                                                            <td style="vertical-align: bottom; text-align:center;">                                                                    
+                                                                {{ i.get_is_shipping_address_display  }}
                                                             </td>
-                                                            <td style="border:0px; vertical-align: bottom">
+                                                            <td style="vertical-align: bottom; text-align:center;">
+                                                                {{ i.get_is_billing_address_display }}
+                                                            </td>   
+                                                            <td style="vertical-align: bottom">
                                                                 {{ i.contact_person}}
-                                                            </td>                                    
-                                                        </tr>
-                                                        <tr class="disabled-tr">
-                                                            <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                                Flat/Office/Door No.
-                                                            </td>
-                                                            <td style="border:0px; vertical-align: bottom">
+                                                            </td>                  
+                                                            <td style="vertical-align: bottom">
                                                                 {{ i.flat_no }}
-                                                            </td>                                    
-                                                        </tr>
-                                                        <tr class="disabled-tr">
-                                                            <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                                Street
-                                                            </td>
-                                                            <td style="border:0px; vertical-align: bottom">
+                                                            </td>  
+                                                            <td style="vertical-align: bottom">
                                                                 {{ i.street }}
-                                                            </td>                                    
-                                                        </tr>
-                                                        <tr class="disabled-tr">
-                                                            <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                                City
-                                                            </td>
-                                                            <td style="border:0px; vertical-align: bottom">
+                                                            </td>               
+                                                            <td style="vertical-align: bottom">
                                                                 {{ i.city }}
-                                                            </td>                                    
-                                                        </tr>
-                                                        <tr class="disabled-tr">
-                                                            <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                                Zipcode/Pincode
-                                                            </td>
-                                                            <td style="border:0px; vertical-align: bottom">
+                                                            </td>   
+                                                            <td style="vertical-align: bottom">
                                                                 {{ i.pincode }}
-                                                            </td>                                    
-                                                        </tr>
-                                                        <tr class="disabled-tr">
-                                                            <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                                State
-                                                            </td>
-                                                            <td style="border:0px; vertical-align: bottom">
+                                                            </td>      
+                                                            <td style="vertical-align: bottom">
                                                                 {{ i.state }}
-                                                            </td>                                    
-                                                        </tr>
-                                                        <tr class="disabled-tr">
-                                                            <td style="padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: bottom">
-                                                                Country
-                                                            </td>
-                                                            <td style="border:0px; vertical-align: bottom">
+                                                            </td>  
+                                                            <td style="vertical-align: bottom">
                                                                 {{ i.country }}
-                                                            </td>                                    
+                                                            </td> 
+                                                            <td style="vertical-align: bottom">                                                                
+                                                                <i title="Edit" class="material-icons" style="cursor:pointer; font-size:18px; color:#74ff63; vertical-align:center; position:relative; vertical-align:middle;" onclick="openAddressModal({{i.id}})">create</i>
+                                                                <i title="Delete" class="material-icons" style="cursor:pointer; font-size:18px; color:#ff1f1f; margin-left:5px; position:relative; vertical-align:middle;" onclick="delete_address({{i.id}})">delete_forever</i>
+                                                            </td>                                   
                                                         </tr>
-                                                    </tbody>
-                                                </table>
-                                            
-                                            {% endfor %}
-
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>      
                                         </div>
                                         <div class="tab-pane fade" id="accounts-form" role="tabpanel" aria-labelledby="accounts-tab" style="padding:10px 20px;">
                                             

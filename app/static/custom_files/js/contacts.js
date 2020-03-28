@@ -340,11 +340,8 @@ function openAccountsModal(ids){
 /********************************************************************/
 //
 /********************************************************************/
-function delete_address(ids){
-    ids = $("#table-"+ids).find("label.address_label_1").find("input").attr("id");
-    id = ids.replace("id_form_","").replace("-is_shipping_address","");
-    
-    $.get("/contacts/delete_address/"+id+"/", function(data){
+function delete_address(ids){    
+    $.get("/contacts/delete_address/"+ids+"/", function(data){
         if(data == '1') location.reload();
         else alert("Unauthorized Access");
     });
