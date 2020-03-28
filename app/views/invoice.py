@@ -540,15 +540,6 @@ class CreateInvoice(View):
     data["css_files"] = []
     data['js_files'] = ['custom_files/js/invoice.js', 'custom_files/js/contacts.js']
     
-    ProductFormSet = inlineformset_factory(
-            InvoiceModel, InvoiceProducts, extra = 1, 
-            fields=('product', 'quantity', 'inventory'),
-            widgets = {
-                'product' : Select(attrs = {'class':'form-control input-sm product_dropdown_select', 'onchange':'get_product_details($(this))'},),
-                'quantity' : NumberInput(attrs = {'class':'form-control input-sm', 'onchange': 'product_quantity($(this))'},),
-            }    
-        )
-
 
     #
     #
@@ -560,7 +551,7 @@ class CreateInvoice(View):
         self.data["add_product_form"] = ProductForm(request.user)
         self.data["add_product_images_form"] = ProductPhotosForm()
 
-        self.data["formset"] = self.ProductFormSet(queryset = ProductsModel.objects.filter(user = request.user))
+        self.data["formset"] = ProductFormSet(queryset = items_model.ProductsModel.objects.filter(user = request.user))
 
         # Initialize Forms
         self.data["contact_form"] = ContactsForm()

@@ -5,6 +5,8 @@ from app.other_constants import *
 from app.models import *
 from django.forms import *
 
+from app.forms import *
+
 #===================================================================================
 # ADDRESS FORMSET
 #===================================================================================
@@ -28,22 +30,16 @@ AddressFormset = inlineformset_factory(contacts_model.Contacts, users_model.User
 # ACCOUNTS FORMSET
 #===================================================================================
 
-class AccountDetailsForm(ModelForm):
-    class Meta:
-        model = users_model.User_Account_Details
-        fields = ('account_number', 'account_holder_name', 'ifsc_code', 'bank_name', 'bank_branch_name')
-
-        widgets = {
-            'account_number' : NumberInput(attrs={'class':'form-control input-sm', 'pattern':'[0-9]'}),
-            'account_holder_name' : TextInput(attrs={'class':'form-control input-sm',}),
-            'ifsc_code' : TextInput(attrs={'class':'form-control input-sm', 'onkeyup':'valid_IFSC($(this))', 'onfocusout':'valid_IFSC($(this))'}),
-            'bank_name' : TextInput(attrs={'class':'form-control input-sm',}),
-            'bank_branch_name' : TextInput(attrs={'class':'form-control input-sm',}),
-        }
-
-AccountsFormset = formset_factory(AccountDetailsForm, extra = 1)
+AccountsFormset = formset_factory(contact_forms.AccountDetailsForm, extra = 1)
 
 #===================================================================================
-# BUNDEL-PRODUCT FORMSET
+# PRODUCT FORMSET
 #===================================================================================
 
+ProductFormSet = inlineformset_factory(invoice_model.InvoiceModel, InvoiceProducts, extra = 1, 
+            fields=('product', 'quantity', 'inventory'),
+            widgets = {
+                'product' : Select(attrs = {'class':'form-control input-sm product_dropdown_select', 'onchange':'get_product_details($(this))'},),
+                'quantity' : NumberInput(attrs = {'class':'form-control input-sm', 'onchange': 'product_quantity($(this))'},),
+            }    
+        )

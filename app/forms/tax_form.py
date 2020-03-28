@@ -25,7 +25,7 @@ class OtherDetailsForm(ModelForm):
 
         widgets = {
             'preferred_currency' : Select(attrs = {'class':'form-control input-sm'}, choices = currency_list.CURRENCY_CHOICES), 
-            'opening_balance' : NumberInput(attrs = {'class':'form-control input-sm', 'type':'number'}),
+            'opening_balance' : NumberInput(attrs = {'class':'form-control input-sm', 'type':'number', 'pattern':'[0-9]'}),
             'preferred_payment_method' : Select(attrs = {'class':'form-control input-sm'}, choices = payment_constants.PREFERRED_PAYMENT_TYPE), 
             'preferred_delivery' : Select(attrs = {'class':'form-control input-sm'}, choices = payment_constants.PREFERRED_DELIVERY), 
             'invoice_terms' : Select(attrs = {'class':'form-control input-sm'}, choices = payment_constants.PAYMENT_DAYS), 

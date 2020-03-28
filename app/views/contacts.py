@@ -393,7 +393,7 @@ def edit_other_details_form(request):
 def edit_address_details_form(request):
     if request.POST:
 
-        keys = [i for i in request.POST.keys() if "is_shipping_address" in i]
+        keys = [i for i in request.POST.keys() if "contact_person" in i]
 
         prefix = keys[0].replace("-contact_person", "").replace("form_", "")
 

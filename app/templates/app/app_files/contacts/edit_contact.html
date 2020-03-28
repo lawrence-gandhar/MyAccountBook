@@ -284,7 +284,7 @@ table{
                                                                 {{ i.country }}
                                                             </td> 
                                                             <td style="vertical-align: bottom">                                                                
-                                                                <i title="Edit" class="material-icons" style="cursor:pointer; font-size:18px; color:#74ff63; vertical-align:center; position:relative; vertical-align:middle;" onclick="openAddressModal({{i.id}})">create</i>
+                                                                <i title="Edit" class="material-icons" style="cursor:pointer; font-size:18px; color:#74ff63; vertical-align:center; position:relative; vertical-align:middle;" onclick="openAddressModal({{forloop.counter}})">create</i>
                                                                 <i title="Delete" class="material-icons" style="cursor:pointer; font-size:18px; color:#ff1f1f; margin-left:5px; position:relative; vertical-align:middle;" onclick="delete_address({{i.id}})">delete_forever</i>
                                                             </td>                                   
                                                         </tr>
@@ -627,18 +627,9 @@ table{
                         <tbody style=" width: 100%; display: inline-table;">
                             <tr>
                                 <td style="text-align:left; padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: inherit">
-                                    Is Shipping Address
+                                    Is Billing Address
                                 </td>
-                                <td style="border:0px; padding:0px">                                                                    
-                                    <label class="switch">
-                                        {{ i.is_shipping_address  }}
-                                        <span class="slider round"></span>
-                                    </label>
-
-                                    <span style="margin-left: 40px; position: relative; top: -7px;">
-                                        Is Billing Address
-                                    </span>
-
+                                <td style="border:0px; padding:0px">  
                                     <label class="switch" style="margin-left: 20px;">
                                         {{ i.is_billing_address }}
                                         <span class="slider round"></span>

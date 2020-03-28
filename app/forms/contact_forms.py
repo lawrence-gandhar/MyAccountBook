@@ -72,7 +72,7 @@ class EditAddressForm(ModelForm):
     class Meta:
         model = users_model.User_Address_Details
         
-        fields = ('contact_person', 'flat_no', 'street', 'city', 'state', 'country', 'pincode', 'is_billing_address', 'is_shipping_address')
+        fields = ('contact_person', 'flat_no', 'street', 'city', 'state', 'country', 'pincode', 'is_billing_address')
         
         widgets = {
             'contact_person' : TextInput(attrs={'class':'form-control input-sm',}),
@@ -83,7 +83,6 @@ class EditAddressForm(ModelForm):
             'country' : Select(attrs={'class':'form-control input-sm',}, choices = country_list.COUNTRIES_LIST_CHOICES),
             'pincode' : TextInput(attrs={'class':'form-control input-sm',}),
             'is_billing_address' : CheckboxInput(attrs={'class':'form-control input-sm',}),
-            'is_shipping_address' : CheckboxInput(attrs={'class':'form-control input-sm',}),
         }
 
 #
@@ -95,14 +94,16 @@ class AccountDetailsForm(ModelForm):
         fields = ('account_number', 'account_holder_name', 'ifsc_code', 'bank_name', 'bank_branch_name')
 
         widgets = {
-            'account_number' : NumberInput(attrs={'class':'form-control input-sm',}),
+            'account_number' : NumberInput(attrs={'class':'form-control input-sm', 'pattern':'[0-9]'}),
             'account_holder_name' : TextInput(attrs={'class':'form-control input-sm',}),
             'ifsc_code' : TextInput(attrs={'class':'form-control input-sm', 'onkeyup':'valid_IFSC($(this))', 'onfocusout':'valid_IFSC($(this))'}),
             'bank_name' : TextInput(attrs={'class':'form-control input-sm',}),
             'bank_branch_name' : TextInput(attrs={'class':'form-control input-sm',}),
         }
 
-
+#
+# CONTACTS EXTRA FORM
+# 
 class ContactsExtraForm(ModelForm):
     class Meta:
 
