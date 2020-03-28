@@ -34,7 +34,7 @@ table{
                                     Customer Type
                                 </td>
                                 <td style="border:0px;">
-                                    {{ contact_details.get_customer_type_display }}
+                                    {{ contact_details.get_customer_type_display|default_if_none:"" }}
                                 </td>                                    
                             </tr>
                             <tr class="disabled-tr">
@@ -42,7 +42,7 @@ table{
                                     Is Sub Customer
                                 </td>
                                 <td style="border:0px;">
-                                    {{ contact_details.get_is_sub_customer_display }}
+                                    {{ contact_details.get_is_sub_customer_display|default_if_none:"" }}
                                 </td>                                    
                             </tr>
                             <tr class="disabled-tr">
@@ -50,7 +50,7 @@ table{
                                     Salutation
                                 </td>
                                 <td style="border:0px;">
-                                    {{ contact_details.get_salutation_display }}
+                                    {{ contact_details.get_salutation_display|default_if_none:"" }}
                                 </td>                                    
                             </tr>
                             <tr class="disabled-tr">
@@ -58,7 +58,7 @@ table{
                                     Contact
                                 </td>
                                 <td style="border:0px;">
-                                    {{ contact_details.contact_name }}
+                                    {{ contact_details.contact_name|default_if_none:"" }}
                                 </td>                                    
                             </tr>
                             <tr class="disabled-tr">
@@ -66,7 +66,7 @@ table{
                                     Contact Display Name
                                 </td>
                                 <td style="border:0px;">
-                                    {{ contact_details.display_name }}
+                                    {{ contact_details.display_name|default_if_none:"" }}
                                 </td>                                    
                             </tr>  
                             <tr class="disabled-tr">
@@ -74,7 +74,7 @@ table{
                                     Organisation Type
                                 </td>
                                 <td style="border:0px;">
-                                    {{ contact_details.get_organization_type_display }}
+                                    {{ contact_details.get_organization_type_display|default_if_none:"" }}
                                 </td>                                    
                             </tr>
                             <tr class="disabled-tr">
@@ -82,7 +82,7 @@ table{
                                     Organisation Name
                                 </td>
                                 <td style="border:0px;">
-                                    {{ contact_details.organization_name }}
+                                    {{ contact_details.organization_name|default_if_none:"" }}
                                 </td>                                    
                             </tr>
                             <tr class="disabled-tr">
@@ -90,7 +90,7 @@ table{
                                     Is MSME Registered
                                 </td>
                                 <td style="border:0px;">
-                                    {{ contact_details.get_is_msme_reg_display }}
+                                    {{ contact_details.get_is_msme_reg_display|default_if_none:"" }}
                                 </td>                                    
                             </tr>  
                             <tr class="disabled-tr">
@@ -98,7 +98,7 @@ table{
                                     Email Address
                                 </td>
                                 <td style="border:0px;">
-                                    {{ contact_details.email }}
+                                    {{ contact_details.email|default_if_none:"" }}
                                 </td>                                    
                             </tr>
                             <tr class="disabled-tr">
@@ -106,7 +106,7 @@ table{
                                     Phone/Mobile
                                 </td>
                                 <td style="border:0px;">
-                                    {{ contact_details.phone }}
+                                    {{ contact_details.phone|default_if_none:"" }}
                                 </td>                                    
                             </tr>                            
                             <tr>
@@ -146,7 +146,7 @@ table{
                                                             PAN
                                                         </td>
                                                         <td style="border:0px;">
-                                                            {{ tax_form_details.pan }}
+                                                            {{ tax_form_details.pan|default_if_none:"" }}
                                                         </td>                                    
                                                     </tr>
                                                     <tr class="disabled-tr">
@@ -154,7 +154,7 @@ table{
                                                             GSTIN
                                                         </td>
                                                         <td style="border:0px;">
-                                                            {{ tax_form_details.gstin }}
+                                                            {{ tax_form_details.gstin|default_if_none:"" }}
                                                         </td>                                    
                                                     </tr>
                                                     <tr class="disabled-tr">
@@ -162,7 +162,7 @@ table{
                                                             GSTIN Reg. No.
                                                         </td>
                                                         <td style="border:0px;">
-                                                            {{ tax_form_details.gst_reg_type }}
+                                                            {{ tax_form_details.gst_reg_type|default_if_none:"" }}
                                                         </td>                                    
                                                     </tr>                                                                                                   
                                                 </tbody>
@@ -181,7 +181,7 @@ table{
                                                             Preferred Currency
                                                         </td>
                                                         <td style="border:0px;">
-                                                            {{ tax_form_details.get_preferred_currency_display }}
+                                                            {{ tax_form_details.get_preferred_currency_display|default_if_none:"" }}
                                                         </td>                                    
                                                     </tr>
                                                     <tr class="disabled-tr">
@@ -189,7 +189,7 @@ table{
                                                             Opening Balance
                                                         </td>
                                                         <td style="border:0px;">
-                                                            {{ tax_form_details.opening_balance }}
+                                                            {{ tax_form_details.opening_balance|default_if_none:"" }}
                                                         </td>                                    
                                                     </tr>
                                                     <tr class="disabled-tr">
@@ -197,7 +197,7 @@ table{
                                                             Payment Method
                                                         </td>
                                                         <td style="border:0px;">
-                                                            {{ tax_form_details.get_preferred_payment_method_display }}
+                                                            {{ tax_form_details.get_preferred_payment_method_display|default_if_none:"" }}
                                                         </td>                                    
                                                     </tr>
                                                     <tr class="disabled-tr">
@@ -205,7 +205,7 @@ table{
                                                             Preferred Delivery
                                                         </td>
                                                         <td style="border:0px;">
-                                                            {{ tax_form_details.get_preferred_delivery_display }}
+                                                            {{ tax_form_details.get_preferred_delivery_display|default_if_none:"" }}
                                                         </td>                                    
                                                     </tr>
                                                     <tr class="disabled-tr">
@@ -213,7 +213,7 @@ table{
                                                             Invoice Terms
                                                         </td>
                                                         <td style="border:0px;">
-                                                            {{ tax_form_details.get_invoice_terms_display }}
+                                                            {{ tax_form_details.get_invoice_terms_display|default_if_none:"" }}
                                                         </td>                                    
                                                     </tr>
                                                     <tr class="disabled-tr">
@@ -221,7 +221,7 @@ table{
                                                             Billing Terms
                                                         </td>
                                                         <td style="border:0px;">
-                                                            {{ tax_form_details.bills_terms }}
+                                                            {{ tax_form_details.bills_terms|default_if_none:"" }}
                                                         </td>                                    
                                                     </tr>
                                                 </tbody>
@@ -253,25 +253,25 @@ table{
                                                                 {{ forloop.counter  }}
                                                             </td>   
                                                             <td style="vertical-align: bottom">
-                                                                {{ i.contact_person}}
+                                                                {{ i.contact_person|default_if_none:"" }}
                                                             </td>                  
                                                             <td style="vertical-align: bottom">
-                                                                {{ i.flat_no }}
+                                                                {{ i.flat_no|default_if_none:"" }}
                                                             </td>  
                                                             <td style="vertical-align: bottom">
-                                                                {{ i.street }}
+                                                                {{ i.street|default_if_none:"" }}
                                                             </td>               
                                                             <td style="vertical-align: bottom">
-                                                                {{ i.city }}
+                                                                {{ i.city|default_if_none:"" }}
                                                             </td>   
                                                             <td style="vertical-align: bottom">
-                                                                {{ i.pincode }}
+                                                                {{ i.pincode|default_if_none:"" }}
                                                             </td>      
                                                             <td style="vertical-align: bottom">
-                                                                {{ i.state }}
+                                                                {{ i.state|default_if_none:"" }}
                                                             </td>  
                                                             <td style="vertical-align: bottom">
-                                                                {{ i.country }}
+                                                                {{ i.country|default_if_none:"" }}
                                                             </td> 
                                                             <td style="vertical-align: bottom; text-align:center;">                                                                    
                                                                 {{ i.get_is_shipping_address_display  }}
@@ -307,19 +307,19 @@ table{
                                                     {% for i in contact_accounts %}
                                                         <tr>
                                                             <td style="border:0px;" class="account_holder_name">
-                                                                {{ i.account_holder_name }}
+                                                                {{ i.account_holder_name|default_if_none:"" }}
                                                             </td> 
                                                             <td style="border:0px;">
-                                                                {{ i.account_number }}
+                                                                {{ i.account_number|default_if_none:"" }}
                                                             </td>
                                                             <td style="border:0px;">
-                                                                {{ i.ifsc_code }}
+                                                                {{ i.ifsc_code|default_if_none:"" }}
                                                             </td>
                                                             <td style="border:0px;">
-                                                                {{ i.bank_name }}
+                                                                {{ i.bank_name|default_if_none:"" }}
                                                             </td>
                                                             <td style="border:0px;">
-                                                                {{ i.bank_branch_name }}
+                                                                {{ i.bank_branch_name|default_if_none:"" }}
                                                             </td>
                                                             <td style="vertical-align: bottom" class="text-center">                                                                
                                                                 <i title="Edit" class="material-icons" style="cursor:pointer; font-size:18px; color:#74ff63; position:relative; vertical-align:middle;" onclick="openAccountsModal({{forloop.counter}})">create</i>
@@ -343,7 +343,7 @@ table{
                                                             Website
                                                         </td>
                                                         <td style="border:0px;">
-                                                            {{ contact_details.website }}
+                                                            {{ contact_details.website|default_if_none:"" }}
                                                             <p id="website_error" style="color: red;margin-bottom: 0px;"></p> 
                                                         </td>
                                                     </tr>
@@ -352,7 +352,7 @@ table{
                                                             Facebook
                                                         </td>
                                                         <td style="border:0px;">
-                                                            {{ contact_details.facebook }}
+                                                            {{ contact_details.facebook|default_if_none:"" }}
                                                             <p id="facebook_error" style="color: red;margin-bottom: 0px;"></p> 
                                                         </td>
                                                     </tr>
@@ -361,7 +361,7 @@ table{
                                                             Twitter
                                                         </td>
                                                         <td style="border:0px;">
-                                                            {{ contact_details.twitter }}
+                                                            {{ contact_details.twitter|default_if_none:"" }}
                                                             <p id="twitter_error" style="color: red;margin-bottom: 0px;"></p> 
                                                         </td>
                                                     </tr>
@@ -370,7 +370,7 @@ table{
                                                             Notes
                                                         </td>
                                                         <td style="border:0px;">
-                                                            {{ contact_details.notes }}
+                                                            {{ contact_details.notes|default_if_none:"" }}
                                                         </td>
                                                     </tr>
                                                 </tbody>
