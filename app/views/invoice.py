@@ -575,7 +575,7 @@ class CreateInvoice(View):
         if invoice_form.is_valid():
             invoice = invoice_form.save()
 
-            formset = self.ProductFormSet(request.POST)
+            formset = ProductFormSet(request.POST)
             if formset.is_valid():
 
                 rownum = 0
@@ -620,14 +620,14 @@ class ViewInvoice(View):
         if ins is not None:
 
             try:
-                invoice = InvoiceModel.objects.get(pk = int(ins))
+                invoice = invoice_model.InvoiceModel.objects.get(pk = int(ins))
                 self.data["invoice_details"] = invoice
             except:
                 return redirect('/unauthorized/', permanent=False)
 
-            contact_address = Contact_Addresses.objects.filter(contact_id = invoice.service_recipient.id)
+            contact_address = contacts_model.Contact_Addresses.objects.filter(contact_id = invoice.service_recipient.id)
 
-            self.data["invoice_products"] = InvoiceProducts.objects.filter(invoice = invoice)
+            self.data["invoice_products"] = invoice_model.InvoiceProducts.objects.filter(invoice = invoice)
 
             return render(request, self.template_name, self.data)
         return redirect('/unauthorized/', permanent = False)

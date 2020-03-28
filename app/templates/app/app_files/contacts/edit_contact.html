@@ -235,32 +235,22 @@ table{
                                             <table class="table-responsive table-bordered">
                                                 <tbody style="width:100%; display:inline-table;">
                                                     <tr style="width:100%; background-color: #EEEEEE; color:#000000; font-size:11px; font-weight:bold;">
-                                                        <td class="text-center">SL. No.</td>
-                                                        <td class="text-center">UID</td>
-                                                        <td class="text-center">Is Shipping Address</td>
-                                                        <td class="text-center">Is Billing Address</td>
+                                                        <td class="text-center">SL. No.</td>                                                        
                                                         <td class="text-center">Contact Person</td>
                                                         <td class="text-center">Flat/Office/Door No.</td>
                                                         <td class="text-center">Street</td>
                                                         <td class="text-center">City</td>
                                                         <td class="text-center">Zipcode/Pincode</td>               
                                                         <td class="text-center">State</td>               
-                                                        <td class="text-center">Country</td>               
+                                                        <td class="text-center">Country</td>  
+                                                        <td class="text-center">Is Shipping</td>
+                                                        <td class="text-center">Is Billing</td>             
                                                         <td class="text-center">Action</td>                
                                                     </tr>                                                
                                                     {% for i in contact_addresses %}
                                                         <tr id="table-{{forloop.counter}}" style="font-size:12px">
                                                             <td style="vertical-align: bottom">                                                                    
                                                                 {{ forloop.counter  }}
-                                                            </td>
-                                                            <td style="vertical-align: bottom">                                                                    
-                                                                C-0000{{ i.id  }}
-                                                            </td>
-                                                            <td style="vertical-align: bottom; text-align:center;">                                                                    
-                                                                {{ i.get_is_shipping_address_display  }}
-                                                            </td>
-                                                            <td style="vertical-align: bottom; text-align:center;">
-                                                                {{ i.get_is_billing_address_display }}
                                                             </td>   
                                                             <td style="vertical-align: bottom">
                                                                 {{ i.contact_person}}
@@ -283,8 +273,14 @@ table{
                                                             <td style="vertical-align: bottom">
                                                                 {{ i.country }}
                                                             </td> 
+                                                            <td style="vertical-align: bottom; text-align:center;">                                                                    
+                                                                {{ i.get_is_shipping_address_display  }}
+                                                            </td>
+                                                            <td style="vertical-align: bottom; text-align:center;">
+                                                                {{ i.get_is_billing_address_display }}
+                                                            </td>
                                                             <td style="vertical-align: bottom">                                                                
-                                                                <i title="Edit" class="material-icons" style="cursor:pointer; font-size:18px; color:#74ff63; vertical-align:center; position:relative; vertical-align:middle;" onclick="openAddressModal({{forloop.counter}})">create</i>
+                                                                <i title="Edit" class="material-icons" style="cursor:pointer; font-size:18px; color:#74ff63; position:relative; vertical-align:middle;" onclick="openAddressModal({{forloop.counter}}, '{{i.is_billing_address}}', '{{i.is_shipping_address}}')">create</i>
                                                                 <i title="Delete" class="material-icons" style="cursor:pointer; font-size:18px; color:#ff1f1f; margin-left:5px; position:relative; vertical-align:middle;" onclick="delete_address({{i.id}})">delete_forever</i>
                                                             </td>                                   
                                                         </tr>
@@ -298,62 +294,41 @@ table{
                                                 <i class="material-icons">add_box</i> Add New
                                             </button>
 
-                                            {% for i in contact_accounts %}
-                                                <table class="table-responsive" id="table-{{forloop.counter}}">
-                                                    <tbody style=" width: 100%; display: inline-table;">
-                                                        <tr class="disabled-tr">
-                                                            <td colspan="2">
-                                                                <button class="btn btn-sm btn-danger pull-right" style="margin-bottom:15px; float:right; margin-left:10px;" type="button" onclick="delete_accounts({{forloop.counter}})">
-                                                                    <i class="material-icons">delete_forever</i> Delete
-                                                                </button>
-                                                                <button class="btn btn-sm btn-success pull-right" style="margin-bottom:15px; float:right" type="button" onclick="openAccountsModal({{forloop.counter}})">
-                                                                    <i class="material-icons">create</i> Edit 
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr class="disabled-tr">
-                                                            <td style=" width:150px; border:0px; vertical-align: bottom">
-                                                                Account Holder
-                                                            </td>
+                                            <table class="table-responsive table-bordered">
+                                                <tbody style="width:100%; display:inline-table;">
+                                                    <tr style="width:100%; background-color: #EEEEEE; color:#000000; font-size:11px; font-weight:bold;">
+                                                        <td class="text-center">SL. No.</td>                                                        
+                                                        <td class="text-center">Account Holder</td>
+                                                        <td class="text-center">IFSC Code</td>
+                                                        <td class="text-center">Bank Name</td>
+                                                        <td class="text-center">Branch Name</td>              
+                                                        <td class="text-center" width="60px">Action</td>                
+                                                    </tr>   
+                                                    {% for i in contact_accounts %}
+                                                        <tr>
                                                             <td style="border:0px;" class="account_holder_name">
                                                                 {{ i.account_holder_name }}
-                                                            </td>                                    
-                                                        </tr>
-                                                        <tr class="disabled-tr">
-                                                            <td style=" width:150px; border:0px; vertical-align: bottom">
-                                                                Account Number
-                                                            </td>
+                                                            </td> 
                                                             <td style="border:0px;">
                                                                 {{ i.account_number }}
-                                                            </td>                                    
-                                                        </tr>                                                        
-                                                        <tr class="disabled-tr">
-                                                            <td style=" width:150px; border:0px; vertical-align: bottom">
-                                                                IFSC Code
                                                             </td>
                                                             <td style="border:0px;">
                                                                 {{ i.ifsc_code }}
-                                                            </td>                                    
-                                                        </tr>
-                                                        <tr class="disabled-tr">
-                                                            <td style=" width:150px; border:0px; vertical-align: bottom">
-                                                                Bank Name
                                                             </td>
                                                             <td style="border:0px;">
                                                                 {{ i.bank_name }}
-                                                            </td>                                    
-                                                        </tr>
-                                                        <tr class="disabled-tr">
-                                                            <td style=" width:150px; border:0px; vertical-align: bottom">
-                                                                Branch Name
                                                             </td>
                                                             <td style="border:0px;">
                                                                 {{ i.bank_branch_name }}
-                                                            </td>                                    
+                                                            </td>
+                                                            <td style="vertical-align: bottom" class="text-center">                                                                
+                                                                <i title="Edit" class="material-icons" style="cursor:pointer; font-size:18px; color:#74ff63; position:relative; vertical-align:middle;" onclick="openAccountsModal({{forloop.counter}})">create</i>
+                                                                <i title="Delete" class="material-icons" style="cursor:pointer; font-size:18px; color:#ff1f1f; margin-left:5px; position:relative; vertical-align:middle;" onclick="delete_accounts({{i.id}})">delete_forever</i>
+                                                            </td>  
                                                         </tr>
-                                                    </tbody>
-                                                </table>
-                                            {% endfor %}
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>   
                                         </div>
                                         <div class="tab-pane fade" id="social-form" role="tabpanel" aria-labelledby="social-tab" style="padding:10px 0px;">
                                             <table class="table-responsive">
@@ -626,14 +601,22 @@ table{
                     <table class="table-responsive">
                         <tbody style=" width: 100%; display: inline-table;">
                             <tr>
-                                <td style="text-align:left; padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: inherit">
-                                    Is Billing Address
-                                </td>
-                                <td style="border:0px; padding:0px">  
-                                    <label class="switch" style="margin-left: 20px;">
-                                        {{ i.is_billing_address }}
-                                        <span class="slider round"></span>
-                                    </label>
+                                <td colspan="2" style="text-align:left; padding:0px 0px 0px 10px; width:150px; border:0px;">
+                                    <div class="shipping_on hide" style="display:inline-block; margin-right:30px;">
+                                        <span style="vertical-align:text-bottom;">Is Shipping Address</span> 
+                                        <label class="switch" style="margin-left: 20px;">
+                                            {{ i.is_shipping_address }}
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+
+                                    <div class="billing_on hide" style="display:inline-block; ">
+                                        <span style="vertical-align:text-bottom;">Is Billing Address </span>
+                                        <label class="switch" style="margin-left: 20px;">
+                                            {{ i.is_billing_address }}
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>                                 
                                 </td>  
                             </tr>
                             <tr>
@@ -725,20 +708,20 @@ table{
                         <tbody style=" width: 100%; display: inline-table;">
                             <tr>
                                 <td style="text-align:left; padding:0px 0px 0px 10px; width:150px; border:0px; vertical-align: inherit">
-                                    Is Shipping Address
+                                    Is Billing Address
                                 </td>
                                 <td style="border:0px; padding:0px">                                                                    
                                     <label class="switch">
-                                        {{ new_address_form.is_shipping_address  }}
+                                        {{ new_address_form.is_billing_address  }}
                                         <span class="slider round"></span>
                                     </label>
 
                                     <span style="margin-left: 40px; position: relative; top: -7px;">
-                                        Is Billing Address
+                                        Is Shipping Address
                                     </span>
 
                                     <label class="switch" style="margin-left: 20px;">
-                                        {{ new_address_form.is_billing_address }}
+                                        {{ new_address_form.is_shipping_address }}
                                         <span class="slider round"></span>
                                     </label>
                                 </td>  

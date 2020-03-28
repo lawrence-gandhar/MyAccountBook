@@ -329,7 +329,14 @@ function billing_clicked(elem){
 /********************************************************************/
 //
 /********************************************************************/
-function openAddressModal(ids){
+function openAddressModal(ids, billing_on, shipping_on){
+
+    if(shipping_on == 'True') $(".shipping_on").show();
+    if(shipping_on == 'False') $(".shipping_on").hide();
+
+    if(billing_on == 'True') $(".billing_on").hide();
+    if(billing_on == 'False') $(".billing_on").show();
+
     $("#editAddressModal-"+ids).modal('show');
 }
 
@@ -351,10 +358,7 @@ function delete_address(ids){
 // 
 /********************************************************************/
 function delete_accounts(ids){
-    ids = $("#table-"+ids).find(".account_holder_name").find("input").attr("id");
-    id = ids.replace("id_form_","").replace("-account_holder_name","");
-    
-    $.get("/contacts/delete_accounts/"+id+"/", function(data){
+    $.get("/contacts/delete_accounts/"+ids+"/", function(data){
         if(data == '1') location.reload();
         else alert("Unauthorized Access");
     });

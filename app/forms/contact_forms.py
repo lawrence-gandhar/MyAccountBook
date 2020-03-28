@@ -50,7 +50,7 @@ class AddressForm(ModelForm):
     class Meta:
         model = users_model.User_Address_Details
         
-        fields = ('contact_person', 'flat_no', 'street', 'city', 'state', 'country', 'pincode', 'is_billing_address_diff', 'is_shipping_address')
+        fields = ('contact_person', 'flat_no', 'street', 'city', 'state', 'country', 'pincode', 'is_shipping_address', 'is_billing_address')
         
         widgets = {
             'contact_person' : TextInput(attrs={'class':'form-control input-sm',}),
@@ -60,8 +60,8 @@ class AddressForm(ModelForm):
             'state' : Select(attrs={'class':'form-control input-sm',}, choices = country_list.STATE_LIST_CHOICES),
             'country' : Select(attrs={'class':'form-control input-sm',}, choices = country_list.COUNTRIES_LIST_CHOICES),
             'pincode' : TextInput(attrs={'class':'form-control input-sm',}),
-            'is_billing_address_diff' : CheckboxInput(attrs={'class':'form-control input-sm',}),
             'is_shipping_address' : CheckboxInput(attrs={'class':'form-control input-sm',}),
+            'is_billing_address' : CheckboxInput(attrs={'class':'form-control input-sm',}),
         }
 
 #
@@ -72,7 +72,7 @@ class EditAddressForm(ModelForm):
     class Meta:
         model = users_model.User_Address_Details
         
-        fields = ('contact_person', 'flat_no', 'street', 'city', 'state', 'country', 'pincode', 'is_billing_address')
+        fields = ('contact_person', 'flat_no', 'street', 'city', 'state', 'country', 'pincode', 'is_billing_address', 'is_shipping_address')
         
         widgets = {
             'contact_person' : TextInput(attrs={'class':'form-control input-sm',}),
@@ -82,7 +82,8 @@ class EditAddressForm(ModelForm):
             'state' : Select(attrs={'class':'form-control input-sm',}, choices = country_list.STATE_LIST_CHOICES),
             'country' : Select(attrs={'class':'form-control input-sm',}, choices = country_list.COUNTRIES_LIST_CHOICES),
             'pincode' : TextInput(attrs={'class':'form-control input-sm',}),
-            'is_billing_address' : CheckboxInput(attrs={'class':'form-control input-sm',}),
+            'is_billing_address' : CheckboxInput(attrs={'class':'form-control input-sm', 'required':'false'}),
+            'is_shipping_address' : CheckboxInput(attrs={'class':'form-control input-sm', 'required':'false'}),
         }
 
 #
